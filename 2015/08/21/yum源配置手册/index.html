@@ -1,0 +1,680 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,yum," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
+常用命令
+升级系统
+yum updateyum -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yum源配置手册">
+<meta property="og:url" content="http://yoursite.com/2015/08/21/yum源配置手册/index.html">
+<meta property="og:site_name" content="Arvon's Blog">
+<meta property="og:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
+常用命令
+升级系统
+yum updateyum -">
+<meta property="og:image" content="http://i1.tietuku.com/90e4fa74d8a26695.png">
+<meta property="og:image" content="http://i1.tietuku.com/caaba96513485367.png">
+<meta property="og:updated_time" content="2015-09-02T06:30:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yum源配置手册">
+<meta name="twitter:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
+常用命令
+升级系统
+yum updateyum -">
+<meta name="twitter:image" content="http://i1.tietuku.com/90e4fa74d8a26695.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/08/21/yum源配置手册/"/>
+
+  <title> yum源配置手册 | Arvon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Arvon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                yum源配置手册
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T15:07:07+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
+<li>升级系统<blockquote>
+<p>yum update<br>yum -y update mysql    #升级特定的软件</p>
+</blockquote>
+</li>
+<li>安装指定的软件包<blockquote>
+<p>yum -y install vsftpd</p>
+</blockquote>
+</li>
+<li>卸载指定的软件包<blockquote>
+<p>yum -y remore vsftpd mysql</p>
+</blockquote>
+</li>
+<li>查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装<blockquote>
+<p>yum grouplist</p>
+</blockquote>
+</li>
+<li>清除缓存中的rpm 头文件和包文件<blockquote>
+<p>yum clean all</p>
+</blockquote>
+</li>
+<li>搜索相关的软件包<blockquote>
+<p> yum -y search Emacs</p>
+</blockquote>
+</li>
+<li>显示指定软件包的信息<blockquote>
+<p>yum info Emacs</p>
+</blockquote>
+</li>
+<li>查询指定软件包的依赖信息，emacs依赖的模块不少啊<blockquote>
+<p>yum deplist emacs</p>
+</blockquote>
+</li>
+<li>列出所有以 yum 开头的软件包<blockquote>
+<p>yum list yum*</p>
+</blockquote>
+</li>
+<li>列出已经安装的但是不包含在资源库中的rpm 包<blockquote>
+<p>yum list extras</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><ul>
+<li>配置文件位于<code>/etc/yum.repos.d/*.repo</code>,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</li>
+<li><p>配置文件解释<br>arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v ‘^#’</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line"><span class="comment">#表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - <span class="number">163</span>.com</div><div class="line"><span class="comment">#名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="comment">#priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="comment">#用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http:<span class="regexp">//mirrors</span>.<span class="number">163</span>.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="comment">#引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http:<span class="regexp">//mirrors</span>.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="comment">#是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line"><span class="comment">#enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line"><span class="comment">#表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http:<span class="regexp">//mirror</span>.centos.org/centos/RPM-GPG-KEY-CentOS-<span class="number">6</span></div><div class="line"><span class="comment">#定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>粘贴可用的epel的yum源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line"></div><div class="line">[epel-debuginfo]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch/debug</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div><div class="line"></div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ul>
+<li><p><a href="https://www.baidu.com/link?url=uVSP1-5Xhdvi2t9FFdRnRC01B7zqLZ6a9LAbUNOfsstMsGb33lKjW4zrqJBHmT1h&amp;wd=&amp;eqid=d8ee0a1d000162130000000355e69580" target="_blank" rel="external">epel的wiki</a><br><img src="http://i1.tietuku.com/90e4fa74d8a26695.png" alt=""><br><img src="http://i1.tietuku.com/caaba96513485367.png" alt=""></p>
+</li>
+<li><p>使用EPEL（Extra Packages for Enterprise Linux）源,<code>RHEL6</code>系列</p>
+<blockquote>
+<p>wget <a href="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm</a><br>rpm -ivh epel-release-6-5.noarch.rpm</p>
+</blockquote>
+</li>
+<li><p>EPEL的<code>RHEL5</code>系列</p>
+<blockquote>
+<p>wget <a href="http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a><br>rpm -ivh epel-release-5-4.noarch.rpm</p>
+</blockquote>
+</li>
+<li><p>EPEL手动配置源</p>
+<blockquote>
+<p>vi /etc/yum.repos.d/epel.repo<br>[epel]<br>name=epel<br>mirrorlist=<a href="http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch" target="_blank" rel="external">http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch</a><br>enabled=1<br>gpgcheck=0</p>
+</blockquote>
+</li>
+<li>网易的源163<blockquote>
+<p>wget <a href="http://mirrors.163.com/.help/CentOS-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS-Base-163.repo</a></p>
+</blockquote>
+</li>
+<li>中科大的源<blockquote>
+<p>wget <a href="http://centos.ustc.edu.cn/CentOS-Base.repo" target="_blank" rel="external">http://centos.ustc.edu.cn/CentOS-Base.repo</a></p>
+</blockquote>
+</li>
+<li>sohu的源<blockquote>
+<p>wget <a href="http://mirrors.sohu.com/help/CentOS-Base-sohu.repo" target="_blank" rel="external">http://mirrors.sohu.com/help/CentOS-Base-sohu.repo</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
+<li>有时候会出现错误，现象：<br>Loading “installonlyn” plugin<br>Existing lock /var/run/yum.pid: another copy is running. Aborting.</li>
+</ul>
+<hr>
+<p>这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。<br>可以直接输入 rm -f /var/run/yum.pid<br>也可以/etc/init.d/yum-updatesd stop </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/yum/" rel="tag">#yum</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/21/lsof命令/" rel="next" title="lsof命令">
+                <i class="fa fa-chevron-left"></i> lsof命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/24/Ubuntu进行ssh连接/" rel="prev" title="Ubuntu进行ssh连接">
+                Ubuntu进行ssh连接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Arvon" />
+          <p class="site-author-name" itemprop="name">Arvon</p>
+          <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repo配置文件"><span class="nav-number">2.</span> <span class="nav-text">Repo配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的yum源站"><span class="nav-number">3.</span> <span class="nav-text">常用的yum源站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能错误"><span class="nav-number">4.</span> <span class="nav-text">可能错误</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

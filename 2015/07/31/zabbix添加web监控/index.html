@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zabbix," />
 
 
 
@@ -84,15 +84,24 @@
 
 
 
-<meta name="description" content="You can go as far as you want to go">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arvon's Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+<meta name="description" content="zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。
+选择一个主机（zabbix含有zabbix client的主机），由这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zabbix添加web监控">
+<meta property="og:url" content="http://yoursite.com/2015/07/31/zabbix添加web监控/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="You can go as far as you want to go">
+<meta property="og:description" content="zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。
+选择一个主机（zabbix含有zabbix client的主机），由这">
+<meta property="og:image" content="http://i3.tietuku.com/dda30fd3f166ea1b.png">
+<meta property="og:image" content="http://i3.tietuku.com/3e7210af7985249d.png">
+<meta property="og:image" content="http://i3.tietuku.com/2252d1cbe47f1e39.png">
+<meta property="og:image" content="http://i3.tietuku.com/c79306382b15ab42.png">
+<meta property="og:updated_time" content="2015-08-26T03:27:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arvon's Blog">
-<meta name="twitter:description" content="You can go as far as you want to go">
+<meta name="twitter:title" content="zabbix添加web监控">
+<meta name="twitter:description" content="zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。
+选择一个主机（zabbix含有zabbix client的主机），由这">
+<meta name="twitter:image" content="http://i3.tietuku.com/dda30fd3f166ea1b.png">
 
 
 
@@ -113,9 +122,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/07/31/zabbix添加web监控/"/>
 
-  <title> Archiv | Arvon's Blog </title>
+  <title> zabbix添加web监控 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -136,7 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,65 +243,139 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! Insgesamt 36 Artikel. Bleib dran.
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                zabbix添加web监控
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-07-31T18:07:40+08:00" content="2015-07-31">
+              2015-07-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <h3 id="zabbix监控web服务"><a href="#zabbix监控web服务" class="headerlink" title="zabbix监控web服务"></a>zabbix监控web服务</h3><p>在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。</p>
+<p>选择一个主机（zabbix含有zabbix client的主机），由这台主机上的client对目标url发起访问。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>先选定一个主机，需要含有clent<br><img src="http://i3.tietuku.com/dda30fd3f166ea1b.png" alt=""></p>
+</li>
+<li><p>点击创建create scenario<br><img src="http://i3.tietuku.com/3e7210af7985249d.png" alt=""></p>
+</li>
+<li><p>填写scenario（方案）<br><img src="http://i3.tietuku.com/2252d1cbe47f1e39.png" alt=""></p>
+</li>
+<li><p>添加并填写steps<br><img src="http://i3.tietuku.com/c79306382b15ab42.png" alt=""></p>
+</li>
+<li><p>完成</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
+          
         </div>
       
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/30/简明Python学习笔记/" rel="next" title="简明Python读书笔记">
+                <i class="fa fa-chevron-left"></i> 简明Python读书笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/03/Linux系统命令（二）/" rel="prev" title="Linux系统命令（二）">
+                Linux系统命令（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/28/使用Hexo和Github搭建Blog/" itemprop="url">
-              
-                <span itemprop="name">使用Hexo和Github搭建Blog</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-28T14:12:31+08:00"
-              content="2016-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -300,6 +383,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -319,8 +406,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -363,6 +459,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#zabbix监控web服务"><span class="nav-number">1.</span> <span class="nav-text">zabbix监控web服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,11 +566,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   

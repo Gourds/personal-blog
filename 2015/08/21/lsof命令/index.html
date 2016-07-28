@@ -1,0 +1,655 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,command," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介：lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lsof命令">
+<meta property="og:url" content="http://yoursite.com/2015/08/21/lsof命令/index.html">
+<meta property="og:site_name" content="Arvon's Blog">
+<meta property="og:description" content="简介：lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该">
+<meta property="og:updated_time" content="2015-08-26T03:29:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lsof命令">
+<meta name="twitter:description" content="简介：lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/08/21/lsof命令/"/>
+
+  <title> lsof命令 | Arvon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Arvon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                lsof命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T10:37:24+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>简介：</strong>lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该有多有用。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>yum安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install lsof -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>源码安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://down1.chinaunix.net/distfiles/lsof_4.76.tar.gz</div><div class="line">tar -zxvf lsof.tar.gz</div><div class="line">cd lsof_4.78</div><div class="line">tar xvf lsof_4.78_srv.tar</div><div class="line">./configure lunux</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
+<li><p>lsof<br>不加参数的输出，是列出所有进程打开的所有文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof </div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND     PID         USER        FD      	TYPE 		DEVICE 			SIZE/OFF   NODE 	NAME</div><div class="line">进程的名称	进程标识符	进程所有者	文件描述符	文件类型	指定磁盘的名称		文件的大小 索引节点 打开文件的确切名称</div><div class="line">init          1       root  cwd   unknown                        /proc/1/cwd (readlink: Permission denied)</div><div class="line">init          1       root  rtd   unknown                        /proc/1/root (readlink: Permission denied)</div><div class="line">init          1       root  txt   unknown                        /proc/1/exe (readlink: Permission denied)</div><div class="line">init          1       root NOFD                                  /proc/1/fd (opendir: Permission denied)</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof /path/to/file /path/to/file2<br>找出谁在使用某个文件,可一次指定多个文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof /home/arvon</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25011 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25012 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof +D /usr/lib<br>加上+D参数，lsof会对指定目录进行递归查找，注意这个参数要比grep版本慢</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof +D /usr/lib</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER  FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon mem    REG    8,2   256324 445427 /usr/lib/locale/es_VE.utf8/LC_CTYPE</div><div class="line">bash    24519 arvon mem    REG    8,2       54 445420 /usr/lib/locale/om_ET/LC_NUMERIC</div><div class="line">bash    24519 arvon mem    REG    8,2     2454 431855 /usr/lib/locale/en_US.utf8/LC_TIME</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看文件、设备被哪些进程占用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /dev/tty1</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash       <span class="number">1770</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">2</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian  <span class="number">255</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控文件系统：指定目录、挂载点，可以看到有哪些进程打开了其下的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /data/</span></div><div class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash    <span class="number">15983</span> jian  cwd    DIR    <span class="number">8</span>,<span class="number">5</span>     <span class="number">4096</span> <span class="number">8252</span> /data/backup</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出被指定进程名打开的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c ssh -c init</span></div><div class="line"> </div><div class="line">COMMAND    PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">init         <span class="number">1</span>       root  txt    REG        <span class="number">8</span>,<span class="number">1</span>   <span class="number">124704</span>  <span class="number">917562</span> /sbin/init</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>  <span class="number">1434180</span> <span class="number">1442625</span> /lib/i386-linux-gnu/libc-<span class="number">2.13</span>.so</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>    <span class="number">30684</span> <span class="number">1442694</span> /lib/i386-linux-gnu/librt-<span class="number">2.13</span>.so</div><div class="line">...</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">1</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">2</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">3</span>u  unix <span class="number">0xdf70e240</span>      0t<span class="number">0</span>   <span class="number">10464</span> /tmp/ssh-sUymKXxw1495/agent.<span class="number">1495</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控进程：指定进程号，可以查看该进程打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -p 2064</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG       <span class="number">0</span>,<span class="number">16</span> <span class="number">67108904</span>   <span class="number">10203</span> /dev/shm/pulse-shm-<span class="number">3021850167</span></div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>当你想要杀掉某个用户所有打开的文件、设备，你可以这样：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">kill</span> -<span class="number">9</span> <span class="string">`lsof -t -u lakshmanan`</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控网络"><a href="#监控网络" class="headerlink" title="监控网络"></a>监控网络</h3><ul>
+<li><p>监控网络:查看<code>指定端口有哪些进程在使用</code>（lsof -i 列出所有的打开的网络连接）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i:22</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">3</span>u  IPv4  <span class="number">10303</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">4</span>u  IPv6  <span class="number">10305</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出被某个进程打开所有的网络文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i -a -p <span class="number">234</span></div><div class="line"><span class="comment">#lsof -i -a -c ssh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出所有 tcp、udp 连接：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp;</div><div class="line">lsof -i udp;</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出所有NFS文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -N -u lakshmanan -a</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定网口有哪些进程在使用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i@192.168.1.91</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">skype      <span class="number">1909</span> jian   <span class="number">54</span>u  IPv4   <span class="number">9116</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">40640</span>-&gt;<span class="number">64.4</span>.<span class="number">23.153</span>:<span class="number">40047</span> (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian    <span class="number">7</span>u  IPv4   <span class="number">6599</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">59311</span>-&gt;hx-in-f125.<span class="number">1</span>e10<span class="number">0</span>.net:https (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian   <span class="number">13</span>u  IPv4   <span class="number">9260</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">54447</span>-&gt;by2msg3010511.phx.gbl:msnp (ESTABLISHED)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控用户"><a href="#监控用户" class="headerlink" title="监控用户"></a>监控用户</h3><ul>
+<li><p>查看指定用戶打开的文件（lsof -u ^lakshmanan 可以排除某用户）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -u messagebus</span></div><div class="line">COMMAND    PID       USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  txt    REG        <span class="number">8</span>,<span class="number">6</span>  <span class="number">1235361</span> <span class="number">1834948</span> /usr/bin/dbus-daemon</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">190145</span> <span class="number">1700642</span> /lib/libnss_nis-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">490366</span> <span class="number">1700636</span> /lib/libnsl-<span class="number">2.15</span>.so</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定程序打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c firefox</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ul>
+<li><p>只有多个查询条件都满足， 用 “-a” 参数，默认是 -o 。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -a -c bash -u root</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME</div><div class="line">bash    <span class="number">1986</span> root  cwd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1701593</span> /root/lab</div><div class="line">bash    <span class="number">1986</span> root  rtd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">bash    <span class="number">1986</span> root  txt    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">1994157</span> <span class="number">1700632</span> /bin/bash</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">9690800</span>  <span class="number">405214</span> /usr/lib/locale/locale-archive</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>关于磁盘空间告警 df -h --max=1 与 du -hx --max=1 显示不一致的问题</code></p>
+</li>
+</ul>
+<blockquote>
+<p>最常见的的还是下面这种情况：</p>
+<p>lsof|grep -i delete</p>
+<p>看看被删除的文件：有些删了文件，但是进程没 reload，那些空间还是占用的，你可以理解为类似 windows 下的进程句柄没释放的概念吧~ 只是 windows 下如果有文件被进程使用，你一般是删不掉的，而 linux 虽然不做删除限制，但却要等到进程使用完文件才能完全释放，以防止进程奔溃，这是操作系统对资源的管理差异吧~<br>例如 nginx 会有很多临时文件占用了 /tmp 目录，删掉后，依然占用着空间，</p>
+<p>此时你可以：</p>
+<p>pkill -9 nginx &amp;&amp; /etc/init.d/nginx restart</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.ibm.com/developerworks/cn/aix/library/au-lsof.html" target="_blank" rel="external">使用lsof查找打开的文件</a><br><a href="http://ylinux.org/blog/article/276" target="_blank" rel="external">实用系统工具lsof</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/command/" rel="tag">#command</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/21/Too-many-open-files错误/" rel="next" title="Too many open files错误">
+                <i class="fa fa-chevron-left"></i> Too many open files错误
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/21/yum源配置手册/" rel="prev" title="yum源配置手册">
+                yum源配置手册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Arvon" />
+          <p class="site-author-name" itemprop="name">Arvon</p>
+          <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控网络"><span class="nav-number">3.</span> <span class="nav-text">监控网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控用户"><span class="nav-number">4.</span> <span class="nav-text">监控用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技巧"><span class="nav-number">5.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

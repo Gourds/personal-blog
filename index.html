@@ -84,12 +84,15 @@
 
 
 
+<meta name="description" content="You can go as far as you want to go">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Arvon's Blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Arvon's Blog">
+<meta property="og:description" content="You can go as far as you want to go">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Arvon's Blog">
+<meta name="twitter:description" content="You can go as far as you want to go">
 
 
 
@@ -112,7 +115,7 @@
 
   <link rel="canonical" href="http://yoursite.com/"/>
 
-  <title> Hexo </title>
+  <title> Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -145,7 +148,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hexo</span>
+      <span class="site-title">Arvon's Blog</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -255,8 +258,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/28/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2016/07/28/使用Hexo和Github搭建Blog/" itemprop="url">
+                  使用Hexo和Github搭建Blog
                 </a>
               
             
@@ -269,7 +272,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T14:02:41+08:00" content="2016-07-28">
+            <time itemprop="dateCreated" datetime="2016-07-28T14:12:31+08:00" content="2016-07-28">
               2016-07-28
             </time>
           </span>
@@ -299,15 +302,1169 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我<br>出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。<br>win上多有不便，还会在linux上进行搭建。</p>
+<p>#更新记录<br> 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改</p>
+<p>#准备工作</p>
+<ol>
+<li>github账户设置<br>平台为win，需注册<a href="http://www.github.com" title="github account" target="_blank" rel="external">github account</a>登陆github后需要创建一个repository,然后就写个REpositoryname，<strong>注意要和Owner的name<br>一致</strong>（注意），然后勾选那个Initaalize this…什么的选项，然后就这样成了，不然就是像我一样不停的犯错，为何还有待考量，反<br>正现在听话就ok。</li>
+<li>软件设置<br>需要的软件有node.js和git，实际最好再来个Visual Studio Code，你会发现有语法高亮就是舒心</li>
+<li>待补充昂<br>为了可以清晰一点，决定把Markdown和这个Blog分开记录。恩，就是这样</li>
+</ol>
+<p>#开始搭建</p>
+<p>###安装node.js软件<br>下载地址戳：<a href="http://www.nodejs.org/download/" title="node.js" target="_blank" rel="external">node.js</a>,然后就开始一路下一步吧，然后你的发现带cmd多了一条np</p>
+<p>###安装git软件<br>下载地址戳：<a href="http://git-scm.com/download/" title="git" target="_blank" rel="external">git</a>,依旧下一步到底。昨天做着的时候没记录，真是一大败笔</p>
+<p>###安装Hexo</p>
+<ol>
+<li>进入Git bash,输入命令<blockquote>
+<p>npm install -g hexo    #hexo表示全局安装hexo<br>#创建hexo文件夹，如/user/arvon/hexo-lxc<br>hexo init    #初始化hexo<br>npm install<br>npm generate<br>npm server</p>
+</blockquote>
+</li>
+<li>然后可以通过访问localhost查看预览http：//localhost:4000/</li>
+</ol>
+<p>###部署</p>
+<ol>
+<li>将在github上创建的Repository，找到https那个url将其复制</li>
+<li>然后编辑位于你创建的文件夹下的文件，例如我就是：/user/arvon/hexo-lxc/_config.yml<blockquote>
+<p>deploy:<br> type: git<br> repository: <a href="https://github.com/arvon2014/arvon2014.github.com" target="_blank" rel="external">https://github.com/arvon2014/arvon2014.github.com</a><br> branch: master<br>#github上的地址：<a href="https://github.com/Arvon2014/arvon2014.github.com.git" target="_blank" rel="external">https://github.com/Arvon2014/arvon2014.github.com.git</a><br>#web上访问的为：<a href="http://arvon2014.github.io" target="_blank" rel="external">http://arvon2014.github.io</a></p>
+</blockquote>
+</li>
+<li>设置ssh免密码访问</li>
+</ol>
+<ul>
+<li>先查看本地是否已经存在ssh文件，如不存在直接跳过下面第二步</li>
+<li>删除已有的ssh的文件</li>
+<li>输入命令<blockquote>
+<p>ssh-keygen -t rsa -C “邮件地址@youremail.com” Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<br>Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;<br>ssh -T git@github.com    #测试<br>The authenticity of host ‘github.com (207.97.227.239)’ can’t be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?    #说明成功<br>$ git config –global user.name “你的名字” $ git config –global user.email “your_email@youremail.com”    #设置你的信息</p>
+</blockquote>
+</li>
+<li>现在已经可以顺利将环境搭建完毕</li>
+<li>进入你的Hexo目录，开始试验吧<blockquote>
+<p>hexo generate = hexo g<br>hexo server = hexo s    #部署本地预览<br>hexo deploy = hexo d    #生成部署     </p>
+</blockquote>
+</li>
+</ul>
+<p>###主题更换</p>
+<ol>
+<li>模板获取</li>
+<li>更改设置</li>
+</ol>
+<p>###插件添加</p>
+<ol>
+<li>待更新</li>
+<li>待更新</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/16/crontab简记/" itemprop="url">
+                  crontab简记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-09-16T17:01:58+08:00" content="2015-09-16">
+              2015-09-16
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。<br><strong>介绍:*</strong>crontab命令<em>常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。</em>crontab文件*包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。<br>crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。(ps:摘自百度百科)</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li>常用命令<blockquote>
+<p>crontab -e    #编辑，编辑后重启服务生效<br>/etc/init.d/crond restart（stop/start）    #重启服务<br>crontab -l    #查看<br>crontab -l&gt;/home/backup/crontab/crontab`date ‘+%Y%m%d’`.bak    #备份crontab</p>
+</blockquote>
+</li>
+<li>每分钟执行以下ls命令<blockquote>
+<p>0 <em> </em> <em> </em> /bin/ls</p>
+</blockquote>
+</li>
+<li>周一到周五每天17点发email给arvon<blockquote>
+<p>0 17 <em> </em> 1-5 mail -s “hi” alex@domain.name &lt; /tmp/maildata</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h2><ul>
+<li>参照man手册<blockquote>
+<p>f1 f2 f3 f4 f5 cmd/script<br>　　其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程式。<br>　　当 f1 为 <em> 时表示每分钟都要执行 program，f2 为 </em> 时表示每小时都要执行程式，其余类推<br>　　当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其余类推<br>　　当 f1 为 <em>/n 时表示每 n 分钟个时间间隔执行一次，f2 为 </em>/n 表示每 n 小时个时间间隔执行一次，其余类推<br>　　当 f1 为 a, b, c,… 时表示第 a, b, c,… 分钟要执行，f2 为 a, b, c,… 时表示第 a, b, c…个小时要执行，其余类推<br>　　使用者也可以将所有的设定先存放在档案 file 中，用 crontab file 的方式来设定时程表。<br>　　由于unix版本不一样，所以部分语法有差别，例如在hp unix aix 中设定间隔执行如果采用*/n 方式将出现语法错误，在这类unix中 ，间隔执行只能以列举方式，详请见例子。 使用方法:　　用VI编辑一个文件 cronfile，然后在这个文件中输入格式良好的时程表。编辑完成后，保存并退出。<br>　　在命令行输入<br>　　$: crontab cronfile<br>　　这样就将cronfile文件提交给c r o n进程，同时，新创建cronfile的一个副本已经被放在/ v a r / s p o o l / c r o n目录中，文件名就是用户名。</p>
+</blockquote>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/14/Zabbix使用Percona组件监控Mysql/" itemprop="url">
+                  Zabbix使用Percona组件监控Mysql
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-09-14T17:40:45+08:00" content="2015-09-14">
+              2015-09-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。<br>Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境</p>
+<h2 id="实现环境"><a href="#实现环境" class="headerlink" title="实现环境"></a>实现环境</h2><ul>
+<li>已经完成了zabbix基本环境部署</li>
+<li>安装php环境</li>
+<li>使用epel源，下载所需组件</li>
+</ul>
+<h3 id="安装-amp-配置步骤"><a href="#安装-amp-配置步骤" class="headerlink" title="安装&amp;配置步骤"></a>安装&amp;配置步骤</h3><h4 id="下载Percona-Monitoring-Plugins"><a href="#下载Percona-Monitoring-Plugins" class="headerlink" title="下载Percona Monitoring Plugins"></a>下载Percona Monitoring Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#下载文件</div><div class="line">wget https://www.percona.com/downloads/percona-monitoring-plugins/1.1.1/percona-zabbix-templates-1.1.1-1.noarch.rpm</div><div class="line">#提取下载的rpm文件</div><div class="line">[root@localhost ~]# rpm2cpio percona-zabbix-templates-1.1.1-1.noarch.rpm |cpio -div</div></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<blockquote>
+<p>目录文件说明<br>#脚本文件路径<br>var/lib/zabbix/percona/scripts/<br>#key文件位置<br>var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf<br>#模板文件位置<br>var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.1.xml</p>
+</blockquote>
+<h4 id="安装percona-monitoring-plugins"><a href="#安装percona-monitoring-plugins" class="headerlink" title="安装percona monitoring plugins"></a>安装percona monitoring plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# rpm -ivh percona-zabbix-templates-1.1.1-1.noarch.rpm</div></pre></td></tr></table></figure>
+<h4 id="安装php环境"><a href="#安装php环境" class="headerlink" title="安装php环境"></a>安装php环境</h4><p>若以安装，可跳过，需求包如下图<br><img src="http://i3.tietuku.com/a647c48fd7daa899.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install php php-mysql</div></pre></td></tr></table></figure></p>
+<h4 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h4><p>将key的子配置文件复制到/etc/zabbix/zabbix_agentd.d/<br><code>插曲</code>由于版本不同，所以实际文件位置也不同，这个位置可以在agent的包里看到</p>
+<blockquote>
+<p>rpm -ql zabbix22-agent-2.2.1-5.el6.x86_64<br>/usr/share/doc/zabbix22-agent-2.2.1/userparameter_mysql.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost zabbix]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="重启zabbix-agent服务"><a href="#重启zabbix-agent服务" class="headerlink" title="重启zabbix-agent服务"></a>重启zabbix-agent服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
+<h4 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h4><p>修改脚本中的用户名和密码,用户名和密码为本机数据库的账户和密码，并不需要特别的权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</div></pre></td></tr></table></figure></p>
+<p>修改字段如图<br><img src="http://i3.tietuku.com/2698b8e90e522cd6.png" alt=""></p>
+<h5 id="没有用户"><a href="#没有用户" class="headerlink" title="没有用户"></a>没有用户</h5><p>添加数据库的用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; grant process,super,select on *.* to zabbix@localhost identified by &apos;zabbix&apos;;</div><div class="line">mysql&gt; flush privileges;</div></pre></td></tr></table></figure></p>
+<h4 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h4><p>运行脚本，只要不报error就是没问题<br><code>[root@centos-01 percona]# /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg</code></p>
+<h4 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h4><p>先找到xml文件，上面的额位置就有，/var/lib/zabbix/percona/templates/，然后传到win下，然后再执行导入模板，看大图<br><img src="http://i3.tietuku.com/404d96621846ce53.png" alt=""><br><img src="http://i3.tietuku.com/8c345d59e2a24c37.png" alt=""><br>将导入的模板应用到主机<br><img src="http://i3.tietuku.com/e65c053544662725.png" alt=""></p>
+<h3 id="错误集锦"><a href="#错误集锦" class="headerlink" title="错误集锦"></a>错误集锦</h3><h4 id="One-连不上数据库"><a href="#One-连不上数据库" class="headerlink" title="One 连不上数据库"></a>One 连不上数据库</h4><p>描述：如图<br><img src="http://i3.tietuku.com/70ee7b048eb32974.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/14/虚拟机错误/" itemprop="url">
+                  虚拟机错误
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-09-14T17:14:45+08:00" content="2015-09-14">
+              2015-09-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>问题：</code>上周挂起了俩虚机（有一个弄的是克隆的），今天打开一启动，报错<br><img src="http://i3.tietuku.com/8a00a6d333f7ecb4.png" alt=""></p>
+<p><strong>解决：</strong><br>右键我的电脑–&gt;管理 –&gt; 服务，找到VMware Authorization Service服务，将其启动，并设置为自动或自动延迟，可以看图<br><img src="http://i3.tietuku.com/b8dbe039996b6155.png" alt=""><br>解释，这个服务为授权服务，没有这个服务打开虚拟机软件时会出现相关权限缺失或文件路径错误等错误提示，使虚机无法启动</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/09/CentOS环境搭建zabbix监控/" itemprop="url">
+                  CentOS环境搭建zabbix监控
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-09-09T10:48:06+08:00" content="2015-09-09">
+              2015-09-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##zabbix server</p>
+<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><p>rpm -ivh <a href="http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm" target="_blank" rel="external">http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</a><br><a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm" target="_blank" rel="external">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</a></p>
+<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><blockquote>
+<p>yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent    #这个装出来是1.8的版本。所以重来</p>
+<ul>
+<li>下面是2.2版本的安装包<br>yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</li>
+</ul>
+</blockquote>
+<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><p>yum install -y mysql-server</p>
+<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v &quot;(^#|^$)&quot; 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line">vi /etc/my.cnf</div><div class="line">&gt;参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=true&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line"></div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
+<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line">mysql&gt; create database zabbix character set utf8;</div><div class="line">mysql&gt; grant all privileges on zabbix.* to zabbix@localhost identified by &apos;zabbix&apos;;</div><div class="line">mysql&gt; flush privileges;</div></pre></td></tr></table></figure>
+<h3 id="创建zabbix的数据库"><a href="#创建zabbix的数据库" class="headerlink" title="创建zabbix的数据库"></a>创建zabbix的数据库</h3><ul>
+<li>zabbix连接数据：zabbix/zabbix<h3 id="导入zabbix的数据库"><a href="#导入zabbix的数据库" class="headerlink" title="导入zabbix的数据库"></a>导入zabbix的数据库</h3><h4 id="进入数据库导入"><a href="#进入数据库导入" class="headerlink" title="进入数据库导入"></a>进入数据库导入</h4>mysql&gt;use zabbix<br>###倒入sql一定按顺序<code>一定</code></li>
+<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###配置zabbix_server.conf</p>
+<ul>
+<li><p>默认参数：<br>  egrep -v “(^#|^$)” /etc/zabbix/zabbix_server.conf</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改后参数：<br>  主要添加字段为：DBpassword=zabbix</p>
+</li>
+</ul>
+<h4 id="iptables-amp-Selinux设置"><a href="#iptables-amp-Selinux设置" class="headerlink" title="iptables&amp;Selinux设置"></a>iptables&amp;Selinux设置</h4><ul>
+<li>iptables设置(注意顺序)<blockquote>
+<p>-A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT<br>-A INPUT -m state –state NEW -m tcp -p tcp –dport 10051 -j ACCEPT<br>-A OUTPUT -m state –state NEW -m tcp -p tcp –dport 10050 -j ACCEPT<br>#-A INPUT -m state –state NEW -m tcp -p tcp –sport 10050 -j ACCEPT</p>
+</blockquote>
+</li>
+<li>Selinux关闭<blockquote>
+<p>[root@localhost ~]# setenforce 0<br>[root@localhost ~]# getenforce</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><p>sudo /etc/init.d/zabbix-server start<br>sudo /etc/init.d/httpd start</p>
+<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><blockquote>
+<p>rpm -ivh <a href="http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm" target="_blank" rel="external">http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</a><br>yum install zabbix zabbix-agent</p>
+</blockquote>
+<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><blockquote>
+<p>-A INPUT -m state –state NEW -m tcp -p tcp –dport 10050 -j ACCEPT<br>-A OUTPUT -m state –state NEW -m tcp -p tcp –dport 10051 -j ACCEPT</p>
+</blockquote>
+<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><blockquote>
+<p>[root@localhost ~]# egrep -v “(^#|^$)” /etc/zabbix/zabbix_agentd.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=127.0.0.1	#被动模式，允许那台服务器连接</div><div class="line">ServerActive=127.0.0.1,192.168.138.133	#主动模式，向哪台服务器发送数据</div><div class="line">Hostname=Centos-01</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>那个没弄好，下面这个好用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v &quot;(^#|^$)&quot; /etc/zabbix/zabbix_agentd.conf </div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133</div><div class="line">ServerActive=192.168.138.133</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><blockquote>
+<p>[root@localhost ~]# /etc/init.d/zabbix-agent restart</p>
+</blockquote>
+<h4 id="zabbix添加主机"><a href="#zabbix添加主机" class="headerlink" title="zabbix添加主机"></a>zabbix添加主机</h4><h5 id="手动添加"><a href="#手动添加" class="headerlink" title="手动添加"></a>手动添加</h5><p><img src="http://i1.tietuku.com/29ff780785f8142b.png" alt="看图"><br><img src="http://i1.tietuku.com/a5071fd29e260241.png" alt=""></p>
+<h5 id="自动添加"><a href="#自动添加" class="headerlink" title="自动添加"></a>自动添加</h5><p><img src="http://i1.tietuku.com/50818e58957d382a.png" alt=""><br><img src="http://i1.tietuku.com/5c8029d4a5750557.png" alt=""></p>
+<p>##报错解决</p>
+<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line">#添加字段：date.timezone = Asia/Shanghai</div></pre></td></tr></table></figure></p>
+<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改其中字段为以下</p>
+<p><directory "="" usr="" share="" zabbix"=""><br>    Options FollowSymLinks<br>    AllowOverride None<br>    Order allow,deny<br>    Allow from all<br>    php_value date:timezone Asia/Shanghai<br>    php_value max_execution_time 300<br>    php_value post_max_size 16M<br>    php_value max_input_time 300<br>    php_value memory_limit 128M<br>    php_value upload_max_filesize 2M<br></directory><br>然后重启httpd服务</p>
+</blockquote>
+<h4 id="默认登陆账号密码"><a href="#默认登陆账号密码" class="headerlink" title="默认登陆账号密码"></a>默认登陆账号密码</h4><p>账户：Admin<br>密码：zabbix</p>
+<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br>#echo -n arvon | openssl md5<br>(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</p>
+<blockquote>
+<p>>mysql -uname -ppassword<br>>use zabbix;<br>>select * from users;<br>#先在外面生成的md5码该用了<br>>update users set  passwd=’e2798af12a7a0f4f70b4d69efbc25f4d’ where userid = ‘1’;<br><img src="http://i1.tietuku.com/75f80ce9269b455a.png" alt=""></p>
+</blockquote>
+<h4 id="报错贴图“table-not-exist”"><a href="#报错贴图“table-not-exist”" class="headerlink" title="报错贴图“table not exist”"></a>报错贴图“table not exist”</h4><p><img src="http://i1.tietuku.com/3f75b678db942213.png" alt=""><br><img src="http://i1.tietuku.com/b585f7995c14ad19.png" alt=""></p>
+<h4 id="epel源错误"><a href="#epel源错误" class="headerlink" title="epel源错误"></a>epel源错误</h4><p><img src="http://i1.tietuku.com/c53075f14306cd61.png" alt=""><br>修改文件“/etc/yum.repos.d/epel.repo”， 第一项epel，将baseurl的注释取消， mirrorlist注释掉。即可</p>
+<h4 id="zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”"><a href="#zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”" class="headerlink" title="zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”"></a>zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”</h4><p><img src="http://i1.tietuku.com/281d34ca6408ac6e.png" alt=""></p>
+<blockquote>
+<p><a href="Zabbix discoverer processes more than 75% busy">参考</a></p>
+</blockquote>
+<h4 id="zabbix-server-is-not-running报错"><a href="#zabbix-server-is-not-running报错" class="headerlink" title="zabbix server is not running报错"></a>zabbix server is not running报错</h4><p><img src="http://i1.tietuku.com/21ba7ab71d649b6d.png" alt="错误如图"><br><img src="http://i1.tietuku.com/263e79625c329936.png" alt=""><br>解决：仅限于我个人使用，打死都想不到密码写错了，zabbix_server.conf里面的密码加了两个单引号，真是作死呀，就是看不出来</p>
+<p>参考文档：<br><a href="http://zabbix.org/wiki/InstallOnCentOS_RHEL#Database" target="_blank" rel="external">zabbix wike</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/07/mysql-keepalive实现高可用/" itemprop="url">
+                  mysql + keepalive实现高可用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-09-07T15:38:14+08:00" content="2015-09-07">
+              2015-09-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>放一放<br><a href="http://user.qzone.qq.com/546259111/blog/1441532749" target="_blank" rel="external">参考文档</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/31/2015读书清单/" itemprop="url">
+                  2015读书清单
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-31T09:44:40+08:00" content="2015-08-31">
+              2015-08-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>没什么好说的</p>
+<h3 id="课外读物"><a href="#课外读物" class="headerlink" title="课外读物"></a>课外读物</h3><ul>
+<li><p><a href="http://item.jd.com/11338771.html" target="_blank" rel="external">从你的全世界路过</a></p>
+</li>
+<li><p><a href="http://item.jd.com/11258976.html" target="_blank" rel="external">追风筝的人</a></p>
+</li>
+<li><p><a href="http://item.jd.com/10658646.html" target="_blank" rel="external">百年孤独</a></p>
+<blockquote>
+<p>已入手</p>
+</blockquote>
+</li>
+<li><p><del><a href="http://item.jd.com/11353729.html" target="_blank" rel="external">活着</a></del></p>
+<blockquote>
+<p>txt版<br>已阅</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="课内读物"><a href="#课内读物" class="headerlink" title="课内读物"></a>课内读物</h3><ul>
+<li><p><a href="http://item.jd.com/10972653.html" target="_blank" rel="external">Perl语言入门_中文版第六版</a></p>
+<blockquote>
+<p>pdf版<br>进行中</p>
+</blockquote>
+</li>
+<li><p><del><a href="http://item.jd.com/10380541.html" target="_blank" rel="external">与孩子一起学编程</a></del></p>
+<blockquote>
+<p>已入手<br>已阅</p>
+</blockquote>
+</li>
+<li><p><del><a href="http://vdisk.weibo.com/s/rUcl_" target="_blank" rel="external">简明python</a></del></p>
+<blockquote>
+<p>pdf版<br>已阅</p>
+</blockquote>
+</li>
+<li><p><a href="http://item.jd.com/10057317.html?cu=true&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=20001286675_0_a3731932b07e46b28c761397b2e6ca64" target="_blank" rel="external">TCP/IP详解卷1 协议</a></p>
+<blockquote>
+<p>已入手</p>
+</blockquote>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/24/使用fio工具测试linux的磁盘性能/" itemprop="url">
+                  使用fio工具测试linux的磁盘性能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-24T17:01:45+08:00" content="2015-08-24">
+              2015-08-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等</p>
+<h3 id="简单测试写性能"><a href="#简单测试写性能" class="headerlink" title="简单测试写性能"></a>简单测试写性能</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> of=testfile bs=<span class="number">1</span>M count=<span class="number">1024</span> oflag=dsync</div><div class="line"><span class="comment">#采用dd创建一个1G的文件的磁盘写速度，IO引擎为dsync</span></div></pre></td></tr></table></figure>
+<h3 id="准备-amp-安装"><a href="#准备-amp-安装" class="headerlink" title="准备&amp;安装"></a>准备&amp;安装</h3><ul>
+<li><a href="http://freecode.com/projects/fio/" target="_blank" rel="external">FIO官网</a></li>
+<li>安装系统<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="regexp">//brick</span>.kernel.dk/snaps/fio-<span class="number">2.0</span>.<span class="number">7</span>.tar.gz</div><div class="line"><span class="comment">#download the software</span></div><div class="line">yum install libaio-devel</div><div class="line"><span class="comment">#安装依赖包</span></div><div class="line">tar -xvf fio-<span class="number">2.0</span>.<span class="number">7</span>.tar.gz</div><div class="line"><span class="comment">#decompression</span></div><div class="line">cd fio-<span class="number">2.0</span>.<span class="number">7</span></div><div class="line"><span class="comment">#进入解压目录</span></div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><ul>
+<li><p>fio选项说明</p>
+<blockquote>
+<p>filename=/dev/sdb1       测试文件名称，通常选择需要测试的盘的data目录。<br>direct=1                 测试过程绕过机器自带的buffer。使测试结果更真实。<br>rw=randwrite             测试随机写的I/O<br>rw=randrw                测试随机写和读的I/O<br>bs=16k                   单次io的块文件大小为16k<br>bsrange=512-2048         同上，提定数据块的大小范围<br>size=5g    本次的测试文件大小为5g，以每次4k的io进行测试。<br>numjobs=30               本次的测试线程为30.<br>runtime=1000             测试时间为1000秒，如果不写则一直将5g文件分4k每次写完为止。<br>ioengine=psync           io引擎使用pync方式<br>rwmixwrite=30            在混合读写的模式下，写占30%<br>group_reporting          关于显示结果的，汇总每个进程的信息。<br>此外<br>lockmem=1g               只使用1g内存进行测试。<br>zero_buffers             用0初始化系统buffer。<br>nrfiles=8                每个进程生成文件的数量。</p>
+</blockquote>
+</li>
+<li><p>例子</p>
+</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#随机读</span></div><div class="line">fio -filename=<span class="regexp">/root/filename</span> -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randread -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">10</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#顺序读</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">read</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#随机写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randwrite -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest </div><div class="line"><span class="comment">#顺序写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">write</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest </div><div class="line"><span class="comment">#混合随机读写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -rwmixread=<span class="number">70</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">100</span> -group_reporting -name=mytest -ioscheduler=noop</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/24/Ubuntu进行ssh连接/" itemprop="url">
+                  Ubuntu进行ssh连接
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-24T10:29:52+08:00" content="2015-08-24">
+              2015-08-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装了Ubuntu进行测试，发现ssh连不上。发现没有ssh进程，so解决之</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li><p>当然先看是不是已经有了ssh,有的话就算了</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | <span class="keyword">grep</span> ssh</div></pre></td></tr></table></figure>
+</li>
+<li><p>没有，就开个终端，装一个<br><img src="http://i1.tietuku.com/0e3b11fdb4002e49.png" alt=""><br><img src="http://i1.tietuku.com/6f17e8bdf2001a06.png" alt=""></p>
+</li>
+<li><p>查看是否有了ssh进程<br><img src="http://i1.tietuku.com/09713a7df77b3306.png" alt=""></p>
+</li>
+<li><p>然后就是进行连接了<br><img src="http://i1.tietuku.com/b61bac93f0ea20ca.png" alt=""></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/21/yum源配置手册/" itemprop="url">
+                  yum源配置手册
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T15:07:07+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
+<li>升级系统<blockquote>
+<p>yum update<br>yum -y update mysql    #升级特定的软件</p>
+</blockquote>
+</li>
+<li>安装指定的软件包<blockquote>
+<p>yum -y install vsftpd</p>
+</blockquote>
+</li>
+<li>卸载指定的软件包<blockquote>
+<p>yum -y remore vsftpd mysql</p>
+</blockquote>
+</li>
+<li>查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装<blockquote>
+<p>yum grouplist</p>
+</blockquote>
+</li>
+<li>清除缓存中的rpm 头文件和包文件<blockquote>
+<p>yum clean all</p>
+</blockquote>
+</li>
+<li>搜索相关的软件包<blockquote>
+<p> yum -y search Emacs</p>
+</blockquote>
+</li>
+<li>显示指定软件包的信息<blockquote>
+<p>yum info Emacs</p>
+</blockquote>
+</li>
+<li>查询指定软件包的依赖信息，emacs依赖的模块不少啊<blockquote>
+<p>yum deplist emacs</p>
+</blockquote>
+</li>
+<li>列出所有以 yum 开头的软件包<blockquote>
+<p>yum list yum*</p>
+</blockquote>
+</li>
+<li>列出已经安装的但是不包含在资源库中的rpm 包<blockquote>
+<p>yum list extras</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><ul>
+<li>配置文件位于<code>/etc/yum.repos.d/*.repo</code>,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</li>
+<li><p>配置文件解释<br>arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v ‘^#’</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line"><span class="comment">#表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - <span class="number">163</span>.com</div><div class="line"><span class="comment">#名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="comment">#priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="comment">#用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http:<span class="regexp">//mirrors</span>.<span class="number">163</span>.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="comment">#引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http:<span class="regexp">//mirrors</span>.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="comment">#是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line"><span class="comment">#enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line"><span class="comment">#表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http:<span class="regexp">//mirror</span>.centos.org/centos/RPM-GPG-KEY-CentOS-<span class="number">6</span></div><div class="line"><span class="comment">#定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>粘贴可用的epel的yum源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line"></div><div class="line">[epel-debuginfo]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch/debug</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div><div class="line"></div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ul>
+<li><p><a href="https://www.baidu.com/link?url=uVSP1-5Xhdvi2t9FFdRnRC01B7zqLZ6a9LAbUNOfsstMsGb33lKjW4zrqJBHmT1h&amp;wd=&amp;eqid=d8ee0a1d000162130000000355e69580" target="_blank" rel="external">epel的wiki</a><br><img src="http://i1.tietuku.com/90e4fa74d8a26695.png" alt=""><br><img src="http://i1.tietuku.com/caaba96513485367.png" alt=""></p>
+</li>
+<li><p>使用EPEL（Extra Packages for Enterprise Linux）源,<code>RHEL6</code>系列</p>
+<blockquote>
+<p>wget <a href="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm</a><br>rpm -ivh epel-release-6-5.noarch.rpm</p>
+</blockquote>
+</li>
+<li><p>EPEL的<code>RHEL5</code>系列</p>
+<blockquote>
+<p>wget <a href="http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a><br>rpm -ivh epel-release-5-4.noarch.rpm</p>
+</blockquote>
+</li>
+<li><p>EPEL手动配置源</p>
+<blockquote>
+<p>vi /etc/yum.repos.d/epel.repo<br>[epel]<br>name=epel<br>mirrorlist=<a href="http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch" target="_blank" rel="external">http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch</a><br>enabled=1<br>gpgcheck=0</p>
+</blockquote>
+</li>
+<li>网易的源163<blockquote>
+<p>wget <a href="http://mirrors.163.com/.help/CentOS-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS-Base-163.repo</a></p>
+</blockquote>
+</li>
+<li>中科大的源<blockquote>
+<p>wget <a href="http://centos.ustc.edu.cn/CentOS-Base.repo" target="_blank" rel="external">http://centos.ustc.edu.cn/CentOS-Base.repo</a></p>
+</blockquote>
+</li>
+<li>sohu的源<blockquote>
+<p>wget <a href="http://mirrors.sohu.com/help/CentOS-Base-sohu.repo" target="_blank" rel="external">http://mirrors.sohu.com/help/CentOS-Base-sohu.repo</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
+<li>有时候会出现错误，现象：<br>Loading “installonlyn” plugin<br>Existing lock /var/run/yum.pid: another copy is running. Aborting.</li>
+</ul>
+<hr>
+<p>这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。<br>可以直接输入 rm -f /var/run/yum.pid<br>也可以/etc/init.d/yum-updatesd stop </p>
 
           
         
@@ -339,6 +1496,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -370,20 +1531,27 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+               alt="Arvon" />
+          <p class="site-author-name" itemprop="name">Arvon</p>
+          <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -421,7 +1589,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
 </div>
 
 <div class="powered-by">

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zabbix,句柄," />
 
 
 
@@ -84,15 +84,31 @@
 
 
 
-<meta name="description" content="You can go as far as you want to go">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arvon's Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+<meta name="description" content="问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下
+
+通过google有了一些眉目,以下摘自google
+
+linux系统出现Too many open files 错误，这是因为文件描述符大小不够，或者有不正常的网络连接(Socket也是一种特殊的文件)、文件IO没有关闭并释放出文件描述符（文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Too many open files错误">
+<meta property="og:url" content="http://yoursite.com/2015/08/21/Too-many-open-files错误/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="You can go as far as you want to go">
+<meta property="og:description" content="问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下
+
+通过google有了一些眉目,以下摘自google
+
+linux系统出现Too many open files 错误，这是因为文件描述符大小不够，或者有不正常的网络连接(Socket也是一种特殊的文件)、文件IO没有关闭并释放出文件描述符（文件">
+<meta property="og:image" content="http://i1.tietuku.com/b005b2a0ab63699d.png">
+<meta property="og:image" content="http://i1.tietuku.com/ac251c031bf640e8.png">
+<meta property="og:updated_time" content="2015-08-26T03:29:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arvon's Blog">
-<meta name="twitter:description" content="You can go as far as you want to go">
+<meta name="twitter:title" content="Too many open files错误">
+<meta name="twitter:description" content="问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下
+
+通过google有了一些眉目,以下摘自google
+
+linux系统出现Too many open files 错误，这是因为文件描述符大小不够，或者有不正常的网络连接(Socket也是一种特殊的文件)、文件IO没有关闭并释放出文件描述符（文件">
+<meta name="twitter:image" content="http://i1.tietuku.com/b005b2a0ab63699d.png">
 
 
 
@@ -113,9 +129,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/08/21/Too-many-open-files错误/"/>
 
-  <title> Archiv | Arvon's Blog </title>
+  <title> Too many open files错误 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -136,7 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,65 +250,143 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! Insgesamt 36 Artikel. Bleib dran.
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Too many open files错误
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T10:10:18+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下<br><img src="http://i1.tietuku.com/b005b2a0ab63699d.png" alt=""></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://i1.tietuku.com/ac251c031bf640e8.png" alt=""></h2><hr>
+<p>通过google有了一些眉目,以下摘自<a href="http://www.cnblogs.com/wgkgood/archive/2011/03/02/2066709.html" target="_blank" rel="external">google</a></p>
+<blockquote>
+<p>linux系统出现Too many open files 错误，这是因为文件描述符大小不够，或者有不正常的网络连接(Socket也是一种特殊的文件)、文件IO没有关闭并释放出文件描述符（文件句柄，File Operator）。<br>使用如下命令查看系统对允许打开最大文件描述符的配置：<br>ulimit -u 查看open files设置<br>ulimit -a 查看所有设置<br>ulimit -u 65535(新的open files 值)修改设置<br>ulimit -n 65536 设置用户可以同时打开的最大文件数（max open files）<br>　<br>如果本参数设置过小，对于并发访问量大的网站，可能会出现too many open files的错误 　<br>使用lsof -p pid [httpd进程的 pid、java的pid]来查看系统中apache进程和java运行时进程当前打开的文件资源，发现两者之和已经接近1024，大于了默认的设置。</p>
+<p>修改配置：</p>
+<p>修改/etc/security/limits.conf，在文件末加上</p>
+<ul>
+<li>soft nofile 65536</li>
+<li>hard nofile 65536</li>
+</ul>
+<p>系统级文件描述符极限还可以通过将以下三行添加到 /etc/rc.d/rc.local 启动脚本中来设置：</p>
+<ul>
+<li>Increase system-wide file descriptor limit.<br>echo 65536 &gt; /proc/sys/fs/file-max<br>echo 65536 &gt; /proc/sys/fs/inode-max</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
+          
+            <a href="/tags/句柄/" rel="tag">#句柄</a>
+          
         </div>
       
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/20/sed-命令实例/" rel="next" title="sed 命令实例">
+                <i class="fa fa-chevron-left"></i> sed 命令实例
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/21/lsof命令/" rel="prev" title="lsof命令">
+                lsof命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/28/使用Hexo和Github搭建Blog/" itemprop="url">
-              
-                <span itemprop="name">使用Hexo和Github搭建Blog</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-28T14:12:31+08:00"
-              content="2016-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -300,6 +394,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -319,8 +417,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -363,6 +470,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,11 +577,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   

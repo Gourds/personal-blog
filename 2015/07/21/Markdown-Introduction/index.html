@@ -1,0 +1,711 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="markdown," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介：Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。
+#语法介绍
+###基本介绍
+
+在Markdown中，、-、+3个符号的效果一致，称为Markdown符号，我习惯用\号
+空白行表示另起一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown Introduction">
+<meta property="og:url" content="http://yoursite.com/2015/07/21/Markdown-Introduction/index.html">
+<meta property="og:site_name" content="Arvon's Blog">
+<meta property="og:description" content="简介：Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。
+#语法介绍
+###基本介绍
+
+在Markdown中，、-、+3个符号的效果一致，称为Markdown符号，我习惯用\号
+空白行表示另起一个">
+<meta property="og:image" content="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png">
+<meta property="og:updated_time" content="2015-08-26T10:17:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown Introduction">
+<meta name="twitter:description" content="简介：Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。
+#语法介绍
+###基本介绍
+
+在Markdown中，、-、+3个符号的效果一致，称为Markdown符号，我习惯用\号
+空白行表示另起一个">
+<meta name="twitter:image" content="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/07/21/Markdown-Introduction/"/>
+
+  <title> Markdown Introduction | Arvon's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Arvon's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Markdown Introduction
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-07-21T08:17:54+08:00" content="2015-07-21">
+              2015-07-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>简介：</strong>Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是<br>很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。</p>
+<p>#语法介绍</p>
+<p>###基本介绍</p>
+<ul>
+<li>在Markdown中，<em>、-、+3个符号的效果一致，称为Markdown符号，我习惯用\</em>号</li>
+<li>空白行表示另起一个段落</li>
+<li>-是表示inline代码，tab是用来标记代码段，分别对应html的code、pre标签</li>
+</ul>
+<p>###标题</p>
+<ul>
+<li>可以用#、-、=一样的效果，个人偏爱#</li>
+<li>#    一级标题</li>
+<li>##    二级标题        </li>
+<li>…    以此类推</li>
+<li>######    六级标题</li>
+</ul>
+<p>###文本强调</p>
+<ul>
+<li><em>斜体</em> or <em>强调</em></li>
+<li><strong>加粗</strong> or <strong>加粗</strong></li>
+<li><strong><em>粗斜体</em></strong> or <strong><em>粗斜体</em></strong></li>
+</ul>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><ul>
+<li>like this<blockquote>
+<p>tag: [tag1, tag2]</p>
+</blockquote>
+</li>
+</ul>
+<p>###List列表</p>
+<ul>
+<li>*无序列表（unordered）</li>
+</ul>
+<ul>
+<li>+无序列表</li>
+</ul>
+<ul>
+<li>-无序列表</li>
+</ul>
+<ol>
+<li><ol>
+<li>第一行（ordered有序列表）</li>
+</ol>
+</li>
+<li>2.或- 第二行</li>
+<li>3.或- 第三行</li>
+</ol>
+<p>###删除线<br>~~文字~~   效果为   <del>文字</del></p>
+<p>###组合用法</p>
+<ul>
+<li>产品介绍（子项目符号）<br>  此时子项，要以一个制表符或者四个空格缩进</li>
+</ul>
+<ul>
+<li>产品特点<ol>
+<li>特点1</li>
+</ol>
+<ul>
+<li>特点2</li>
+<li>特点3</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>产品功能<ol>
+<li>功能1</li>
+</ol>
+<ul>
+<li>功能2</li>
+<li>功能3</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>可能有时会出现这样的情况，首行内容是以日期或数字开头：2013.公司的年度目标，为了避免也转换成有序列表，可以在.前面<br>加上\:2013. 公司的年度目标</li>
+</ul>
+<p>###Links网站链接</p>
+<blockquote>
+<p>Inline-style 内嵌方式：<br>[link text](<a href="https://www.google.com" target="_blank" rel="external">https://www.google.com</a> “title text”)</p>
+<p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
+<p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
+<p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
+<p>Email 邮件：<br><a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a></p>
+</blockquote>
+<p>###images图片链接<br><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
+<blockquote>
+<p>Inline-style 内嵌方式：<br>![alt text](<a href="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" target="_blank" rel="external">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png</a> “title text”)</p>
+<p>Reference-style 引用方式：<br>![alt text][logo]<br>[logo]: <a href="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" target="_blank" rel="external">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png</a> “title text”<br>Inline-style 内嵌方式：<br><img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="title text"></p>
+<p>Reference-style 引用方式：<br>![alt text][logo]</p>
+<p>[logo]: <a href="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" target="_blank" rel="external">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png</a> “title text”</p>
+<p>###code and Syntax HIghlighting 代码语法高亮：</p>
+<ul>
+<li>使用`` 包裹起来 ``效果为： <code>包裹起来</code></li>
+</ul>
+</blockquote>
+<ul>
+<li>语法高亮</li>
+<li><p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">"Python syntax highlighting"</span></div><div class="line"><span class="keyword">print</span> s</div></pre></td></tr></table></figure>
+</li>
+<li><p>Block Code代码分组（代码区块）：<br>在该行开头缩进4个空格或一个制表符(tab)</p>
+</li>
+</ul>
+<p><strong>Blockquotes 引用：</strong></p>
+<blockquote>
+<p>Email-style angle brackets<br>are used for blockquotes.</p>
+<blockquote>
+<p>And, they can be nested.</p>
+<h4 id="Headers-in-blockquotes"><a href="#Headers-in-blockquotes" class="headerlink" title="Headers in blockquotes"></a>Headers in blockquotes</h4><ul>
+<li>You can quote a list.</li>
+<li>Etc.</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>###Hard LIne Breaks换行：<br>在一行的结尾处加上2个或2个以上的空格，也可以使用标签<br>第一行文字，<br>第二行文字</p>
+<p>###水平分割线：<br>*<em>*<br>\</em> <em> </em><br>- - -</p>
+<p>###Escape charecter转义符（反斜杠）：<br>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果，你可以在星号的前面加上反斜杠：<br>*literal asterisks*<br>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：<br>\反斜杠  `反引号  *星号  _下划线  {}花括号  []方括号  ()括弧  #井字号  +加号  -减号  .英文句 !感叹号</p>
+<p>###参考文档<br><a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown官网</a><br><a href="http://www.markdown.cn/" target="_blank" rel="external">Markdown语法说明</a><br><a href="http://www.bluesdream.com/blog/markdown-cheatsheet-syntax-manual.html" target="_blank" rel="external">参照地址</a><br><a href="http://blog.maxwi.com/2014/03/20/learn-mardown-in-5-minutes/" target="_blank" rel="external">good</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag">#markdown</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/20/Hexo简明/" rel="next" title="Hexo简明">
+                <i class="fa fa-chevron-left"></i> Hexo简明
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/21/salt简明使用手册/" rel="prev" title="SaltStack使用简明手册">
+                SaltStack使用简明手册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Arvon" />
+          <p class="site-author-name" itemprop="name">Arvon</p>
+          <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标签"><span class="nav-number">1.</span> <span class="nav-text">标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Headers-in-blockquotes"><span class="nav-number">1.1.</span> <span class="nav-text">Headers in blockquotes</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="tools,ansible," />
 
 
 
@@ -84,15 +84,28 @@
 
 
 
-<meta name="description" content="You can go as far as you want to go">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arvon's Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+<meta name="description" content="简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
+
+批量执行支持模块化，支持playbook（相比puppet还是弱些）上手容易（puppet上手有门槛）权限控制
+
+##自用例子1234567ansible -i hos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ansible自用手册">
+<meta property="og:url" content="http://yoursite.com/2015/08/05/ansible自用手册/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="You can go as far as you want to go">
+<meta property="og:description" content="简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
+
+批量执行支持模块化，支持playbook（相比puppet还是弱些）上手容易（puppet上手有门槛）权限控制
+
+##自用例子1234567ansible -i hos">
+<meta property="og:updated_time" content="2015-08-26T03:26:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arvon's Blog">
-<meta name="twitter:description" content="You can go as far as you want to go">
+<meta name="twitter:title" content="ansible自用手册">
+<meta name="twitter:description" content="简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
+
+批量执行支持模块化，支持playbook（相比puppet还是弱些）上手容易（puppet上手有门槛）权限控制
+
+##自用例子1234567ansible -i hos">
 
 
 
@@ -113,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/08/05/ansible自用手册/"/>
 
-  <title> Archiv | Arvon's Blog </title>
+  <title> ansible自用手册 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -136,7 +149,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,65 +247,137 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! Insgesamt 36 Artikel. Bleib dran.
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ansible自用手册
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-08-05T13:42:15+08:00" content="2015-08-05">
+              2015-08-05
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p><strong>简介：</strong>ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：</p>
+<blockquote>
+<p>批量执行<br>支持模块化，支持playbook（相比puppet还是弱些）<br>上手容易（puppet上手有门槛）<br>权限控制</p>
+</blockquote>
+<p>##自用例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ansible -i hosts all -a <span class="string">'date -R'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line">ansible -i hosts all -a <span class="string">'ntpdate vn.pool.ntp.org'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line"><span class="comment">#ansible -i hosts gsservers -a 'sudo yum install -y telnet' --private-key=$&#123;PRIVATE_KEY_FILE&#125;</span></div><div class="line"></div><div class="line"><span class="comment">###example two</span></div><div class="line">ansible-playbook -i hosts list.yml --list-hosts	<span class="comment">#列出主机信息</span></div><div class="line">ansible-playbook -i hosts list.yml -v	<span class="comment">#显示详细过程</span></div></pre></td></tr></table></figure></p>
+<p>##配置使用手册</p>
+<p>###安装</p>
+<p>###配置</p>
+<p>###测试</p>
+<p>##参考文档<br><a href="http://www.tuicool.com/articles/2EVBJjv" target="_blank" rel="external">集群工具ansible使用方法</a><br><a href="https://linuxtoy.org/archives/hands-on-with-ansible.html" target="_blank" rel="external">Ansible快速上手</a></p>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tools/" rel="tag">#tools</a>
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
         </div>
       
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/03/Linux系统命令（二）/" rel="next" title="Linux系统命令（二）">
+                <i class="fa fa-chevron-left"></i> Linux系统命令（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/07/Linux挂载LVM分区/" rel="prev" title="Linux挂载LVM分区">
+                Linux挂载LVM分区 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/28/使用Hexo和Github搭建Blog/" itemprop="url">
-              
-                <span itemprop="name">使用Hexo和Github搭建Blog</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-28T14:12:31+08:00"
-              content="2016-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -300,6 +385,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -319,8 +408,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -363,6 +461,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,11 +568,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
