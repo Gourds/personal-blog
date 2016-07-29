@@ -87,7 +87,7 @@
 <meta name="description" content="You can go as far as you want to go">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Arvon's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/zabbix/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/Zabbix/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="You can go as far as you want to go">
 <meta name="twitter:card" content="summary">
@@ -113,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/zabbix/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/Zabbix/"/>
 
-  <title> 标签: zabbix | Arvon's Blog </title>
+  <title> 标签: Zabbix | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -247,94 +247,10 @@
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
-        zabbix
+        Zabbix
         <small>标签</small>
       </h2>
     </div>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/09/14/Zabbix使用Percona组件监控Mysql/" itemprop="url">
-              
-                <span itemprop="name">Zabbix使用Percona组件监控Mysql</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-09-14T17:40:45+08:00"
-              content="2015-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/09/09/CentOS环境搭建zabbix监控/" itemprop="url">
-              
-                <span itemprop="name">CentOS环境搭建zabbix监控</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-09-09T10:48:06+08:00"
-              content="2015-09-09" >
-          09-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/08/21/Too-many-open-files错误/" itemprop="url">
-              
-                <span itemprop="name">Too many open files错误</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-08-21T10:10:18+08:00"
-              content="2015-08-21" >
-          08-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
 
     
       
@@ -416,7 +332,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -663,6 +579,54 @@
                 $element.find('.leancloud-visitors-count').text(counter.get('time'));
               },
               error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
+function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });

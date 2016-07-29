@@ -328,11 +328,14 @@
       
         
           
-            <p><strong>简介：</strong>LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空间。普通的磁盘分区管理方式在逻辑分区划分好之后就无法改变其大小，当一个逻辑分区存放不下某个文件时，这个文件因为受上层文件系统的限制，也不能跨越多个分区来存放，所以也不能同时放到别的磁盘上。而遇到出现某个分区空间耗尽时，解决的方法通常是使用符号链接，或者使用调整分区大小的工具，但这只是暂时解决办法，没有从根本上解决问题。随着Linux的逻辑卷管理功能的出现，这些问题都迎刃而解，用户在无需停机的情况下可以方便地调整各个分区大小。</p>
-<p>##手动将LVM挂载至linux系统<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">rpm -qa lvm2</div><div class="line"><span class="comment">#查看是否安装了lvm</span></div><div class="line">yum install lvm2</div><div class="line"><span class="comment">#安装lvm软件</span></div><div class="line">vgscan</div><div class="line"><span class="comment">#查找并显示系统中存在的LVN卷组</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看系统中存在哪些卷组以及它们的激活状态（注意：如果有两个卷组名一样，其中一个是无法挂载的，要想挂载，需要重命名一个卷组）</span></div><div class="line">vgdisplay LVMname | more</div><div class="line"><span class="comment">#显示所有名为LVMname卷组的详细信息，请记住你将要挂载卷组的 VG UUID。</span></div><div class="line">	vgrename o236o6-MGAQ-erKG-k6cH<span class="number">-12</span>Zs<span class="number">-8</span>NwX-CCqPG3 vgNewName</div><div class="line">	<span class="comment">#卷组重新命名为vgNewName</span></div><div class="line">vgchange -ay /dev/vgNewName</div><div class="line"><span class="comment">#激活卷组vsNewName，此时你也并不能使用，需要挂载</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看现在的激活状态</span></div><div class="line">mount /dev/vgNewName /somePoint</div><div class="line"><span class="comment">#挂载LVM到挂载点，这样就可以访问了</span></div><div class="line">umount /dev/vgNewName<span class="comment"># or usr 'umount /somePoint'</span></div><div class="line"><span class="comment">#卸载LVM卷组</span></div><div class="line">vgchange -an /dev/vgNewName</div><div class="line"><span class="comment">#将卷组修改成不激活状态</span></div></pre></td></tr></table></figure></p>
-<p>###LVM配置</p>
+          简介：LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/07/Linux挂载LVM分区/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -440,18 +443,16 @@
       
         
           
-            <p><strong>简介：</strong>ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：</p>
-<blockquote>
-<p>批量执行<br>支持模块化，支持playbook（相比puppet还是弱些）<br>上手容易（puppet上手有门槛）<br>权限控制</p>
-</blockquote>
-<p>##自用例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ansible -i hosts all -a <span class="string">'date -R'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line">ansible -i hosts all -a <span class="string">'ntpdate vn.pool.ntp.org'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line"><span class="comment">#ansible -i hosts gsservers -a 'sudo yum install -y telnet' --private-key=$&#123;PRIVATE_KEY_FILE&#125;</span></div><div class="line"></div><div class="line"><span class="comment">###example two</span></div><div class="line">ansible-playbook -i hosts list.yml --list-hosts	<span class="comment">#列出主机信息</span></div><div class="line">ansible-playbook -i hosts list.yml -v	<span class="comment">#显示详细过程</span></div></pre></td></tr></table></figure></p>
-<p>##配置使用手册</p>
-<p>###安装</p>
-<p>###配置</p>
-<p>###测试</p>
-<p>##参考文档<br><a href="http://www.tuicool.com/articles/2EVBJjv" target="_blank" rel="external">集群工具ansible使用方法</a><br><a href="https://linuxtoy.org/archives/hands-on-with-ansible.html" target="_blank" rel="external">Ansible快速上手</a></p>
+          简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
 
-          
+批量执行支持模块化，支持playbook（相比puppet还是弱些）
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/05/ansible自用手册/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -559,18 +560,18 @@
       
         
           
-            <p><strong>主要记录：</strong>Linux下的常用命令实例</p>
-<p>###实例</p>
-<ul>
-<li><p>search where the software are installed</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~/arvon_perl&gt; whereis perl</div><div class="line">perl: /usr/bin/perl /usr/bin/X11/perl /usr/share/man/man1/perl<span class="number">.1</span>.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>Update the perl to 5.14</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~/pkg&gt; wget http://www.cpan.org/src/<span class="number">5.0</span>/perl<span class="number">-5.14</span><span class="number">.1</span>.tar.gz</div><div class="line"><span class="comment">#download the package</span></div><div class="line">arvon@Mo:~/pkg/perl<span class="number">-5.14</span><span class="number">.1</span>&gt; tar zxvf perl<span class="number">-5.14</span><span class="number">.1</span>.tar.gz</div><div class="line"><span class="comment">#decompression the package</span></div><div class="line">arvon@Mo:~/pkg&gt; cd perl<span class="number">-5.14</span><span class="number">.1</span>/</div><div class="line"><span class="comment">#access to the directgory</span></div><div class="line">arvon@Mo:~/pkg/perl<span class="number">-5.14</span><span class="number">.1</span>&gt; vim README</div><div class="line"><span class="comment">#</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
+          主要记录：Linux下的常用命令实例
+###实例
 
-          
+search where the software are installed
+12arvon@Mo:~/arvon_perl&gt; whereis perlperl: /usr/bin/perl /usr/bin/X11/perl /usr/s
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/03/Linux系统命令（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -678,22 +679,14 @@
       
         
           
-            <h3 id="zabbix监控web服务"><a href="#zabbix监控web服务" class="headerlink" title="zabbix监控web服务"></a>zabbix监控web服务</h3><p>在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。</p>
-<p>选择一个主机（zabbix含有zabbix client的主机），由这台主机上的client对目标url发起访问。</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li><p>先选定一个主机，需要含有clent<br><img src="http://i3.tietuku.com/dda30fd3f166ea1b.png" alt=""></p>
-</li>
-<li><p>点击创建create scenario<br><img src="http://i3.tietuku.com/3e7210af7985249d.png" alt=""></p>
-</li>
-<li><p>填写scenario（方案）<br><img src="http://i3.tietuku.com/2252d1cbe47f1e39.png" alt=""></p>
-</li>
-<li><p>添加并填写steps<br><img src="http://i3.tietuku.com/c79306382b15ab42.png" alt=""></p>
-</li>
-<li><p>完成</p>
-</li>
-</ol>
+          zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/31/zabbix添加web监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -801,240 +794,28 @@
       
         
           
-            <p>#更新记录</p>
-<ul>
-<li>20150730 总结介绍</li>
-<li>20150731 控制流</li>
-<li>20150804 module</li>
-<li>20150806 脚本练手</li>
-<li>20150807 模块方法</li>
-<li>20150810 是时候结束了</li>
-</ul>
-<p>#介绍</p>
-<p>##简记</p>
-<ul>
-<li>这里使用的是CentOS release 6.6 (Final)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@Mo ~]# python -V		#查看python的版本</div><div class="line">Python 2.6.6	</div><div class="line"></div><div class="line">[root@Mo arvon_python]# which python	#查看python命令的安装的位置</div><div class="line">/usr/bin/python</div><div class="line"></div><div class="line">[root@Mo arvon_python]# echo $PATH		#查看$PATH变量，可以通过which命令查看一个命令的位置</div><div class="line">/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</div><div class="line"></div><div class="line">	#缩进可以使用Tab、2个空格、4个空格，选择一个长期用下去</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#the script is about expression</span></div><div class="line">length = float(raw_input(<span class="string">"Enter the length:"</span>))</div><div class="line">breadth = float(raw_input(<span class="string">"Enter the breadth:"</span>))</div><div class="line">area = length * breadth</div><div class="line"><span class="keyword">print</span> <span class="string">'Area is'</span>, area</div><div class="line"><span class="keyword">print</span> <span class="string">'Perimeter is'</span>, <span class="number">2</span>* (length + breadth)</div></pre></td></tr></table></figure>
-<p>##控制流</p>
-<p>###简介</p>
-<ul>
-<li>在python中有三种控制流语句if、for、while</li>
-</ul>
-<p>####if语句实例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: show how to use if</span></div><div class="line"><span class="comment">#number = int(raw_input("Input a number:"))</span></div><div class="line">number = <span class="number">25</span></div><div class="line">guess = int(input(<span class="string">"Enter a number which you are think:"</span>))</div><div class="line"><span class="keyword">print</span> guess</div><div class="line"><span class="keyword">print</span> number</div><div class="line"><span class="keyword">if</span> guess == number:</div><div class="line">    <span class="keyword">print</span> <span class="string">"Your number is right"</span></div><div class="line"><span class="keyword">elif</span> guess &gt; <span class="number">25</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"Your number is:"</span>, guess, <span class="string">"It,s too big"</span></div><div class="line"><span class="keyword">elif</span> guess &lt; <span class="number">25</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"You number is:"</span>, guess, <span class="string">"is small"</span></div></pre></td></tr></table></figure>
-<p>####while语句实例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: while</span></div><div class="line">number=<span class="number">23</span></div><div class="line">running=<span class="keyword">True</span></div><div class="line"><span class="keyword">while</span> running:</div><div class="line">    guess=int(raw_input(<span class="string">'Enteraninteger:'</span>))</div><div class="line">    <span class="keyword">if</span> guess == number:</div><div class="line">        <span class="keyword">print</span> <span class="string">'Congratulations, you guessed it.'</span></div><div class="line">        running = <span class="keyword">False</span> <span class="comment">#this causes the while loop to stop</span></div><div class="line">    <span class="keyword">elif</span> guess &lt; number:</div><div class="line">        <span class="keyword">print</span> <span class="string">'No, it is a litte higher than that'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'No, it is a little lower than that'</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'The while loop is over.'</span></div><div class="line">    <span class="comment">#Do anything else you want to do here </span></div><div class="line"><span class="keyword">print</span> <span class="string">'done'</span></div></pre></td></tr></table></figure>
-<p>####for语句</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">15</span>, <span class="number">2</span>):</div><div class="line">    <span class="keyword">print</span> i</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'THe for loop is over'</span></div></pre></td></tr></table></figure>
-<p>####break语句</p>
-<ul>
-<li>break语句是用来终止循环语句的，哪怕循环条件没有称为False或序列还没有被完全递归，也停止执行循环语句。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: break.py</span></div><div class="line">runing = <span class="string">'True'</span></div><div class="line"><span class="keyword">while</span> runing:</div><div class="line">    s = raw_input(<span class="string">'Enter your name:'</span>)</div><div class="line">    <span class="keyword">if</span> s == <span class="string">'quit'</span>:</div><div class="line">        <span class="keyword">break</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Length of the string is'</span>, len(s)</div><div class="line"><span class="keyword">print</span> <span class="string">'Done'</span></div></pre></td></tr></table></figure>
-<p>####continue语句</p>
-<ul>
-<li>跳过当前循环块中的剩余语句，然后进行下一轮循环。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line">runing = <span class="keyword">True</span></div><div class="line"><span class="keyword">while</span> runing:</div><div class="line">    s = raw_input(<span class="string">'Enter something:'</span>)</div><div class="line">    <span class="keyword">if</span> s == <span class="string">'quit'</span>:</div><div class="line">        <span class="keyword">break</span></div><div class="line">    <span class="keyword">if</span> len(s) &lt; <span class="number">3</span>:</div><div class="line">        <span class="keyword">continue</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Input is of sufficient length'</span></div></pre></td></tr></table></figure>
-<p>##函数</p>
-<ul>
-<li>函数是重用的程序段。它们允许你给一块语句一个名称，然后你可以在你的程序的任何地方使用这个名称任意多次<br>地运行这个语句块，这称为调用函数。函数通过def关键字定义。def关键字后跟一个函数的标识符名称，然后跟一对<br>圆括号。圆括号可以包括一些变量名，该行以冒号结尾，接下来的是一块语句，它们是函数体。</li>
-</ul>
-<p>###定义函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sayHello</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Hello World！'</span><span class="comment">#block belonging to the function</span></div><div class="line">sayHello()<span class="comment">#call the function</span></div></pre></td></tr></table></figure>
-<p>###使用函数形参</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Filename:func_param.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">printMax</span><span class="params">(a,b)</span>:</span></div><div class="line">    <span class="keyword">if</span> a&gt;b:</div><div class="line">        <span class="keyword">print</span> a, <span class="string">'is max number'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> b, <span class="string">'is max number'</span></div><div class="line">printMax(<span class="number">3</span>,<span class="number">4</span>)<span class="comment">#directly give litter values</span></div><div class="line">x = <span class="number">5</span></div><div class="line">y = <span class="number">7</span></div><div class="line">printMax(x,y)<span class="comment">#give variables as arguments</span></div></pre></td></tr></table></figure>
-<p>###局部变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#Filename: func_local.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'x is'</span>, x</div><div class="line">    x = <span class="number">2</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Changed local x to'</span>, x</div><div class="line">x = <span class="number">50</span></div><div class="line">func(x)</div><div class="line"><span class="keyword">print</span> <span class="string">'x is still'</span>, x</div></pre></td></tr></table></figure>
-<p>###global语句</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: func_global.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> x</div><div class="line">    <span class="keyword">print</span> <span class="string">'x is'</span>, x</div><div class="line">    x = <span class="number">2</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Changed local x to'</span>, x</div><div class="line">x = <span class="number">50</span></div><div class="line">func()</div><div class="line"><span class="keyword">print</span> <span class="string">'Value of x is'</span>, x</div></pre></td></tr></table></figure>
-<p>###使用默认参数值</p>
-<ul>
-<li>默认参数值是一个参数，默认参数值应该是不可变的，只有在形参表末尾的那些参数可以有默认参数值，即<br>你不能在声明函数形参的时候，先声明有默认值的形参而后声明没有默认值的形参，例如：def func（a，b=5）<br>是有效地，但是def func（a=5， b）是无效的</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8</span></div><div class="line"><span class="comment">#Todo: func_default.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">say</span> <span class="params">(message, times=<span class="number">1</span>)</span>:</span></div><div class="line">    <span class="keyword">print</span> message*times</div><div class="line">say(<span class="string">'Hello'</span>)</div><div class="line">say(<span class="string">'World'</span>,<span class="number">5</span>)</div></pre></td></tr></table></figure>
-<p>###关键参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a,b = <span class="number">5</span>, c=<span class="number">10</span>)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'a is'</span>, a, <span class="string">'and b is'</span>, b, <span class="string">'and c is'</span>, c</div><div class="line">func(<span class="number">3</span>, <span class="number">7</span>)</div><div class="line">func(<span class="number">25</span>, c=<span class="number">24</span>)</div><div class="line">func(c= <span class="number">50</span>, a= <span class="number">100</span>)</div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python func_key.py </span></div><div class="line">a <span class="keyword">is</span> <span class="number">3</span> <span class="keyword">and</span> b <span class="keyword">is</span> <span class="number">7</span> <span class="keyword">and</span> c <span class="keyword">is</span> <span class="number">10</span></div><div class="line">a <span class="keyword">is</span> <span class="number">25</span> <span class="keyword">and</span> b <span class="keyword">is</span> <span class="number">5</span> <span class="keyword">and</span> c <span class="keyword">is</span> <span class="number">24</span></div><div class="line">a <span class="keyword">is</span> <span class="number">100</span> <span class="keyword">and</span> b <span class="keyword">is</span> <span class="number">5</span> <span class="keyword">and</span> c <span class="keyword">is</span> <span class="number">50</span></div></pre></td></tr></table></figure>
-<p>###return语句</p>
-<ul>
-<li>return语句用来从一个函数返回即跳出函数。也可选函数返回一个值</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: func_return.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximum</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">if</span> x&gt;y:</div><div class="line">        <span class="keyword">return</span> x</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> y</div><div class="line"><span class="keyword">print</span> maximum(<span class="number">2</span>, <span class="number">3</span>)</div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python func_return.py </span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
-<p>###文档字符串（DocStrings）</p>
-<ul>
-<li>在函数的第一个逻辑行的字符串是这个函数的文档那个字符串 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: func_doc.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">printMax</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="string">'''Prints the max num of tow numbers.</span></div><div class="line">    The two values must be in tetgers.'''</div><div class="line">    x = int(x)<span class="comment">#convert to in tegers, if possible</span></div><div class="line">    y = int(y)</div><div class="line">    <span class="keyword">if</span> x&gt;y:</div><div class="line">        <span class="keyword">print</span> x, <span class="string">'is max num'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> y, <span class="string">'is max num'</span></div><div class="line">printMax(<span class="number">3</span>, <span class="number">5</span>)</div><div class="line"><span class="keyword">print</span> printMax.__doc__</div><div class="line"><span class="comment">###Out put</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python func_doc.py </span></div><div class="line"><span class="number">5</span> <span class="keyword">is</span> max num</div><div class="line">Prints the max num of tow numbers.</div><div class="line">    The two values must be <span class="keyword">in</span> tetgers.</div></pre></td></tr></table></figure>
-<p>##模块</p>
-<p>###模块概述</p>
-<ul>
-<li>模块的用处在于它能为你在别的程序中重用它提供的服务和功能。Python附带的标准库就是这<br>样一组模块的例子。</li>
-</ul>
-<p>###使用sys模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: using_sys.py</span></div><div class="line"><span class="keyword">import</span> sys  <span class="comment">#sys是system的缩写</span></div><div class="line"><span class="keyword">print</span> <span class="string">'The command line arguments are:'</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sys.argv:</div><div class="line"><span class="comment">#脚本的名称总是sys.argv列表的第一个参数</span></div><div class="line">    <span class="keyword">print</span> i</div><div class="line"><span class="keyword">print</span> <span class="string">'\n\nThe PYTHON PATH is'</span>, sys.path, <span class="string">'\n'</span></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python using_sys.py </span></div><div class="line">The command line arguments are:</div><div class="line">using_sys.py</div><div class="line"></div><div class="line"></div><div class="line">The PYTHON PATH <span class="keyword">is</span> [<span class="string">'/root/arvon_python'</span>, <span class="string">'/usr/lib64/python26.zip'</span>, <span class="string">'/usr/lib64/python2.6'</span>, <span class="string">'/usr/lib64/python2.6/plat-linux2'</span>, <span class="string">'/usr/lib64/python2.6/lib-tk'</span>, <span class="string">'/usr/lib64/python2.6/lib-old'</span>, <span class="string">'/usr/lib64/python2.6/lib-dynload'</span>, <span class="string">'/usr/lib64/python2.6/site-packages'</span>, <span class="string">'/usr/lib/python2.6/site-packages'</span>]</div></pre></td></tr></table></figure></p>
-<p>###字节编译的.pyc文件</p>
-<ul>
-<li>输入一个模块相对来说是一个比较费时的事情，所以Python做了一些技巧，以便使输入模块更<br>加快一些。一种方法是创建 字节编译的文件 ，这些文件以.pyc作为扩展名。字节编译的文件与<br>Python变换程序的中间状态有关（是否还记得Python如何工作的介绍？）。当你在下次从别的<br>程序输入这个模块的时候，.pyc文件是十分有用的——它会快得多，因为一部分输入模块所需<br>的处理已经完成了。另外，这些字节编译的文件也是与平台无关的。所以，现在你知道了那<br>些.pyc文件事实上是什么了。</li>
-</ul>
-<p>###from..import语句</p>
-<ul>
-<li><p>如果你想要直接输入argv变量到你的程序中（避免在每次使用它时打sys.），那么你可以使用<br>from sys import argv语句。如果你想要输入所有sys模块使用的名字，那么你可以使用from sys<br>import *语句。这对于所有模块都适用。一般说来，应该避免使用from..import而使用import语<br>句，因为这样可以使你的程序更加易读，也可以避免名称的冲突。</p>
-</li>
-<li><p>不建议使用，尽量使用sys.argv这样的</p>
-</li>
-</ul>
-<p>###模块的<strong>name</strong>(这里左右都是两个下划线)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">' __main__ '</span>:</div><div class="line"><span class="comment">#模块是对象，并且所有的模块都有一个内置属性 __name__。一个模块的 __name__ 的值取决于您如何应用模块。如果 import 一个模块，那么模块__name__ 的值通常为模块文件名，不带路径或者文件扩展名。但是您也可以像一个标准的程序样直接运行模块，在这 种情况下, __name__ 的值将是一个特别缺省"__main__"</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'This program is being run by itself'</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'I am being imorted form another module'</span></div></pre></td></tr></table></figure></p>
-<p>###创造自己的module<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: creat own module.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Hi, this is my wife pikachu.'</span></div><div class="line">version = <span class="string">'0.1'</span></div><div class="line"><span class="comment">#End of  my module.py</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python   #使用自己创建的模块</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: use my own module</span></div><div class="line"><span class="keyword">import</span> myModule</div><div class="line">myModule.sayHi()</div><div class="line"><span class="keyword">print</span> <span class="string">'Version'</span>,myModule.version</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python usemyModule.py </span></div><div class="line">Hi, this <span class="keyword">is</span> my wife pikachu.</div><div class="line">Version <span class="number">0.1</span></div></pre></td></tr></table></figure>
-<p>###使用dir函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir(sys)</div><div class="line">[<span class="string">'__displayhook__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__excepthook__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__stderr__'</span>, <span class="string">'__stdin__'</span>, <span class="string">'__stdout__'</span>, <span class="string">'_clear_type_cache'</span>, <span class="string">'_current_frames'</span>, <span class="string">'_getframe'</span>, <span class="string">'api_version'</span>, <span class="string">'argv'</span>, <span class="string">'builtin_module_names'</span>, <span class="string">'byteorder'</span>, <span class="string">'call_tracing'</span>, <span class="string">'callstats'</span>, <span class="string">'copyright'</span>, <span class="string">'displayhook'</span>, <span class="string">'dont_write_bytecode'</span>, <span class="string">'exc_clear'</span>, <span class="string">'exc_info'</span>, <span class="string">'exc_type'</span>, <span class="string">'excepthook'</span>, <span class="string">'exec_prefix'</span>, <span class="string">'executable'</span>, <span class="string">'exit'</span>, <span class="string">'flags'</span>, <span class="string">'float_info'</span>, <span class="string">'getcheckinterval'</span>, <span class="string">'getdefaultencoding'</span>, <span class="string">'getdlopenflags'</span>, <span class="string">'getfilesystemencoding'</span>, <span class="string">'getprofile'</span>, <span class="string">'getrecursionlimit'</span>, <span class="string">'getrefcount'</span>, <span class="string">'getsizeof'</span>, <span class="string">'gettrace'</span>, <span class="string">'hexversion'</span>, <span class="string">'maxint'</span>, <span class="string">'maxsize'</span>, <span class="string">'maxunicode'</span>, <span class="string">'meta_path'</span>, <span class="string">'modules'</span>, <span class="string">'path'</span>, <span class="string">'path_hooks'</span>, <span class="string">'path_importer_cache'</span>, <span class="string">'platform'</span>, <span class="string">'prefix'</span>, <span class="string">'ps1'</span>, <span class="string">'ps2'</span>, <span class="string">'py3kwarning'</span>, <span class="string">'setcheckinterval'</span>, <span class="string">'setdlopenflags'</span>, <span class="string">'setprofile'</span>, <span class="string">'setrecursionlimit'</span>, <span class="string">'settrace'</span>, <span class="string">'stderr'</span>, <span class="string">'stdin'</span>, <span class="string">'stdout'</span>, <span class="string">'subversion'</span>, <span class="string">'version'</span>, <span class="string">'version_info'</span>, <span class="string">'warnoptions'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir()</div><div class="line">[<span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'sys'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir()</div><div class="line">[<span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'a'</span>, <span class="string">'sys'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dela</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">NameError: name <span class="string">'dela'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir()</div><div class="line">[<span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'a'</span>, <span class="string">'sys'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir ()</div><div class="line">[<span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'sys'</span>]</div><div class="line"></div><div class="line"><span class="comment">###说明</span></div><div class="line"><span class="comment">#首先，我们来看一下在输入的sys模块上使用dir。我们看到它包含一个庞大的属性列表。</span></div><div class="line"><span class="comment">#接下来，我们不给dir函数传递参数而使用它——默认地，它返回当前模块的属性列表。注</span></div><div class="line"><span class="comment">#意，输入的模块同样是列表的一部分。</span></div><div class="line"><span class="comment">#为了观察dir的作用，我们定义一个新的变量a并且给它赋一个值，然后检验dir，我们观察到在</span></div><div class="line"><span class="comment">#列表中增加了以上相同的值。我们使用del语句删除当前模块中的变量/属性，这个变化再一次</span></div><div class="line"><span class="comment">#反映在dir的输出中。</span></div><div class="line"><span class="comment">#关于del的一点注释——这个语句在运行后被用来 删除 一个变量/名称。在这个例子中，del a，</span></div><div class="line"><span class="comment">#你将无法再使用变量a——它就好像从来没有存在过一样。</span></div></pre></td></tr></table></figure></p>
-<p>##数据结构</p>
-<p>###简介</p>
-<ul>
-<li>数据结构基本上就是它们可以处理一些数据的结构，或说，它们是用来存储一组相关数据的。<br>在Python中有三种内建的数据结构——列表、元组和字典。</li>
-</ul>
-<p>###列表</p>
-<ul>
-<li><p>list是处理一组有序项目的数据结构，即你可以在一个列表中存储一个 序列 的项目。假想你有<br>一个购物列表，上面记载着你要买的东西，你就容易理解列表了。只不过在你的购物表上，可<br>能每样东西都独自占有一行，而在Python中，你在每个项目之间用逗号分割。<br>列表中的项目应该包括在方括号中，这样Python就知道你是在指明一个列表。一旦你创建了一<br>个列表，你可以添加、删除或是搜索列表中的项目。由于你可以增加或删除项目，我们说列表<br>是 可变的 数据类型，即这种类型是可以被改变的。</p>
-</li>
-<li><p>eggs:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: using_list.py</span></div><div class="line">likelist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'pikachu'</span>, <span class="string">'mo'</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'I have'</span>, len(likelist), <span class="string">'Just do.'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'These things include:'</span>,</div><div class="line"><span class="keyword">for</span> eachone <span class="keyword">in</span> likelist:</div><div class="line">    <span class="keyword">print</span> eachone,</div><div class="line"><span class="keyword">print</span> <span class="string">'\nI just like live with her.'</span></div><div class="line">likelist.append(<span class="string">'Arvon'</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'My life now is include:'</span>, likelist</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'I want sort mylist now'</span></div><div class="line">likelist.sort()</div><div class="line"><span class="keyword">print</span> <span class="string">'Have done, Now the list is:'</span>, likelist</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'The first item now is'</span>, likelist[<span class="number">0</span>]</div><div class="line">oldlist = likelist[<span class="number">0</span>]</div><div class="line"><span class="keyword">del</span> likelist[<span class="number">0</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'I am'</span>, oldlist</div><div class="line"><span class="keyword">print</span> <span class="string">'My list now is:'</span>, likelist</div><div class="line"></div><div class="line"><span class="comment">##[root@Mo arvon_python]# python useing_list.py </span></div><div class="line">I have <span class="number">4</span> Just do.</div><div class="line">These things include: apple mango pikachu mo </div><div class="line">I just like live <span class="keyword">with</span> her.</div><div class="line">My life now <span class="keyword">is</span> include: [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'pikachu'</span>, <span class="string">'mo'</span>, <span class="string">'Arvon'</span>]</div><div class="line">I want sort mylist now</div><div class="line">Have done, Now the list <span class="keyword">is</span>: [<span class="string">'Arvon'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'mo'</span>, <span class="string">'pikachu'</span>]</div><div class="line">The first item now <span class="keyword">is</span> Arvon</div><div class="line">I am Arvon</div><div class="line">My list now <span class="keyword">is</span>: [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'mo'</span>, <span class="string">'pikachu'</span>]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>###对象和类简介</p>
-<ul>
-<li>列表是使用对象和类的一个例子。当你使用变量i并给它赋值的时候，比如赋整数5，你可以认<br>为你创建了一个类（类型）int的对象（实例）i。事实上，你可以看一下help(int)以更好地理解<br>这一点。<br>类也有方法，即仅仅为类而定义地函数。仅仅在你有一个该类的对象的时候，你才可以使用这<br>些功能。例如，Python为list类提供了append方法，这个方法让你在列表尾添加一个项目。例如<br>mylist.append(‘an item’)列表mylist中增加那个字符串。注意，使用点号来使用对象的方法。<br>一个类也有域，它是仅仅为类而定义的变量。仅仅在你有一个该类的对象的时候，你才可以使<br>用这些变量/名称。类也通过点号使用，例如mylist.field。</li>
-</ul>
-<p>###元组</p>
-<ul>
-<li>元组和列表十分类似，只不过元组和字符串一样是 不可变的 即你不能修改元组。元组通过圆<br>括号中用逗号分割的项目定义。元组通常用在使语句或用户定义的函数能够安全地采用一组值<br>的时候，即被使用的元组的值不会改变。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line">home = (<span class="string">'Mo'</span>, <span class="string">'Arvon'</span>, <span class="string">'Pikachu'</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'Numble of home is'</span>, len(home)</div><div class="line">ourhome = (<span class="string">'Mo'</span>, <span class="string">'Arvon'</span>, <span class="string">'SmallArvon'</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'Number of ourhome is'</span>, len(ourhome)</div><div class="line"><span class="keyword">print</span> <span class="string">'All member in ourhome are'</span>, ourhome</div><div class="line"><span class="keyword">print</span> <span class="string">'come here in later'</span>, ourhome[<span class="number">2</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Last member is'</span>, ourhome[<span class="number">2</span>][<span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">root@Mo arvon_python]<span class="comment"># python using_tuple.py </span></div><div class="line">Numble of home <span class="keyword">is</span> <span class="number">3</span></div><div class="line">Number of ourhome <span class="keyword">is</span> <span class="number">3</span></div><div class="line">All member <span class="keyword">in</span> ourhome are (<span class="string">'Mo'</span>, <span class="string">'Arvon'</span>, <span class="string">'SmallArvon'</span>)</div><div class="line">come here <span class="keyword">in</span> later SmallArvon</div><div class="line">Last member <span class="keyword">is</span> a</div></pre></td></tr></table></figure>
-<p>####元组与打印语句<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">#-*- coding: utf-8 -*-</div><div class="line">#Todo: print_tuple.py</div><div class="line">age = 23</div><div class="line">name = 'Arvon'</div><div class="line">print '%s is %d years lold' % (name, age)</div><div class="line">#print语句可以使用跟着%符号的项目元组的字符串。这些字符串具备定制的功能。定制让输出</div><div class="line">#满足某种特定的格式。定制可以是%s表示字符串或%d表示整数。元组必须按照相同的顺序来</div><div class="line">#对应这些定制。</div><div class="line">print 'Why is %s playing with that python?' % name</div><div class="line"></div><div class="line">###Output</div><div class="line">[root@Mo arvon_python]# python print_tuple.py </div><div class="line">Arvon is 23 years lold</div><div class="line">Why is Arvon playing with that python?</div></pre></td></tr></table></figure></p>
-<p>###字典</p>
-<ul>
-<li><p>只能使用不可变的对象（比如字符串）来作为字典的键，但是你可以把不可变或可变<br>的对象作为字典的值。基本说来就是，你应该只使用简单的对象作为键。</p>
-</li>
-<li><p>键值对在字典中以这样的方式标记：d = {key1 : value1, key2 : value2 }。注意它们的键/值对用冒<br>号分割，而各个对用逗号分割，所有这些都包括在花括号中。</p>
-</li>
-<li><p>字典中的键/值对是没有顺序的。如果你想要一个特定的顺序，那么你应该在使用前自己<br>对它们排序。</p>
-</li>
-<li><p>字典是dict类的实例/对象。</p>
-</li>
-</ul>
-<p>####使用字典实例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: script's name is using_dict.py</span></div><div class="line">ad = &#123;<span class="string">'arvon'</span>:<span class="string">'126@126.com'</span>,</div><div class="line">    <span class="string">'Mo'</span>:<span class="string">'Mo@mo.com'</span>,</div><div class="line">    <span class="string">'Pikachu'</span>:<span class="string">'pikachu@love.com'</span>,</div><div class="line">    <span class="string">'marry'</span>:<span class="string">'love@you.com'</span></div><div class="line">    &#125;</div><div class="line"><span class="keyword">print</span> <span class="string">"Arvon's email is %s"</span> % ad[<span class="string">'arvon'</span>]</div><div class="line"><span class="comment">#Adding a key/value pair</span></div><div class="line">ad[<span class="string">'life'</span>] = <span class="string">'travl@world.com'</span></div><div class="line"><span class="comment">#Deleting a key/value pair</span></div><div class="line"><span class="keyword">del</span> ad[<span class="string">'marry'</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'\n There are %d contacts in the address-book\n'</span> % len(ad)</div><div class="line"><span class="keyword">for</span> name,address <span class="keyword">in</span> ad.items():</div><div class="line">    <span class="keyword">print</span> <span class="string">'Contact %s at %s'</span> % (name, address)</div><div class="line"><span class="keyword">if</span> <span class="string">'life'</span> <span class="keyword">in</span> ad:</div><div class="line">   <span class="keyword">print</span> <span class="string">"\n life's address is %s"</span> % ad[<span class="string">'life'</span>]</div></pre></td></tr></table></figure></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@Mo arvon_python]# python using_dict.py </div><div class="line">Arvon's email is 126@126.com</div><div class="line"></div><div class="line"> There are 4 contacts in the address-book</div><div class="line"></div><div class="line">Contact Mo at Mo@mo.com</div><div class="line">Contact arvon at 126@126.com</div><div class="line">Contact life at travl@world.com</div><div class="line">Contact Pikachu at pikachu@love.com</div><div class="line"></div><div class="line"> life's address is travl@world.com</div></pre></td></tr></table></figure>
-<p>###序列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: The script's name is seq.py</span></div><div class="line"><span class="comment">#</span></div><div class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Item 0 is'</span>, shoplist[<span class="number">0</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item 1 is'</span>, shoplist[<span class="number">1</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item 2 is'</span>, shoplist[<span class="number">2</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item 3 is'</span>, shoplist[<span class="number">3</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item -1 is'</span>, shoplist[<span class="number">-1</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item -2 is'</span>, shoplist[<span class="number">-2</span>]</div><div class="line"><span class="comment"># Slicing on a list</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Item 1 to 3 is'</span>, shoplist[<span class="number">1</span>:<span class="number">3</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item 2 to end is'</span>, shoplist[<span class="number">2</span>:]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item 1 to -1 is'</span>, shoplist[<span class="number">1</span>:<span class="number">-1</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'Item start to end is'</span>, shoplist[:]</div><div class="line"><span class="comment"># Slicing on a string</span></div><div class="line">name = <span class="string">'swaroop'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'characters 1 to 3 is'</span>, name[<span class="number">1</span>:<span class="number">3</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'characters 2 to end is'</span>, name[<span class="number">2</span>:]</div><div class="line"><span class="keyword">print</span> <span class="string">'characters 1 to -1 is'</span>, name[<span class="number">1</span>:<span class="number">-1</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'characters start to end is'</span>, name[:]</div></pre></td></tr></table></figure></p>
-<p><strong>输出：</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@Mo arvon_python]<span class="comment"># python seq.py </span></div><div class="line">Item <span class="number">0</span> <span class="keyword">is</span> apple</div><div class="line">Item <span class="number">1</span> <span class="keyword">is</span> mango</div><div class="line">Item <span class="number">2</span> <span class="keyword">is</span> carrot</div><div class="line">Item <span class="number">3</span> <span class="keyword">is</span> banana</div><div class="line">Item <span class="number">-1</span> <span class="keyword">is</span> banana</div><div class="line">Item <span class="number">-2</span> <span class="keyword">is</span> carrot</div><div class="line">Item <span class="number">1</span> to <span class="number">3</span> <span class="keyword">is</span> [<span class="string">'mango'</span>, <span class="string">'carrot'</span>]</div><div class="line">Item <span class="number">2</span> to end <span class="keyword">is</span> [<span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">Item <span class="number">1</span> to <span class="number">-1</span> <span class="keyword">is</span> [<span class="string">'mango'</span>, <span class="string">'carrot'</span>]</div><div class="line">Item start to end <span class="keyword">is</span> [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">characters <span class="number">1</span> to <span class="number">3</span> <span class="keyword">is</span> wa</div><div class="line">characters <span class="number">2</span> to end <span class="keyword">is</span> aroop</div><div class="line">characters <span class="number">1</span> to <span class="number">-1</span> <span class="keyword">is</span> waroo</div><div class="line">characters start to end <span class="keyword">is</span> swaroop</div></pre></td></tr></table></figure></p>
-<p>###引用</p>
-<ul>
-<li>当你创建一个对象并给它赋一个变量的时候，这个变量仅仅 引用 那个对象，而不是表示这个<br>对象本身！也就是说，变量名指向你计算机中存储那个对象的内存。这被称作名称到对象的绑<br>定。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: refernce.py</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Simple Assignment'</span></div><div class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">mylist = shoplist <span class="comment"># mylist is just another name pointing to the same object!</span></div><div class="line"><span class="keyword">del</span> shoplist[<span class="number">0</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">'shoplist is'</span>, shoplist</div><div class="line"><span class="keyword">print</span> <span class="string">'mylist is'</span>, mylist</div><div class="line"><span class="comment"># notice that both shoplist and mylist both print the same list without</span></div><div class="line"><span class="comment"># the 'apple' confirming that they point to the same object</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Copy by making a full slice'</span></div><div class="line">mylist = shoplist[:] <span class="comment"># make a copy by doing a full slice</span></div><div class="line"><span class="keyword">del</span> mylist[<span class="number">0</span>] <span class="comment"># remove first item</span></div><div class="line"><span class="keyword">print</span> <span class="string">'shoplist is'</span>, shoplist</div><div class="line"><span class="keyword">print</span> <span class="string">'mylist is'</span>, mylist</div><div class="line"><span class="comment"># notice that now the two lists are different</span></div></pre></td></tr></table></figure>
-<p><strong>Output:</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@Mo arvon_python]<span class="comment"># python referen.py </span></div><div class="line">Simple Assignment</div><div class="line">shoplist <span class="keyword">is</span> [<span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">mylist <span class="keyword">is</span> [<span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">Copy by making a full slice</div><div class="line">shoplist <span class="keyword">is</span> [<span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div><div class="line">mylist <span class="keyword">is</span> [<span class="string">'carrot'</span>, <span class="string">'banana'</span>]</div></pre></td></tr></table></figure></p>
-<p>##编写脚本实例</p>
-<p>###备份脚本<br><strong>Question：</strong></p>
-<ol>
-<li>需要备份的文件和目录由一个列表指定。</li>
-<li>备份应该保存在主备份目录中。</li>
-<li>文件备份成一个zip文件。</li>
-<li>zip存档的名称是当前的日期和时间。</li>
-<li>我们使用标准的zip命令，它通常默认地随Linux/Unix发行版提供。Windows用户可以使<br>用Info-Zip程序。注意你可以使用任何地存档命令，只要它有命令行界面就可以了，那<br>样的话我们可以从我们的脚本中传递参数给它。</li>
-</ol>
-<p>####Answer_1<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*- </span></div><div class="line"><span class="comment">#Todo: backup_verl.py</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="comment"># 1. The files and directories to be backed up are specified in a list.</span></div><div class="line"><span class="comment">#source = ['/home/swaroop/byte', '/home/swaroop/bin']</span></div><div class="line">source = [ <span class="string">'/etc'</span>]</div><div class="line"><span class="comment"># If you are using Windows, use source = [r'C:\Documents', r'D:\Work'] or something like that</span></div><div class="line"><span class="comment"># 2. The backup must be stored in a main backup directory</span></div><div class="line">target_dir = <span class="string">'/mnt/e/backup/'</span> <span class="comment"># Remember to change this to what you will be using</span></div><div class="line"><span class="comment"># 3. The files are backed up into a zip file.</span></div><div class="line"><span class="comment"># 4. The name of the zip archive is the current date and time</span></div><div class="line">target = target_dir + time.strftime(<span class="string">'%Y%m%d%H%M%S'</span>) + <span class="string">'.zip'</span></div><div class="line"><span class="comment"># 5. We use the zip command (in Unix/Linux) to put the files in a zip archive</span></div><div class="line">zip_command = <span class="string">"zip -qr '%s' %s"</span> % (target, <span class="string">' '</span>.join(source))</div><div class="line"><span class="comment"># Run the backup</span></div><div class="line"><span class="keyword">if</span> os.system(zip_command) == <span class="number">0</span>:</div><div class="line"> <span class="keyword">print</span> <span class="string">'Successful backup to'</span>, target</div><div class="line"><span class="keyword">else</span>:</div><div class="line"> <span class="keyword">print</span> <span class="string">'Backup FAILED'</span></div></pre></td></tr></table></figure></p>
-<p>####Answer_2</p>
-<ul>
-<li>注意os.sep变量的用法——这会根据你的操作系统给出目录分隔符，即在Linux、Unix下它<br>是’/‘，在Windows下它是’\‘，而在Mac OS下它是’:’。使用os.sep而非直接使用字符，会使我们的<br>程序具有移植性，可以在上述这些系统下工作。<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: backup_ver2.py</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="comment">#1.The files and directoryes to be backed up are specified in a list.</span></div><div class="line">source = [<span class="string">'/etc/fstab'</span>, <span class="string">'etc'</span>]</div><div class="line"><span class="comment">#if you are using Windows, use source = [r'C:\Documents',r'D:\work']</span></div><div class="line"><span class="comment">#2.The backup must be stored in a main backup directory</span></div><div class="line">target_dir = <span class="string">'/mnt/'</span></div><div class="line"><span class="comment">#3.The files are backed up into a zip file.</span></div><div class="line"><span class="comment">#4.The current_dir + time.strftime('%Y%m%d')</span></div><div class="line">today = target_dir + time.strftime(<span class="string">'%Y%m%d'</span>)</div><div class="line"><span class="comment">#The current time is the name of the zip archive</span></div><div class="line">now = time.strftime(<span class="string">'%H%M%S'</span>)</div><div class="line"><span class="comment">#Create the subdirectory if it isn't already threre</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(today):</div><div class="line">    os.mkdir(today)</div><div class="line">    <span class="keyword">print</span> <span class="string">'Successfully creatd directory'</span>, today</div><div class="line"><span class="comment">#The name of the zip file</span></div><div class="line">target = today + os.sep + now + <span class="string">'.zip'</span></div><div class="line"><span class="comment">#5.We use the zip command(in Unix/Linux) to put the files in a zip archive</span></div><div class="line">zip_command = <span class="string">"zip -qr '%s' %s"</span> % (target, <span class="string">' '</span>.join(source))</div><div class="line"><span class="comment">#Run the backup</span></div><div class="line"><span class="keyword">if</span> os.system(zip_command) == <span class="number">0</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'Successful backup to'</span>, target</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'Backup FAILED'</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>####Answer_3<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: backup_ver3.py</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="comment">#1.The files and directories to be backed up are specified in a list.</span></div><div class="line">source = [<span class="string">'/etc/'</span>, <span class="string">'/etc/fstab'</span>]</div><div class="line">target_dir = <span class="string">'/mnt/'</span></div><div class="line">today = target_dir + time.strftime(<span class="string">'%Y%m%d'</span>)</div><div class="line">now = time.strftime(<span class="string">'%H%M%S'</span>)</div><div class="line">comment = raw_input(<span class="string">"Enter a commnet--&gt;"</span>)</div><div class="line"><span class="keyword">if</span> len(comment) == <span class="number">0</span>:<span class="comment">#check if a comment was entered</span></div><div class="line">    target = today + os.sep + now + <span class="string">'.zip'</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    target = today + os.sep + now + <span class="string">'_'</span> +\</div><div class="line">    comment.replace(<span class="string">' '</span>, <span class="string">' '</span>) + <span class="string">'.zip'</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(today):</div><div class="line">    os.mkdir(today)</div><div class="line">    <span class="keyword">print</span> <span class="string">'Successfully created directory'</span>, today</div><div class="line">zip_command = <span class="string">"zip -qr '%s' %s"</span> % (target, <span class="string">' '</span>.join(source))</div><div class="line"><span class="keyword">if</span> os.system(zip_command) == <span class="number">0</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"Successfule backup to"</span>, target</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'Backup FAILED'</span></div></pre></td></tr></table></figure></p>
-<p>##面向对象的编程</p>
-<p>###面向对象介绍<br>到目前为止，在我们的程序中，我们都是根据操作数据的函数或语句块来设计程序的。这被称<br>为<code>面向过程的</code>编程。还有一种把数据和功能结合起来，用称为对象的东西包裹起来组织程序<br>的方法。这种方法称为<code>面向对象</code>的编程理念。在大多数时候你可以使用过程性编程，但是有<br>些时候当你想要编写大型程序或是寻求一个更加合适的解决方案的时候，你就得使用面向对象<br>的编程技术。<br>类和对象是面向对象编程的两个主要方面。类创建一个新类型，而对象是这个类的实例 。这类<br>似于你有一个int类型的变量，存储整数的变量是int类的实例（对象）。<br>给C/C++/Java/C#程序员的注释<br>注意，即便是整数也被作为对象（属于int类）。这和C++、Java（1.5版之前）把整数纯粹作为<br>类型是不同的。通过help(int)了解更多这个类的详情。 C#和Java 1.5程序员会熟悉这个概念，因<br>为它类似与 封装与解封装 的概念。<br>对象可以使用普通的 属于 对象的变量存储数据。属于一个对象或类的变量被称为域。对象也<br>可以使用 属于 类的函数来具有功能。这样的函数被称为类的方法。这些术语帮助我们把它们<br>与孤立的函数和变量区分开来。域和方法可以合称为类的属性。<br>域有两种类型——属于每个实例/类的对象或属于类本身。它们分别被称为实例变量和类变量。<br>类使用class关键字创建。类的域和方法被列在一个缩进块中。</p>
-<p>###self<br>类的方法与普通的函数只有一个特别的区别——它们必须有一个额外的第一个参数名称，但是<br>在调用这个方法的时候你不为这个参数赋值，Python会提供这个值。这个特别的变量指对象本<br>身，按照惯例它的名称是self。<br>虽然你可以给这个参数任何名称，但是 强烈建议 你使用self这个名称——其他名称都是不赞成<br>你使用的。使用一个标准的名称有很多优点——你的程序读者可以迅速识别它，如果使用self<br>的话，还有些IDE（集成开发环境）也可以帮助你。<br>给C++/Java/C#程序员的注释<br>Python中的self等价于C++中的self指针和Java、C#中的this参考。<br>你一定很奇怪Python如何给self赋值以及为何你不需要给它赋值。举一个例子会使此变得清<br>晰。假如你有一个类称为MyClass和这个类的一个实例MyObject。当你调用这个对象的方法<br>MyObject.method(arg1, arg2)的时候，这会由Python自动转为MyClass.method(MyObject, arg1,<br>arg2)——这就是self的原理了。<br>这也意味着如果你有一个不需要参数的方法，你还是得给这个方法定义一个self参数。</p>
-<p>###类</p>
-<p>####创建一个类<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: simplest_class.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></div><div class="line">    <span class="keyword">pass</span><span class="comment">#Anempty block</span></div><div class="line">p = Person()</div><div class="line"><span class="keyword">print</span> p</div><div class="line"></div><div class="line"><span class="comment">#**输出：**</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python simplestclass.py </span></div><div class="line">&lt;__main__.Person instance at <span class="number">0x7fdec3490d88</span>&gt;</div></pre></td></tr></table></figure></p>
-<p><strong>说明：</strong>我们使用class语句后跟类名，创建了一个新的类。这后面跟着一个缩进的语句块形成类体。在<br>这个例子中，我们使用了一个空白块，它由pass语句表示。<br>我们简单地打印了这个变量的类型。它告诉我们我们已经在<strong>main</strong>模块中有了一个Person类的实例。<br>可以注意到存储对象的计算机内存地址也打印了出来。这个地址在你的计算机上会是另外一个<br>值，因为Python可以在任何空位存储对象。</p>
-<p>###对象的方法</p>
-<p>####使用对象的方法<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">#-*- coding: utf-8 -*-</div><div class="line">#Todo: method.py</div><div class="line">class Person:</div><div class="line">    def sayHi(self):</div><div class="line">        print 'Hello, how are you?'</div><div class="line">p = Person()</div><div class="line">p.sayHi()</div><div class="line">#This short example can also be written as Person().sayHi()</div><div class="line"></div><div class="line">###Output</div><div class="line">[root@Mo arvon_python]# python method.py </div><div class="line">Hello, how are you?</div></pre></td></tr></table></figure></p>
-<p>###使用<strong>init</strong>方法</p>
-<ul>
-<li><strong>init</strong>方法在类的一个对象被建立时，马上运行。这个方法可以用来对你的对象做一些你希<br>望的 初始化 。注意，这个名称的开始和结尾都是双下划线。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: class_init.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></div><div class="line">        self.name = name</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'Hello, my name is'</span>, self.name</div><div class="line">p = Person(<span class="string">'Arvon'</span>)</div><div class="line">p.sayHi()</div><div class="line"><span class="comment">#This short example can also be written as Person('Arvon').sayHi()</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python class_init.py </span></div><div class="line">Hello, my name <span class="keyword">is</span> Arvon</div></pre></td></tr></table></figure>
-<p>###类与对象的方法</p>
-<ul>
-<li>事实上，类与对象的数据部分只是与类和对象的名称空间<code>绑定</code>的普通变量，即这些名称只<br>在这些类与对象的前提下有效。<br>有两种类型的<code>域</code> ——类的变量和对象的变量，它们根据是类还是对象拥有这个变量而区分。<br><code>类的变量</code>由一个类的所有对象（实例）共享使用。只有一个类变量的拷贝，所以当某个对象<br>对类的变量做了改动的时候，这个改动会反映到所有其他的实例上。<br><code>对象的变量</code>由类的每个对象/实例拥有。因此每个对象有自己对这个域的一份拷贝，即它们不<br>是共享的，在同一个类的不同实例中，虽然对象的变量有相同的名称，但是是互不相关的。通<br>过一个例子会使这个易于理解。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: obj_var.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></div><div class="line">    <span class="string">'''Represents a person.'''</span></div><div class="line">    population = <span class="number">0</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">'''INitializes the person's data.'''</span></div><div class="line">        self.name = name</div><div class="line">        <span class="keyword">print</span> <span class="string">'(Initializing %s)'</span> % self.name</div><div class="line">        <span class="comment">#When this person is created, he/she</span></div><div class="line">        <span class="comment">#adds to population</span></div><div class="line">        Person.population += <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">'''I am dying.'''</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'%s says bye.'</span>% self.name</div><div class="line">        Person.population == <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> Person.population == <span class="number">0</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">'I am the lase one.'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">'These are still %d people left.'</span>% Person.population</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">'''Greeting by the person.</span></div><div class="line"></div><div class="line">           Really, that's all it does.'''</div><div class="line">        <span class="keyword">print</span> <span class="string">'Hi, my name is %s.'</span>% self.name</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">howMany</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">'''Prints the curent population.'''</span></div><div class="line">        <span class="keyword">if</span> Person.population == <span class="number">1</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">'I am the only person here.'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"We have %d persons here."</span>% Person.population</div><div class="line">swaroop = Person(<span class="string">'Arvon'</span>)</div><div class="line">swaroop.sayHi()</div><div class="line">swaroop.howMany()</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python obj_var.py </span></div><div class="line">(Initializing Arvon)</div><div class="line">Hi, my name <span class="keyword">is</span> Arvon.</div><div class="line">I am the only person here.</div><div class="line">Arvon says bye.</div><div class="line">These are still <span class="number">1</span> people left.</div></pre></td></tr></table></figure>
-<ul>
-<li>How to work:<br>这是一个很长的例子，但是它有助于说明类与对象的变量的本质。这里，population属于Person<br>类，因此是一个类的变量。name变量属于对象（它使用self赋值）因此是对象的变量。<br>观察可以发现<strong>init</strong>方法用一个名字来初始化Person实例。在这个方法中，我们让population<br>增加1，这是因为我们增加了一个人。同样可以发现，self.name的值根据每个对象指定，这表<br>明了它作为对象的变量的本质。<br>记住，你只能使用self变量来参考同一个对象的变量和方法。这被称为 属性参考 。<br>在这个程序中，我们还看到docstring对于类和方法同样有用。我们可以在运行时使用Person.<br><strong>doc</strong>和Person.sayHi.<strong>doc</strong>来分别访问类与方法的文档字符串。<br>就如同<strong>init</strong>方法一样，还有一个特殊的方法<strong>del</strong>，它在对象消逝的时候被调用。对象消<br>逝即对象不再被使用，它所占用的内存将返回给系统作它用。在这个方法里面，我们只是简单<br>地把Person.population减1。<br>当对象不再被使用时，<strong>del</strong>方法运行，但是很难保证这个方法究竟在 什么时候 运行。如果<br>你想要指明它的运行，你就得使用del语句，就如同我们在以前的例子中使用的那样。<br>给C++/Java/C#程序员的注释<br>Python中所有的类成员（包括数据成员）都是 公共的 ，所有的方法都是 有效的 。<br>只有一个例外：如果你使用的数据成员名称以 双下划线前缀 比如<strong>privatevar，Python的名称<br>管理体系会有效地把它作为私有变量。<br>这样就有一个惯例，如果某个变量只想在类或对象中使用，就应该以单下划线前缀。而其他的<br>名称都将作为公共的，可以被其他类/对象使用。记住这只是一个惯例，并不是Python所要求<br>的（与双下划线前缀不同）。<br>同样，注意</strong>del__方法与 destructor 的概念类似。</li>
-</ul>
-<p>###继承<br>面向对象的编程带来的主要好处之一是代码的重用，实现这种重用的方法之一是通过 继承 机<br>制。继承完全可以理解成类之间的<code>类型和子类型</code>关系。<br>假设你想要写一个程序来记录学校之中的教师和学生情况。他们有一些共同属性，比如姓名、<br>年龄和地址。他们也有专有的属性，比如教师的薪水、课程和假期，学生的成绩和学费。<br>你可以为教师和学生建立两个独立的类来处理它们，但是这样做的话，如果要增加一个新的共<br>有属性，就意味着要在这两个独立的类中都增加这个属性。这很快就会显得不实用。<br>一个比较好的方法是创建一个共同的类称为SchoolMember然后让教师和学生的类 继承 这个共<br>同的类。即它们都是这个类型（类）的子类型，然后我们再为这些子类型添加专有的属性。<br>使用这种方法有很多优点。如果我们增加/改变了SchoolMember中的任何功能，它会自动地反<br>映到子类型之中。例如，你要为教师和学生都增加一个新的身份证域，那么你只需简单地把它<br>加到SchoolMember类中。然而，在一个子类型之中做的改动不会影响到别的子类型。另外一个<br>优点是你可以把教师和学生对象都作为SchoolMember对象来使用，这在某些场合特别有用，比<br>如统计学校成员的人数。一个子类型在任何需要父类型的场合可以被替换成父类型，即对象可<br>以被视作是父类的实例，这种现象被称为多态现象。<br>另外，我们会发现在 重用 父类的代码的时候，我们无需在不同的类中重复它。而如果我们使<br>用独立的类的话，我们就不得不这么做了。<br>在上述的场合中，SchoolMember类被称为 基本类 或 超类 。而Teacher和Student类被称为 导出<br>类 或 子类 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: inherit.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SchooMember</span>:</span></div><div class="line">    <span class="string">'''Represents any school member.'''</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line">        <span class="keyword">print</span> <span class="string">'(Initialized SchooMember: %s)'</span>% self.name</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">'''Tell my details.'''</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'Name: "%s" Age: "%s"'</span>% (self.name, self.age)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span><span class="params">(SchooMember)</span>:</span></div><div class="line">    <span class="string">'''Represents a teacher.'''</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, salary)</span>:</span></div><div class="line">        SchooMember.__init__(self, name, age)</div><div class="line">        self.salary = salary</div><div class="line">        <span class="keyword">print</span> <span class="string">'(Initialized Teacher: %s)'</span>% self.name</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></div><div class="line">        SchooMember.tell(self)</div><div class="line">        <span class="keyword">print</span> <span class="string">'Salary: "%d"'</span>% self.salary</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(SchooMember)</span>:</span></div><div class="line">    <span class="string">'''Represents a student.'''</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, marks)</span>:</span></div><div class="line">        SchooMember.__init__(self, name, age)</div><div class="line">        self.marks = marks</div><div class="line">        <span class="keyword">print</span> <span class="string">'(Initialized Student: %s)'</span>% self.name</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></div><div class="line">        SchooMember.tell(self)</div><div class="line">        <span class="keyword">print</span> <span class="string">'Marks: "%d"'</span>% self.marks</div><div class="line">t = Teacher(<span class="string">'Mo'</span>, <span class="number">23</span>, <span class="number">5201314</span>)</div><div class="line">s = Student(<span class="string">'Arvon'</span>, <span class="number">24</span>, <span class="number">75</span>)</div><div class="line"><span class="keyword">print</span><span class="comment">#prints a blank line</span></div><div class="line">members = [t, s]</div><div class="line"><span class="keyword">for</span> member <span class="keyword">in</span> members:</div><div class="line">    member.tell()<span class="comment">#works for both Teachers and Students</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python inherit.py </span></div><div class="line">(Initialized SchooMember: Mo)</div><div class="line">(Initialized Teacher: Mo)</div><div class="line">(Initialized SchooMember: Arvon)</div><div class="line">(Initialized Student: Arvon)</div><div class="line"></div><div class="line">Name: <span class="string">"Mo"</span> Age: <span class="string">"23"</span></div><div class="line">Salary: <span class="string">"5201314"</span></div><div class="line">Name: <span class="string">"Arvon"</span> Age: <span class="string">"24"</span></div><div class="line">Marks: <span class="string">"75"</span></div></pre></td></tr></table></figure>
-<ul>
-<li>How tow work<br>为了使用继承，我们把基本类的名称作为一个元组跟在定义类时的类名称之后。然后，我们注<br>意到基本类的<strong>init</strong>方法专门使用self变量调用，这样我们就可以初始化对象的基本类部分。<br>这一点十分重要——Python不会自动调用基本类的constructor，你得亲自专门调用它。<br>我们还观察到我们在方法调用之前加上类名称前缀，然后把self变量及其他参数传递给它。<br>注意，在我们使用SchoolMember类的tell方法的时候，我们把Teacher和Student的实例仅仅作为<br>SchoolMember的实例。<br>另外，在这个例子中，我们调用了子类型的tell方法，而不是SchoolMember类的tell方法。可以<br>这样来理解，Python总是首先查找对应类型的方法，在这个例子中就是如此。如果它不能在导<br>出类中找到对应的方法，它才开始到基本类中逐个查找。基本类是在类定义的时候，在元组之<br>中指明的。<br>一个术语的注释——如果在继承元组中列了一个以上的类，那么它就被称作 多重继承 。</li>
-</ul>
-<p>##输入/输出</p>
-<p>###文件</p>
-<ul>
-<li>通过创建一个file类的对象来打开一个文件，分别使用file类的read、readline或write方法来<br>恰当地读写文件。对文件的读写能力依赖于你在打开文件时指定的模式。最后，当你完成对文<br>件的操作的时候，你调用close方法来告诉Python我们完成了对文件的使用。</li>
-</ul>
-<p>####使用文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line">poem = <span class="string">'''\</span></div><div class="line">Programming is fun</div><div class="line">When the work is done</div><div class="line">if you wanna make your work also fun:</div><div class="line">    use Python!</div><div class="line">'''</div><div class="line">f = file(<span class="string">'poem.txt'</span>, <span class="string">'w'</span>)<span class="comment">#open for 'w'riting</span></div><div class="line">f.write(poem)<span class="comment">#write text to file</span></div><div class="line">f.close()<span class="comment">#close the file</span></div><div class="line">f = file(<span class="string">'poem.txt'</span>)</div><div class="line"><span class="comment">#if no mode is specified, 'r'ead mode is assumed by default</span></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    line = f.readline()</div><div class="line">    <span class="keyword">if</span> len(line) == <span class="number">0</span>:<span class="comment">#Zero length indicatesEOF</span></div><div class="line">        <span class="keyword">break</span></div><div class="line">    <span class="keyword">print</span> line,</div><div class="line">    <span class="comment">#Notice comma to avoid automatice new line added by Python</span></div><div class="line">f.close()<span class="comment">#close the file</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># !p</span></div><div class="line">python using_file.py </div><div class="line">Programming <span class="keyword">is</span> fun</div><div class="line">When the work <span class="keyword">is</span> done</div><div class="line"><span class="keyword">if</span> you wanna make your work also fun:</div><div class="line">    use Python!</div></pre></td></tr></table></figure></p>
-<p>###储存器</p>
-<ul>
-<li>Python提供一个标准的模块，称为pickle。使用它你可以在一个文件中储存任何Python对象，之<br>后你又可以把它完整无缺地取出来。这被称为 持久地 储存对象。<br>还有另一个模块称为cPickle，它的功能和pickle模块完全相同，只不过它是用C语言编写的，因<br>此要快得多（比pickle快1000倍）。你可以使用它们中的任一个，而我们在这里将使用cPickle模<br>块。记住，我们把这两个模块都简称为pickle模块。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: pickling.py</span></div><div class="line"><span class="keyword">import</span> cPickle <span class="keyword">as</span> p</div><div class="line"><span class="comment">#import pickleasp</span></div><div class="line">shoplistfile = <span class="string">'shoplist.data'</span></div><div class="line"><span class="comment">#the name of the file where we will store the object</span></div><div class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>]</div><div class="line"><span class="comment">#Write to the file</span></div><div class="line">f = file(shoplistfile, <span class="string">'w'</span>)</div><div class="line">p.dump(shoplist, f)<span class="comment">#dump the object to a file</span></div><div class="line">f.close()</div><div class="line"><span class="keyword">del</span> shoplist<span class="comment">#remove the shoplist</span></div><div class="line"><span class="comment">#Read back from the storage</span></div><div class="line">f = file(shoplistfile)</div><div class="line">storedlist = p.load(f)</div><div class="line"><span class="keyword">print</span> storedlist</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python pickling.py </span></div><div class="line">[<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>]</div></pre></td></tr></table></figure>
-<ul>
-<li>How to work<br>首先，请注意我们使用了import..as语法。这是一种便利方法，以便于我们可以使用更短的模块<br>名称。在这个例子中，它还让我们能够通过简单地改变一行就切换到另一个模块（cPickle或者<br>pickle）！在程序的其余部分的时候，我们简单地把这个模块称为p。<br>为了在文件里储存一个对象，首先以写模式打开一个file对象，然后调用储存器模块的dump函<br>数，把对象储存到打开的文件中。这个过程称为 储存 。<br>接下来，我们使用pickle模块的load函数的返回来取回对象。这个过程称为 取储存 。</li>
-</ul>
-<p>##异常</p>
-<p>###处理异常</p>
-<ul>
-<li>使用try..except语句来处理异常。我们把通常的语句放在try-块中，而把我们的错误处<br>理语句放在except-块中。</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">#-*- coding: utf-8 -*-</div><div class="line">#Todo: try_except.py</div><div class="line">import sys</div><div class="line">try:</div><div class="line">    s = raw_input("Entersomething --&gt;")</div><div class="line">except EOFError:</div><div class="line">    print '\nWhy did you do an EOF on me?'</div><div class="line">    sys.exit()#exit the program</div><div class="line">except:</div><div class="line">    print '\nSome error/exception occurred.'</div><div class="line">    #here, we are not exiting the program</div><div class="line">print 'Done'</div><div class="line"></div><div class="line">###Output</div><div class="line">[root@Mo arvon_python]# python try_except.py </div><div class="line">Entersomething --&gt;hello</div><div class="line">Done</div><div class="line">[root@Mo arvon_python]# python try_except.py </div><div class="line">Entersomething --&gt;</div><div class="line">Why did you do an EOF on me?</div></pre></td></tr></table></figure>
-<ul>
-<li>How to work<br>我们把所有可能引发错误的语句放在try块中，然后在except从句/块中处理所有的错误和异常。<br>except从句可以专门处理单一的错误或异常，或者一组包括在圆括号内的错误/异常。如果没有<br>给出错误或异常的名称，它会处理 所有的 错误和异常。对于每个try从句，至少都有一个相关<br>联的except从句。<br>如果某个错误或异常没有被处理，默认的Python处理器就会被调用。它会终止程序的运行，并<br>且打印一个消息，我们已经看到了这样的处理。<br>你还可以让try..catch块关联上一个else从句。当没有异常发生的时候，else从句将被执行。<br>我们还可以得到异常对象，从而获取更多有个这个异常的信息。</li>
-</ul>
-<p>###引发异常</p>
-<ul>
-<li>可以使用raise语句 引发 异常。你还得指明错误/异常的名称和伴随异常 触发的 异常对象。你<br>可以引发的错误或异常应该分别是一个Error或Exception类的直接或间接导出类。</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">#-*- coding: utf-8 -*-</div><div class="line">class ShortINputException(Exception):</div><div class="line">    '''A user defined exception class.'''</div><div class="line">    def __init__(self, length, atleast):</div><div class="line">        Exception.__init__(self)</div><div class="line">        self.length = length</div><div class="line">        self.atleast = atleast</div><div class="line">try:</div><div class="line">    s = raw_input('Enter something --&gt;')</div><div class="line">    if len(s) &lt; 3:</div><div class="line">        raise ShortINputException(len(s), 3)</div><div class="line">    #Other work can continue as usual here</div><div class="line">except EOFError:</div><div class="line">    print '\nWhy did you do an EOF on me?'</div><div class="line">except ShortINputException, x:</div><div class="line">    print 'ShortINputException: The Input was of length %d,\</div><div class="line">        was expecting at least %d' % (x.length, x.atleast)</div><div class="line">else:</div><div class="line">    print 'No exception was raised.'</div><div class="line"></div><div class="line">###Output</div><div class="line">[root@Mo arvon_python]# python raising.py </div><div class="line">Enter something --&gt;</div><div class="line">Why did you do an EOF on me?</div><div class="line">[root@Mo arvon_python]# python raising.py </div><div class="line">Enter something --&gt;a</div><div class="line">ShortINputException: The Input was of length 1,        was expecting at least 3</div><div class="line">[root@Mo arvon_python]# python raising.py </div><div class="line">Enter something --&gt;abc</div><div class="line">No exception was raised.</div></pre></td></tr></table></figure>
-<p>###Try finally</p>
-<ul>
-<li>假如你在读一个文件的时候，希望在无论异常发生与否的情况下都关闭文件，该怎么做呢？这<br>可以使用finally块来完成。注意，在一个try块下，你可以同时使用except从句和finally块。如果<br>你要同时使用它们的话，需要把一个嵌入另外一个。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: finally.py</span></div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    f = file(<span class="string">'poem.txt'</span>)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:<span class="comment">#our usual file-reading idiom(成语、习语、土话)</span></div><div class="line">        line = f.readline()</div><div class="line">        <span class="keyword">if</span> len(line) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        time.sleep(<span class="number">2</span>)</div><div class="line">        <span class="keyword">print</span> line,</div><div class="line"><span class="keyword">finally</span>:</div><div class="line">    f.close()</div><div class="line">    <span class="keyword">print</span> <span class="string">'Cleaning up... closed the file'</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python finally.py </span></div><div class="line">Programming <span class="keyword">is</span> fun</div><div class="line">When the work <span class="keyword">is</span> done</div><div class="line"><span class="keyword">if</span> you wanna make your work also fun:</div><div class="line">    use Python!</div><div class="line">Cleaning up... closed the file</div></pre></td></tr></table></figure>
-<ul>
-<li>How to work<br>我们进行通常的读文件工作，但是我有意在每打印一行之前用time.sleep方法暂停2秒钟。这样<br>做的原因是让程序运行得慢一些（Python由于其本质通常运行得很快）。在程序运行的时候，<br>按Ctrl-c中断/取消程序。<br>我们可以观察到KeyboardInterrupt异常被触发，程序退出。但是在程序退出之前，finally从句仍<br>然被执行，把文件关闭</li>
-</ul>
-<p>##Python的标准库</p>
-<ul>
-<li>Python标准库是随Python附带安装的，它包含大量极其有用的模块。熟悉Python标准库是十分<br>重要的，因为如果你熟悉这些库中的模块，那么你的大多数问题都可以简单快捷地使用它们来<br>解决。</li>
-</ul>
-<p>###sys模块</p>
-<ul>
-<li>sys模块包含系统对应的功能。<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#Todo: cat.py</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(filename)</span>:</span></div><div class="line">    <span class="string">'''Print a file to the standard output'''</span></div><div class="line">    f = file(filename)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        line = f.readline()</div><div class="line">        <span class="keyword">if</span> len(line) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">print</span> line,<span class="comment">#notice commma</span></div><div class="line">    f.close()</div><div class="line"><span class="comment">#Script starts from here</span></div><div class="line"><span class="keyword">if</span> len(sys.argv) &lt; <span class="number">2</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'No action specified.'</span></div><div class="line">    sys.exit()</div><div class="line"><span class="keyword">if</span> sys.argv[<span class="number">1</span>].startswith(<span class="string">'--'</span>):</div><div class="line">    option = sys.argv[<span class="number">1</span>][<span class="number">2</span>:]</div><div class="line">    <span class="comment">#fetch sys.argv[1] but without the first two characters</span></div><div class="line">    <span class="keyword">if</span> option == <span class="string">'version'</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'Version 1.2'</span></div><div class="line">    <span class="keyword">elif</span> option == <span class="string">'help'</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'''\</span></div><div class="line">This program prints files to the standard output.</div><div class="line">Any number of files can be specified.</div><div class="line">Options include:</div><div class="line"> --version : Prints the version number</div><div class="line"> --help : Display this help'''</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'Unknown option.'</span></div><div class="line">    sys.exit()</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">        readfile(filename)</div><div class="line">        </div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python cat.py --help</span></div><div class="line">This program prints files to the standard output.</div><div class="line">Any number of files can be specified.</div><div class="line">Options include:</div><div class="line"> --version : Prints the version number</div><div class="line"> --help : Display this help</div><div class="line">[root@Mo arvon_python]<span class="comment"># python cat.py --version</span></div><div class="line">Version <span class="number">1.2</span></div><div class="line">[root@Mo arvon_python]<span class="comment"># python cat.py --love</span></div><div class="line">Unknown option.</div><div class="line">[root@Mo arvon_python]<span class="comment"># python cat.py poem.txt </span></div><div class="line">Programming <span class="keyword">is</span> fun</div><div class="line">When the work <span class="keyword">is</span> done</div><div class="line"><span class="keyword">if</span> you wanna make your work also fun:</div><div class="line">    use Python!</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>###OS模块</p>
-<ul>
-<li>简略<br>● os.name字符串指示你正在使用的平台。比如对于Windows，它是’nt’，而对于Linux/Unix<br>用户，它是’posix’。<br>● os.getcwd()函数得到当前工作目录，即当前Python脚本工作的目录路径。<br>● os.getenv()和os.putenv()函数分别用来读取和设置环境变量。<br>● os.listdir()返回指定目录下的所有文件和目录名。<br>● os.remove()函数用来删除一个文件。<br>● os.system()函数用来运行shell命令。<br>● os.linesep字符串给出当前平台使用的行终止符。例如，Windows使用’\r\n’，Linux使<br>用’\n’而Mac使用’\r’。<br>● os.path.split()函数返回一个路径的目录名和文件名。<br>os.path.split(‘/home/swaroop/byte/code/poem.txt’)<br>(‘/home/swaroop/byte/code’, ‘poem.txt’)<br>● os.path.isfile()和os.path.isdir()函数分别检验给出的路径是一个文件还是目录。类似地，os.<br>path.exists()函数用来检验给出的路径是否真地存在。</li>
-</ul>
-<p>##参考</p>
-<p>###特殊的方法</p>
-<ul>
-<li><strong>init</strong>(self, …)<br>这个方法在新建对象恰好要被返回使用之前被调用</li>
-<li><strong>del</strong>(self)<br>恰好在对象要被删除之前调用</li>
-<li><strong>str</strong>(self, other)<br>当使用小于运算符（&lt;）的时候调用。类似地，对于说有的运算符（+， &gt;等等）都有特殊的方法</li>
-<li><strong>getitem</strong>(self, key)<br>使用x[key]索引操作符的时候调用</li>
-<li><strong>len</strong>(self)<br>对序列对象使用内建的len（）函数的时候调用</li>
-</ul>
-<p>###参考书籍<br><a href="https://docs.python.org/3/" target="_blank" rel="external">Python标准文档（英文）</a><br><a href="http://code.activestate.com/recipes/langs/python/" target="_blank" rel="external">Python实用大全（英文）</a><br><a href="http://daqinbuyi.iteye.com/blog/1668678" target="_blank" rel="external">Python常用类库（Blog）</a><br><a href="http://wiki.woodpecker.org.cn/moin/PythonStandardLib" target="_blank" rel="external">Python类库手册（中文）</a><br><a href="http://python.usyiyi.cn/" target="_blank" rel="external">Python官方文档（中文）</a></p>
+          #更新记录
 
-          
+20150730 总结介绍
+20150731 控制流
+20150804 module
+20150806 脚本练手
+20150807 模块方法
+20150810 是时候结束了
+
+#介绍
+##简记
+
+这里使用的是CentOS release 6.6 (Final)
+
+12345678910
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/30/简明Python学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1142,31 +923,14 @@
       
         
           
-            <p><strong>简介：</strong>awk一种优秀的文本处理工具，Linux和Unix环境中现有的功能最强大的数据处理引擎之一。这个编程及数据操作语言其名称得自于它的创始人阿尔佛雷德·艾侯、彼得·温伯格和布莱恩·柯林汉姓氏的首个字母。<br>awk的处理文本和数据的方式是这样的，它逐行扫描文件，从第一行到最后一行，寻找匹配的特定模式的行，并在这些行上进行你想要的操作。如果没有指定处理动作，则把匹配的行显示到标准输出(屏幕)，如果没有指定<br>模式，则所有被操作所指定的行都被处理</p>
-<p>awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
-<ul>
-<li>使用方法：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk  <span class="string">'&#123;pattern + action&#125;'</span> <span class="string">&#123;filenames&#125;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。awk语言的最基本功能是在文件或者字符串中基于指定规则浏览和抽取信息，awk抽取信息后，才能进行其他文本操作。完整的awk脚本通常用来格式化文本文件中的信息。通常，awk是以文件的一行为处理单位的。awk每接收文件的一行，然后执行相应的命令，来处理文本。</p>
-<ul>
-<li>三种调用方式<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. 命令行方式</div><div class="line"><span class="comment">#tail /etc/fstab |awk '&#123;print $1&#125;'</span></div><div class="line"><span class="comment">#cat /etc/passwd |awk  -F ':'  '&#123;print $1&#125;'</span></div><div class="line"><span class="comment">#cat /etc/passwd |awk  -F ':'  '&#123;print $1"\t"$7&#125;'</span></div><div class="line"><span class="number">2</span>. shell脚本方式</div><div class="line"><span class="number">3</span>. awk命令插入为单独文件的方式</div><div class="line"><span class="comment">#awk -f awk-script-file input-file(s)</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="大实例"><a href="#大实例" class="headerlink" title="大实例"></a>大实例</h3><ul>
-<li><p>显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”。</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/passwd |awk  -F <span class="string">':'</span>  <span class="string">'BEGIN &#123;print "name,shell"&#125;  &#123;print $1","$7&#125; END &#123;print "blue,/bin/nosh"&#125;'</span></div><div class="line">name,shell</div><div class="line">root,<span class="regexp">/bin/bash</span></div><div class="line">daemon,<span class="regexp">/bin/sh</span></div><div class="line">bin,<span class="regexp">/bin/sh</span></div><div class="line">sys,<span class="regexp">/bin/sh</span></div><div class="line">....</div><div class="line">blue,<span class="regexp">/bin/nosh</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>搜索/etc/passwd有root关键字的所有行</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#awk -F: '/root/' /etc/passwd</span></div><div class="line">root:<span class="keyword">x</span>:<span class="number">0</span>:<span class="number">0</span>:root:<span class="regexp">/root:/bin</span><span class="regexp">/bash</span></div><div class="line">```   </div><div class="line"></div><div class="line">- 统计/etc<span class="regexp">/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:</span></div><div class="line">```perl</div><div class="line">#awk  -F ':'  '&#123;print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0&#125;' /etc<span class="regexp">/passwd</span></div><div class="line">filename:/etc<span class="regexp">/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root</span>:<span class="regexp">/bin/bash</span></div><div class="line">filename:<span class="regexp">/etc/passwd</span>,linenumber:<span class="number">2</span>,columns:<span class="number">7</span>,linecontent:daemon:<span class="keyword">x</span>:<span class="number">1</span>:<span class="number">1</span>:daemon:<span class="regexp">/usr/sbin</span>:<span class="regexp">/bin/sh</span></div><div class="line">filename:<span class="regexp">/etc/passwd</span>,linenumber:<span class="number">3</span>,columns:<span class="number">7</span>,linecontent:bin:<span class="keyword">x</span>:<span class="number">2</span>:<span class="number">2</span>:bin:<span class="regexp">/bin:/bin</span><span class="regexp">/sh</span></div><div class="line">filename:/etc<span class="regexp">/passwd,linenumber:4,columns:7,linecontent:sys:x:3:3:sys:/dev</span>:<span class="regexp">/bin/sh</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>使用printf替代print,可以让代码更加简洁，易读</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk  -F <span class="string">':'</span>  <span class="string">'&#123;printf("filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n",FILENAME,NR,NF,$0)&#125;'</span> /etc/passwd</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="参考这里"><a href="#参考这里" class="headerlink" title="参考这里"></a>参考这里</h3><p><a href="http://www.gnu.org/software/gawk/manual/gawk.html" title="awk官网" target="_blank" rel="external">awk官网</a><br><a href="http://man.lupaworld.com/content/manage/ringkee/awk.htm" title="awk学习笔记" target="_blank" rel="external">awk学习笔记</a><br><a href="http://www.aslibra.com/doc/awk.htm" title="awk手册" target="_blank" rel="external">awk手册</a><br><a href="http://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html" target="_blank" rel="external">参考博客</a></p>
+          简介：awk一种优秀的文本处理工具，Linux和Unix环境中现有的功能最强大的数据处理引擎之一。这个编程及数据操作语言其名称得自于它的创始人阿尔佛雷德·艾侯、彼得·温伯格和布莱恩·柯林汉姓氏的首个字母。awk的处理文本和数据的方式是这样的，它逐行扫描文件，从第一行到最后一行，寻找匹配的特定模式的行
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/29/awk用法实例/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1274,61 +1038,49 @@
       
         
           
-            <p>###需学习技能</p>
-<ol>
-<li><p>系统管理语言</p>
-<ul>
-<li><del>Shell脚本语言</del></li>
-<li>perl</li>
-<li>python</li>
-</ul>
-</li>
-<li><p>监控工具</p>
-<ul>
-<li>zabbix</li>
-<li>nagios</li>
-</ul>
-</li>
-<li><p>运维自动化工具</p>
-<ul>
-<li>saltstack</li>
-<li>Ansible</li>
-<li>puppet</li>
-</ul>
-</li>
-<li><p>大数据</p>
-</li>
-<li>云计算<ul>
-<li>OPenStack</li>
-<li>Docker</li>
-</ul>
-</li>
-<li>虚拟化<ul>
-<li>KVM</li>
-<li>VMware</li>
-</ul>
-</li>
-</ol>
-<p>###Linux系统技能要求</p>
-<ol>
-<li>Keepalived、lvs高可用及负载均衡技术</li>
-<li>Mysql</li>
-<li>正则表达式<ul>
-<li>sed</li>
-<li>awk</li>
-</ul>
-</li>
-<li>常用协议（SSH、telnet、rlogin、RDP、VNC）</li>
-<li>熟悉Kernel调优</li>
-<li>Web服务<ul>
-<li>appache</li>
-<li>nginx</li>
-</ul>
-</li>
-</ol>
-<p>###资源网站<br><a href="http://www.osyunwei.com/" target="_blank" rel="external">系统运维之家</a><br><a href="http://www.lupaworld.com/article-242275-1.html" target="_blank" rel="external">兴趣看看</a><br><a href="http://linux.cn/" target="_blank" rel="external">中文Linux社区</a><br><a href="http://www.linux.com/" target="_blank" rel="external">英文版参考学习主站</a></p>
+          ###需学习技能
 
-          
+系统管理语言
+
+Shell脚本语言
+perl
+python
+
+
+监控工具
+
+zabbix
+nagios
+
+
+运维自动化工具
+
+saltstack
+Ansible
+puppet
+
+
+大数据
+
+云计算
+OPenStack
+Docker
+
+
+虚拟化
+KVM
+VMware
+
+
+
+###L
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/28/SA运维资源/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1436,52 +1188,14 @@
       
         
           
-            <p><strong>简介：</strong>VSFTP（Very Secure FTP）是一个基于GPL发布的类Unix系统上使用的FTP服务器软件，设计者的初衷是代码的安全，<br>另外速度在使用ASCII代码的模式下在数据时，VSFTP的速度为Wu-FTp的两倍，如果Linux主机使用2.4.x的内核，在千兆以太网的<br>下的下载速度可以达到86MB/S。而且很稳定，在单机上支持4000以上的并发用户同时连接，根据RedHat和Ftp服务器的数据，VSFTP<br>服务器可以支持15000个并发用户</p>
-<p>#搭建VSFTP</p>
-<p>##VSFTP的优缺点</p>
-<p>###VSFTP的优点</p>
-<ol>
-<li>它是一个安全、高速、稳定的FTP服务器；</li>
-<li>它可以做基于多个IP的虚拟FTP主机服务器；</li>
-<li>匿名服务设置十分方便；</li>
-<li>匿名FTP的根目录不需要任何特殊的目录结构，或系统程序或其它的系统文件；</li>
-<li>不执行任何外部程序，从而减少了安全隐患；</li>
-<li>支持虚拟用户，并且每个虚拟用户可以具有独立的属性配置；</li>
-<li>可以设置从inetd中启动，或者独立的FTP服务器两种运行方式；</li>
-<li>支持两种认证方式（PAP或xinetd/ tcp_wrappers）；</li>
-<li>支持带宽限制；<br>VSFTP市场应用十分广范，很多国际性的大公司和自由开源组织在使用，如：Red Hat, Suse，Debian，OpenBSD</li>
-</ol>
-<p>###VSFTP的缺点</p>
-<ol>
-<li>VSFTP从没有处理文件编码转换的windows客户端访问时有乱码现象</li>
-<li>解决方法：<ul>
-<li>使用vsftp的补丁</li>
-<li>转换服务器目录文件编码</li>
-</ul>
-</li>
-</ol>
-<p>##环境</p>
-<ul>
-<li>CentOS release 6.6</li>
-</ul>
-<p>##搭建步骤</p>
-<p>###安装VSFTP</p>
-<ol>
-<li><p>检查是否已安装vsftp服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@Mo ~]# rpm -q vsftpd</div><div class="line">package vsftpd is not installed</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装vsftp服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@Mo ~]# yum install -y vsftpd db4-utils	#安装vsftpd服务</div><div class="line">[root@Mo ~]# rpm -q vsftpd 		#vsftpd服务已安装</div><div class="line">vsftpd-2.2.2-13.el6_6.1.x86_64</div><div class="line"></div><div class="line">[root@Mo vsftp]# yum install lrzsz		#安装后可以把windows的文件直接通过xshell拉到目标主机</div></pre></td></tr></table></figure>
-</li>
-<li><p>vsftp配置文件</p>
-<ul>
-<li>官方wiki有处理脚本：<a href="http://wiki.centos.org/HowTos/Chroot_Vsftpd_with_non-system_users" target="_blank" rel="external">脚本地址</a></li>
-<li>将脚本放至linux主机，然后执行该脚本</li>
-</ul>
-</li>
-</ol>
+          简介：VSFTP（Very Secure FTP）是一个基于GPL发布的类Unix系统上使用的FTP服务器软件，设计者的初衷是代码的安全，另外速度在使用ASCII代码的模式下在数据时，VSFTP的速度为Wu-FTp的两倍，如果Linux主机使用2.4.x的内核，在千兆以太网的下的下载速度可以达到86
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/28/Linux下搭建vsftp服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1589,40 +1303,19 @@
       
         
           
-            <p><strong>Command Include：</strong>disk、memory、hostname、find</p>
-<h3 id="查看磁盘空间"><a href="#查看磁盘空间" class="headerlink" title="查看磁盘空间"></a>查看磁盘空间</h3><ul>
-<li><p>常用命令<br>df -hl 查看磁盘剩余空间<br>df -h 查看每个根路径的分区大小<br>du -sh [目录名] 返回该目录的大小<br>du -sm [文件夹] 返回该文件夹总M数</p>
-</li>
-<li><p>命令演示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# cat /proc/cpuinfo	#查看cpu的核心数</div><div class="line"></div><div class="line">[root@cloud ~]# df -h	#磁盘使用情况</div><div class="line">[root@cloud ~]# df -hl</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda1       9.1G  2.2G  6.4G  26% /</div><div class="line">tmpfs           487M     0  487M   0% /dev/shm</div><div class="line">/dev/sdb1       4.5G  1.9M  4.3G   1% /data</div><div class="line"></div><div class="line">[root@cloud ~]# du --max-depth=1 -h	#查看当前文件夹下的磁盘使用情况</div><div class="line">25M	./.nvm</div><div class="line">8.0K	./.pki</div><div class="line">4.0K	./Blog</div><div class="line">25M		.</div><div class="line"></div><div class="line">[root@cloud ~]# du -sh	#显示当前目录的大小</div><div class="line">25M	.</div><div class="line"></div><div class="line">[root@cloud ~]# du -sh /opt/	#显示指定路径的大小</div><div class="line">4.0K	/opt/	</div><div class="line"></div><div class="line">[root@cloud ~]# du -h test.txt	#显示指定文件的大小 </div><div class="line">0	test.txt</div><div class="line">```	</div><div class="line"></div><div class="line">###查看内存</div><div class="line">* 常用命令</div><div class="line">cat /proc/meminfo	#查看内存使用信息</div><div class="line"></div><div class="line"></div><div class="line">* 命令实例</div><div class="line">空闲内存 =free+buffers+cached =total-used</div><div class="line">```shell</div><div class="line">[root@cloud ~]# free -m	#查看内存使用状况</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:           972        667        304          0         41        497</div><div class="line">-/+ buffers/cache:        128        843</div><div class="line">Swap:          999          0        999</div><div class="line">说明：	 shared：多个进程共享的内存总额</div><div class="line">		Buffers/cached		</div><div class="line"></div><div class="line">[root@cloud ~]# cat /proc/meminfo </div><div class="line">MemTotal:         995648 kB</div><div class="line">MemFree:          312228 kB</div><div class="line">Buffers:           42836 kB</div><div class="line">Cached:           509164 kB</div><div class="line">SwapCached:          352 kB</div><div class="line">Active:           413060 kB</div><div class="line">Inactive:         145136 kB		</div><div class="line"></div><div class="line">[root@cloud ~]# ll -h /proc/kcore	#查看/proc/kcore文件的大小（内存镜像）</div><div class="line">-r-------- 1 root root 4.0K Jul 27 16:31 /proc/kcore</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>###查看cpu使用率</p>
-<ul>
-<li><p>使用top命令<br>具体介绍：<a href="http://www.cnblogs.com/xd502djj/archive/2011/03/01/1968041.html" target="_blank" rel="external">top命输出解释</a></p>
-</li>
-<li><p>产看内核信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# uname -a</div><div class="line">Linux cloud 2.6.32-504.1.3.el6.x86_64 #1 SMP Tue Nov 11 17:57:25 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看发行版信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# cat /etc/issue</div><div class="line">CentOS release 6.6 (Final)</div><div class="line">Kernel \r on an \m</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>###Find命令</p>
-<ul>
-<li><p>命令实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# find / -name fstab</div><div class="line">/etc/fstab</div><div class="line"></div><div class="line">[root@cloud ~]# find / -name access_log 2&gt;/dev/null		#无错误查找</div><div class="line"></div><div class="line">[root@cloud ~]# find / etc -name &apos;*fst*&apos;	#模糊查找，支持通配符</div><div class="line">/lib/udev/fstab_import</div><div class="line">/lib/udev/rules.d/79-fstab_import.rules</div><div class="line">/etc/fstab</div><div class="line">/usr/bin/psfstriptable</div><div class="line"></div><div class="line">find  /home  -size  +512k	#查大于512k的文档</div><div class="line"></div><div class="line">$ find logs -type f -mtime +5 -exec  -ok  rm &#123;&#125; \;	#在/ l o g s目录中查找更改时间在5日以前的文档并删除他们：</div><div class="line"></div><div class="line"># A=`find ./ -name &quot;*php&quot;` |  ls -l --full-time $A 2&gt;/dev/null | grep &quot;2004-11-30 16:36:37&quot;		#查找2004-11-30 16:36:37时更改过的文档</div></pre></td></tr></table></figure>
-</li>
-<li><p>参考网址<br><a href="http://linux.chinaunix.net/techdoc/system/2008/07/25/1020339.shtml" target="_blank" rel="external">参考实例</a><br><a href="http://www.chinaz.com/server/2009/0807/85796.shtml" target="_blank" rel="external">与或非的find介绍</a></p>
-</li>
-</ul>
-<p>###修改常见配置</p>
-<ul>
-<li>修改主机名<br>参考这里:[北南南北的博客，修改Linux主机名]<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# hostname Mo		#临时修改hostname</div><div class="line"></div><div class="line">[root@Mo ~]# vim /etc/sysconfig/network		#两个都要改</div><div class="line">[root@Mo ~]# vim /etc/hosts</div><div class="line"></div><div class="line">[root@linuxsir01 ~]# hostname -i	#显示主机名的IP</div></pre></td></tr></table></figure>
-</li>
-</ul>
+          Command Include：disk、memory、hostname、find
+查看磁盘空间
+常用命令df -hl 查看磁盘剩余空间df -h 查看每个根路径的分区大小du -sh [目录名] 返回该目录的大小du -sm [文件夹] 返回该文件夹总M数
 
-          
+命令演示
+12345678910111
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/27/Linux系统命令（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1730,72 +1423,20 @@
       
         
           
-            <p>#配置流程</p>
-<p>##环境准备</p>
-<p>###本地环境</p>
-<ul>
-<li>CentOS6</li>
-<li>下载nvm（Node.js的版本管理器）软件<blockquote>
-<p>wget -qO- <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="external">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh    #下载安装nvm（安装目录在/root/.nvm/）</p>
-</blockquote>
-</li>
-<li>安装nvm软件<blockquote>
-<p>nvm install 0.10    #选择Node.js的安装版本<br>nvm ls    #查看node.js的版本</p>
-</blockquote>
-</li>
-</ul>
-<p>###安装git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
-<p>###安装Hexo</p>
-<blockquote>
-<p>npm install -g hexo    #使用npm安装hexo(此处安装并未完成)<br>如果显示command not found，就重启终端，然后使用nvm ls检查当前版本，如果没有使用命令<br>nvm use 0.10    #即使用方才装的版本（使用此命令后安装成功）<br>或使用一下命令直接设置全局默认的node.js版本<br>nvm alias default 0.10.26</p>
-</blockquote>
-<ul>
-<li><p>安装失败的原因可能是无法连接到官方服务器，或者是GFW（Great Firewall，中国国家防火墙或长城防火墙）的问题。需<br>  修改npm镜像源<br>  使用config命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ npm config set registry http://registry.cnpmjs.org  </div><div class="line">$ npm info underscore (如果上面配置成功，使用这个命令会有以下提示)  </div><div class="line">$ npm http GET http://registry.cnpmjs.org/underscore  </div><div class="line">$ npm http 200 http://registry.cnpmjs.org/underscore  </div><div class="line"> ``` </div><div class="line">命令行指定  </div><div class="line">```Shell </div><div class="line">$ npm --registry http://registry.cnpmjs.org info underscore   </div><div class="line">编辑 ~/.npmrc 加入以下内容可以使配置永久生效，就不用每次npm安装时都要运行指定源命令了  </div><div class="line">$ registry = http://registry.cnpmjs.org  </div><div class="line"> ``` </div><div class="line"></div><div class="line">- 使用以下命令对hexo进行初始化（这里我位于~目录，而且我想把我的个人博客放在~/hexo目录，需要放在其他目录直接改一下自己需要的目录就可以了）  </div><div class="line">```Shell </div><div class="line">$ hexo install hexo --save</div><div class="line">$ hexo init hexo</div></pre></td></tr></table></figure>
-</li>
-<li><p>本地环境到此结束，有木有很easy</p>
-</li>
-</ul>
-<p>###初步预览</p>
-<blockquote>
-<p>hexo generate 或 hexo g    #生成静态文件<br>hexo server 或 hexo s    #打开本地预览（http:localhost:4000）</p>
-</blockquote>
-<p>##配置git并发布<br>配置git并发布基于hexo和github的个人博客<br>首先编辑个人安装目录的_config.yml文件，找到一下内容并修改为git</p>
-<blockquote>
-<p>deploy:<br>type: git<br>repository: <a href="https://github.com/Arvon2014/arvon2014.github.com.git(直接将github上的https项复制并粘贴" target="_blank" rel="external">https://github.com/Arvon2014/arvon2014.github.com.git(直接将github上的https项复制并粘贴</a>)<br>branch: master</p>
-</blockquote>
-<p>运行以下命令设置git全局变量，即设置用户名和邮箱(需要先和github建立免密码登陆)</p>
-<blockquote>
-<p>git config –global user.name “Arvon”<br>git config –global user.email “yafeng2011@126.com”</p>
-</blockquote>
-<p>##免密码ssh公钥设置</p>
-<ol>
-<li><p>是否安装了ssh，未装执行</p>
-<blockquote>
-<p>yum install ssh</p>
-</blockquote>
-</li>
-<li><p>检查公钥</p>
-<blockquote>
-<p>cd ~/.ssh    #存在就删了</p>
-</blockquote>
-</li>
-<li><p>生成公钥私钥对</p>
-<blockquote>
-<p>ssh-keygen -t rsa -C “you_email@youremail.com”<br>cd ~/.ssh    #验证</p>
-</blockquote>
-</li>
-<li><p>添加ssh公钥到github<br>将公钥（pub）的内容复制到Deploykeys里面</p>
-</li>
-<li><p>测试是否生效</p>
-<blockquote>
-<p>ssh -T git@github.com</p>
-</blockquote>
-</li>
-</ol>
-<p>##待完善</p>
+          #配置流程
+##环境准备
+###本地环境
 
-          
+CentOS6
+下载nvm（Node.js的版本管理器）软件
+wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh    #下载安装nvm（安装目录在/root/.nv
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/23/Linux下hexo+github搭建Blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1877,7 +1518,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
