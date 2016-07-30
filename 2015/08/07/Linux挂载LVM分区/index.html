@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/08/07/Linux挂载LVM分区/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="简介：LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空">
-<meta property="og:updated_time" content="2015-08-26T03:21:26.000Z">
+<meta property="og:updated_time" content="2016-07-30T09:56:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux挂载LVM分区">
 <meta name="twitter:description" content="简介：LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空">
@@ -220,9 +220,39 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'pucaxC2HNyypdTZJxgrS','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -313,8 +343,7 @@
 
       
         <p><strong>简介：</strong>LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空间。普通的磁盘分区管理方式在逻辑分区划分好之后就无法改变其大小，当一个逻辑分区存放不下某个文件时，这个文件因为受上层文件系统的限制，也不能跨越多个分区来存放，所以也不能同时放到别的磁盘上。而遇到出现某个分区空间耗尽时，解决的方法通常是使用符号链接，或者使用调整分区大小的工具，但这只是暂时解决办法，没有从根本上解决问题。随着Linux的逻辑卷管理功能的出现，这些问题都迎刃而解，用户在无需停机的情况下可以方便地调整各个分区大小。</p>
-<p>##手动将LVM挂载至linux系统<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">rpm -qa lvm2</div><div class="line"><span class="comment">#查看是否安装了lvm</span></div><div class="line">yum install lvm2</div><div class="line"><span class="comment">#安装lvm软件</span></div><div class="line">vgscan</div><div class="line"><span class="comment">#查找并显示系统中存在的LVN卷组</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看系统中存在哪些卷组以及它们的激活状态（注意：如果有两个卷组名一样，其中一个是无法挂载的，要想挂载，需要重命名一个卷组）</span></div><div class="line">vgdisplay LVMname | more</div><div class="line"><span class="comment">#显示所有名为LVMname卷组的详细信息，请记住你将要挂载卷组的 VG UUID。</span></div><div class="line">	vgrename o236o6-MGAQ-erKG-k6cH<span class="number">-12</span>Zs<span class="number">-8</span>NwX-CCqPG3 vgNewName</div><div class="line">	<span class="comment">#卷组重新命名为vgNewName</span></div><div class="line">vgchange -ay /dev/vgNewName</div><div class="line"><span class="comment">#激活卷组vsNewName，此时你也并不能使用，需要挂载</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看现在的激活状态</span></div><div class="line">mount /dev/vgNewName /somePoint</div><div class="line"><span class="comment">#挂载LVM到挂载点，这样就可以访问了</span></div><div class="line">umount /dev/vgNewName<span class="comment"># or usr 'umount /somePoint'</span></div><div class="line"><span class="comment">#卸载LVM卷组</span></div><div class="line">vgchange -an /dev/vgNewName</div><div class="line"><span class="comment">#将卷组修改成不激活状态</span></div></pre></td></tr></table></figure></p>
-<p>###LVM配置</p>
+<h2 id="手动将LVM挂载至linux系统"><a href="#手动将LVM挂载至linux系统" class="headerlink" title="手动将LVM挂载至linux系统"></a>手动将LVM挂载至linux系统</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">rpm -qa lvm2</div><div class="line"><span class="comment">#查看是否安装了lvm</span></div><div class="line">yum install lvm2</div><div class="line"><span class="comment">#安装lvm软件</span></div><div class="line">vgscan</div><div class="line"><span class="comment">#查找并显示系统中存在的LVN卷组</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看系统中存在哪些卷组以及它们的激活状态（注意：如果有两个卷组名一样，其中一个是无法挂载的，要想挂载，需要重命名一个卷组）</span></div><div class="line">vgdisplay LVMname | more</div><div class="line"><span class="comment">#显示所有名为LVMname卷组的详细信息，请记住你将要挂载卷组的 VG UUID。</span></div><div class="line">	vgrename o236o6-MGAQ-erKG-k6cH<span class="number">-12</span>Zs<span class="number">-8</span>NwX-CCqPG3 vgNewName</div><div class="line"><span class="comment">#卷组重新命名为vgNewName</span></div><div class="line">vgchange -ay /dev/vgNewName</div><div class="line"><span class="comment">#激活卷组vsNewName，此时你也并不能使用，需要挂载</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看现在的激活状态</span></div><div class="line">mount /dev/vgNewName /somePoint</div><div class="line"><span class="comment">#挂载LVM到挂载点，这样就可以访问了</span></div><div class="line">umount /dev/vgNewName<span class="comment"># or usr 'umount /somePoint'</span></div><div class="line"><span class="comment">#卸载LVM卷组</span></div><div class="line">vgchange -an /dev/vgNewName</div><div class="line"><span class="comment">#将卷组修改成不激活状态</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -446,7 +475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -456,7 +485,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -505,7 +534,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#手动将LVM挂载至linux系统"><span class="nav-number">1.</span> <span class="nav-text">手动将LVM挂载至linux系统</span></a></li></ol></div>
             
           </div>
         </section>

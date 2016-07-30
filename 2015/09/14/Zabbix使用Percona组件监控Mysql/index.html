@@ -94,19 +94,17 @@
 <meta property="og:description" content="上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境
 实现环境
 已经完成了zabbix基本环境部署">
-<meta property="og:image" content="http://i3.tietuku.com/a647c48fd7daa899.png">
-<meta property="og:image" content="http://i3.tietuku.com/2698b8e90e522cd6.png">
 <meta property="og:image" content="http://i3.tietuku.com/404d96621846ce53.png">
 <meta property="og:image" content="http://i3.tietuku.com/8c345d59e2a24c37.png">
 <meta property="og:image" content="http://i3.tietuku.com/e65c053544662725.png">
 <meta property="og:image" content="http://i3.tietuku.com/70ee7b048eb32974.png">
-<meta property="og:updated_time" content="2015-09-16T09:58:58.000Z">
+<meta property="og:updated_time" content="2016-07-29T15:11:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix使用Percona组件监控Mysql">
 <meta name="twitter:description" content="上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境
 实现环境
 已经完成了zabbix基本环境部署">
-<meta name="twitter:image" content="http://i3.tietuku.com/a647c48fd7daa899.png">
+<meta name="twitter:image" content="http://i3.tietuku.com/404d96621846ce53.png">
 
 
 
@@ -233,9 +231,39 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'pucaxC2HNyypdTZJxgrS','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -331,21 +359,13 @@
 <li>安装php环境</li>
 <li>使用epel源，下载所需组件</li>
 </ul>
-<h3 id="安装-amp-配置步骤"><a href="#安装-amp-配置步骤" class="headerlink" title="安装&amp;配置步骤"></a>安装&amp;配置步骤</h3><h4 id="下载Percona-Monitoring-Plugins"><a href="#下载Percona-Monitoring-Plugins" class="headerlink" title="下载Percona Monitoring Plugins"></a>下载Percona Monitoring Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#下载文件</div><div class="line">wget https://www.percona.com/downloads/percona-monitoring-plugins/1.1.1/percona-zabbix-templates-1.1.1-1.noarch.rpm</div><div class="line">#提取下载的rpm文件</div><div class="line">[root@localhost ~]# rpm2cpio percona-zabbix-templates-1.1.1-1.noarch.rpm |cpio -div</div></pre></td></tr></table></figure>
-<p><strong>说明：</strong></p>
-<blockquote>
-<p>目录文件说明<br>#脚本文件路径<br>var/lib/zabbix/percona/scripts/<br>#key文件位置<br>var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf<br>#模板文件位置<br>var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.1.xml</p>
-</blockquote>
-<h4 id="安装percona-monitoring-plugins"><a href="#安装percona-monitoring-plugins" class="headerlink" title="安装percona monitoring plugins"></a>安装percona monitoring plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# rpm -ivh percona-zabbix-templates-1.1.1-1.noarch.rpm</div></pre></td></tr></table></figure>
-<h4 id="安装php环境"><a href="#安装php环境" class="headerlink" title="安装php环境"></a>安装php环境</h4><p>若以安装，可跳过，需求包如下图<br><img src="http://i3.tietuku.com/a647c48fd7daa899.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum install php php-mysql</div></pre></td></tr></table></figure></p>
-<h4 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h4><p>将key的子配置文件复制到/etc/zabbix/zabbix_agentd.d/<br><code>插曲</code>由于版本不同，所以实际文件位置也不同，这个位置可以在agent的包里看到</p>
-<blockquote>
-<p>rpm -ql zabbix22-agent-2.2.1-5.el6.x86_64<br>/usr/share/doc/zabbix22-agent-2.2.1/userparameter_mysql.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost zabbix]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h4 id="重启zabbix-agent服务"><a href="#重启zabbix-agent服务" class="headerlink" title="重启zabbix-agent服务"></a>重启zabbix-agent服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
-<h4 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h4><p>修改脚本中的用户名和密码,用户名和密码为本机数据库的账户和密码，并不需要特别的权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</div></pre></td></tr></table></figure></p>
-<p>修改字段如图<br><img src="http://i3.tietuku.com/2698b8e90e522cd6.png" alt=""></p>
-<h5 id="没有用户"><a href="#没有用户" class="headerlink" title="没有用户"></a>没有用户</h5><p>添加数据库的用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; grant process,super,select on *.* to zabbix@localhost identified by &apos;zabbix&apos;;</div><div class="line">mysql&gt; flush privileges;</div></pre></td></tr></table></figure></p>
+<h3 id="安装-amp-配置步骤"><a href="#安装-amp-配置步骤" class="headerlink" title="安装&amp;配置步骤"></a>安装&amp;配置步骤</h3><h4 id="下载Percona-Monitoring-Plugins"><a href="#下载Percona-Monitoring-Plugins" class="headerlink" title="下载Percona Monitoring Plugins"></a>下载Percona Monitoring Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#下载文件</div><div class="line">wget https://www.percona.com/downloads/percona-monitoring-plugins/1.1.1/percona-zabbix-templates-1.1.1-1.noarch.rpm</div><div class="line">#提取下载的rpm文件</div><div class="line">[root@localhost ~]# rpm2cpio percona-zabbix-templates-1.1.1-1.noarch.rpm |cpio -div</div><div class="line"></div><div class="line">```  </div><div class="line">**说明：**</div><div class="line">&gt;目录文件说明</div><div class="line">\#脚本文件路径</div><div class="line">var/lib/zabbix/percona/scripts/</div><div class="line">\#key文件位置</div><div class="line">var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf</div><div class="line">\#模板文件位置</div><div class="line">var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.1.xml</div><div class="line"></div><div class="line">#### 安装percona monitoring plugins</div></pre></td></tr></table></figure>
+<p>[root@localhost ~]# rpm -ivh percona-zabbix-templates-1.1.1-1.noarch.rpm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 安装php环境</div><div class="line">若以安装，可跳过，需求包如下图</div><div class="line">![](http://i3.tietuku.com/a647c48fd7daa899.png)</div></pre></td></tr></table></figure></p>
+<p>[root@localhost ~]# yum install php php-mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 复制文件</div><div class="line">将key的子配置文件复制到/etc/zabbix/zabbix_agentd.d/</div><div class="line">``插曲``由于版本不同，所以实际文件位置也不同，这个位置可以在agent的包里看到</div><div class="line">&gt;rpm -ql zabbix22-agent-2.2.1-5.el6.x86_64</div><div class="line">/usr/share/doc/zabbix22-agent-2.2.1/userparameter_mysql.conf</div></pre></td></tr></table></figure></p>
+<p>[root@localhost zabbix]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agentd.d/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 重启zabbix-agent服务</div></pre></td></tr></table></figure></p>
+<p>/etc/init.d/zabbix-agent restart<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 修改脚本</div><div class="line">修改脚本中的用户名和密码,用户名和密码为本机数据库的账户和密码，并不需要特别的权限</div></pre></td></tr></table></figure></p>
+<p>[root@localhost ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">修改字段如图</div><div class="line">![](http://i3.tietuku.com/2698b8e90e522cd6.png)</div><div class="line"></div><div class="line">##### 没有用户</div><div class="line">添加数据库的用户</div></pre></td></tr></table></figure></p>
+<p>mysql&gt; grant process,super,select on <em>.</em> to zabbix@localhost identified by ‘zabbix’;<br>mysql&gt; flush privileges;<br>```</p>
 <h4 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h4><p>运行脚本，只要不报error就是没问题<br><code>[root@centos-01 percona]# /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg</code></p>
 <h4 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h4><p>先找到xml文件，上面的额位置就有，/var/lib/zabbix/percona/templates/，然后传到win下，然后再执行导入模板，看大图<br><img src="http://i3.tietuku.com/404d96621846ce53.png" alt=""><br><img src="http://i3.tietuku.com/8c345d59e2a24c37.png" alt=""><br>将导入的模板应用到主机<br><img src="http://i3.tietuku.com/e65c053544662725.png" alt=""></p>
 <h3 id="错误集锦"><a href="#错误集锦" class="headerlink" title="错误集锦"></a>错误集锦</h3><h4 id="One-连不上数据库"><a href="#One-连不上数据库" class="headerlink" title="One 连不上数据库"></a>One 连不上数据库</h4><p>描述：如图<br><img src="http://i3.tietuku.com/70ee7b048eb32974.png" alt=""></p>
@@ -480,7 +500,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +510,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -539,7 +559,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现环境"><span class="nav-number">1.</span> <span class="nav-text">实现环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-amp-配置步骤"><span class="nav-number">1.1.</span> <span class="nav-text">安装&配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载Percona-Monitoring-Plugins"><span class="nav-number">1.1.1.</span> <span class="nav-text">下载Percona Monitoring Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装percona-monitoring-plugins"><span class="nav-number">1.1.2.</span> <span class="nav-text">安装percona monitoring plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装php环境"><span class="nav-number">1.1.3.</span> <span class="nav-text">安装php环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">复制文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启zabbix-agent服务"><span class="nav-number">1.1.5.</span> <span class="nav-text">重启zabbix-agent服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改脚本"><span class="nav-number">1.1.6.</span> <span class="nav-text">修改脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#没有用户"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">没有用户</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本调试"><span class="nav-number">1.1.7.</span> <span class="nav-text">脚本调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入模板"><span class="nav-number">1.1.8.</span> <span class="nav-text">导入模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误集锦"><span class="nav-number">1.2.</span> <span class="nav-text">错误集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#One-连不上数据库"><span class="nav-number">1.2.1.</span> <span class="nav-text">One 连不上数据库</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现环境"><span class="nav-number">1.</span> <span class="nav-text">实现环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-amp-配置步骤"><span class="nav-number">1.1.</span> <span class="nav-text">安装&配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载Percona-Monitoring-Plugins"><span class="nav-number">1.1.1.</span> <span class="nav-text">下载Percona Monitoring Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本调试"><span class="nav-number">1.1.2.</span> <span class="nav-text">脚本调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入模板"><span class="nav-number">1.1.3.</span> <span class="nav-text">导入模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误集锦"><span class="nav-number">1.2.</span> <span class="nav-text">错误集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#One-连不上数据库"><span class="nav-number">1.2.1.</span> <span class="nav-text">One 连不上数据库</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

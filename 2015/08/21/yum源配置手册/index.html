@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux,yum," />
+  <meta name="keywords" content="yum," />
 
 
 
@@ -85,27 +85,18 @@
 
 
 <meta name="description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
-常用命令
-升级系统
-yum updateyum -">
+常用命令123456789101112131415">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yum源配置手册">
 <meta property="og:url" content="http://yoursite.com/2015/08/21/yum源配置手册/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
-常用命令
-升级系统
-yum updateyum -">
-<meta property="og:image" content="http://i1.tietuku.com/90e4fa74d8a26695.png">
-<meta property="og:image" content="http://i1.tietuku.com/caaba96513485367.png">
-<meta property="og:updated_time" content="2015-09-02T06:30:38.000Z">
+常用命令123456789101112131415">
+<meta property="og:updated_time" content="2016-07-30T03:35:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yum源配置手册">
 <meta name="twitter:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍
-常用命令
-升级系统
-yum updateyum -">
-<meta name="twitter:image" content="http://i1.tietuku.com/90e4fa74d8a26695.png">
+常用命令123456789101112131415">
 
 
 
@@ -232,9 +223,39 @@ yum updateyum -">
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'pucaxC2HNyypdTZJxgrS','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -325,93 +346,23 @@ yum updateyum -">
 
       
         <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
-<li>升级系统<blockquote>
-<p>yum update<br>yum -y update mysql    #升级特定的软件</p>
-</blockquote>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#1. 升级系统</div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line">#2. 安装指定的软件包</div><div class="line">yum -y install vsftpd</div><div class="line">#3. 卸载指定的软件包</div><div class="line">yum -y remore vsftpd mysql</div><div class="line">#4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</div><div class="line">yum grouplist</div><div class="line">#5. 清除缓存中的rpm 头文件和包文件</div><div class="line">yum clean all</div><div class="line">#6. 搜索相关的软件包</div><div class="line">yum -y search Emacs</div><div class="line">#显示指定软件包的信息</div><div class="line">yum info Emacs</div><div class="line">#查询指定软件包的依赖信息，emacs依赖的模块不少啊</div><div class="line">yum deplist emacs</div><div class="line">#列出所有以 yum 开头的软件包</div><div class="line">yum list yum\*</div><div class="line">#10. 列出已经安装的但是不包含在资源库中的rpm 包</div><div class="line">yum list extras</div></pre></td></tr></table></figure>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</div><div class="line">#配置文件解释</div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v &apos;^#&apos;</div><div class="line">[base]</div><div class="line">#表示标识名称</div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line">#名字，其实可以随便起</div><div class="line">faliovermethod=priority</div><div class="line">#priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line">#用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line">#引用的地址,http://网站  file://本地		ftp://文件服务器</div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line">#是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</div><div class="line">enabled=1</div><div class="line">#enabled=1为启用这个源，0为不启用这个源</div><div class="line">gpgcheck=1</div><div class="line">#表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line">#定义用于校验的gpg密匙</div></pre></td></tr></table></figure>
+<ul>
+<li>粘贴可用的epel的yum源<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]  </div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch/debug</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1  </div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
 </li>
-<li>安装指定的软件包<blockquote>
-<p>yum -y install vsftpd</p>
-</blockquote>
-</li>
-<li>卸载指定的软件包<blockquote>
-<p>yum -y remore vsftpd mysql</p>
-</blockquote>
-</li>
-<li>查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装<blockquote>
-<p>yum grouplist</p>
-</blockquote>
-</li>
-<li>清除缓存中的rpm 头文件和包文件<blockquote>
-<p>yum clean all</p>
-</blockquote>
-</li>
-<li>搜索相关的软件包<blockquote>
-<p> yum -y search Emacs</p>
-</blockquote>
-</li>
-<li>显示指定软件包的信息<blockquote>
-<p>yum info Emacs</p>
-</blockquote>
-</li>
-<li>查询指定软件包的依赖信息，emacs依赖的模块不少啊<blockquote>
-<p>yum deplist emacs</p>
-</blockquote>
-</li>
-<li>列出所有以 yum 开头的软件包<blockquote>
-<p>yum list yum*</p>
-</blockquote>
-</li>
-<li>列出已经安装的但是不包含在资源库中的rpm 包<blockquote>
-<p>yum list extras</p>
-</blockquote>
-</li>
+</ul>
+<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ol>
+<li>EPEL源</li>
 </ol>
-<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><ul>
-<li>配置文件位于<code>/etc/yum.repos.d/*.repo</code>,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</li>
-<li><p>配置文件解释<br>arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v ‘^#’</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line"><span class="comment">#表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - <span class="number">163</span>.com</div><div class="line"><span class="comment">#名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="comment">#priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="comment">#用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http:<span class="regexp">//mirrors</span>.<span class="number">163</span>.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="comment">#引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http:<span class="regexp">//mirrors</span>.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="comment">#是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line"><span class="comment">#enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line"><span class="comment">#表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http:<span class="regexp">//mirror</span>.centos.org/centos/RPM-GPG-KEY-CentOS-<span class="number">6</span></div><div class="line"><span class="comment">#定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>粘贴可用的epel的yum源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line"></div><div class="line">[epel-debuginfo]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch/debug</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div><div class="line"></div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ul>
-<li><p><a href="https://www.baidu.com/link?url=uVSP1-5Xhdvi2t9FFdRnRC01B7zqLZ6a9LAbUNOfsstMsGb33lKjW4zrqJBHmT1h&amp;wd=&amp;eqid=d8ee0a1d000162130000000355e69580" target="_blank" rel="external">epel的wiki</a><br><img src="http://i1.tietuku.com/90e4fa74d8a26695.png" alt=""><br><img src="http://i1.tietuku.com/caaba96513485367.png" alt=""></p>
-</li>
-<li><p>使用EPEL（Extra Packages for Enterprise Linux）源,<code>RHEL6</code>系列</p>
-<blockquote>
-<p>wget <a href="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm</a><br>rpm -ivh epel-release-6-5.noarch.rpm</p>
-</blockquote>
-</li>
-<li><p>EPEL的<code>RHEL5</code>系列</p>
-<blockquote>
-<p>wget <a href="http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a><br>rpm -ivh epel-release-5-4.noarch.rpm</p>
-</blockquote>
-</li>
-<li><p>EPEL手动配置源</p>
-<blockquote>
-<p>vi /etc/yum.repos.d/epel.repo<br>[epel]<br>name=epel<br>mirrorlist=<a href="http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch" target="_blank" rel="external">http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&amp;arch=$basearch</a><br>enabled=1<br>gpgcheck=0</p>
-</blockquote>
-</li>
-<li>网易的源163<blockquote>
-<p>wget <a href="http://mirrors.163.com/.help/CentOS-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS-Base-163.repo</a></p>
-</blockquote>
-</li>
-<li>中科大的源<blockquote>
-<p>wget <a href="http://centos.ustc.edu.cn/CentOS-Base.repo" target="_blank" rel="external">http://centos.ustc.edu.cn/CentOS-Base.repo</a></p>
-</blockquote>
-</li>
-<li>sohu的源<blockquote>
-<p>wget <a href="http://mirrors.sohu.com/help/CentOS-Base-sohu.repo" target="_blank" rel="external">http://mirrors.sohu.com/help/CentOS-Base-sohu.repo</a></p>
-</blockquote>
-</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#URL</div><div class="line">https://admin.fedoraproject.org/mirrormanager/</div><div class="line">#EPEL-REPO-RPM</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">axel https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</div></pre></td></tr></table></figure>
+<ol>
+<li>ALI源</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#URL</div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line">#ALI-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line">#ALI-EPLE-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line">#ALI-FEDORA-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
 <h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
-<li>有时候会出现错误，现象：<br>Loading “installonlyn” plugin<br>Existing lock /var/run/yum.pid: another copy is running. Aborting.</li>
+<li>错误现象lock<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading &quot;installonlyn&quot; plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line">#解释</div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
 </ul>
-<hr>
-<p>这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。<br>可以直接输入 rm -f /var/run/yum.pid<br>也可以/etc/init.d/yum-updatesd stop </p>
 
       
     </div>
@@ -449,8 +400,6 @@ yum updateyum -">
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/linux/" rel="tag">#linux</a>
           
             <a href="/tags/yum/" rel="tag">#yum</a>
           
@@ -543,7 +492,7 @@ yum updateyum -">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -553,7 +502,7 @@ yum updateyum -">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -98,7 +98,7 @@ hexo p == hexo publish    #将_drafts下的">
 
 hexo n “我的博客” == hexo new “我的博客”    #新建文章
 hexo p == hexo publish    #将_drafts下的">
-<meta property="og:updated_time" content="2015-08-26T03:28:26.000Z">
+<meta property="og:updated_time" content="2016-07-30T04:05:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo简明">
 <meta name="twitter:description" content="简介：出自台湾某大学生之手，说是叫tommy351，感觉是叼了个扎天。是一个基于Node.js的静态博客程序，其编译上百篇文字只需要几秒。hexo生成静态网页可以直接放到Github Pages，BAE，SAE等平台上。
@@ -232,9 +232,39 @@ hexo p == hexo publish    #将_drafts下的">
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'pucaxC2HNyypdTZJxgrS','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -367,6 +397,12 @@ hexo p == hexo publish    #将_drafts下的">
 <li>hexo new photo “My Gallery”</li>
 <li>hexo new “Hello World” –lang tw</li>
 </ul>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><ol>
+<li><strong>Question：</strong>如何设置首页的卡片摘要效果<br><code>Answer:</code>将_config.yml文件中的index：下的expand设置为false，然后在文中添加&lt;!–more–&gt;字段来截取摘要</li>
+<li><strong>Question:</strong>出现了很大的问题，描述：本人准备做一个看起来很厉害的简历，but我按教程做的结果是hexo反复报错报错如下<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">FATAL Something<span class="string">'s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span></div><div class="line">Error: expected end of comment, got end of file</div><div class="line">    at Tokenizer.nextToken (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/lexer.js:282:23)</div><div class="line">    at Object.extend.nextToken (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/parser.js:32:27)</div><div class="line">    at Object.extend.peekToken (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/parser.js:44:43)</div><div class="line">    at Object.extend.parseNodes (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/parser.js:1124:38)</div><div class="line">    at Object.extend.parseAsRoot (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/parser.js:1177:42)</div><div class="line">    at Object.module.exports.parse (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/parser.js:1199:18)</div><div class="line">    at Object.module.exports.compile (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/compiler.js:1118:48)</div><div class="line">    at Obj.extend._compile (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/environment.js:444:35)</div><div class="line">    at Obj.extend.compile (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/environment.js:433:18)</div><div class="line">    at null.&lt;anonymous&gt; (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/environment.js:378:22)</div><div class="line">    at Object.exports.withPrettyErrors (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/lib.js:24:16)</div><div class="line">    at Obj.extend.render (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/environment.js:374:20)</div><div class="line">    at Obj.extend.renderString (/home/fenghao/blog/node_modules/hexo/node_modules/nunjucks/src/environment.js:261:21)</div><div class="line">    at /home/fenghao/blog/node_modules/hexo/lib/extend/tag.js:56:9</div><div class="line">    at tryCatcher (/home/fenghao/blog/node_modules/hexo/node_modules/bluebird/js/main/util.js:24:31)</div><div class="line">    at Promise._resolveFromResolver (/home/fenghao/blog/node_modules/hexo/node_modules/bluebird/js/main/promise.js:427:31)</div><div class="line">    at new Promise (/home/fenghao/blog/node_modules/hexo/node_modules/bluebird/js/main/promise.js:53:37)</div><div class="line">    at Tag.render (/home/fenghao/blog/node_modules/hexo/lib/extend/tag.js:55:10)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>诸如此类报错，还原之前备份后再倒入md文件，问题依旧，也怪自己没想法，本该料到是markdown文件出错了的，ba~la~ba~la,最后还是google拯救了我，不得不吐槽一下某度，真不是东西，屁都查不出来、、、<br><code>解决方法</code>只要将一个markdown文件中的内容去掉以后就好了，好像是#的问题，真是邪了门了，我都打不出来，只能嵌在代码里了。他们讲版本2.8.3没有这个问题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">“Error $&#123;<span class="comment">#v0&#125; $&#123;#v1&#125;”</span></div></pre></td></tr></table></figure></p>
 <p>###摘抄地址</p>
 <ul>
 <li>地址一：<a href="https://segmentfault.com/a/1190000002632530" title="hexo命令详解" target="_blank" rel="external">Hexo命令详解</a></li>
@@ -501,7 +537,7 @@ hexo p == hexo publish    #将_drafts下的">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -511,7 +547,7 @@ hexo p == hexo publish    #将_drafts下的">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -560,7 +596,7 @@ hexo p == hexo publish    #将_drafts下的">
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题记录"><span class="nav-number">1.</span> <span class="nav-text">问题记录</span></a></li></ol></div>
             
           </div>
         </section>
