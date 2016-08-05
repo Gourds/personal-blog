@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mysql,keepalive," />
+  <meta name="keywords" content="python,zabbix," />
 
 
 
@@ -84,16 +84,23 @@
 
 
 
-<meta name="description" content="放一放参考文档">
+<meta name="description" content="Intorduction: 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql + keepalive实现高可用">
-<meta property="og:url" content="http://yoursite.com/2015/09/07/mysql-keepalive实现高可用/index.html">
+<meta property="og:title" content="Zabbix添加自定义监控项">
+<meta property="og:url" content="http://yoursite.com/2016/08/05/Zabbix添加自定义监控项/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="放一放参考文档">
-<meta property="og:updated_time" content="2016-07-29T15:18:22.000Z">
+<meta property="og:description" content="Intorduction: 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正">
+<meta property="og:image" content="http://i2.piimg.com/517630/0c01bdd6219c3701.png">
+<meta property="og:image" content="http://i2.piimg.com/517630/bcb1bc968c4cfc0e.png">
+<meta property="og:image" content="http://i2.piimg.com/517630/dd84b9121935c8c7.png">
+<meta property="og:image" content="http://i4.piimg.com/517630/a37a0d40e1291ed0.png">
+<meta property="og:image" content="http://i4.piimg.com/517630/44c96bd2fd4c7918.png">
+<meta property="og:image" content="http://i1.piimg.com/517630/7f896d9b22bb7af5.png">
+<meta property="og:updated_time" content="2016-08-05T08:19:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql + keepalive实现高可用">
-<meta name="twitter:description" content="放一放参考文档">
+<meta name="twitter:title" content="Zabbix添加自定义监控项">
+<meta name="twitter:description" content="Intorduction: 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正">
+<meta name="twitter:image" content="http://i2.piimg.com/517630/0c01bdd6219c3701.png">
 
 
 
@@ -114,9 +121,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/09/07/mysql-keepalive实现高可用/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/05/Zabbix添加自定义监控项/"/>
 
-  <title> mysql + keepalive实现高可用 | Arvon's Blog </title>
+  <title> Zabbix添加自定义监控项 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +263,7 @@
             
             
               
-                mysql + keepalive实现高可用
+                Zabbix添加自定义监控项
               
             
           </h1>
@@ -268,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-07T15:38:14+08:00" content="2015-09-07">
-              2015-09-07
+            <time itemprop="dateCreated" datetime="2016-08-05T15:14:59+08:00" content="2016-08-05">
+              2016-08-05
             </time>
           </span>
 
@@ -279,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/07/mysql-keepalive实现高可用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/07/mysql-keepalive实现高可用/" itemprop="commentsCount"></span>
+                <a href="/2016/08/05/Zabbix添加自定义监控项/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/05/Zabbix添加自定义监控项/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -290,7 +297,7 @@
 
           
           
-             <span id="/2015/09/07/mysql-keepalive实现高可用/" class="leancloud_visitors" data-flag-title="mysql + keepalive实现高可用">
+             <span id="/2016/08/05/Zabbix添加自定义监控项/" class="leancloud_visitors" data-flag-title="Zabbix添加自定义监控项">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -312,7 +319,28 @@
       
 
       
-        <p>放一放<br><a href="http://user.qzone.qq.com/546259111/blog/1441532749" target="_blank" rel="external">参考文档</a></p>
+        <p><em>Intorduction:</em> 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正<br><a id="more"></a></p>
+<h3 id="部署思路"><a href="#部署思路" class="headerlink" title="部署思路"></a>部署思路</h3><ul>
+<li>zabbix的server端我是直接写脚本安装的。先前blog有记录过。</li>
+<li>zabbix的client端和监控脚本采用ansible直接推送和安装。（ansible的配置随后再记录）  <h3 id="配置调试"><a href="#配置调试" class="headerlink" title="配置调试"></a>配置调试</h3><h4 id="自定义脚本"><a href="#自定义脚本" class="headerlink" title="自定义脚本"></a>自定义脚本</h4></li>
+<li><p>脚本如下</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#########################################################################</span></div><div class="line"><span class="comment">#Author: arvon</span></div><div class="line"><span class="comment">#Email: guoyf@easemob.com</span></div><div class="line"><span class="comment">#Blog: arvon.top</span></div><div class="line"><span class="comment">#Date: 16/07/06</span></div><div class="line"><span class="comment">#Version: 1.0</span></div><div class="line"><span class="comment">#Todo: collect the monit summary process status send to zabbix server</span></div><div class="line"><span class="comment">##########################################################################</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> commands</div><div class="line">my_parameter = sys.argv[<span class="number">1</span>]</div><div class="line">total_msg = commands.getoutput(<span class="string">'monit summary'</span>)</div><div class="line">msg_list = total_msg.split(<span class="string">'\n'</span>)</div><div class="line">a = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> each_line <span class="keyword">in</span> msg_list:</div><div class="line">    <span class="keyword">if</span> my_parameter <span class="keyword">in</span> each_line <span class="keyword">and</span> <span class="string">'Process'</span> <span class="keyword">in</span> each_line:</div><div class="line">        <span class="keyword">if</span> <span class="string">'Running'</span> <span class="keyword">in</span> each_line:</div><div class="line">            a = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            a = <span class="number">0</span></div><div class="line"><span class="keyword">print</span> a</div></pre></td></tr></table></figure>
+</li>
+<li><p>开启client端自定义脚本选项<br><img src="http://i2.piimg.com/517630/0c01bdd6219c3701.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Include=/etc/zabbix/zabbix_agentd.d/  #在这个路径下可以放自己的配置文件</div><div class="line">UnsafeUserParameters=1 #就是这个参数1为打开，没有脚本的话打开这个会报错的</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件说明<br><img src="http://i2.piimg.com/517630/bcb1bc968c4cfc0e.png" alt=""><br>这里截图就是我自定义在/etc/zabbix/zabbix_agentd.d/下的配置文件<br>里面主要有两个关键因素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UserParameter=process.msg.web #这个就是定义key名称的地方，但最好定义的规整一点，还有就是别和zabbix自带的key重复</div><div class="line">sudo python /etc/zabbix/scripts/get_monit_status.py &quot;&apos;nginx&apos;&quot;  #这个是Value，可以是脚本也可以是个命令什么，这里返回的值就是zabbixServer得到的值</div></pre></td></tr></table></figure>
+</li>
+<li><p>zabbix-get测试说明<br><img src="http://i2.piimg.com/517630/dd84b9121935c8c7.png" alt=""><br>zabbix-get是zabbix的排错工具，在server上安装执行最好，-s是指定主机，-k是指定要获取哪个key对应的值，这里返回的是1，是我想用1和0在web上方便使用布尔值对服务状态做判断</p>
+<h4 id="网页配置（点点点才是重点）"><a href="#网页配置（点点点才是重点）" class="headerlink" title="网页配置（点点点才是重点）"></a>网页配置（点点点才是重点）</h4></li>
+</ul>
+<ol>
+<li>创建模板<br><img src="http://i4.piimg.com/517630/a37a0d40e1291ed0.png" alt=""><br>这一步不是必须的，可以直接给主机配置监控项和触发器，不过这样对大量服务器时会有优势</li>
+<li>给模板创建监控项<br><img src="http://i4.piimg.com/517630/44c96bd2fd4c7918.png" alt=""><br>注意我这里是直接给创建的模板添加了监控项，所以链接这个模板的主机都会有这个监控项</li>
+<li>配置触发器<br><img src="http://i1.piimg.com/517630/7f896d9b22bb7af5.png" alt=""><br>说下那个添加触发值，点击添加，后面找到对应监控项或者对应主机，然后选择表达式，可以像我一样一次就报警也可以若干次失败再报警，这个自行调节</li>
+<li>接下来就剩报警媒介了，这个分开单独再说吧.</li>
+</ol>
 
       
     </div>
@@ -351,9 +379,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mysql/" rel="tag">#mysql</a>
+            <a href="/tags/python/" rel="tag">#python</a>
           
-            <a href="/tags/keepalive/" rel="tag">#keepalive</a>
+            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
           
         </div>
       
@@ -362,17 +390,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/24/使用fio工具测试linux的磁盘性能/" rel="next" title="使用fio工具测试linux的磁盘性能">
-                <i class="fa fa-chevron-left"></i> 使用fio工具测试linux的磁盘性能
+              <a href="/2016/08/05/Ansible根据excel自动生成inventory文件/" rel="next" title="Ansible根据excel自动生成inventory文件">
+                <i class="fa fa-chevron-left"></i> Ansible根据excel自动生成inventory文件
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/09/CentOS环境搭建zabbix监控/" rel="prev" title="CentOS环境搭建zabbix2.2监控">
-                CentOS环境搭建zabbix2.2监控 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -398,8 +422,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/09/07/mysql-keepalive实现高可用/"
-           data-title="mysql + keepalive实现高可用" data-url="http://yoursite.com/2015/09/07/mysql-keepalive实现高可用/">
+      <div class="ds-thread" data-thread-key="2016/08/05/Zabbix添加自定义监控项/"
+           data-title="Zabbix添加自定义监控项" data-url="http://yoursite.com/2016/08/05/Zabbix添加自定义监控项/">
       </div>
     
   </div>
@@ -503,7 +527,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#部署思路"><span class="nav-number">1.</span> <span class="nav-text">部署思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置调试"><span class="nav-number">2.</span> <span class="nav-text">配置调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义脚本"><span class="nav-number">2.1.</span> <span class="nav-text">自定义脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网页配置（点点点才是重点）"><span class="nav-number">2.2.</span> <span class="nav-text">网页配置（点点点才是重点）</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
