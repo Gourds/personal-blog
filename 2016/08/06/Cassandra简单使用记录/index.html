@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="zabbix,mysql," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,27 +84,16 @@
 
 
 
-<meta name="description" content="上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境
-实现环境
-已经完成了zabbix基本环境部署">
+<meta name="description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix使用Percona组件监控Mysql">
-<meta property="og:url" content="http://yoursite.com/2015/09/14/Zabbix使用Percona组件监控Mysql/index.html">
+<meta property="og:title" content="Cassandra简单使用记录">
+<meta property="og:url" content="http://yoursite.com/2016/08/06/Cassandra简单使用记录/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境
-实现环境
-已经完成了zabbix基本环境部署">
-<meta property="og:image" content="http://i3.tietuku.com/404d96621846ce53.png">
-<meta property="og:image" content="http://i3.tietuku.com/8c345d59e2a24c37.png">
-<meta property="og:image" content="http://i3.tietuku.com/e65c053544662725.png">
-<meta property="og:image" content="http://i3.tietuku.com/70ee7b048eb32974.png">
-<meta property="og:updated_time" content="2016-07-29T15:11:48.000Z">
+<meta property="og:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
+<meta property="og:updated_time" content="2016-08-06T03:54:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix使用Percona组件监控Mysql">
-<meta name="twitter:description" content="上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境
-实现环境
-已经完成了zabbix基本环境部署">
-<meta name="twitter:image" content="http://i3.tietuku.com/404d96621846ce53.png">
+<meta name="twitter:title" content="Cassandra简单使用记录">
+<meta name="twitter:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
 
 
 
@@ -125,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/09/14/Zabbix使用Percona组件监控Mysql/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/06/Cassandra简单使用记录/"/>
 
-  <title> Zabbix使用Percona组件监控Mysql | Arvon's Blog </title>
+  <title> Cassandra简单使用记录 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +256,7 @@
             
             
               
-                Zabbix使用Percona组件监控Mysql
+                Cassandra简单使用记录
               
             
           </h1>
@@ -279,8 +268,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-14T17:40:45+08:00" content="2015-09-14">
-              2015-09-14
+            <time itemprop="dateCreated" datetime="2016-08-06T00:14:09+08:00" content="2016-08-06">
+              2016-08-06
             </time>
           </span>
 
@@ -290,8 +279,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/14/Zabbix使用Percona组件监控Mysql/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/Zabbix使用Percona组件监控Mysql/" itemprop="commentsCount"></span>
+                <a href="/2016/08/06/Cassandra简单使用记录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/Cassandra简单使用记录/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -301,7 +290,7 @@
 
           
           
-             <span id="/2015/09/14/Zabbix使用Percona组件监控Mysql/" class="leancloud_visitors" data-flag-title="Zabbix使用Percona组件监控Mysql">
+             <span id="/2016/08/06/Cassandra简单使用记录/" class="leancloud_visitors" data-flag-title="Cassandra简单使用记录">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -323,22 +312,34 @@
       
 
       
-        <p>上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。<br>Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境</p>
-<h2 id="实现环境"><a href="#实现环境" class="headerlink" title="实现环境"></a>实现环境</h2><ul>
-<li>已经完成了zabbix基本环境部署</li>
-<li>安装php环境</li>
-<li>使用epel源，下载所需组件</li>
+        <p><strong>简述：</strong>在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。<br><a id="more"></a></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Apache Cassandra最初由Facebook创建，集Google BigTable的数据模型与Amazon Dynamo的完全分布式的架构于一身,是一个大规模可伸缩的开源NoSQL数据库。Cassandra完美地支持管理大量的结构化，半结构化和非结构化数据，且能够跨多个数据中心和云。Cassandra提供了持续可用性，线性扩展，操作简单，跨多个服务器而没有单点故障。且提供了一个有力的动态数据模型，支持最大的灵活性和快速响应。  </p>
+<h3 id="cql交互命令（类似sql）"><a href="#cql交互命令（类似sql）" class="headerlink" title="cql交互命令（类似sql）"></a>cql交互命令（类似sql）</h3><ol>
+<li><p>运行cqlsh<br>直接键入cqlsh命令即可，登陆后可使用help查看帮助</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/data/apps/opt/cassandra/bin/cqlsh ssy-db1</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建keyspace（秘钥空间）</p>
+<ul>
+<li><p>主要包括复制策略和durable_writes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; CREATE KEYSPACE &quot;Test&quot;</div><div class="line">cqlsh&gt; WITH replication = &#123;&apos;class&apos;:&apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 3&#125;;</div><div class="line">#创建名为Test的keyspace(默认创建时不区分大小写的，加上双引号就区分大小写了),采用simple存储策略，factor为存储策略的选项</div></pre></td></tr></table></figure>
+</li>
+<li><p>复制策略介绍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">org.apache.cassandra.locator.SimpleStrategy</div><div class="line">#SimpleStrategy针对是一个data center中的多个存储节点(node)的存储，strategy_options表示数据存储所有存储节点(node)的复本数量，选择node的规则是在data center中按照顺时针的方向进行选择；</div><div class="line">org.apache.cassandra.locator.NetworkTopologyStrategy</div><div class="line">#NetworkTopologyStrategy是针对多个data center的情况进行处理，这个是以防同一个data center中的所以节点同时出现问题，如掉电；</div><div class="line">org.apache.cassandra.locator.OldNetworkTopologyStrategy</div><div class="line">#OldNetworkT opologyStrategy，这个可能会很少用上了，对data center的个数及复本的数量支持的有限，有了NetworkTopologyStrategy就不需要OldNetworkTopologyStrategy了。</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="安装-amp-配置步骤"><a href="#安装-amp-配置步骤" class="headerlink" title="安装&amp;配置步骤"></a>安装&amp;配置步骤</h3><h4 id="下载Percona-Monitoring-Plugins"><a href="#下载Percona-Monitoring-Plugins" class="headerlink" title="下载Percona Monitoring Plugins"></a>下载Percona Monitoring Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#下载文件</div><div class="line">wget https://www.percona.com/downloads/percona-monitoring-plugins/1.1.1/percona-zabbix-templates-1.1.1-1.noarch.rpm</div><div class="line">#提取下载的rpm文件</div><div class="line">[root@localhost ~]# rpm2cpio percona-zabbix-templates-1.1.1-1.noarch.rpm |cpio -div</div><div class="line"></div><div class="line">```  </div><div class="line">**说明：**</div><div class="line">&gt;目录文件说明</div><div class="line">\#脚本文件路径</div><div class="line">var/lib/zabbix/percona/scripts/</div><div class="line">\#key文件位置</div><div class="line">var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf</div><div class="line">\#模板文件位置</div><div class="line">var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.1.xml</div><div class="line"></div><div class="line">#### 安装percona monitoring plugins</div></pre></td></tr></table></figure>
-<p>[root@localhost ~]# rpm -ivh percona-zabbix-templates-1.1.1-1.noarch.rpm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 安装php环境</div><div class="line">若以安装，可跳过，需求包如下图</div><div class="line">![](http://i3.tietuku.com/a647c48fd7daa899.png)</div></pre></td></tr></table></figure></p>
-<p>[root@localhost ~]# yum install php php-mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 复制文件</div><div class="line">将key的子配置文件复制到/etc/zabbix/zabbix_agentd.d/</div><div class="line">``插曲``由于版本不同，所以实际文件位置也不同，这个位置可以在agent的包里看到</div><div class="line">&gt;rpm -ql zabbix22-agent-2.2.1-5.el6.x86_64</div><div class="line">/usr/share/doc/zabbix22-agent-2.2.1/userparameter_mysql.conf</div></pre></td></tr></table></figure></p>
-<p>[root@localhost zabbix]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agentd.d/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 重启zabbix-agent服务</div></pre></td></tr></table></figure></p>
-<p>/etc/init.d/zabbix-agent restart<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 修改脚本</div><div class="line">修改脚本中的用户名和密码,用户名和密码为本机数据库的账户和密码，并不需要特别的权限</div></pre></td></tr></table></figure></p>
-<p>[root@localhost ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">修改字段如图</div><div class="line">![](http://i3.tietuku.com/2698b8e90e522cd6.png)</div><div class="line"></div><div class="line">##### 没有用户</div><div class="line">添加数据库的用户</div></pre></td></tr></table></figure></p>
-<p>mysql&gt; grant process,super,select on <em>.</em> to zabbix@localhost identified by ‘zabbix’;<br>mysql&gt; flush privileges;<br>```</p>
-<h4 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h4><p>运行脚本，只要不报error就是没问题<br><code>[root@centos-01 percona]# /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg</code></p>
-<h4 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h4><p>先找到xml文件，上面的额位置就有，/var/lib/zabbix/percona/templates/，然后传到win下，然后再执行导入模板，看大图<br><img src="http://i3.tietuku.com/404d96621846ce53.png" alt=""><br><img src="http://i3.tietuku.com/8c345d59e2a24c37.png" alt=""><br>将导入的模板应用到主机<br><img src="http://i3.tietuku.com/e65c053544662725.png" alt=""></p>
-<h3 id="错误集锦"><a href="#错误集锦" class="headerlink" title="错误集锦"></a>错误集锦</h3><h4 id="One-连不上数据库"><a href="#One-连不上数据库" class="headerlink" title="One 连不上数据库"></a>One 连不上数据库</h4><p>描述：如图<br><img src="http://i3.tietuku.com/70ee7b048eb32974.png" alt=""></p>
+</li>
+<li><p>删除keyspace</p>
+<pre><code class="shell">cqlsh&gt; drop keyspace &quot;Test&quot;
+</code></pre>
+</li>
+<li>修改keyspace参数信息<pre><code class="shell">cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = { &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 }; 
+#修改factor为1
+</code></pre>
+</li>
+<li>查看keyspace<pre><code class="shell">cqlsh&gt; SELECT * from system.schema_keyspaces;
+</code></pre>
+</li>
+</ol>
 
       
     </div>
@@ -375,30 +376,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/zabbix/" rel="tag">#zabbix</a>
-          
-            <a href="/tags/mysql/" rel="tag">#mysql</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/14/虚拟机错误/" rel="next" title="虚拟机错误">
-                <i class="fa fa-chevron-left"></i> 虚拟机错误
+              <a href="/2016/08/05/Zabbix添加自定义监控项/" rel="next" title="Zabbix添加自定义监控项">
+                <i class="fa fa-chevron-left"></i> Zabbix添加自定义监控项
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/16/crontab简记/" rel="prev" title="crontab简记">
-                crontab简记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,8 +413,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/09/14/Zabbix使用Percona组件监控Mysql/"
-           data-title="Zabbix使用Percona组件监控Mysql" data-url="http://yoursite.com/2015/09/14/Zabbix使用Percona组件监控Mysql/">
+      <div class="ds-thread" data-thread-key="2016/08/06/Cassandra简单使用记录/"
+           data-title="Cassandra简单使用记录" data-url="http://yoursite.com/2016/08/06/Cassandra简单使用记录/">
       </div>
     
   </div>
@@ -529,7 +518,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现环境"><span class="nav-number">1.</span> <span class="nav-text">实现环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-amp-配置步骤"><span class="nav-number">1.1.</span> <span class="nav-text">安装&配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载Percona-Monitoring-Plugins"><span class="nav-number">1.1.1.</span> <span class="nav-text">下载Percona Monitoring Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本调试"><span class="nav-number">1.1.2.</span> <span class="nav-text">脚本调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入模板"><span class="nav-number">1.1.3.</span> <span class="nav-text">导入模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误集锦"><span class="nav-number">1.2.</span> <span class="nav-text">错误集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#One-连不上数据库"><span class="nav-number">1.2.1.</span> <span class="nav-text">One 连不上数据库</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cql交互命令（类似sql）"><span class="nav-number">2.</span> <span class="nav-text">cql交互命令（类似sql）</span></a></li></ol></div>
             
           </div>
         </section>
