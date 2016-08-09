@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/08/06/Cassandra简单使用记录/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
-<meta property="og:updated_time" content="2016-08-08T09:29:30.000Z">
+<meta property="og:updated_time" content="2016-08-09T06:43:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cassandra简单使用记录">
 <meta name="twitter:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
@@ -359,15 +359,12 @@
 </ul>
 </li>
 <li><p>删除keyspace</p>
-<pre><code class="shell">cqlsh&gt; drop keyspace &quot;Test&quot;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> cqlsh&gt; drop keyspace &quot;Test&quot;</div><div class="line"> ```  </div><div class="line">4. 修改keyspace参数信息</div><div class="line"> ```shell</div><div class="line"> cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = &#123; &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 &#125;; </div><div class="line"> #修改factor为1</div><div class="line"> ```  </div><div class="line">5. 查看</div><div class="line"> 查看keyspace</div><div class="line"> ```shell</div><div class="line"> cqlsh&gt; SELECT * from system.schema_keyspaces;</div><div class="line"> cqlsh&gt; describe keyspaces;</div><div class="line"> ```  </div><div class="line"> 查看已有表</div><div class="line"> ```shell</div><div class="line"> sqlsh&gt; describe tables;</div></pre></td></tr></table></figure>
+<p>查看表结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; use &quot;keyspace_name&quot;</div><div class="line">sqlsh&gt; describe table &quot;table_name&quot;;</div></pre></td></tr></table></figure>
 </li>
-<li>修改keyspace参数信息<pre><code class="shell">cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = { &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 }; 
-#修改factor为1
-</code></pre>
-</li>
-<li>查看keyspace<pre><code class="shell">cqlsh&gt; SELECT * from system.schema_keyspaces;
-</code></pre>
+<li><p>进入keyspace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; use &quot;keyspace_name&quot;;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 
