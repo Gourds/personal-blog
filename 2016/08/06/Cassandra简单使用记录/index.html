@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/08/06/Cassandra简单使用记录/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
-<meta property="og:updated_time" content="2016-08-09T06:43:26.000Z">
+<meta property="og:updated_time" content="2016-08-09T08:21:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cassandra简单使用记录">
 <meta name="twitter:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
@@ -345,8 +345,11 @@
         <p><strong>简述：</strong>在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。<br><a id="more"></a></p>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Apache Cassandra最初由Facebook创建，集Google BigTable的数据模型与Amazon Dynamo的完全分布式的架构于一身,是一个大规模可伸缩的开源NoSQL数据库。Cassandra完美地支持管理大量的结构化，半结构化和非结构化数据，且能够跨多个数据中心和云。Cassandra提供了持续可用性，线性扩展，操作简单，跨多个服务器而没有单点故障。且提供了一个有力的动态数据模型，支持最大的灵活性和快速响应。  </p>
 <h3 id="cql交互命令（类似sql）"><a href="#cql交互命令（类似sql）" class="headerlink" title="cql交互命令（类似sql）"></a>cql交互命令（类似sql）</h3><ol>
-<li><p>运行cqlsh<br>直接键入cqlsh命令即可，登陆后可使用help查看帮助</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/data/apps/opt/cassandra/bin/cqlsh ssy-db1</div></pre></td></tr></table></figure>
+<li><p>运行cqlsh</p>
+<ul>
+<li>直接键入cqlsh命令即可，登陆后可使用help查看帮助<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/data/apps/opt/cassandra/bin/cqlsh ssy-db1</div></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 <li><p>创建keyspace（秘钥空间）</p>
 <ul>
@@ -359,9 +362,23 @@
 </ul>
 </li>
 <li><p>删除keyspace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> cqlsh&gt; drop keyspace &quot;Test&quot;</div><div class="line"> ```  </div><div class="line">4. 修改keyspace参数信息</div><div class="line"> ```shell</div><div class="line"> cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = &#123; &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 &#125;; </div><div class="line"> #修改factor为1</div><div class="line"> ```  </div><div class="line">5. 查看</div><div class="line"> 查看keyspace</div><div class="line"> ```shell</div><div class="line"> cqlsh&gt; SELECT * from system.schema_keyspaces;</div><div class="line"> cqlsh&gt; describe keyspaces;</div><div class="line"> ```  </div><div class="line"> 查看已有表</div><div class="line"> ```shell</div><div class="line"> sqlsh&gt; describe tables;</div></pre></td></tr></table></figure>
-<p>查看表结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; drop keyspace &quot;Test&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改keyspace参数信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = &#123; &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 &#125;; </div><div class="line">#修改factor为1</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看</p>
+<ul>
+<li><p>查看keyspace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; SELECT * from system.schema_keyspaces;</div><div class="line">cqlsh&gt; describe keyspaces;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看已有表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; describe tables;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看表结构</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; use &quot;keyspace_name&quot;</div><div class="line">sqlsh&gt; describe table &quot;table_name&quot;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 <li><p>进入keyspace</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; use &quot;keyspace_name&quot;;</div></pre></td></tr></table></figure>
