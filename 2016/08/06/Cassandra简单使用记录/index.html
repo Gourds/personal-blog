@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/08/06/Cassandra简单使用记录/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
-<meta property="og:updated_time" content="2016-08-09T08:21:48.000Z">
+<meta property="og:updated_time" content="2016-08-09T10:03:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cassandra简单使用记录">
 <meta name="twitter:description" content="简述：在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。">
@@ -367,6 +367,9 @@
 <li><p>修改keyspace参数信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = &#123; &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 &#125;; </div><div class="line">#修改factor为1</div></pre></td></tr></table></figure>
 </li>
+<li><p>进入keyspace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; use &quot;keyspace_name&quot;;</div></pre></td></tr></table></figure>
+</li>
 <li><p>查看</p>
 <ul>
 <li><p>查看keyspace</p>
@@ -379,9 +382,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; use &quot;keyspace_name&quot;</div><div class="line">sqlsh&gt; describe table &quot;table_name&quot;;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>进入keyspace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; use &quot;keyspace_name&quot;;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 
