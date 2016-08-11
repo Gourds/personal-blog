@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,blog," />
+  <meta name="keywords" content="command," />
 
 
 
@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。
-更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
+<meta name="description" content="Tips:遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo和Github搭建Blog">
-<meta property="og:url" content="http://yoursite.com/2015/07/17/使用Hexo和Github搭建Blog/index.html">
+<meta property="og:title" content="sort小插曲">
+<meta property="og:url" content="http://yoursite.com/2016/08/11/sort小插曲/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。
-更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
-<meta property="og:updated_time" content="2016-07-30T10:14:45.000Z">
+<meta property="og:description" content="Tips:遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。">
+<meta property="og:updated_time" content="2016-08-11T11:10:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo和Github搭建Blog">
-<meta name="twitter:description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。
-更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
+<meta name="twitter:title" content="sort小插曲">
+<meta name="twitter:description" content="Tips:遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。">
 
 
 
@@ -117,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/07/17/使用Hexo和Github搭建Blog/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/11/sort小插曲/"/>
 
-  <title> 使用Hexo和Github搭建Blog | Arvon's Blog </title>
+  <title> sort小插曲 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +286,7 @@
             
             
               
-                使用Hexo和Github搭建Blog
+                sort小插曲
               
             
           </h1>
@@ -301,8 +298,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-17T12:10:00+08:00" content="2015-07-17">
-              2015-07-17
+            <time itemprop="dateCreated" datetime="2016-08-11T16:10:05+08:00" content="2016-08-11">
+              2016-08-11
             </time>
           </span>
 
@@ -312,8 +309,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/17/使用Hexo和Github搭建Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/17/使用Hexo和Github搭建Blog/" itemprop="commentsCount"></span>
+                <a href="/2016/08/11/sort小插曲/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/sort小插曲/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -323,7 +320,7 @@
 
           
           
-             <span id="/2015/07/17/使用Hexo和Github搭建Blog/" class="leancloud_visitors" data-flag-title="使用Hexo和Github搭建Blog">
+             <span id="/2016/08/11/sort小插曲/" class="leancloud_visitors" data-flag-title="sort小插曲">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -345,39 +342,32 @@
       
 
       
-        <p>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我<br>出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。<br>win上多有不便，还会在linux上进行搭建。</p>
-<h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p> 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
-<li>github账户设置<br>平台为win，需注册<a href="http://www.github.com" title="github account" target="_blank" rel="external">github account</a>登陆github后需要创建一个repository,然后就写个REpositoryname，<strong>注意要和Owner的name<br>一致</strong>（注意），然后勾选那个Initaalize this…什么的选项，然后就这样成了，不然就是像我一样不停的犯错，为何还有待考量，反<br>正现在听话就ok。</li>
-<li>软件设置<br>需要的软件有node.js和git，实际最好再来个Visual Studio Code，你会发现有语法高亮就是舒心</li>
-<li>待补充昂<br>为了可以清晰一点，决定把Markdown和这个Blog分开记录。恩，就是这样</li>
-</ol>
-<h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><h3 id="安装node-js软件"><a href="#安装node-js软件" class="headerlink" title="安装node.js软件"></a>安装node.js软件</h3><p>下载地址戳：<a href="http://www.nodejs.org/download/" title="node.js" target="_blank" rel="external">node.js</a>,然后就开始一路下一步吧，然后你的发现带cmd多了一条np</p>
-<h3 id="安装git软件"><a href="#安装git软件" class="headerlink" title="安装git软件"></a>安装git软件</h3><p>下载地址戳：<a href="http://git-scm.com/download/" title="git" target="_blank" rel="external">git</a>,依旧下一步到底。昨天做着的时候没记录，真是一大败笔</p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ol>
-<li><p>进入Git bash,输入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo	#hexo表示全局安装hexo</div><div class="line">#创建hexo文件夹，如/user/arvon/hexo-lxc</div><div class="line">hexo init	#初始化hexo</div><div class="line">npm install</div><div class="line">npm generate</div><div class="line">npm server</div></pre></td></tr></table></figure>
-</li>
-<li><p>然后可以通过访问localhost查看预览http：//localhost:4000/</p>
-</li>
-</ol>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><ol>
-<li>将在github上创建的Repository，找到https那个url将其复制</li>
-<li><p>然后编辑位于你创建的文件夹下的文件，例如我就是：/user/arvon/hexo-lxc/_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#deploy:</div><div class="line">type: git</div><div class="line">repository: https://github.com/arvon2014/arvon2014.github.com</div><div class="line">branch: master</div><div class="line">github上的地址：https://github.com/Arvon2014/arvon2014.github.com.git</div><div class="line">#web上访问的为：http://arvon2014.github.io</div></pre></td></tr></table></figure>
-</li>
-<li><p>设置ssh免密码访问</p>
-</li>
-</ol>
+        <p><strong>Tips:</strong>遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。<br><a id="more"></a></p>
+<h4 id="有意思的例子"><a href="#有意思的例子" class="headerlink" title="有意思的例子"></a>有意思的例子</h4><ul>
+<li><p>要求：将以下文本_按字母排序，_和-之间的按数字升序，-之后的按数字降序排列,不能破坏原本每行的数据，只对上下顺序排列.</p>
 <ul>
-<li>先查看本地是否已经存在ssh文件，如不存在直接跳过下面第二步</li>
-<li>删除已有的ssh的文件</li>
-<li><p>输入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot; Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line">ssh -T git@github.com	#测试</div><div class="line">The authenticity of host &apos;github.com (207.97.227.239)&apos; can&apos;t be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?	#说明成功</div><div class="line"> $ git config --global user.name &quot;你的名字&quot; $ git config --global user.email &quot;your_email@youremail.com&quot;	#设置你的信息</div></pre></td></tr></table></figure>
+<li>文本sort.txt如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def_99-55</div><div class="line">def_99-11</div><div class="line">def_123-100</div><div class="line">abc_456-100</div><div class="line">abc_123-100</div><div class="line">def_123-10</div><div class="line">abc_456-10</div><div class="line">abc_123-1</div><div class="line">xzy_789-0</div></pre></td></tr></table></figure>
 </li>
-<li><p>现在已经可以顺利将环境搭建完毕</p>
+</ul>
 </li>
-<li>进入你的Hexo目录，开始试验吧<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate = hexo g</div><div class="line">hexo server = hexo s	#部署本地预览</div><div class="line">hexo deploy = hexo d	#生成部署</div></pre></td></tr></table></figure>
+<li><p>解答</p>
+<ul>
+<li>脚本如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cat sort.txt |sed s/_/-/ |sort -t<span class="string">"-"</span> -k1,1 -k2,2n -k3,3nr |sed s/-/_/</div><div class="line"><span class="comment">#说明：先将分隔符替换为统一，然后以-为分割符对第一字段按基础排序，第二字段按数字排序，第三字段按数字降序排序</span></div><div class="line"><span class="comment">#-k1,1这种表达方式是只对本域进行排序是最准确的表达,类似还有-k1.2,1.2表示仅对第一列第二个字符排序，1,1这种表达表示的是一个完整域，如果直接写-k1那就表示从1到最后一个域，这样表述的是不准确的</span></div><div class="line"><span class="comment">#输出如下</span></div><div class="line">abc_123-100</div><div class="line">abc_123-1</div><div class="line">abc_456-100</div><div class="line">abc_456-10</div><div class="line">def_99-55</div><div class="line">def_99-11</div><div class="line">def_123-100</div><div class="line">def_123-10</div><div class="line">xzy_789-0</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="sort命令回顾"><a href="#sort命令回顾" class="headerlink" title="sort命令回顾"></a>sort命令回顾</h4><ul>
+<li><p>基础选项</p>
+<ul>
+<li>常规选项(参考:<a href="http://man.linuxde.net/sort" target="_blank" rel="external">http://man.linuxde.net/sort</a>)<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#usage: sort [选项] [参数]</span></div><div class="line">-b：忽略每行前面开始出的空格字符； </div><div class="line">-c：检查文件是否已经按照顺序排序； </div><div class="line"><span class="_">-d</span>：排序时，处理英文字母、数字及空格字符外，忽略其他的字符； </div><div class="line"><span class="_">-f</span>：排序时，将小写字母视为大写字母； </div><div class="line">-i：排序时，除了040至176之间的ASCII字符外，忽略其他的字符； </div><div class="line">-m：将几个排序号的文件进行合并； </div><div class="line">-M：将前面3个字母依照月份的缩写进行排序； </div><div class="line">-n：依照数值的大小排序； </div><div class="line">-o&lt;输出文件&gt;：将排序后的结果存入制定的文件； </div><div class="line">-r：以相反的顺序来排序； </div><div class="line">-t&lt;分隔字符&gt;：指定排序时所用的栏位分隔字符； </div><div class="line">+&lt;起始栏位&gt;-&lt;结束栏位&gt;：以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>关于古老的+-选定域的说明<br>sort官方有如下说明(摘自<a href="http://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html" target="_blank" rel="external">孙愚的博客</a>)</p>
+<blockquote>
+<p>On older systems, <code>sort’ supports an obsolete origin-zero syntax</code>+POS1 [-POS2]‘ for specifying sort keys.  POSIX 1003.1-2001 (*note Standards conformance::) does not allow this; use `-k’ instead.<br>原来，这种古老的表示方式已经被淘汰了，以后可以理直气壮的鄙视使用这种表示方法的脚本喽！<br>（为了防止古老脚本的存在，在这再说一下这种表示方法，加号表示Start部分，减号表示End部分。最最重要的一点是，这种方式方法是从0开始计数的，以前所说的第一个域，在此被表示为第0个域。以前的第2个字符，在此表示为第1个字符</p>
+</blockquote>
 </li>
 </ul>
 
@@ -418,9 +408,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
-          
-            <a href="/tags/blog/" rel="tag">#blog</a>
+            <a href="/tags/command/" rel="tag">#command</a>
           
         </div>
       
@@ -429,17 +417,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/17/皮卡邱/" rel="next" title="Pikachu">
-                <i class="fa fa-chevron-left"></i> Pikachu
+              <a href="/2016/08/08/ssh无交互批量认证/" rel="next" title="ssh无交互批量认证">
+                <i class="fa fa-chevron-left"></i> ssh无交互批量认证
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/07/20/Hexo简明/" rel="prev" title="Hexo简明">
-                Hexo简明 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,8 +449,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/07/17/使用Hexo和Github搭建Blog/"
-           data-title="使用Hexo和Github搭建Blog" data-url="http://yoursite.com/2015/07/17/使用Hexo和Github搭建Blog/">
+      <div class="ds-thread" data-thread-key="2016/08/11/sort小插曲/"
+           data-title="sort小插曲" data-url="http://yoursite.com/2016/08/11/sort小插曲/">
       </div>
     
   </div>
@@ -570,7 +554,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#更新记录"><span class="nav-number">1.</span> <span class="nav-text">更新记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始搭建"><span class="nav-number">3.</span> <span class="nav-text">开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装node-js软件"><span class="nav-number">3.0.1.</span> <span class="nav-text">安装node.js软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git软件"><span class="nav-number">3.0.2.</span> <span class="nav-text">安装git软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">3.0.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">3.0.4.</span> <span class="nav-text">部署</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#有意思的例子"><span class="nav-number">1.</span> <span class="nav-text">有意思的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort命令回顾"><span class="nav-number">2.</span> <span class="nav-text">sort命令回顾</span></a></li></ol></div>
             
           </div>
         </section>
