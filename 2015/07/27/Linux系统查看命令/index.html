@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux,command," />
+  <meta name="keywords" content="command,linux," />
 
 
 
@@ -91,7 +91,7 @@
 命令演示
 1234567891011121314151617181920212223242526272829303132333435363">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux系统查看命令">
+<meta property="og:title" content="Linux查看系统信息命令">
 <meta property="og:url" content="http://yoursite.com/2015/07/27/Linux系统查看命令/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="Command Include：disk、memory、hostname、find
@@ -100,9 +100,9 @@
 
 命令演示
 1234567891011121314151617181920212223242526272829303132333435363">
-<meta property="og:updated_time" content="2016-07-30T09:47:16.000Z">
+<meta property="og:updated_time" content="2016-08-13T03:06:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux系统查看命令">
+<meta name="twitter:title" content="Linux查看系统信息命令">
 <meta name="twitter:description" content="Command Include：disk、memory、hostname、find
 查看磁盘空间
 常用命令df -hl 查看磁盘剩余空间df -h 查看每个根路径的分区大小du -sh [目录名] 返回该目录的大小du -sm [文件夹] 返回该文件夹总M数
@@ -131,7 +131,7 @@
 
   <link rel="canonical" href="http://yoursite.com/2015/07/27/Linux系统查看命令/"/>
 
-  <title> Linux系统查看命令 | Arvon's Blog </title>
+  <title> Linux查看系统信息命令 | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -301,7 +301,7 @@
             
             
               
-                Linux系统查看命令
+                Linux查看系统信息命令
               
             
           </h1>
@@ -335,7 +335,7 @@
 
           
           
-             <span id="/2015/07/27/Linux系统查看命令/" class="leancloud_visitors" data-flag-title="Linux系统查看命令">
+             <span id="/2015/07/27/Linux系统查看命令/" class="leancloud_visitors" data-flag-title="Linux查看系统信息命令">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -362,11 +362,10 @@
 <li><p>常用命令<br>df -hl 查看磁盘剩余空间<br>df -h 查看每个根路径的分区大小<br>du -sh [目录名] 返回该目录的大小<br>du -sm [文件夹] 返回该文件夹总M数</p>
 </li>
 <li><p>命令演示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# cat /proc/cpuinfo	#查看cpu的核心数</div><div class="line"></div><div class="line">[root@cloud ~]# df -h	#磁盘使用情况</div><div class="line">[root@cloud ~]# df -hl</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda1       9.1G  2.2G  6.4G  26% /</div><div class="line">tmpfs           487M     0  487M   0% /dev/shm</div><div class="line">/dev/sdb1       4.5G  1.9M  4.3G   1% /data</div><div class="line"></div><div class="line">[root@cloud ~]# du --max-depth=1 -h	#查看当前文件夹下的磁盘使用情况</div><div class="line">25M	./.nvm</div><div class="line">8.0K	./.pki</div><div class="line">4.0K	./Blog</div><div class="line">25M		.</div><div class="line"></div><div class="line">[root@cloud ~]# du -sh	#显示当前目录的大小</div><div class="line">25M	.</div><div class="line"></div><div class="line">[root@cloud ~]# du -sh /opt/	#显示指定路径的大小</div><div class="line">4.0K	/opt/	</div><div class="line"></div><div class="line">[root@cloud ~]# du -h test.txt	#显示指定文件的大小 </div><div class="line">0	test.txt</div><div class="line">```	</div><div class="line"></div><div class="line">###查看内存</div><div class="line">* 常用命令</div><div class="line">cat /proc/meminfo	#查看内存使用信息</div><div class="line"></div><div class="line"></div><div class="line">* 命令实例</div><div class="line">空闲内存 =free+buffers+cached =total-used</div><div class="line">```shell</div><div class="line">[root@cloud ~]# free -m	#查看内存使用状况</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:           972        667        304          0         41        497</div><div class="line">-/+ buffers/cache:        128        843</div><div class="line">Swap:          999          0        999</div><div class="line">说明：	 shared：多个进程共享的内存总额</div><div class="line">		Buffers/cached		</div><div class="line"></div><div class="line">[root@cloud ~]# cat /proc/meminfo </div><div class="line">MemTotal:         995648 kB</div><div class="line">MemFree:          312228 kB</div><div class="line">Buffers:           42836 kB</div><div class="line">Cached:           509164 kB</div><div class="line">SwapCached:          352 kB</div><div class="line">Active:           413060 kB</div><div class="line">Inactive:         145136 kB		</div><div class="line"></div><div class="line">[root@cloud ~]# ll -h /proc/kcore	#查看/proc/kcore文件的大小（内存镜像）</div><div class="line">-r-------- 1 root root 4.0K Jul 27 16:31 /proc/kcore</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# cat /proc/cpuinfo	#查看cpu的核心数</div><div class="line">[root@cloud ~]# df -h	#磁盘使用情况</div><div class="line">[root@cloud ~]# df -hl</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda1       9.1G  2.2G  6.4G  26% /</div><div class="line">tmpfs           487M     0  487M   0% /dev/shm</div><div class="line">/dev/sdb1       4.5G  1.9M  4.3G   1% /data</div><div class="line">[root@cloud ~]# du --max-depth=1 -h	#查看当前文件夹下的磁盘使用情况</div><div class="line">25M	./.nvm</div><div class="line">8.0K	./.pki</div><div class="line">4.0K	./Blog</div><div class="line">25M		.</div><div class="line">[root@cloud ~]# du -sh	#显示当前目录的大小</div><div class="line">25M	.</div><div class="line">[root@cloud ~]# du -sh /opt/	#显示指定路径的大小</div><div class="line">4.0K	/opt/	</div><div class="line">[root@cloud ~]# du -h test.txt	#显示指定文件的大小 </div><div class="line">0	test.txt</div><div class="line">```	</div><div class="line"></div><div class="line">### 查看内存</div><div class="line">* 常用命令</div><div class="line">cat /proc/meminfo	#查看内存使用信息</div><div class="line">* 命令实例</div><div class="line">空闲内存 =free+buffers+cached =total-used</div><div class="line">```shell</div><div class="line">[root@cloud ~]# free -m	#查看内存使用状况</div><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:           972        667        304          0         41        497</div><div class="line">-/+ buffers/cache:        128        843</div><div class="line">Swap:          999          0        999</div><div class="line">说明：	 shared：多个进程共享的内存总额</div><div class="line">		Buffers/cached		</div><div class="line">[root@cloud ~]# cat /proc/meminfo </div><div class="line">MemTotal:         995648 kB</div><div class="line">MemFree:          312228 kB</div><div class="line">Buffers:           42836 kB</div><div class="line">Cached:           509164 kB</div><div class="line">SwapCached:          352 kB</div><div class="line">Active:           413060 kB</div><div class="line">Inactive:         145136 kB		</div><div class="line">[root@cloud ~]# ll -h /proc/kcore	#查看/proc/kcore文件的大小（内存镜像）</div><div class="line">-r-------- 1 root root 4.0K Jul 27 16:31 /proc/kcore</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>###查看cpu使用率</p>
-<ul>
+<h3 id="查看cpu使用率"><a href="#查看cpu使用率" class="headerlink" title="查看cpu使用率"></a>查看cpu使用率</h3><ul>
 <li><p>使用top命令<br>具体介绍：<a href="http://www.cnblogs.com/xd502djj/archive/2011/03/01/1968041.html" target="_blank" rel="external">top命输出解释</a></p>
 </li>
 <li><p>产看内核信息</p>
@@ -376,19 +375,19 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# cat /etc/issue</div><div class="line">CentOS release 6.6 (Final)</div><div class="line">Kernel \r on an \m</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>###Find命令</p>
-<ul>
+<h3 id="Find命令"><a href="#Find命令" class="headerlink" title="Find命令"></a>Find命令</h3><ul>
 <li><p>命令实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# find / -name fstab</div><div class="line">/etc/fstab</div><div class="line"></div><div class="line">[root@cloud ~]# find / -name access_log 2&gt;/dev/null		#无错误查找</div><div class="line"></div><div class="line">[root@cloud ~]# find / etc -name &apos;*fst*&apos;	#模糊查找，支持通配符</div><div class="line">/lib/udev/fstab_import</div><div class="line">/lib/udev/rules.d/79-fstab_import.rules</div><div class="line">/etc/fstab</div><div class="line">/usr/bin/psfstriptable</div><div class="line"></div><div class="line">find  /home  -size  +512k	#查大于512k的文档</div><div class="line"></div><div class="line">$ find logs -type f -mtime +5 -exec  -ok  rm &#123;&#125; \;	#在/ l o g s目录中查找更改时间在5日以前的文档并删除他们：</div><div class="line"></div><div class="line"># A=`find ./ -name &quot;*php&quot;` |  ls -l --full-time $A 2&gt;/dev/null | grep &quot;2004-11-30 16:36:37&quot;		#查找2004-11-30 16:36:37时更改过的文档</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# find / -name fstab</div><div class="line">/etc/fstab</div><div class="line">[root@cloud ~]# find / -name access_log 2&gt;/dev/null		#无错误查找</div><div class="line">[root@cloud ~]# find / etc -name &apos;*fst*&apos;	#模糊查找，支持通配符</div><div class="line">/lib/udev/fstab_import</div><div class="line">/lib/udev/rules.d/79-fstab_import.rules</div><div class="line">/etc/fstab</div><div class="line">/usr/bin/psfstriptable</div><div class="line">find  /home  -size  +512k	#查大于512k的文档</div><div class="line">$ find logs -type f -mtime +5 -exec  -ok  rm &#123;&#125; \;	#在/ l o g s目录中查找更改时间在5日以前的文档并删除他们：</div><div class="line"># A=`find ./ -name &quot;*php&quot;` |  ls -l --full-time $A 2&gt;/dev/null | grep &quot;2004-11-30 16:36:37&quot;		#查找2004-11-30 16:36:37时更改过的文档</div></pre></td></tr></table></figure>
 </li>
 <li><p>参考网址<br><a href="http://linux.chinaunix.net/techdoc/system/2008/07/25/1020339.shtml" target="_blank" rel="external">参考实例</a><br><a href="http://www.chinaz.com/server/2009/0807/85796.shtml" target="_blank" rel="external">与或非的find介绍</a></p>
 </li>
 </ul>
-<p>###修改常见配置</p>
-<ul>
-<li>修改主机名<br>参考这里:[北南南北的博客，修改Linux主机名]<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# hostname Mo		#临时修改hostname</div><div class="line"></div><div class="line">[root@Mo ~]# vim /etc/sysconfig/network		#两个都要改</div><div class="line">[root@Mo ~]# vim /etc/hosts</div><div class="line"></div><div class="line">[root@linuxsir01 ~]# hostname -i	#显示主机名的IP</div></pre></td></tr></table></figure>
+<h3 id="修改常见配置"><a href="#修改常见配置" class="headerlink" title="修改常见配置"></a>修改常见配置</h3><ul>
+<li>修改主机名<br>参考这里:[北南南北的博客，修改Linux主机名]<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@cloud ~]# hostname Mo		#临时修改hostname</div><div class="line">[root@Mo ~]# vim /etc/sysconfig/network		#两个都要改</div><div class="line">[root@Mo ~]# vim /etc/hosts</div><div class="line">[root@linuxsir01 ~]# hostname -i	#显示主机名的IP</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<hr>
+<p>以上</p>
 
       
     </div>
@@ -427,9 +426,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
-          
             <a href="/tags/command/" rel="tag">#command</a>
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
           
         </div>
       
@@ -475,7 +474,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/07/27/Linux系统查看命令/"
-           data-title="Linux系统查看命令" data-url="http://yoursite.com/2015/07/27/Linux系统查看命令/">
+           data-title="Linux查看系统信息命令" data-url="http://yoursite.com/2015/07/27/Linux系统查看命令/">
       </div>
     
   </div>
@@ -520,7 +519,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -530,7 +529,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -579,7 +578,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看磁盘空间"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘空间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看磁盘空间"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看cpu使用率"><span class="nav-number">2.</span> <span class="nav-text">查看cpu使用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Find命令"><span class="nav-number">3.</span> <span class="nav-text">Find命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改常见配置"><span class="nav-number">4.</span> <span class="nav-text">修改常见配置</span></a></li></ol></div>
             
           </div>
         </section>
