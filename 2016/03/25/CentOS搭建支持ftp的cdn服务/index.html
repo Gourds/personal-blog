@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/03/25/CentOS搭建支持ftp的cdn服务/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
 <meta property="og:description" content="摘要：由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的–&amp;gt;飞机票,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。">
-<meta property="og:updated_time" content="2016-08-13T04:46:57.000Z">
+<meta property="og:updated_time" content="2016-08-13T04:53:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建支持ftp的cdn服务">
 <meta name="twitter:description" content="摘要：由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的–&amp;gt;飞机票,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。">
@@ -342,17 +342,17 @@
       
 
       
-        <p><strong>摘要：</strong>由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的<a href="">–&gt;飞机票</a>,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。<br><a id="more"></a></p>
-<h2 id="搭建nginx-cdn服务器"><a href="#搭建nginx-cdn服务器" class="headerlink" title="搭建nginx cdn服务器"></a>搭建nginx cdn服务器</h2><ul>
-<li>具体参照使用nginx作cdn源站<br><code>WARING:</code><ul>
+        <p><strong>摘要：</strong>由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的<a href="http://blog.arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/" target="_blank" rel="external">–&gt;飞机票</a>,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。<br><a id="more"></a></p>
+<h3 id="搭建nginx-cdn服务器"><a href="#搭建nginx-cdn服务器" class="headerlink" title="搭建nginx cdn服务器"></a>搭建nginx cdn服务器</h3><ul>
+<li>具体参照使用nginx作cdn源站</li>
 <li>nginx默认不开启文件目录显示，需要自行手动修改开启,在nginx.conf文件(/usr/local/nginx/conf/)里的http{}里面加入如下代码：</li>
 <li>如显示不正常需删除多余index页面<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">autoindex on;</div><div class="line"><span class="comment">#PS:另外两个参数最好也加上去</span></div><div class="line">autoindex_exact_size off;</div><div class="line"><span class="comment">#默认为on，显示出文件的确切大小，单位是bytes。</span></div><div class="line"><span class="comment">#改为off后，显示出文件的大概大小，单位是kB或者MB或者GB</span></div><div class="line">autoindex_localtime on;</div><div class="line"><span class="comment">#默认为off，显示的文件时间为GMT时间。</span></div><div class="line"><span class="comment">#改为on后，显示的文件时间为文件的服务器时间</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="搭建ftp服务器（来源：参照Johnny整理的步骤整合）"><a href="#搭建ftp服务器（来源：参照Johnny整理的步骤整合）" class="headerlink" title="搭建ftp服务器（来源：参照Johnny整理的步骤整合）"></a>搭建ftp服务器（来源：参照Johnny整理的步骤整合）</h3><ul>
+<li><p>安装软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install vsftpd -y</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="搭建ftp服务器（来源：参照Johnny整理的步骤整合）"><a href="#搭建ftp服务器（来源：参照Johnny整理的步骤整合）" class="headerlink" title="搭建ftp服务器（来源：参照Johnny整理的步骤整合）"></a>搭建ftp服务器（来源：参照Johnny整理的步骤整合）</h2><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>-　安装软件<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install vsftpd -y</div></pre></td></tr></table></figure></p>
-<ul>
 <li><p>修改配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#[root@stag-gw-cnd conf.d]# cat /etc/vsftpd/vsftpd.conf | egrep -v "^$|^#"</span></div><div class="line">anonymous_<span class="built_in">enable</span>=NO</div><div class="line"><span class="built_in">local</span>_<span class="built_in">enable</span>=YES</div><div class="line">write_<span class="built_in">enable</span>=YES</div><div class="line"><span class="built_in">local</span>_<span class="built_in">umask</span>=022</div><div class="line">dirmessage_<span class="built_in">enable</span>=YES</div><div class="line">xferlog_<span class="built_in">enable</span>=YES</div><div class="line">connect_from_port_20=YES</div><div class="line">xferlog_std_format=YES</div><div class="line">listen=YES</div><div class="line">chroot_<span class="built_in">local</span>_user=YES</div><div class="line"><span class="built_in">local</span>_root=/usr/share/nginx/cdn/Test</div><div class="line">pasv_promiscuous=YES</div><div class="line">pasv_<span class="built_in">enable</span>=YES</div><div class="line">pasv_max_port=10100</div><div class="line">pasv_min_port=10090</div><div class="line">pam_service_name=vsftpd</div><div class="line">userlist_<span class="built_in">enable</span>=YES</div><div class="line">tcp_wrappers=YES</div></pre></td></tr></table></figure>
 </li>
@@ -502,7 +502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -512,7 +512,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -561,7 +561,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建nginx-cdn服务器"><span class="nav-number">1.</span> <span class="nav-text">搭建nginx cdn服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建ftp服务器（来源：参照Johnny整理的步骤整合）"><span class="nav-number">2.</span> <span class="nav-text">搭建ftp服务器（来源：参照Johnny整理的步骤整合）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境"><span class="nav-number">2.1.</span> <span class="nav-text">配置环境</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建nginx-cdn服务器"><span class="nav-number">1.</span> <span class="nav-text">搭建nginx cdn服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建ftp服务器（来源：参照Johnny整理的步骤整合）"><span class="nav-number">2.</span> <span class="nav-text">搭建ftp服务器（来源：参照Johnny整理的步骤整合）</span></a></li></ol></div>
             
           </div>
         </section>
