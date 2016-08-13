@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="os,command," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,16 +84,15 @@
 
 
 
-<meta name="description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CentOS6.x挂载ntfs和xfs问题">
-<meta property="og:url" content="http://yoursite.com/2016/08/13/CentOS6-x挂载ntfs和xfs问题/index.html">
+<meta name="description" content="You can go as far as you want to go">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arvon's Blog">
+<meta property="og:url" content="http://yoursite.com/tags/nginx/index.html">
 <meta property="og:site_name" content="Arvon's Blog">
-<meta property="og:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
-<meta property="og:updated_time" content="2016-08-13T03:48:48.000Z">
+<meta property="og:description" content="You can go as far as you want to go">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS6.x挂载ntfs和xfs问题">
-<meta name="twitter:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
+<meta name="twitter:title" content="Arvon's Blog">
+<meta name="twitter:description" content="You can go as far as you want to go">
 
 
 
@@ -114,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/13/CentOS6-x挂载ntfs和xfs问题/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/nginx/"/>
 
-  <title> CentOS6.x挂载ntfs和xfs问题 | Arvon's Blog </title>
+  <title> 标签: nginx | Arvon's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +146,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -265,171 +264,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        nginx
+        <small>标签</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
+      
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/03/03/Nginx搭建CDN源站/" itemprop="url">
               
-                CentOS6.x挂载ntfs和xfs问题
+                <span itemprop="name">Nginx搭建CDN源站记录</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-13T11:30:24+08:00" content="2016-08-13">
-              2016-08-13
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-03-03T12:32:05+08:00"
+              content="2016-03-03" >
+          03-03
+        </time>
+      </div>
 
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/13/CentOS6-x挂载ntfs和xfs问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/13/CentOS6-x挂载ntfs和xfs问题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/13/CentOS6-x挂载ntfs和xfs问题/" class="leancloud_visitors" data-flag-title="CentOS6.x挂载ntfs和xfs问题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><strong>摘要：</strong> centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。<br><a id="more"></a></p>
-<h3 id="挂载xfs"><a href="#挂载xfs" class="headerlink" title="挂载xfs"></a>挂载xfs</h3><ul>
-<li><p>安装支持包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line">yum install xfsprogs kmod-xfs xfsdump xfsprogs-devel</div><div class="line">mount -t xfs /dev/sdc1 /data3/sdc1/</div></pre></td></tr></table></figure>
-</li>
-<li><p>报错解决</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#需要安装 lvm2:  yum install lvm2</span></div><div class="line"><span class="comment">#然后按一下步骤：</span></div><div class="line"><span class="comment">#1、查看物理卷：pvs</span></div><div class="line">PV       VG       Fmt   Attr PSize PFree </div><div class="line">  /dev/sda2   VolGroup00 lvm2 a- 279.22G 32.00M</div><div class="line"><span class="comment">#2、查看卷组：vgs</span></div><div class="line">VG       <span class="comment">#PV #LV #SN Attr VSize VFree </span></div><div class="line">  VolGroup00 1 4 0 wz--n- 279.22G 32.00M</div><div class="line"><span class="comment">#3、查看逻辑卷：lvdisplay</span></div><div class="line">--- Logical volume ---</div><div class="line">  LV Name             /dev/VolGroup00/LogVol03</div><div class="line">  VG Name             VolGroup00</div><div class="line">  LV UUID             YhG8Fu-ZGPk-qt8D-AxgC-DzOU-dg1F-z71feI</div><div class="line">  LV Write Access        <span class="built_in">read</span>/write</div><div class="line"> LV Status              unenable</div><div class="line">  <span class="comment"># open                 1</span></div><div class="line">  LV Size             245.97 GB</div><div class="line">  Current LE          7871</div><div class="line">  Segments             1</div><div class="line">  Allocation          inherit</div><div class="line">  Read ahead sectors     auto</div><div class="line">  - currently <span class="built_in">set</span> to     256</div><div class="line">  Block device           253:2</div><div class="line"><span class="comment">#4、如未激活，需要激活逻辑卷：vgchange -ay /dev/VolGroup00</span></div><div class="line">LV Status              available</div><div class="line"><span class="comment">#5、挂载逻辑卷：mount   /dev/VolGroup00/LogVol03   /home/lvm</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="挂载ntfs"><a href="#挂载ntfs" class="headerlink" title="挂载ntfs"></a>挂载ntfs</h3><ul>
-<li><p>安装支持包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</div><div class="line">chmod 755 rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</div><div class="line">rpm -ivh rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</div><div class="line">yum install fuse-ntfs-3g -y</div><div class="line">mount /dev/sdd1 /data3/sdd/</div></pre></td></tr></table></figure>
-</li>
-<li><p>补充<br>此时挂载了ntfs也只是可以实现读取并不能写入，目前没有发现什么有效方法</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div></div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://i2.piimg.com/517630/cac5f15767848576.jpg" alt="Arvon Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
-
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/os/" rel="tag">#os</a>
-          
-            <a href="/tags/command/" rel="tag">#command</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/08/13/8月读书计划/" rel="next" title="8月读书计划">
-                <i class="fa fa-chevron-left"></i> 8月读书计划
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -437,14 +311,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/08/13/CentOS6-x挂载ntfs和xfs问题/"
-           data-title="CentOS6.x挂载ntfs和xfs问题" data-url="http://yoursite.com/2016/08/13/CentOS6-x挂载ntfs和xfs问题/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -464,17 +330,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -485,7 +342,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -495,7 +352,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -537,17 +394,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载xfs"><span class="nav-number">1.</span> <span class="nav-text">挂载xfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载ntfs"><span class="nav-number">2.</span> <span class="nav-text">挂载ntfs</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -644,10 +490,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 
