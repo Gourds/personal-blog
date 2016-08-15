@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[hexo之Next主题头像设置]]></title>
+      <title><![CDATA[hexo之Next主题头像打赏设置]]></title>
       <url>http://yoursite.com/2016/08/15/hexo%E4%B9%8BNext%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E8%AE%BE%E7%BD%AE/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br><a id="more"></a></p>
 <h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>这个头像就是站内侧边栏上那个头像</p>
@@ -28,6 +28,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/_config.yml</span></div><div class="line">favicon: images/favicon.ico</div></pre></td></tr></table></figure>
 </li>
 <li><p>完成（测试即可）</p>
+</li>
+</ul>
+<h3 id="打赏功能"><a href="#打赏功能" class="headerlink" title="打赏功能"></a>打赏功能</h3><p>如果url的话很简单，直接参照<a href="http://theme-next.iissnan.com/theme-settings.html#reward" target="_blank" rel="external">官网</a>就可以,对于不使用外链，图片放本地的话需要注意下路径</p>
+<ul>
+<li><p>图片位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">themes/next/<span class="built_in">source</span>/images/uploads/zhipay.jpg</div><div class="line">themes/next/<span class="built_in">source</span>/images/uploads/weipay.jpg</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改主题配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/_config.yml</span></div><div class="line"><span class="comment">#使用外链的话很简单，如下，直接写外链地址就可以了</span></div><div class="line"><span class="comment">#wechatpay: http://i2.piimg.com/517630/8ef419c517319dd1.jpg</span></div><div class="line"><span class="comment">#alipay: http://i2.piimg.com/517630/cac5f15767848576.jpg</span></div><div class="line">alipay: /images/uploads/zhipay.jpg</div><div class="line">wechatpay: /images/uploads/weipay.jpg</div></pre></td></tr></table></figure>
+</li>
+<li><p>好了，配置完成</p>
 </li>
 </ul>
 <hr>
