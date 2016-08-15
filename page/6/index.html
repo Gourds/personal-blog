@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -288,8 +288,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/22/Tmux-使用简记/" itemprop="url">
-                  Tmux 使用简记
+                <a class="post-title-link" href="/2015/08/18/SSH-Tunnel翻墙/" itemprop="url">
+                  SSH-Tunnel翻墙
                 </a>
               
             
@@ -302,8 +302,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-22T09:49:22+08:00" content="2015-07-22">
-              2015-07-22
+            <time itemprop="dateCreated" datetime="2015-08-18T16:28:47+08:00" content="2015-08-18">
+              2015-08-18
             </time>
           </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/22/Tmux-使用简记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/22/Tmux-使用简记/" itemprop="commentsCount"></span>
+                <a href="/2015/08/18/SSH-Tunnel翻墙/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/18/SSH-Tunnel翻墙/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +324,7 @@
 
           
           
-             <span id="/2015/07/22/Tmux-使用简记/" class="leancloud_visitors" data-flag-title="Tmux 使用简记">
+             <span id="/2015/08/18/SSH-Tunnel翻墙/" class="leancloud_visitors" data-flag-title="SSH-Tunnel翻墙">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -348,11 +348,18 @@
       
         
           
-          简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多
+          世界这么大，我想到翻过墙头看看。社会主义的GWF，真真是极好的
+环境准备
+Firefox（推荐英文版）
+Foxyproxy(Firefox插件）
+Xshell
+海外服务器（当让你在那要有个可以ssh的用户)
+
+使用说明使用Xshell建立sshtunnel，Firefox通过插件代理设置开全局翻墙，
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/22/Tmux-使用简记/#more" rel="contents">
+            <a class="btn" href="/2015/08/18/SSH-Tunnel翻墙/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -403,8 +410,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/21/salt简明使用手册/" itemprop="url">
-                  SaltStack使用简明手册
+                <a class="post-title-link" href="/2015/08/17/Perl语言入门2/" itemprop="url">
+                  Perl语言入门
                 </a>
               
             
@@ -417,8 +424,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-21T17:29:41+08:00" content="2015-07-21">
-              2015-07-21
+            <time itemprop="dateCreated" datetime="2015-08-17T17:45:52+08:00" content="2015-08-17">
+              2015-08-17
             </time>
           </span>
 
@@ -428,8 +435,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/21/salt简明使用手册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/salt简明使用手册/" itemprop="commentsCount"></span>
+                <a href="/2015/08/17/Perl语言入门2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/Perl语言入门2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -439,7 +446,7 @@
 
           
           
-             <span id="/2015/07/21/salt简明使用手册/" class="leancloud_visitors" data-flag-title="SaltStack使用简明手册">
+             <span id="/2015/08/17/Perl语言入门2/" class="leancloud_visitors" data-flag-title="Perl语言入门">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -463,14 +470,15 @@
       
         
           
-          介绍：salt是一种基础设施管理方式，部署简单，在几分钟内便可运行起来，扩展性好，很容易管理上万台服务器，速度够快，服务器之间秒级通讯。salt底层采用动态链接总线，使其可以用于编配，远程执行，配置管理等。
-###常用命令
+          更新记录2015/08/17    拆开来记，start with foreach2015/09/01 更新到子程序，最近有点懒惰了
+##结构
+###foreach控制结构
 
-salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
+Example one12345#!/usr/bin/perluse 5.010;foreach $rock (qw/ my
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/21/salt简明使用手册/#more" rel="contents">
+            <a class="btn" href="/2015/08/17/Perl语言入门2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -521,8 +529,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
             
               
                 
-                <a class="post-title-link" href="/2015/07/21/Markdown-Introduction/" itemprop="url">
-                  Markdown Introduction
+                <a class="post-title-link" href="/2015/08/12/Perl语言入门（6th）课后习题/" itemprop="url">
+                  Perl语言入门（6th）课后习题
                 </a>
               
             
@@ -535,8 +543,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-21T08:17:54+08:00" content="2015-07-21">
-              2015-07-21
+            <time itemprop="dateCreated" datetime="2015-08-12T16:00:21+08:00" content="2015-08-12">
+              2015-08-12
             </time>
           </span>
 
@@ -546,8 +554,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/21/Markdown-Introduction/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/21/Markdown-Introduction/" itemprop="commentsCount"></span>
+                <a href="/2015/08/12/Perl语言入门（6th）课后习题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/Perl语言入门（6th）课后习题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -557,7 +565,7 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
 
           
           
-             <span id="/2015/07/21/Markdown-Introduction/" class="leancloud_visitors" data-flag-title="Markdown Introduction">
+             <span id="/2015/08/12/Perl语言入门（6th）课后习题/" class="leancloud_visitors" data-flag-title="Perl语言入门（6th）课后习题">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -581,13 +589,14 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
       
         
           
-          简介：Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。
-语法介绍基本介绍
-在Markdown中
+          个人感觉课后习题单独分出来比较方便，这里有可能的话会多放些例子，ok，go
+###Chapter one
+
+计算半径为12.5的园的周长，可自行输入，小于0输出为012345#!/usr/bin/perlprint "Please input a number: ";$inputNumber = &
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/21/Markdown-Introduction/#more" rel="contents">
+            <a class="btn" href="/2015/08/12/Perl语言入门（6th）课后习题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -638,8 +647,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
             
               
                 
-                <a class="post-title-link" href="/2015/07/20/Hexo简明/" itemprop="url">
-                  Hexo简明
+                <a class="post-title-link" href="/2015/08/10/Prel语言入门读书笔记/" itemprop="url">
+                  Perl语言入门（一）
                 </a>
               
             
@@ -652,8 +661,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-20T16:42:47+08:00" content="2015-07-20">
-              2015-07-20
+            <time itemprop="dateCreated" datetime="2015-08-10T14:55:36+08:00" content="2015-08-10">
+              2015-08-10
             </time>
           </span>
 
@@ -663,8 +672,8 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/20/Hexo简明/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/20/Hexo简明/" itemprop="commentsCount"></span>
+                <a href="/2015/08/10/Prel语言入门读书笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/10/Prel语言入门读书笔记/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -674,7 +683,7 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
 
           
           
-             <span id="/2015/07/20/Hexo简明/" class="leancloud_visitors" data-flag-title="Hexo简明">
+             <span id="/2015/08/10/Prel语言入门读书笔记/" class="leancloud_visitors" data-flag-title="Perl语言入门（一）">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -698,14 +707,21 @@ salt ‘主机（支持通配符匹配）’ cmd.run ‘command’e
       
         
           
-          简介：出自台湾某大学生之手，说是叫tommy351，感觉是叼了个扎天。是一个基于Node.js的静态博客程序，其编译上百篇文字只需要几秒。hexo生成静态网页可以直接放到Github Pages，BAE，SAE等平台上。
-###常用的命令
+          更新记录：
 
-hexo n “我的博客” == hexo new “我的
+2015/08/10 DonePage45
+2015/08/11 DonePage68
+2015/08/17 Read list and array, do a new one.
+
+##前言杂记
+
+适合管理员使用的语言
+Arvon’s读书笔记
+sixth edtion for lear
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/20/Hexo简明/#more" rel="contents">
+            <a class="btn" href="/2015/08/10/Prel语言入门读书笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -756,8 +772,8 @@ hexo n “我的博客” == hexo new “我的
             
               
                 
-                <a class="post-title-link" href="/2015/07/17/使用Hexo和Github搭建Blog/" itemprop="url">
-                  使用Hexo和Github搭建Blog
+                <a class="post-title-link" href="/2015/08/07/Linux挂载LVM分区/" itemprop="url">
+                  Linux挂载LVM分区
                 </a>
               
             
@@ -770,8 +786,8 @@ hexo n “我的博客” == hexo new “我的
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-17T12:10:00+08:00" content="2015-07-17">
-              2015-07-17
+            <time itemprop="dateCreated" datetime="2015-08-07T18:02:24+08:00" content="2015-08-07">
+              2015-08-07
             </time>
           </span>
 
@@ -781,8 +797,8 @@ hexo n “我的博客” == hexo new “我的
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/17/使用Hexo和Github搭建Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/17/使用Hexo和Github搭建Blog/" itemprop="commentsCount"></span>
+                <a href="/2015/08/07/Linux挂载LVM分区/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/07/Linux挂载LVM分区/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -792,7 +808,7 @@ hexo n “我的博客” == hexo new “我的
 
           
           
-             <span id="/2015/07/17/使用Hexo和Github搭建Blog/" class="leancloud_visitors" data-flag-title="使用Hexo和Github搭建Blog">
+             <span id="/2015/08/07/Linux挂载LVM分区/" class="leancloud_visitors" data-flag-title="Linux挂载LVM分区">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -816,12 +832,11 @@ hexo n “我的博客” == hexo new “我的
       
         
           
-          Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。
-更新记录 2
+          简介：LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/17/使用Hexo和Github搭建Blog/#more" rel="contents">
+            <a class="btn" href="/2015/08/07/Linux挂载LVM分区/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -872,8 +887,8 @@ hexo n “我的博客” == hexo new “我的
             
               
                 
-                <a class="post-title-link" href="/2015/07/17/皮卡邱/" itemprop="url">
-                  Pikachu
+                <a class="post-title-link" href="/2015/08/05/ansible自用手册/" itemprop="url">
+                  ansible自用手册
                 </a>
               
             
@@ -886,8 +901,8 @@ hexo n “我的博客” == hexo new “我的
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-17T12:07:11+08:00" content="2015-07-17">
-              2015-07-17
+            <time itemprop="dateCreated" datetime="2015-08-05T13:42:15+08:00" content="2015-08-05">
+              2015-08-05
             </time>
           </span>
 
@@ -897,8 +912,8 @@ hexo n “我的博客” == hexo new “我的
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/17/皮卡邱/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/17/皮卡邱/" itemprop="commentsCount"></span>
+                <a href="/2015/08/05/ansible自用手册/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/05/ansible自用手册/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -908,7 +923,7 @@ hexo n “我的博客” == hexo new “我的
 
           
           
-             <span id="/2015/07/17/皮卡邱/" class="leancloud_visitors" data-flag-title="Pikachu">
+             <span id="/2015/08/05/ansible自用手册/" class="leancloud_visitors" data-flag-title="ansible自用手册">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -932,12 +947,13 @@ hexo n “我的博客” == hexo new “我的
       
         
           
-          ###Eatlike：虾、牛蛙、不咸的蚕豆、鸭翅（绝味）、不二家的果味糖（葡萄味）、芒果、葡萄味的饮料、涮羊肉（少吃，过敏了都）、炸鸡、unlike：豆腐、粉、芥末味锅巴
-###Thinglike：一切尽在掌握（旅游的话提前计划）、看进度条（真奇葩）unlike：手足无措（到地方不知道怎么玩去哪玩）
+          简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
+
+批量执行支持模块化，支持playbook（相比puppet还是弱些）
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/17/皮卡邱/#more" rel="contents">
+            <a class="btn" href="/2015/08/05/ansible自用手册/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -988,8 +1004,8 @@ hexo n “我的博客” == hexo new “我的
             
               
                 
-                <a class="post-title-link" href="/2015/06/13/CentOS安装hexo记录/" itemprop="url">
-                  CentOS安装hexo记录
+                <a class="post-title-link" href="/2015/07/31/zabbix添加web监控/" itemprop="url">
+                  zabbix添加web监控
                 </a>
               
             
@@ -1002,8 +1018,8 @@ hexo n “我的博客” == hexo new “我的
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-13T10:00:02+08:00" content="2015-06-13">
-              2015-06-13
+            <time itemprop="dateCreated" datetime="2015-07-31T18:07:40+08:00" content="2015-07-31">
+              2015-07-31
             </time>
           </span>
 
@@ -1013,8 +1029,8 @@ hexo n “我的博客” == hexo new “我的
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/06/13/CentOS安装hexo记录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/13/CentOS安装hexo记录/" itemprop="commentsCount"></span>
+                <a href="/2015/07/31/zabbix添加web监控/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/31/zabbix添加web监控/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1024,7 +1040,7 @@ hexo n “我的博客” == hexo new “我的
 
           
           
-             <span id="/2015/06/13/CentOS安装hexo记录/" class="leancloud_visitors" data-flag-title="CentOS安装hexo记录">
+             <span id="/2015/07/31/zabbix添加web监控/" class="leancloud_visitors" data-flag-title="zabbix添加web监控">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1047,345 +1063,12 @@ hexo n “我的博客” == hexo new “我的
 
       
         
-          <p>简要记录一下在centos上安装hexo的过程<br>
+          
+          zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需
+          ...
+
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/13/CentOS安装hexo记录/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/13/Linux下关于文件属性的三个时间/" itemprop="url">
-                  Linux下关于文件属性的三个时间
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-13T10:36:23+08:00" content="2015-05-13">
-              2015-05-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/13/Linux下关于文件属性的三个时间/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/13/Linux下关于文件属性的三个时间/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/05/13/Linux下关于文件属性的三个时间/" class="leancloud_visitors" data-flag-title="Linux下关于文件属性的三个时间">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tips: 主要区分linux下文件的三个时间属性，atime、mtime、ctime<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/13/Linux下关于文件属性的三个时间/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/13/Linux查看主机信息/" itemprop="url">
-                  Linux查看主机信息
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-13T11:08:25+08:00" content="2015-04-13">
-              2015-04-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/13/Linux查看主机信息/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/13/Linux查看主机信息/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/04/13/Linux查看主机信息/" class="leancloud_visitors" data-flag-title="Linux查看主机信息">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这篇包括（系统版本、内核信息、核心数、主机名）还有一个关于系统信息查看的，<a href="http://blog.arvon.top/2015/07/27/Linux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/">–&gt;飞机票</a><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/13/Linux查看主机信息/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/02/13/Centos搭建nginx-php环境/" itemprop="url">
-                  Centos搭建nginx+php环境
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-02-13T12:58:28+08:00" content="2015-02-13">
-              2015-02-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/13/Centos搭建nginx-php环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/13/Centos搭建nginx-php环境/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/02/13/Centos搭建nginx-php环境/" class="leancloud_visitors" data-flag-title="Centos搭建nginx+php环境">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/13/Centos搭建nginx-php环境/#more" rel="contents">
+            <a class="btn" href="/2015/07/31/zabbix添加web监控/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1419,7 +1102,7 @@ hexo n “我的博客” == hexo new “我的
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1452,7 +1135,7 @@ hexo n “我的博客” == hexo new “我的
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/suolong.jpg"
                alt="Arvon" />
           <p class="site-author-name" itemprop="name">Arvon</p>
           <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
@@ -1648,6 +1331,135 @@ hexo n “我的博客” == hexo new “我的
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

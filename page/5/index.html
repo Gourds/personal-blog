@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -288,8 +288,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/05/ansible自用手册/" itemprop="url">
-                  ansible自用手册
+                <a class="post-title-link" href="/2015/09/07/mysql-keepalive实现高可用/" itemprop="url">
+                  mysql + keepalive实现高可用
                 </a>
               
             
@@ -302,8 +302,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-05T13:42:15+08:00" content="2015-08-05">
-              2015-08-05
+            <time itemprop="dateCreated" datetime="2015-09-07T15:38:14+08:00" content="2015-09-07">
+              2015-09-07
             </time>
           </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/05/ansible自用手册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/05/ansible自用手册/" itemprop="commentsCount"></span>
+                <a href="/2015/09/07/mysql-keepalive实现高可用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/07/mysql-keepalive实现高可用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +324,7 @@
 
           
           
-             <span id="/2015/08/05/ansible自用手册/" class="leancloud_visitors" data-flag-title="ansible自用手册">
+             <span id="/2015/09/07/mysql-keepalive实现高可用/" class="leancloud_visitors" data-flag-title="mysql + keepalive实现高可用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -347,14 +347,9 @@
 
       
         
-          
-          简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
-
-批量执行支持模块化，支持playbook（相比puppet还是弱些）
-          ...
-
+          <p>这篇题目占了好长时间了，一直说补上也没补上，今天没事，就弄个实验环境来记录一下。正所谓好记性不如烂笔头，那就写一下。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/05/ansible自用手册/#more" rel="contents">
+            <a class="btn" href="/2015/09/07/mysql-keepalive实现高可用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -405,8 +400,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/31/zabbix添加web监控/" itemprop="url">
-                  zabbix添加web监控
+                <a class="post-title-link" href="/2015/08/24/使用fio工具测试linux的磁盘性能/" itemprop="url">
+                  使用fio工具测试linux的磁盘性能
                 </a>
               
             
@@ -419,8 +414,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-31T18:07:40+08:00" content="2015-07-31">
-              2015-07-31
+            <time itemprop="dateCreated" datetime="2015-08-24T17:01:45+08:00" content="2015-08-24">
+              2015-08-24
             </time>
           </span>
 
@@ -430,8 +425,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/31/zabbix添加web监控/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/31/zabbix添加web监控/" itemprop="commentsCount"></span>
+                <a href="/2015/08/24/使用fio工具测试linux的磁盘性能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/24/使用fio工具测试linux的磁盘性能/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -441,7 +436,7 @@
 
           
           
-             <span id="/2015/07/31/zabbix添加web监控/" class="leancloud_visitors" data-flag-title="zabbix添加web监控">
+             <span id="/2015/08/24/使用fio工具测试linux的磁盘性能/" class="leancloud_visitors" data-flag-title="使用fio工具测试linux的磁盘性能">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -465,11 +460,11 @@
       
         
           
-          zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需
+          很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guas
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/31/zabbix添加web监控/#more" rel="contents">
+            <a class="btn" href="/2015/08/24/使用fio工具测试linux的磁盘性能/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -520,8 +515,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/30/nc命令/" itemprop="url">
-                  nc命令
+                <a class="post-title-link" href="/2015/08/24/Ubuntu进行ssh连接/" itemprop="url">
+                  Ubuntu进行ssh连接
                 </a>
               
             
@@ -534,8 +529,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-30T12:10:00+08:00" content="2015-07-30">
-              2015-07-30
+            <time itemprop="dateCreated" datetime="2015-08-24T10:29:52+08:00" content="2015-08-24">
+              2015-08-24
             </time>
           </span>
 
@@ -545,8 +540,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/30/nc命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/nc命令/" itemprop="commentsCount"></span>
+                <a href="/2015/08/24/Ubuntu进行ssh连接/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/24/Ubuntu进行ssh连接/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -556,7 +551,7 @@
 
           
           
-             <span id="/2015/07/30/nc命令/" class="leancloud_visitors" data-flag-title="nc命令">
+             <span id="/2015/08/24/Ubuntu进行ssh连接/" class="leancloud_visitors" data-flag-title="Ubuntu进行ssh连接">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -580,14 +575,23 @@
       
         
           
-          由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等
+          安装了Ubuntu进行测试，发现ssh连不上。发现没有ssh进程，so解决之
+步骤
+当然先看是不是已经有了ssh,有的话就算了
+1ps aux | grep ssh
 
-参数介绍
-1234567891011121314-g&l
-          ...
+没有，就开个终端，装一个
+
+查看是否有了ssh进程
+
+然后就是进行连接了
+
+
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/30/nc命令/#more" rel="contents">
+            <a class="btn" href="/2015/08/24/Ubuntu进行ssh连接/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -638,8 +642,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/30/简明Python学习笔记/" itemprop="url">
-                  简明Python读书笔记
+                <a class="post-title-link" href="/2015/08/21/yum源配置手册/" itemprop="url">
+                  yum源配置手册
                 </a>
               
             
@@ -652,8 +656,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-30T11:25:39+08:00" content="2015-07-30">
-              2015-07-30
+            <time itemprop="dateCreated" datetime="2015-08-21T15:07:07+08:00" content="2015-08-21">
+              2015-08-21
             </time>
           </span>
 
@@ -663,8 +667,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/30/简明Python学习笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/30/简明Python学习笔记/" itemprop="commentsCount"></span>
+                <a href="/2015/08/21/yum源配置手册/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/yum源配置手册/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -674,7 +678,7 @@
 
           
           
-             <span id="/2015/07/30/简明Python学习笔记/" class="leancloud_visitors" data-flag-title="简明Python读书笔记">
+             <span id="/2015/08/21/yum源配置手册/" class="leancloud_visitors" data-flag-title="yum源配置手册">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -698,25 +702,11 @@
       
         
           
-          #更新记录
-
-20150730 总结介绍
-20150731 控制流
-20150804 module
-20150806 脚本练手
-20150807 模块方法
-20150810 是时候结束了
-
-#介绍
-##简记
-
-这里使用的是CentOS release 6.6 (Final)
-
-12345678910
+          yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/30/简明Python学习笔记/#more" rel="contents">
+            <a class="btn" href="/2015/08/21/yum源配置手册/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -767,8 +757,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/29/awk用法实例/" itemprop="url">
-                  awk用法实例
+                <a class="post-title-link" href="/2015/08/21/lsof命令/" itemprop="url">
+                  lsof命令
                 </a>
               
             
@@ -781,8 +771,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-29T10:45:32+08:00" content="2015-07-29">
-              2015-07-29
+            <time itemprop="dateCreated" datetime="2015-08-21T10:37:24+08:00" content="2015-08-21">
+              2015-08-21
             </time>
           </span>
 
@@ -792,8 +782,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/29/awk用法实例/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/29/awk用法实例/" itemprop="commentsCount"></span>
+                <a href="/2015/08/21/lsof命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/lsof命令/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -803,7 +793,7 @@
 
           
           
-             <span id="/2015/07/29/awk用法实例/" class="leancloud_visitors" data-flag-title="awk用法实例">
+             <span id="/2015/08/21/lsof命令/" class="leancloud_visitors" data-flag-title="lsof命令">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -827,11 +817,11 @@
       
         
           
-          简介：awk一种优秀的文本处理工具，Linux和Unix环境中现有的功能最强大的数据处理引擎之一。这个编程及数据操作语言其名称得自于它的创始人阿尔佛雷德·艾侯、彼得·温伯格和布莱恩·柯林汉姓氏的首个字母。awk的处理文本和数据的方式是这样的，它逐行扫描文件，从第一行到最后一行，寻找匹配的特定模式的行
+          简介：lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/29/awk用法实例/#more" rel="contents">
+            <a class="btn" href="/2015/08/21/lsof命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -882,8 +872,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/07/28/SA运维资源/" itemprop="url">
-                  SA运维资源
+                <a class="post-title-link" href="/2015/08/21/Too-many-open-files错误/" itemprop="url">
+                  zabbix Too many open files错误
                 </a>
               
             
@@ -896,8 +886,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-28T16:07:50+08:00" content="2015-07-28">
-              2015-07-28
+            <time itemprop="dateCreated" datetime="2015-08-21T10:10:18+08:00" content="2015-08-21">
+              2015-08-21
             </time>
           </span>
 
@@ -907,8 +897,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/28/SA运维资源/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/28/SA运维资源/" itemprop="commentsCount"></span>
+                <a href="/2015/08/21/Too-many-open-files错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/Too-many-open-files错误/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -918,7 +908,7 @@
 
           
           
-             <span id="/2015/07/28/SA运维资源/" class="leancloud_visitors" data-flag-title="SA运维资源">
+             <span id="/2015/08/21/Too-many-open-files错误/" class="leancloud_visitors" data-flag-title="zabbix Too many open files错误">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -942,46 +932,15 @@
       
         
           
-          ###需学习技能
+          问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下
 
-系统管理语言
+通过google有了一些眉目,以下摘自google
 
-Shell脚本语言
-perl
-python
-
-
-监控工具
-
-zabbix
-nagios
-
-
-运维自动化工具
-
-saltstack
-Ansible
-puppet
-
-
-大数据
-
-云计算
-OPenStack
-Docker
-
-
-虚拟化
-KVM
-VMware
-
-
-
-###L
+linux系统出现Too many open files 错误，这是因为文件描述符大小不够
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/28/SA运维资源/#more" rel="contents">
+            <a class="btn" href="/2015/08/21/Too-many-open-files错误/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1032,8 +991,8 @@ VMware
             
               
                 
-                <a class="post-title-link" href="/2015/07/28/Linux下搭建vsftp服务器/" itemprop="url">
-                  Linux下搭建VSFTP服务器
+                <a class="post-title-link" href="/2015/08/20/sed-命令实例/" itemprop="url">
+                  sed 命令实例
                 </a>
               
             
@@ -1046,8 +1005,8 @@ VMware
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-28T15:04:06+08:00" content="2015-07-28">
-              2015-07-28
+            <time itemprop="dateCreated" datetime="2015-08-20T11:50:23+08:00" content="2015-08-20">
+              2015-08-20
             </time>
           </span>
 
@@ -1057,8 +1016,8 @@ VMware
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/28/Linux下搭建vsftp服务器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/28/Linux下搭建vsftp服务器/" itemprop="commentsCount"></span>
+                <a href="/2015/08/20/sed-命令实例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/20/sed-命令实例/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1068,7 +1027,7 @@ VMware
 
           
           
-             <span id="/2015/07/28/Linux下搭建vsftp服务器/" class="leancloud_visitors" data-flag-title="Linux下搭建VSFTP服务器">
+             <span id="/2015/08/20/sed-命令实例/" class="leancloud_visitors" data-flag-title="sed 命令实例">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1092,367 +1051,12 @@ VMware
       
         
           
-          简介：VSFTP（Very Secure FTP）是一个基于GPL发布的类Unix系统上使用的FTP服务器软件，设计者的初衷是代码的安全，另外速度在使用ASCII代码的模式下在数据时，VSFTP的速度为Wu-FTp的两倍，如果Linux主机使用2.4.x的内核，在千兆以太网的下的下载速度可以达到86
+          sed命令在很有目的性的针对文本进行操作的时候还是十分有优势的。
+sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/28/Linux下搭建vsftp服务器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/27/Linux系统查看命令/" itemprop="url">
-                  Linux查看系统信息命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-27T10:49:08+08:00" content="2015-07-27">
-              2015-07-27
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/27/Linux系统查看命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/27/Linux系统查看命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/07/27/Linux系统查看命令/" class="leancloud_visitors" data-flag-title="Linux查看系统信息命令">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Command Include：disk、memory、hostname、find
-查看磁盘空间
-常用命令df -hl 查看磁盘剩余空间df -h 查看每个根路径的分区大小du -sh [目录名] 返回该目录的大小du -sm [文件夹] 返回该文件夹总M数
-
-命令演示
-12345678910111
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/27/Linux系统查看命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/23/Linux下hexo配置/" itemprop="url">
-                  Linux下hexo配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-23T11:25:11+08:00" content="2015-07-23">
-              2015-07-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/23/Linux下hexo配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/23/Linux下hexo配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/07/23/Linux下hexo配置/" class="leancloud_visitors" data-flag-title="Linux下hexo配置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          配置流程环境准备本地环境
-CentOS6
-下载nvm（Node.js的版本管理器）软件
-wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh    #下载安装nvm（安装目录在/root/.nvm/）
-
-
-安装n
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/23/Linux下hexo配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/22/mysql自用命令手册/" itemprop="url">
-                  Mysql自用命令手册
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-22T16:10:15+08:00" content="2015-07-22">
-              2015-07-22
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/22/mysql自用命令手册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/22/mysql自用命令手册/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/07/22/mysql自用命令手册/" class="leancloud_visitors" data-flag-title="Mysql自用命令手册">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          连接登录数据库12345678mysql –u用户名 [–h主机名或者IP地址] –p密码eggs: mysql -uusername -hIPaddress -p(password)#1. 连接到本机上的MYSQL。#首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/22/mysql自用命令手册/#more" rel="contents">
+            <a class="btn" href="/2015/08/20/sed-命令实例/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1486,7 +1090,7 @@ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh    #下�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1519,7 +1123,7 @@ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh    #下�
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/suolong.jpg"
                alt="Arvon" />
           <p class="site-author-name" itemprop="name">Arvon</p>
           <p class="site-description motion-element" itemprop="description">You can go as far as you want to go</p>
@@ -1715,6 +1319,135 @@ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh    #下�
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 
