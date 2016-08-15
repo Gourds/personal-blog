@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title><![CDATA[hexo之Next主题头像打赏设置]]></title>
+      <title><![CDATA[hexo之Next主题设置]]></title>
       <url>http://yoursite.com/2016/08/15/hexo%E4%B9%8BNext%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E8%AE%BE%E7%BD%AE/</url>
-      <content type="html"><![CDATA[<p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br><a id="more"></a><br>更新：打赏<br>更新：站内搜索</p>
 <h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>这个头像就是站内侧边栏上那个头像</p>
 <ul>
 <li>第一步找个jpg图片</li>
@@ -40,6 +40,19 @@
 </li>
 <li><p>好了，配置完成</p>
 </li>
+</ul>
+<h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><ul>
+<li><p>安装sitemap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-search --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改站点配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">search:</div><div class="line">    path: sitemap.xml</div><div class="line">        field: post</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改localsearch文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/layout/_partials/search/localsearch.swig</span></div><div class="line"><span class="comment">#修改如下：</span></div><div class="line">&lt;div class=<span class="string">"popup"</span>&gt;</div><div class="line">&lt;span class=<span class="string">"search-icon fa fa-search"</span>&gt;&lt;/span&gt;</div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"local-search-input"</span> placeholder=<span class="string">"search my blog..."</span>&gt;</div><div class="line">&lt;div id=<span class="string">"local-search-result"</span>&gt;&lt;/div&gt;</div><div class="line">&lt;span class=<span class="string">"popup-btn-close"</span>&gt;close&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"><span class="comment">#原文件如下：</span></div><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</div><div class="line">   var search_path = <span class="string">"&lt;%= config.search.path %&gt;"</span>;</div><div class="line">   <span class="keyword">if</span> (search_path.length == 0) &#123;</div><div class="line">       search_path = <span class="string">"search.xml"</span>;</div><div class="line">   &#125;</div><div class="line">   var path = <span class="string">"&lt;%= config.root %&gt;"</span> + search_path;</div><div class="line">   searchFunc(path, <span class="string">'local-search-input'</span>, <span class="string">'local-search-result'</span>);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>```</p>
+</li>
+<li>站内搜索完成</li>
 </ul>
 <hr>
 <p>以上</p>
