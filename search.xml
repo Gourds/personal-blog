@@ -50,9 +50,9 @@
 </li>
 <li><p>修改localsearch文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/layout/_partials/search/localsearch.swig</span></div><div class="line"><span class="comment">#修改如下：</span></div><div class="line">&lt;div class=<span class="string">"popup"</span>&gt;</div><div class="line">&lt;span class=<span class="string">"search-icon fa fa-search"</span>&gt;&lt;/span&gt;</div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"local-search-input"</span> placeholder=<span class="string">"search my blog..."</span>&gt;</div><div class="line">&lt;div id=<span class="string">"local-search-result"</span>&gt;&lt;/div&gt;</div><div class="line">&lt;span class=<span class="string">"popup-btn-close"</span>&gt;close&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"><span class="comment">#原文件如下：</span></div><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</div><div class="line">   var search_path = <span class="string">"&lt;%= config.search.path %&gt;"</span>;</div><div class="line">   <span class="keyword">if</span> (search_path.length == 0) &#123;</div><div class="line">       search_path = <span class="string">"search.xml"</span>;</div><div class="line">   &#125;</div><div class="line">   var path = <span class="string">"&lt;%= config.root %&gt;"</span> + search_path;</div><div class="line">   searchFunc(path, <span class="string">'local-search-input'</span>, <span class="string">'local-search-result'</span>);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>```</p>
 </li>
-<li>站内搜索完成</li>
+<li><p>站内搜索完成</p>
+</li>
 </ul>
 <hr>
 <p>以上</p>
@@ -2285,7 +2285,7 @@ Mo birthday happy to
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#64;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#64;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>Email 邮件：<br><a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;">&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>
