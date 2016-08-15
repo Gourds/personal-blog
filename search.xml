@@ -4,6 +4,38 @@
   
     
     <entry>
+      <title><![CDATA[hexo之Next主题头像设置]]></title>
+      <url>http://yoursite.com/2016/08/15/hexo%E4%B9%8BNext%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E8%AE%BE%E7%BD%AE/</url>
+      <content type="html"><![CDATA[<p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br><a id="more"></a></p>
+<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>这个头像就是站内侧边栏上那个头像</p>
+<ul>
+<li>第一步找个jpg图片</li>
+<li><p>将图片放到站点配置目录images目录下（并没有规定非放在这）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#我图片放的路径</span></div><div class="line">themes/next/<span class="built_in">source</span>/images/suolong.jpg</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改主题配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/_config.yml</span></div><div class="line"><span class="comment">#在任意位置添加如下内容</span></div><div class="line">avatar: images/suolong.jpg</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成（hexo s测试）</p>
+</li>
+</ul>
+<h3 id="设置网站logo"><a href="#设置网站logo" class="headerlink" title="设置网站logo"></a>设置网站logo</h3><p>也就是浏览器标签上的显示图标,这个图片是有要求的，可以使用在线工具生成。</p>
+<ul>
+<li><p>图片位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">themes/next/<span class="built_in">source</span>/images/favicon.ico</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改站点配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim themes/next/_config.yml</span></div><div class="line">favicon: images/favicon.ico</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成（测试即可）</p>
+</li>
+</ul>
+<hr>
+<p>以上</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[8月读书计划]]></title>
       <url>http://yoursite.com/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
       <content type="html"><![CDATA[<p>前天入了三本图灵的图解系列丛书，要计划读一下，这里做个记录。<br><a id="more"></a></p>
@@ -2229,7 +2261,7 @@ Mo birthday happy to
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a></p>
+<p>Email 邮件：<br><a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>
