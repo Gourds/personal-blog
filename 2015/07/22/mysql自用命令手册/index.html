@@ -176,21 +176,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="连接登录数据库"><a href="#连接登录数据库" class="headerlink" title="连接登录数据库"></a>连接登录数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql –u用户名 [–h主机名或者IP地址] –p密码</div><div class="line">eggs: mysql -uusername -hIPaddress -p(password)</div><div class="line">#1. 连接到本机上的MYSQL。</div><div class="line">#首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码.</div><div class="line">#如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</div><div class="line">#2. 连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：</div><div class="line">#mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）</div><div class="line">#3. 退出MYSQL命令： exit （回车） 或者 \q</div></pre></td></tr></table></figure>
-<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#**格式：**mysqladmin -u用户名 -p旧密码 password 新密码(注：因为开始时root没有密码，所以-p旧密码一项就可以省略)</div><div class="line">mysqladmin -u root password ab12</div><div class="line">再将root的密码改为djg345</div><div class="line">mysqladmin -u root -p ab12 password djg345</div></pre></td></tr></table></figure>
-<h3 id="查看mysql数据库中所有用户及拥有的权限"><a href="#查看mysql数据库中所有用户及拥有的权限" class="headerlink" title="查看mysql数据库中所有用户及拥有的权限"></a>查看mysql数据库中所有用户及拥有的权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT DISTINCT CONCAT(&apos;User: &apos;&apos;&apos;,user,&apos;&apos;&apos;@&apos;&apos;&apos;,host,&apos;&apos;&apos;;&apos;) AS query FROM mysql.user;</div></pre></td></tr></table></figure>
-<h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#**格式：**grant select on 数据库.* to 用户名@登录主机 identified by “密码”</div><div class="line">#1.增加一个用户test1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：</div><div class="line">grant select,insert,update,delete on *.* to test1@”%” Identified by “abc”;</div><div class="line">#2.增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），</div><div class="line">这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。</div><div class="line">#grant select,insert,update,delete on mydb.* to test2@localhost identified by “abc”;</div><div class="line">#如果你不想test2有密码，可以再打一个命令将密码消掉:</div><div class="line">grant select,insert,update,delete on mydb.* to test2@localhost identified by “”;</div></pre></td></tr></table></figure>
-<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt;Delete FROM user Where User=&apos;test&apos; and Host=&apos;localhost&apos;;</div><div class="line">mysql&gt;flush privileges;</div><div class="line">mysql&gt;drop database testDB; //删除用户的数据库</div></pre></td></tr></table></figure>
-<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SHOW DATABASES;	#显示当前数据库服务器中的数据库列表(注意：mysql库里面有MYSQL的系统信息，我们改密码和新增用户，实际上就是用这个库进行操作。)</div><div class="line">mysql&gt; USE 库名；	##显示数据库中的数据表</div><div class="line">mysql&gt; SHOW TABLES;	</div><div class="line">mysql&gt; DESCRIBE 表名;	#显示数据表的结构</div><div class="line">mysql&gt; CREATE DATABASE 库名;	#建立数据库</div><div class="line">mysql&gt; USE 库名;	#;建立数据表</div><div class="line">mysql&gt; CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1))</div><div class="line">mysql&gt; DROP DATABASE 	#库名;删除数据库</div><div class="line">mysql&gt; DROP TABLE 表名；	#删除数据表</div><div class="line">mysql&gt; DELETE FROM 表名;	#将表中记录清空</div><div class="line">mysql&gt; SELECT * FROM 表名;	#显示表中的记录</div><div class="line">mysql&gt; INSERT INTO 表名 VALUES (”hyq”,”M”);	#往表中插入记录</div><div class="line">mysql&gt; UPDATE 表名 SET 字段名1=&apos;a&apos;,字段名2=&apos;b&apos; WHERE 字段名3=&apos;c&apos;;	#更新表中数据</div><div class="line">mysql&gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE 表名;	#用文本方式将数据装入数据表中</div><div class="line">mysql&gt; USE 数据库名;</div><div class="line">mysql&gt; SOURCE d:/mysql.sql;	#导入.sql文件命令：</div><div class="line">mysql&gt; UPDATE mysql.user SET password=PASSWORD(&apos;新密码&apos;) WHERE User=&apos;root&apos;;</div><div class="line">mysql&gt; FLUSH PRIVILEGES;	#命令行修改root密码</div><div class="line">mysql&gt; SELECT DATABASE();	#显示use的数据库名</div><div class="line">mysql&gt; SELECT USER();	#显示当前的user</div></pre></td></tr></table></figure>
-<h4 id="命令实例"><a href="#命令实例" class="headerlink" title="命令实例"></a>命令实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">drop database if exists school;	#如果存在SCHOOL则删除</div><div class="line">create database school;	#建立库SCHOOL</div><div class="line">use school;	#打开库SCHOOL</div><div class="line">create table teacher;	#(进入SCHOOL库后)简历表teacher</div><div class="line"> (</div><div class="line"> id int(3) auto_increment not null primary key,</div><div class="line"> name char(10) not null,</div><div class="line"> address varchar(50) default ‘深圳&apos;,</div><div class="line"> year date</div><div class="line"> );	#建表结束</div><div class="line">insert into teacher values(”,&apos;allen&apos;,&apos;大连一中&apos;,&apos;1976-10-10′);	#插入字段</div><div class="line">insert into teacher values(”,&apos;jack&apos;,&apos;大连二中&apos;,&apos;1975-12-23′);</div></pre></td></tr></table></figure>
-<p>###导出数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#1. 导出整个数据库（导出文件默认是存在mysql\bin目录下；在linux下为/var/lib/mysql）</div><div class="line">mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql</div><div class="line">#2. 导出一个表</div><div class="line">mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql</div><div class="line">#3. 导出一个数据库结构</div><div class="line">mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql</div><div class="line">#-d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table</div><div class="line">#4. 带语言参数导出</div><div class="line">mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name &gt; outfile_name.sql</div></pre></td></tr></table></figure></p>
-<p>###备份恢复数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#1. 备份数据库</div><div class="line">mysqldump -uroot -p test_db &gt; test_db.sql </div><div class="line">mysqldump -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 \</div><div class="line">--comments=FALSE --tables --no-create-info=FALSE --add-drop-table=TRUE --no-data=FALSE \</div><div class="line">$&#123;area&#125; | sed &apos;s/AUTO_INCREMENT=[0-9]*\s//g&apos; &gt;$&#123;dest_dir&#125;/$&#123;area&#125;.sql</div></pre></td></tr></table></figure></p>
+        <h3 id="连接登录数据库"><a href="#连接登录数据库" class="headerlink" title="连接登录数据库"></a>连接登录数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql –u用户名 [–h主机名或者IP地址] –p密码</div><div class="line">eggs: mysql -uusername -hIPaddress -p(password)</div><div class="line"><span class="meta">#</span><span class="bash">1. 连接到本机上的MYSQL。</span></div><div class="line"><span class="meta">#</span><span class="bash">首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码.</span></div><div class="line"><span class="meta">#</span><span class="bash">如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</span></div><div class="line"><span class="meta">#</span><span class="bash">2. 连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：</span></div><div class="line"><span class="meta">#</span><span class="bash">mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）</span></div><div class="line"><span class="meta">#</span><span class="bash">3. 退出MYSQL命令： <span class="built_in">exit</span> （回车） 或者 \q</span></div></pre></td></tr></table></figure>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">**格式：**mysqladmin -u用户名 -p旧密码 password 新密码(注：因为开始时root没有密码，所以-p旧密码一项就可以省略)</span></div><div class="line">mysqladmin -u root password ab12</div><div class="line">再将root的密码改为djg345</div><div class="line">mysqladmin -u root -p ab12 password djg345</div></pre></td></tr></table></figure>
+<h3 id="查看mysql数据库中所有用户及拥有的权限"><a href="#查看mysql数据库中所有用户及拥有的权限" class="headerlink" title="查看mysql数据库中所有用户及拥有的权限"></a>查看mysql数据库中所有用户及拥有的权限</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;</div></pre></td></tr></table></figure>
+<h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">**格式：**grant select on 数据库.* to 用户名@登录主机 identified by “密码”</span></div><div class="line"><span class="meta">#</span><span class="bash">1.增加一个用户<span class="built_in">test</span>1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：</span></div><div class="line">grant select,insert,update,delete on *.* to test1@”%” Identified by “abc”;</div><div class="line"><span class="meta">#</span><span class="bash">2.增加一个用户<span class="built_in">test</span>2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），</span></div><div class="line">这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。</div><div class="line"><span class="meta">#</span><span class="bash">grant select,insert,update,delete on mydb.* to <span class="built_in">test</span>2@localhost identified by “abc”;</span></div><div class="line"><span class="meta">#</span><span class="bash">如果你不想<span class="built_in">test</span>2有密码，可以再打一个命令将密码消掉:</span></div><div class="line">grant select,insert,update,delete on mydb.* to test2@localhost identified by “”;</div></pre></td></tr></table></figure>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">mysql&gt;</span><span class="bash">Delete FROM user Where User=<span class="string">'test'</span> and Host=<span class="string">'localhost'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">drop database <span class="built_in">test</span>DB; //删除用户的数据库</span></div></pre></td></tr></table></figure>
+<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW DATABASES;	<span class="comment">#显示当前数据库服务器中的数据库列表(注意：mysql库里面有MYSQL的系统信息，我们改密码和新增用户，实际上就是用这个库进行操作。)</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 库名；	<span class="comment">##显示数据库中的数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW TABLES;	</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DESCRIBE 表名;	<span class="comment">#显示数据表的结构</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE DATABASE 库名;	<span class="comment">#建立数据库</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 库名;	<span class="comment">#;建立数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1))</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DROP DATABASE 	<span class="comment">#库名;删除数据库</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DROP TABLE 表名；	<span class="comment">#删除数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DELETE FROM 表名;	<span class="comment">#将表中记录清空</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT * FROM 表名;	<span class="comment">#显示表中的记录</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> INSERT INTO 表名 VALUES (”hyq”,”M”);	<span class="comment">#往表中插入记录</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> UPDATE 表名 SET 字段名1=<span class="string">'a'</span>,字段名2=<span class="string">'b'</span> WHERE 字段名3=<span class="string">'c'</span>;	<span class="comment">#更新表中数据</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE 表名;	<span class="comment">#用文本方式将数据装入数据表中</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 数据库名;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SOURCE d:/mysql.sql;	<span class="comment">#导入.sql文件命令：</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> UPDATE mysql.user SET password=PASSWORD(<span class="string">'新密码'</span>) WHERE User=<span class="string">'root'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;	<span class="comment">#命令行修改root密码</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT DATABASE();	<span class="comment">#显示use的数据库名</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT USER();	<span class="comment">#显示当前的user</span></span></div></pre></td></tr></table></figure>
+<h4 id="命令实例"><a href="#命令实例" class="headerlink" title="命令实例"></a>命令实例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">drop database if exists school;	#如果存在SCHOOL则删除</div><div class="line">create database school;	#建立库SCHOOL</div><div class="line">use school;	#打开库SCHOOL</div><div class="line">create table teacher;	#(进入SCHOOL库后)简历表teacher</div><div class="line"> (</div><div class="line"> id int(3) auto_increment not null primary key,</div><div class="line"> name char(10) not null,</div><div class="line"> address varchar(50) default ‘深圳',</div><div class="line"> year date</div><div class="line"> );	#建表结束</div><div class="line">insert into teacher values(”,'allen','大连一中','1976-10-10′);	#插入字段</div><div class="line">insert into teacher values(”,'jack','大连二中','1975-12-23′);</div></pre></td></tr></table></figure>
+<p>###导出数据库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 导出整个数据库（导出文件默认是存在mysql\bin目录下；在linux下为/var/lib/mysql）</span></div><div class="line">mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash">2. 导出一个表</span></div><div class="line">mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash">3. 导出一个数据库结构</span></div><div class="line">mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash"><span class="_">-d</span> 没有数据 –add-drop-table 在每个create语句之前增加一个drop table</span></div><div class="line"><span class="meta">#</span><span class="bash">4. 带语言参数导出</span></div><div class="line">mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name &gt; outfile_name.sql</div></pre></td></tr></table></figure></p>
+<p>###备份恢复数据库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 备份数据库</span></div><div class="line">mysqldump -uroot -p test_db &gt; test_db.sql </div><div class="line">mysqldump -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 \</div><div class="line">--comments=FALSE --tables --no-create-info=FALSE --add-drop-table=TRUE --no-data=FALSE \</div><div class="line"><span class="meta">$</span><span class="bash">&#123;area&#125; | sed <span class="string">'s/AUTO_INCREMENT=[0-9]*\s//g'</span> &gt;<span class="variable">$&#123;dest_dir&#125;</span>/<span class="variable">$&#123;area&#125;</span>.sql</span></div></pre></td></tr></table></figure></p>
 <ol>
 <li><p>恢复数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p test_db &lt; test_db.sql </div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute=&quot;DROP DATABASE IF EXISTS  $&#123;area&#125;&quot;;</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute=&quot;CREATE DATABASE IF NOT EXISTS  $&#123;area&#125; DEFAULT CHARACTER SET utf8&quot;;</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --database= $&#123;area&#125; &lt;$&#123;area&#125;.sql;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p test_db &lt; test_db.sql </div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute="DROP DATABASE IF EXISTS  $&#123;area&#125;";</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute="CREATE DATABASE IF NOT EXISTS  $&#123;area&#125; DEFAULT CHARACTER SET utf8";</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --database= $&#123;area&#125; &lt;$&#123;area&#125;.sql;</div></pre></td></tr></table></figure>
 </li>
 <li><p>创建权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grant all privileges on test_db.* to test_db@&apos;localhost&apos; identified by &apos;123456&apos;; </div><div class="line">#兼容4.1之前的版本：</div><div class="line">update mysql.user set password=old_password(&apos;123456&apos;) where user=&apos;test_db&apos;; </div><div class="line">#4. 忘记密码</div><div class="line">在“my.cnf”或“my.ini”文件的“mysqld”配置段添加“skip-grant-tables”，然后重新启动mysql即可登录修改root密码。</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grant all privileges on test_db.* to test_db@'localhost' identified by '123456'; </div><div class="line"><span class="meta">#</span><span class="bash">兼容4.1之前的版本：</span></div><div class="line">update mysql.user set password=old_password('123456') where user='test_db'; </div><div class="line"><span class="meta">#</span><span class="bash">4. 忘记密码</span></div><div class="line">在“my.cnf”或“my.ini”文件的“mysqld”配置段添加“skip-grant-tables”，然后重新启动mysql即可登录修改root密码。</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>###参考文档<br><a href="http://www.jb51.net/article/24345.htm" target="_blank" rel="external">mysql常用命令集锦</a><br><a href="http://www.jb51.net/article/25652.htm" target="_blank" rel="external">Mysql常用命令 详细整理版</a><br><a href="http://www.cnblogs.com/fly1988happy/archive/2011/12/15/2288554.html" target="_blank" rel="external">Mysql 用户权限</a><br><a href="http://www.cnblogs.com/fly1988happy/archive/2011/12/15/2288554.html" target="_blank" rel="external">Mysql 命令大全</a></p>
@@ -427,15 +427,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,15 +463,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,15 +475,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,15 +503,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,15 +519,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,14 +543,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -555,11 +551,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +579,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

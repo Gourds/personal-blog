@@ -179,17 +179,17 @@
         <p>这篇包括（系统版本、内核信息、核心数、主机名）还有一个关于系统信息查看的，<a href="http://blog.arvon.top/2015/07/27/Linux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" target="_blank" rel="external">–&gt;飞机票</a><br><a id="more"></a></p>
 <h3 id="查看主机版本信息"><a href="#查看主机版本信息" class="headerlink" title="查看主机版本信息"></a>查看主机版本信息</h3><ul>
 <li><p>系统信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /etc/redhat-release </div><div class="line">CentOS release 6.7 (Final)</div><div class="line">#or</div><div class="line">[root@localhost ~]# cat /etc/issue</div><div class="line">CentOS release 6.7 (Final)</div><div class="line">Kernel \r on an \m</div><div class="line">#or</div><div class="line">[root@localhost ~]# lsb_release -a</div><div class="line">LSB Version:    :base-4.0-ia32:base-4.0-noarch:core-4.0-ia32:core-4.0-noarch</div><div class="line">Distributor ID:    CentOS</div><div class="line">Description:    CentOS release 6.7 (Final)</div><div class="line">Release:    6.7</div><div class="line">Codename:    Final</div><div class="line">#yum provides */lsb_release</div><div class="line">#yum install -y redhat-lsb-core-4.0-7.el6.centos.i686</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /etc/redhat-release </div><div class="line">CentOS release 6.7 (Final)</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# cat /etc/issue</div><div class="line">CentOS release 6.7 (Final)</div><div class="line">Kernel \r on an \m</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# lsb_release -a</div><div class="line">LSB Version:    :base-4.0-ia32:base-4.0-noarch:core-4.0-ia32:core-4.0-noarch</div><div class="line">Distributor ID:    CentOS</div><div class="line">Description:    CentOS release 6.7 (Final)</div><div class="line">Release:    6.7</div><div class="line">Codename:    Final</div><div class="line"><span class="meta">#</span><span class="bash">yum provides */lsb_release</span></div><div class="line"><span class="meta">#</span><span class="bash">yum install -y redhat-lsb-core-4.0-7.el6.centos.i686</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>内核信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /proc/version </div><div class="line">Linux version 2.6.32-573.el6.x86_64 (mockbuild@c6b9.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Thu Jul 23 15:44:03 UTC 2015</div><div class="line">#or</div><div class="line">[root@localhost ~]# uname -a</div><div class="line">Linux localhost.localdomain 2.6.32-573.el6.x86_64 #1 SMP Thu Jul 23 15:44:03 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</div><div class="line">#or</div><div class="line">[root@localhost ~]# uname -r</div><div class="line">2.6.32-573.el6.x86_64</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cat /proc/version </div><div class="line">Linux version 2.6.32-573.el6.x86_64 (mockbuild@c6b9.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC) ) #1 SMP Thu Jul 23 15:44:03 UTC 2015</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# uname -a</div><div class="line">Linux localhost.localdomain 2.6.32-573.el6.x86_64 #1 SMP Thu Jul 23 15:44:03 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# uname -r</div><div class="line">2.6.32-573.el6.x86_64</div></pre></td></tr></table></figure>
 </li>
 <li><p>查看当前运行环境是32还是64，是32也不代表不支持64</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# getconf LONG_BIT </div><div class="line">64</div><div class="line">#or</div><div class="line">[root@localhost ~]# file /sbin/init</div><div class="line">/sbin/init: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, stripped</div><div class="line">[root@localhost ~]# file /bin/ls</div><div class="line">/bin/ls: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, stripped</div><div class="line">#or</div><div class="line">[root@localhost ~]# uname -a</div><div class="line">Linux localhost.localdomain 2.6.32-573.el6.x86_64 #1 SMP Thu Jul 23 15:44:03 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</div><div class="line">[root@localhost ~]# uname -m</div><div class="line">x86_64</div><div class="line">#or</div><div class="line">[root@localhost ~]# arch</div><div class="line">x86_64</div><div class="line">#or</div><div class="line">[root@localhost ~]# echo $HOSTTYPE</div><div class="line">x86_64</div><div class="line">#or</div><div class="line">[root@localhost ~]# getconf -a</div><div class="line">#or</div><div class="line">[root@localhost ~]# more /proc/cpuinfo</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# getconf LONG_BIT </div><div class="line">64</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# file /sbin/init</div><div class="line">/sbin/init: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, stripped</div><div class="line">[root@localhost ~]# file /bin/ls</div><div class="line">/bin/ls: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, stripped</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# uname -a</div><div class="line">Linux localhost.localdomain 2.6.32-573.el6.x86_64 #1 SMP Thu Jul 23 15:44:03 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</div><div class="line">[root@localhost ~]# uname -m</div><div class="line">x86_64</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# arch</div><div class="line">x86_64</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# echo $HOSTTYPE</div><div class="line">x86_64</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# getconf -a</div><div class="line"><span class="meta">#</span><span class="bash">or</span></div><div class="line">[root@localhost ~]# more /proc/cpuinfo</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="查看其他"><a href="#查看其他" class="headerlink" title="查看其他"></a>查看其他</h3><ul>
-<li>查看cpu核心数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c</div></pre></td></tr></table></figure>
+<li>查看cpu核心数<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -431,15 +431,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,15 +467,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,15 +479,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,15 +507,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,15 +523,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,14 +547,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -559,11 +555,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,15 +583,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

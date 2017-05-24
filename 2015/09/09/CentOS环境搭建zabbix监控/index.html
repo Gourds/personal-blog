@@ -191,45 +191,45 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
-<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
-<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent	#这个装出来是1.8的版本。所以重来</div><div class="line">#* 下面是2.2版本的安装包	</div><div class="line">yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</div></pre></td></tr></table></figure>
-<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server</div></pre></td></tr></table></figure>
-<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v &quot;(^#|^$)&quot; 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line">#vi /etc/my.cnf</div><div class="line">#参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=true&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
-<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
-<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line">mysql&gt; create database zabbix character set utf8;</div><div class="line">mysql&gt; grant all privileges on zabbix.* to zabbix@localhost identified by &apos;zabbix&apos;;</div><div class="line">mysql&gt; flush privileges;</div></pre></td></tr></table></figure>
+<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
+<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent	#这个装出来是1.8的版本。所以重来</div><div class="line"><span class="meta">#</span><span class="bash">* 下面是2.2版本的安装包	</span></div><div class="line">yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</div></pre></td></tr></table></figure>
+<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server</div></pre></td></tr></table></figure>
+<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v "(^#|^$)" 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line"><span class="meta">#</span><span class="bash">vi /etc/my.cnf</span></div><div class="line"><span class="meta">#</span><span class="bash">参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=<span class="literal">true</span>&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</span></div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"><span class="meta">#</span><span class="bash"> Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
+<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database zabbix character <span class="built_in">set</span> utf8;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all privileges on zabbix.* to zabbix@localhost identified by <span class="string">'zabbix'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></div></pre></td></tr></table></figure>
 <h3 id="创建zabbix的数据库"><a href="#创建zabbix的数据库" class="headerlink" title="创建zabbix的数据库"></a>创建zabbix的数据库</h3><ul>
 <li>zabbix连接数据：zabbix/zabbix<h3 id="导入zabbix的数据库"><a href="#导入zabbix的数据库" class="headerlink" title="导入zabbix的数据库"></a>导入zabbix的数据库</h3><h4 id="进入数据库导入"><a href="#进入数据库导入" class="headerlink" title="进入数据库导入"></a>进入数据库导入</h4>mysql&gt;use zabbix<br>###倒入sql一定按顺序<code>一定</code></li>
-<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
+<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>###配置zabbix_server.conf</p>
 <ul>
 <li><p>默认参数：<br>  egrep -v “(^#|^$)” /etc/zabbix/zabbix_server.conf</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
 </li>
 <li><p>修改后参数：<br>  主要添加字段为：DBpassword=zabbix</p>
 </li>
 </ul>
 <h4 id="iptables-amp-Selinux设置"><a href="#iptables-amp-Selinux设置" class="headerlink" title="iptables&amp;Selinux设置"></a>iptables&amp;Selinux设置</h4><ul>
-<li>iptables设置(注意顺序)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --sport 10050 -j ACCEPT</div><div class="line">#* Selinux关闭</div><div class="line">[root@localhost ~]# setenforce 0</div><div class="line">[root@localhost ~]# getenforce</div></pre></td></tr></table></figure>
+<li>iptables设置(注意顺序)<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --sport 10050 -j ACCEPT</div><div class="line"><span class="meta">#</span><span class="bash">* Selinux关闭</span></div><div class="line">[root@localhost ~]# setenforce 0</div><div class="line">[root@localhost ~]# getenforce</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/zabbix-server start</div><div class="line">sudo /etc/init.d/httpd start</div></pre></td></tr></table></figure>
-<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
-<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div></pre></td></tr></table></figure>
-<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v &quot;(^#|^$)&quot; /etc/zabbix/zabbix_agentd.conf </div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133	#server IP</div><div class="line">ServerActive=192.168.138.133	#server IP</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# /etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
+<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/zabbix-server start</div><div class="line">sudo /etc/init.d/httpd start</div></pre></td></tr></table></figure>
+<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
+<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div></pre></td></tr></table></figure>
+<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v "(^#|^$)" /etc/zabbix/zabbix_agentd.conf </div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133	#server IP</div><div class="line">ServerActive=192.168.138.133	#server IP</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# /etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
 <h4 id="zabbix添加主机"><a href="#zabbix添加主机" class="headerlink" title="zabbix添加主机"></a>zabbix添加主机</h4><h5 id="手动添加"><a href="#手动添加" class="headerlink" title="手动添加"></a>手动添加</h5><p><img src="http://i1.tietuku.com/29ff780785f8142b.png" alt="看图"><br><img src="http://i1.tietuku.com/a5071fd29e260241.png" alt=""></p>
 <h5 id="自动添加"><a href="#自动添加" class="headerlink" title="自动添加"></a>自动添加</h5><p><img src="http://i1.tietuku.com/50818e58957d382a.png" alt=""><br><img src="http://i1.tietuku.com/5c8029d4a5750557.png" alt=""></p>
 <p>##报错解决</p>
-<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line">#添加字段：date.timezone = Asia/Shanghai</div></pre></td></tr></table></figure></p>
-<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
+<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line"><span class="meta">#</span><span class="bash">添加字段：date.timezone = Asia/Shanghai</span></div></pre></td></tr></table></figure></p>
+<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>修改其中字段为以下</p>
 <p><directory "="" usr="" share="" zabbix"=""><br>    Options FollowSymLinks<br>    AllowOverride None<br>    Order allow,deny<br>    Allow from all<br>    php_value date:timezone Asia/Shanghai<br>    php_value max_execution_time 300<br>    php_value post_max_size 16M<br>    php_value max_input_time 300<br>    php_value memory_limit 128M<br>    php_value upload_max_filesize 2M<br></directory><br>然后重启httpd服务</p>
 </blockquote>
 <h4 id="默认登陆账号密码"><a href="#默认登陆账号密码" class="headerlink" title="默认登陆账号密码"></a>默认登陆账号密码</h4><p>账户：Admin<br>密码：zabbix</p>
-<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo -n arvon | openssl md5</div><div class="line">(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</div><div class="line">&gt;mysql -uname -ppassword</div><div class="line">&gt;use zabbix;</div><div class="line">&gt;select * from users;</div><div class="line">#先在外面生成的md5码该用了</div><div class="line">&gt;update users set  passwd=&apos;e2798af12a7a0f4f70b4d69efbc25f4d&apos; where userid = &apos;1&apos;;</div></pre></td></tr></table></figure></p>
+<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo -n arvon | openssl md5</div><div class="line">(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</div><div class="line"><span class="meta">&gt;</span><span class="bash">mysql -uname -ppassword</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">use zabbix;</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">select * from users;</span></div><div class="line"><span class="meta">#</span><span class="bash">先在外面生成的md5码该用了</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">update users <span class="built_in">set</span>  passwd=<span class="string">'e2798af12a7a0f4f70b4d69efbc25f4d'</span> <span class="built_in">where</span> userid = <span class="string">'1'</span>;</span></div></pre></td></tr></table></figure></p>
 <p><img src="http://i1.tietuku.com/75f80ce9269b455a.png" alt=""></p>
 <h4 id="报错贴图“table-not-exist”"><a href="#报错贴图“table-not-exist”" class="headerlink" title="报错贴图“table not exist”"></a>报错贴图“table not exist”</h4><p><img src="http://i1.tietuku.com/3f75b678db942213.png" alt=""><br><img src="http://i1.tietuku.com/b585f7995c14ad19.png" alt=""></p>
 <h4 id="epel源错误"><a href="#epel源错误" class="headerlink" title="epel源错误"></a>epel源错误</h4><p><img src="http://i1.tietuku.com/c53075f14306cd61.png" alt=""><br>修改文件“/etc/yum.repos.d/epel.repo”， 第一项epel，将baseurl的注释取消， mirrorlist注释掉。即可</p>
@@ -472,15 +472,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,15 +508,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,15 +520,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,15 +548,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,15 +564,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,14 +588,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -600,11 +596,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,15 +624,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

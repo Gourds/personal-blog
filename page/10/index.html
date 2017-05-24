@@ -316,7 +316,7 @@
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#x65;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x65;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a></p>
+<p>Email 邮件：<br><a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#101;&#120;&#x61;&#109;&#x70;&#108;&#101;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#101;&#120;&#x61;&#109;&#x70;&#108;&#101;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>
@@ -365,11 +365,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tools</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tools</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
@@ -537,7 +537,7 @@
 <h3 id="安装git软件"><a href="#安装git软件" class="headerlink" title="安装git软件"></a>安装git软件</h3><p>下载地址戳：<a href="http://git-scm.com/download/" title="git" target="_blank" rel="external">git</a>,依旧下一步到底。昨天做着的时候没记录，真是一大败笔</p>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ol>
 <li><p>进入Git bash,输入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo	#hexo表示全局安装hexo</div><div class="line">#创建hexo文件夹，如/user/arvon/hexo-lxc</div><div class="line">hexo init	#初始化hexo</div><div class="line">npm install</div><div class="line">npm generate</div><div class="line">npm server</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo	#hexo表示全局安装hexo</div><div class="line"><span class="meta">#</span><span class="bash">创建hexo文件夹，如/user/arvon/hexo-lxc</span></div><div class="line">hexo init	#初始化hexo</div><div class="line">npm install</div><div class="line">npm generate</div><div class="line">npm server</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后可以通过访问localhost查看预览http：//localhost:4000/</p>
 </li>
@@ -545,7 +545,7 @@
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><ol>
 <li>将在github上创建的Repository，找到https那个url将其复制</li>
 <li><p>然后编辑位于你创建的文件夹下的文件，例如我就是：/user/arvon/hexo-lxc/_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#deploy:</div><div class="line">type: git</div><div class="line">repository: https://github.com/arvon2014/arvon2014.github.com</div><div class="line">branch: master</div><div class="line">github上的地址：https://github.com/Arvon2014/arvon2014.github.com.git</div><div class="line">#web上访问的为：http://arvon2014.github.io</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">deploy:</span></div><div class="line">type: git</div><div class="line">repository: https://github.com/arvon2014/arvon2014.github.com</div><div class="line">branch: master</div><div class="line">github上的地址：https://github.com/Arvon2014/arvon2014.github.com.git</div><div class="line"><span class="meta">#</span><span class="bash">web上访问的为：http://arvon2014.github.io</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>设置ssh免密码访问</p>
 </li>
@@ -554,11 +554,11 @@
 <li>先查看本地是否已经存在ssh文件，如不存在直接跳过下面第二步</li>
 <li>删除已有的ssh的文件</li>
 <li><p>输入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot; Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line">ssh -T git@github.com	#测试</div><div class="line">The authenticity of host &apos;github.com (207.97.227.239)&apos; can&apos;t be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?	#说明成功</div><div class="line"> $ git config --global user.name &quot;你的名字&quot; $ git config --global user.email &quot;your_email@youremail.com&quot;	#设置你的信息</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C "邮件地址@youremail.com" Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line">ssh -T git@github.com	#测试</div><div class="line">The authenticity of host 'github.com (207.97.227.239)' can't be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?	#说明成功</div><div class="line"><span class="meta"> $</span><span class="bash"> git config --global user.name <span class="string">"你的名字"</span> $ git config --global user.email <span class="string">"your_email@youremail.com"</span>	<span class="comment">#设置你的信息</span></span></div></pre></td></tr></table></figure>
 </li>
 <li><p>现在已经可以顺利将环境搭建完毕</p>
 </li>
-<li>进入你的Hexo目录，开始试验吧<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate = hexo g</div><div class="line">hexo server = hexo s	#部署本地预览</div><div class="line">hexo deploy = hexo d	#生成部署</div></pre></td></tr></table></figure>
+<li>进入你的Hexo目录，开始试验吧<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate = hexo g</div><div class="line">hexo server = hexo s	#部署本地预览</div><div class="line">hexo deploy = hexo d	#生成部署</div></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -692,8 +692,6 @@
       
         <p>简要记录一下在centos上安装hexo的过程<br>
         
-          <a class="article-more-a" href="/2015/06/13/CentOS安装hexo记录/#more">more >></a>
-        
       
 
       
@@ -752,8 +750,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Tips: 主要区分linux下文件的三个时间属性，atime、mtime、ctime<br>
-        
-          <a class="article-more-a" href="/2015/05/13/Linux下关于文件属性的三个时间/#more">more >></a>
         
       
 
@@ -892,15 +888,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,15 +924,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,15 +936,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -964,15 +964,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -980,15 +980,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1004,14 +1004,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -1020,11 +1012,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1048,15 +1040,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

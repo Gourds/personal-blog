@@ -187,13 +187,13 @@
 </blockquote>
 </li>
 </ul>
-<p>###安装git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>###安装git<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><blockquote>
 <p>npm install -g hexo    #使用npm安装hexo(此处安装并未完成)<br>如果显示command not found，就重启终端，然后使用nvm ls检查当前版本，如果没有使用命令<br>nvm use 0.10    #即使用方才装的版本（使用此命令后安装成功）<br>或使用一下命令直接设置全局默认的node.js版本<br>nvm alias default 0.10.26</p>
 </blockquote>
 <ul>
 <li><p>安装失败的原因可能是无法连接到官方服务器，或者是GFW（Great Firewall，中国国家防火墙或长城防火墙）的问题。需<br>  修改npm镜像源<br>  使用config命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ npm config set registry http://registry.cnpmjs.org  </div><div class="line">$ npm info underscore (如果上面配置成功，使用这个命令会有以下提示)  </div><div class="line">$ npm http GET http://registry.cnpmjs.org/underscore  </div><div class="line">$ npm http 200 http://registry.cnpmjs.org/underscore  </div><div class="line"> ``` </div><div class="line">命令行指定  </div><div class="line">```Shell </div><div class="line">$ npm --registry http://registry.cnpmjs.org info underscore   </div><div class="line">编辑 ~/.npmrc 加入以下内容可以使配置永久生效，就不用每次npm安装时都要运行指定源命令了  </div><div class="line">$ registry = http://registry.cnpmjs.org  </div><div class="line"> ``` </div><div class="line"></div><div class="line">- 使用以下命令对hexo进行初始化（这里我位于~目录，而且我想把我的个人博客放在~/hexo目录，需要放在其他目录直接改一下自己需要的目录就可以了）  </div><div class="line">```Shell </div><div class="line">$ hexo install hexo --save</div><div class="line">$ hexo init hexo</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> registry http://registry.cnpmjs.org  </span></div><div class="line"><span class="meta">$</span><span class="bash"> npm info underscore (如果上面配置成功，使用这个命令会有以下提示)  </span></div><div class="line"><span class="meta">$</span><span class="bash"> npm http GET http://registry.cnpmjs.org/underscore  </span></div><div class="line"><span class="meta">$</span><span class="bash"> npm http 200 http://registry.cnpmjs.org/underscore  </span></div><div class="line"> ``` </div><div class="line">命令行指定  </div><div class="line">```Shell </div><div class="line"><span class="meta">$</span><span class="bash"> npm --registry http://registry.cnpmjs.org info underscore   </span></div><div class="line">编辑 ~/.npmrc 加入以下内容可以使配置永久生效，就不用每次npm安装时都要运行指定源命令了  </div><div class="line"><span class="meta">$</span><span class="bash"> registry = http://registry.cnpmjs.org  </span></div><div class="line"> ``` </div><div class="line"></div><div class="line">- 使用以下命令对hexo进行初始化（这里我位于~目录，而且我想把我的个人博客放在~/hexo目录，需要放在其他目录直接改一下自己需要的目录就可以了）  </div><div class="line">```Shell </div><div class="line"><span class="meta">$</span><span class="bash"> hexo install hexo --save</span></div><div class="line"><span class="meta">$</span><span class="bash"> hexo init hexo</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>本地环境到此结束，有木有很easy</p>
 </li>
@@ -468,15 +468,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,15 +504,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,15 +516,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,15 +544,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,15 +560,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,14 +584,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -596,11 +592,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,15 +620,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

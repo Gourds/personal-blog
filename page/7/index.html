@@ -251,22 +251,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#1. 升级系统</div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line">#2. 安装指定的软件包</div><div class="line">yum -y install vsftpd</div><div class="line">#3. 卸载指定的软件包</div><div class="line">yum -y remore vsftpd mysql</div><div class="line">#4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</div><div class="line">yum grouplist</div><div class="line">#5. 清除缓存中的rpm 头文件和包文件</div><div class="line">yum clean all</div><div class="line">#6. 搜索相关的软件包</div><div class="line">yum -y search Emacs</div><div class="line">#显示指定软件包的信息</div><div class="line">yum info Emacs</div><div class="line">#查询指定软件包的依赖信息，emacs依赖的模块不少啊</div><div class="line">yum deplist emacs</div><div class="line">#列出所有以 yum 开头的软件包</div><div class="line">yum list yum\*</div><div class="line">#10. 列出已经安装的但是不包含在资源库中的rpm 包</div><div class="line">yum list extras</div></pre></td></tr></table></figure>
-<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</div><div class="line">#配置文件解释</div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v &apos;^#&apos;</div><div class="line">[base]</div><div class="line">#表示标识名称</div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line">#名字，其实可以随便起</div><div class="line">faliovermethod=priority</div><div class="line">#priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line">#用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line">#引用的地址,http://网站  file://本地		ftp://文件服务器</div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line">#是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</div><div class="line">enabled=1</div><div class="line">#enabled=1为启用这个源，0为不启用这个源</div><div class="line">gpgcheck=1</div><div class="line">#表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line">#定义用于校验的gpg密匙</div></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 升级系统</span></div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line"><span class="meta">#</span><span class="bash">2. 安装指定的软件包</span></div><div class="line">yum -y install vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">3. 卸载指定的软件包</span></div><div class="line">yum -y remore vsftpd mysql</div><div class="line"><span class="meta">#</span><span class="bash">4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</span></div><div class="line">yum grouplist</div><div class="line"><span class="meta">#</span><span class="bash">5. 清除缓存中的rpm 头文件和包文件</span></div><div class="line">yum clean all</div><div class="line"><span class="meta">#</span><span class="bash">6. 搜索相关的软件包</span></div><div class="line">yum -y search Emacs</div><div class="line"><span class="meta">#</span><span class="bash">显示指定软件包的信息</span></div><div class="line">yum info Emacs</div><div class="line"><span class="meta">#</span><span class="bash">查询指定软件包的依赖信息，emacs依赖的模块不少啊</span></div><div class="line">yum deplist emacs</div><div class="line"><span class="meta">#</span><span class="bash">列出所有以 yum 开头的软件包</span></div><div class="line">yum list yum\*</div><div class="line"><span class="meta">#</span><span class="bash">10. 列出已经安装的但是不包含在资源库中的rpm 包</span></div><div class="line">yum list extras</div></pre></td></tr></table></figure>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</span></div><div class="line"><span class="meta">#</span><span class="bash">配置文件解释</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v '^#'</div><div class="line">[base]</div><div class="line"><span class="meta">#</span><span class="bash">表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line"><span class="meta">#</span><span class="bash">名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="meta">#</span><span class="bash">priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="meta">#</span><span class="bash">用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="meta">#</span><span class="bash">引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="meta">#</span><span class="bash">是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=1</div><div class="line"><span class="meta">#</span><span class="bash">enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=1</div><div class="line"><span class="meta">#</span><span class="bash">表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line"><span class="meta">#</span><span class="bash">定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
 <ul>
-<li>粘贴可用的epel的yum源<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]  </div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch/debug</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1  </div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">#baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
+<li>粘贴可用的epel的yum源<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span></span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]  </div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span>/debug</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1  </div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ol>
 <li>EPEL源</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#URL</div><div class="line">https://admin.fedoraproject.org/mirrormanager/</div><div class="line">#EPEL-REPO-RPM</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">axel https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">https://admin.fedoraproject.org/mirrormanager/</div><div class="line"><span class="meta">#</span><span class="bash">EPEL-REPO-RPM</span></div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">axel https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</div></pre></td></tr></table></figure>
 <ol>
 <li>ALI源</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#URL</div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line">#ALI-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line">#ALI-EPLE-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line">#ALI-FEDORA-REPO</div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line"><span class="meta">#</span><span class="bash">ALI-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-EPLE-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-FEDORA-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
 <h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
-<li>错误现象lock<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading &quot;installonlyn&quot; plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line">#解释</div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
+<li>错误现象lock<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading "installonlyn" plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line"><span class="meta">#</span><span class="bash">解释</span></div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -329,10 +329,10 @@
         <p><strong>简介：</strong>lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该有多有用。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
 <li><p>yum安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install lsof -y</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install lsof -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>源码安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://down1.chinaunix.net/distfiles/lsof_4.76.tar.gz</div><div class="line">tar -zxvf lsof.tar.gz</div><div class="line">cd lsof_4.78</div><div class="line">tar xvf lsof_4.78_srv.tar</div><div class="line">./configure lunux</div><div class="line">make</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://down1.chinaunix.net/distfiles/lsof_4.76.tar.gz</div><div class="line">tar -zxvf lsof.tar.gz</div><div class="line">cd lsof_4.78</div><div class="line">tar xvf lsof_4.78_srv.tar</div><div class="line">./configure lunux</div><div class="line">make</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
@@ -980,15 +980,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1008,15 +1016,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1028,15 +1028,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1052,15 +1056,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1068,15 +1072,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1092,14 +1096,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -1108,11 +1104,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,15 +1132,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

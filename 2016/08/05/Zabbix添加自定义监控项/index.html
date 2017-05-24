@@ -191,10 +191,10 @@
   <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#########################################################################</span></div><div class="line"><span class="comment">#Author: arvon</span></div><div class="line"><span class="comment">#Email: guoyf@easemob.com</span></div><div class="line"><span class="comment">#Blog: arvon.top</span></div><div class="line"><span class="comment">#Date: 16/07/06</span></div><div class="line"><span class="comment">#Version: 1.0</span></div><div class="line"><span class="comment">#Todo: collect the monit summary process status send to zabbix server</span></div><div class="line"><span class="comment">##########################################################################</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> commands</div><div class="line">my_parameter = sys.argv[<span class="number">1</span>]</div><div class="line">total_msg = commands.getoutput(<span class="string">'monit summary'</span>)</div><div class="line">msg_list = total_msg.split(<span class="string">'\n'</span>)</div><div class="line">a = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> each_line <span class="keyword">in</span> msg_list:</div><div class="line">    <span class="keyword">if</span> my_parameter <span class="keyword">in</span> each_line <span class="keyword">and</span> <span class="string">'Process'</span> <span class="keyword">in</span> each_line:</div><div class="line">        <span class="keyword">if</span> <span class="string">'Running'</span> <span class="keyword">in</span> each_line:</div><div class="line">            a = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            a = <span class="number">0</span></div><div class="line"><span class="keyword">print</span> a</div></pre></td></tr></table></figure>
 </li>
 <li><p>开启client端自定义脚本选项<br><img src="http://i2.piimg.com/517630/0c01bdd6219c3701.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Include=/etc/zabbix/zabbix_agentd.d/  #在这个路径下可以放自己的配置文件</div><div class="line">UnsafeUserParameters=1 #就是这个参数1为打开，没有脚本的话打开这个会报错的</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Include=/etc/zabbix/zabbix_agentd.d/  #在这个路径下可以放自己的配置文件</div><div class="line">UnsafeUserParameters=1 #就是这个参数1为打开，没有脚本的话打开这个会报错的</div></pre></td></tr></table></figure>
 </li>
 <li><p>配置文件说明<br><img src="http://i2.piimg.com/517630/bcb1bc968c4cfc0e.png" alt=""><br>这里截图就是我自定义在/etc/zabbix/zabbix_agentd.d/下的配置文件<br>里面主要有两个关键因素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UserParameter=process.msg.web #这个就是定义key名称的地方，但最好定义的规整一点，还有就是别和zabbix自带的key重复</div><div class="line">sudo python /etc/zabbix/scripts/get_monit_status.py &quot;&apos;nginx&apos;&quot;  #这个是Value，可以是脚本也可以是个命令什么，这里返回的值就是zabbixServer得到的值</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UserParameter=process.msg.web #这个就是定义key名称的地方，但最好定义的规整一点，还有就是别和zabbix自带的key重复</div><div class="line">sudo python /etc/zabbix/scripts/get_monit_status.py "'nginx'"  #这个是Value，可以是脚本也可以是个命令什么，这里返回的值就是zabbixServer得到的值</div></pre></td></tr></table></figure>
 </li>
 <li><p>zabbix-get测试说明<br><img src="http://i2.piimg.com/517630/dd84b9121935c8c7.png" alt=""><br>zabbix-get是zabbix的排错工具，在server上安装执行最好，-s是指定主机，-k是指定要获取哪个key对应的值，这里返回的是1，是我想用1和0在web上方便使用布尔值对服务状态做判断</p>
 <h4 id="网页配置（点点点才是重点）"><a href="#网页配置（点点点才是重点）" class="headerlink" title="网页配置（点点点才是重点）"></a>网页配置（点点点才是重点）</h4></li>
@@ -442,15 +442,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,15 +478,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,15 +490,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,15 +518,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +534,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,14 +558,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -570,11 +566,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,15 +594,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

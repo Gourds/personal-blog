@@ -202,26 +202,26 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[hello@host]$ sudo cat /etc/rsyncd/rsyncd.secrets</div><div class="line">rsync:123456</div></pre></td></tr></table></figure>
 </li>
 <li><p>Look_config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># vi /etc/rsyncd/rsyncd.motd</div><div class="line">################################</div><div class="line">#            Go !!!</div><div class="line">#欢迎信息，并无卵用</div><div class="line">################################</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> vi /etc/rsyncd/rsyncd.motd</span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">###############################</span></span></div><div class="line"><span class="meta">#</span><span class="bash">            Go !!!</span></div><div class="line"><span class="meta">#</span><span class="bash">欢迎信息，并无卵用</span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">###############################</span></span></div></pre></td></tr></table></figure>
 </li>
 <li><p>Start_service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf    #启动服务</div><div class="line">echo &apos;/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf&apos; &gt;&gt; /etc/rc.local    #设置开机启动</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf    #启动服务</div><div class="line">echo '/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf' &gt;&gt; /etc/rc.local    #设置开机启动</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h4><ul>
 <li><p>Install </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install rsync -y</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install rsync -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>Config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo 123456 &gt; /etc/rsync.password  #将rsync的密码写入本地</div><div class="line">#这个rsync.password文件可随意放，不过建议放在etc下</div><div class="line">chmod 600 /etc/rsync.password #重要，rsync会检查权限，如果不是600会报出错误</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo 123456 &gt; /etc/rsync.password  #将rsync的密码写入本地</div><div class="line"><span class="meta">#</span><span class="bash">这个rsync.password文件可随意放，不过建议放在etc下</span></div><div class="line">chmod 600 /etc/rsync.password #重要，rsync会检查权限，如果不是600会报出错误</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="测试-amp-使用"><a href="#测试-amp-使用" class="headerlink" title="测试&amp;使用"></a>测试&amp;使用</h4><ul>
 <li><p>列出文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rsync --list-only --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp</div><div class="line">#这个mytmp是体现在主配置 文件的，也就是/etc/rsyncd/rsyncd.conf</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rsync --list-only --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp</div><div class="line"><span class="meta">#</span><span class="bash">这个mytmp是体现在主配置 文件的，也就是/etc/rsyncd/rsyncd.conf</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>同步文件到本地的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#rsync -auvzP --delete --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</div><div class="line">#由于这里只是需要将线上数据拉到本地，并不需要完全一致，所以可以不用--delete参数，能不用则不用，删除总归是危险操作 </div><div class="line">rsync -auvzP  --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">rsync -auvzP --delete --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</span></div><div class="line"><span class="meta">#</span><span class="bash">由于这里只是需要将线上数据拉到本地，并不需要完全一致，所以可以不用--delete参数，能不用则不用，删除总归是危险操作 </span></div><div class="line">rsync -auvzP  --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</div></pre></td></tr></table></figure>
 </li>
 <li><p>参数说明</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="_">-a</span> 相当于-rlptgoD</div><div class="line">-r是递归 </div><div class="line"><span class="_">-l</span>是链接文件，意思是拷贝链接文件；</div><div class="line">-p表示保持文件原有权限；</div><div class="line">-t保持文件原有时间；</div><div class="line">-g保持文件原有用户组；</div><div class="line">-o 保持文件原有属主；</div><div class="line">-D 相当于块设备文件；</div><div class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件) </div><div class="line">-z 传输时压缩；</div><div class="line">-P 传输进度；</div><div class="line">-v 传输时的进度等信息，和-P有点关系，自己试试。</div><div class="line">--delete 表示客户端的数据要与服务器端完全一致，如果客户端目录里有服务器上不存在的文件，则删除。</div><div class="line"><span class="comment">#执行rsync同步时，慎用-z参数！一旦启用了-z参数，则数据在传输前会先经过压缩，如果文件比较大的话，压缩会很慢！进而出现，明明网速很快，却同步缓慢的情况。</span></div></pre></td></tr></table></figure>
@@ -470,15 +470,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,15 +506,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,15 +518,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,15 +546,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,15 +562,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,14 +586,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -598,11 +594,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,15 +622,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

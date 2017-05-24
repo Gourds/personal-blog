@@ -188,19 +188,19 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install vsftpd -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#[root@stag-gw-cnd conf.d]# cat /etc/vsftpd/vsftpd.conf | egrep -v "^$|^#"</span></div><div class="line">anonymous_<span class="built_in">enable</span>=NO</div><div class="line"><span class="built_in">local</span>_<span class="built_in">enable</span>=YES</div><div class="line">write_<span class="built_in">enable</span>=YES</div><div class="line"><span class="built_in">local</span>_<span class="built_in">umask</span>=022</div><div class="line">dirmessage_<span class="built_in">enable</span>=YES</div><div class="line">xferlog_<span class="built_in">enable</span>=YES</div><div class="line">connect_from_port_20=YES</div><div class="line">xferlog_std_format=YES</div><div class="line">listen=YES</div><div class="line">chroot_<span class="built_in">local</span>_user=YES</div><div class="line"><span class="built_in">local</span>_root=/usr/share/nginx/cdn/Test</div><div class="line">pasv_promiscuous=YES</div><div class="line">pasv_<span class="built_in">enable</span>=YES</div><div class="line">pasv_max_port=10100</div><div class="line">pasv_min_port=10090</div><div class="line">pam_service_name=vsftpd</div><div class="line">userlist_<span class="built_in">enable</span>=YES</div><div class="line">tcp_wrappers=YES</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#[root@stag-gw-cnd conf.d]# cat /etc/vsftpd/vsftpd.conf | egrep -v "^$|^#"</span></div><div class="line">anonymous_enable=NO</div><div class="line">local_enable=YES</div><div class="line">write_enable=YES</div><div class="line">local_umask=022</div><div class="line">dirmessage_enable=YES</div><div class="line">xferlog_enable=YES</div><div class="line">connect_from_port_20=YES</div><div class="line">xferlog_std_format=YES</div><div class="line">listen=YES</div><div class="line">chroot_local_user=YES</div><div class="line">local_root=/usr/share/nginx/cdn/Test</div><div class="line">pasv_promiscuous=YES</div><div class="line">pasv_enable=YES</div><div class="line">pasv_max_port=10100</div><div class="line">pasv_min_port=10090</div><div class="line">pam_service_name=vsftpd</div><div class="line">userlist_enable=YES</div><div class="line">tcp_wrappers=YES</div></pre></td></tr></table></figure>
 </li>
 <li><p>防火墙配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/iptables</div><div class="line">iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --destination-port 10090:10100 -j ACCEPT</div><div class="line">/etc/init.d/iptables save</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/iptables</div><div class="line">iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --destination-port 10090:10100 -j ACCEPT</div><div class="line">/etc/init.d/iptables save</div></pre></td></tr></table></figure>
 </li>
 <li><p>服务配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service vsftpd restart</div><div class="line">iptables -nvL</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service vsftpd restart</div><div class="line">iptables -nvL</div></pre></td></tr></table></figure>
 </li>
 <li><p>用户配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">adduser ftptest</div><div class="line">passwd ftptest</div><div class="line">usermod -s /sbin/nologin ftptest</div><div class="line">usermod -d /usr/share/nginx/cdn/Test ftptest</div><div class="line">chown dcxjftp:ftp -R /usr/share/nginx/cdn/Test</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">adduser ftptest</div><div class="line">passwd ftptest</div><div class="line">usermod -s /sbin/nologin ftptest</div><div class="line">usermod -d /usr/share/nginx/cdn/Test ftptest</div><div class="line">chown dcxjftp:ftp -R /usr/share/nginx/cdn/Test</div></pre></td></tr></table></figure>
 </li>
 <li><p>安全配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim /etc/pam.d/vsftpd</div><div class="line">#注释下面这行</div><div class="line">#auth       required  pam_shells.so</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim /etc/pam.d/vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">注释下面这行</span></div><div class="line"><span class="meta">#</span><span class="bash">auth       required  pam_shells.so</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -442,15 +442,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,15 +478,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,15 +490,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,15 +518,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +534,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,14 +558,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -570,11 +566,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,15 +594,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

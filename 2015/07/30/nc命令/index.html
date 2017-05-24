@@ -179,19 +179,19 @@
         <p>由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法<br><code>nc命令介绍:</code>可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等</p>
 <ul>
 <li><p>参数介绍</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</div><div class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</div><div class="line">-h 在线帮助。</div><div class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</div><div class="line">-l 使用监听模式，管控传入的资料。</div><div class="line">-n 直接使用IP地址，而不通过域名服务器。</div><div class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</div><div class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</div><div class="line">-r 乱数指定本地与远端主机的通信端口。</div><div class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</div><div class="line">-u 使用UDP传输协议。</div><div class="line">-v 显示指令执行过程。</div><div class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</div><div class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</div><div class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</div><div class="line">-h 在线帮助。</div><div class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</div><div class="line">-l 使用监听模式，管控传入的资料。</div><div class="line">-n 直接使用IP地址，而不通过域名服务器。</div><div class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</div><div class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</div><div class="line">-r 乱数指定本地与远端主机的通信端口。</div><div class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</div><div class="line">-u 使用UDP传输协议。</div><div class="line">-v 显示指令执行过程。</div><div class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</div><div class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</div></pre></td></tr></table></figure>
 </li>
 <li><p>检测端口连通性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#TCP</div><div class="line">#TCP单个端口或范围扫描</div><div class="line">nc -vz -w2 192.168.20.133 1870</div><div class="line">nc -vz -w2 192.168.20.133 1-1870</div><div class="line">#UDP</div><div class="line">#UDP单个端口或范围扫描</div><div class="line">nc -uz -w2 192.168.20.133 5000</div><div class="line">nc -uz -w2 192.168.20.133 4990-5000</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">TCP</span></div><div class="line"><span class="meta">#</span><span class="bash">TCP单个端口或范围扫描</span></div><div class="line">nc -vz -w2 192.168.20.133 1870</div><div class="line">nc -vz -w2 192.168.20.133 1-1870</div><div class="line"><span class="meta">#</span><span class="bash">UDP</span></div><div class="line"><span class="meta">#</span><span class="bash">UDP单个端口或范围扫描</span></div><div class="line">nc -uz -w2 192.168.20.133 5000</div><div class="line">nc -uz -w2 192.168.20.133 4990-5000</div></pre></td></tr></table></figure>
 </li>
 <li><p>传输文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#目标文件主机命令，这个需要在文件传输之前执行，file.txt为文件传输过来后的文件名</div><div class="line">nc -l 1234 &gt; file.txt</div><div class="line">#源文件主机命令，hello.txt为传输文件，63为目标主机</div><div class="line">nc 172.17.18.63 1234 &lt; hello.txt</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">目标文件主机命令，这个需要在文件传输之前执行，file.txt为文件传输过来后的文件名</span></div><div class="line">nc -l 1234 &gt; file.txt</div><div class="line"><span class="meta">#</span><span class="bash">源文件主机命令，hello.txt为传输文件，63为目标主机</span></div><div class="line">nc 172.17.18.63 1234 &lt; hello.txt</div></pre></td></tr></table></figure>
 </li>
 <li><p>聊天，与传输文件基本一样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -l 1234    #主机1</div><div class="line">nc 192.168.2.34 1234    #主机2</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -l 1234    #主机1</div><div class="line">nc 192.168.2.34 1234    #主机2</div></pre></td></tr></table></figure>
 </li>
 <li><p>操作memcache</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#存储数据</div><div class="line">printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211</div><div class="line">#获取数据</div><div class="line">printf “get keyrn” |nc 192.168.2.34 11211</div><div class="line">#删除数据</div><div class="line">printf “delete keyrn” |nc 192.168.2.34 11211</div><div class="line">#查看状态</div><div class="line">printf “statsrn” |nc 192.168.2.34 11211</div><div class="line">#模拟top命令查看状态</div><div class="line">watch “echo stats” |nc 192.168.2.34 11211</div><div class="line">#清空缓存</div><div class="line">printf “flush_allrn” |nc 192.168.2.34 11211</div></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">存储数据</span></div><div class="line">printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">获取数据</span></div><div class="line">printf “get keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">删除数据</span></div><div class="line">printf “delete keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">查看状态</span></div><div class="line">printf “statsrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">模拟top命令查看状态</span></div><div class="line">watch “echo stats” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">清空缓存</span></div><div class="line">printf “flush_allrn” |nc 192.168.2.34 11211</div></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -426,15 +426,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,15 +462,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,15 +474,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,15 +502,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,15 +518,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,14 +542,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -554,11 +550,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,15 +578,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

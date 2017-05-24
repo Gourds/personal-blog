@@ -181,39 +181,39 @@
 <h3 id="cql交互命令（类似sql）"><a href="#cql交互命令（类似sql）" class="headerlink" title="cql交互命令（类似sql）"></a>cql交互命令（类似sql）</h3><ol>
 <li><p>运行cqlsh</p>
 <ul>
-<li>直接键入cqlsh命令即可，登陆后可使用help查看帮助<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/data/apps/opt/cassandra/bin/cqlsh ssy-db1</div></pre></td></tr></table></figure>
+<li>直接键入cqlsh命令即可，登陆后可使用help查看帮助<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/data/apps/opt/cassandra/bin/cqlsh ssy-db1</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>创建keyspace（秘钥空间）</p>
 <ul>
 <li><p>主要包括复制策略和durable_writes</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; CREATE KEYSPACE &quot;Test&quot;</div><div class="line">cqlsh&gt; WITH replication = &#123;&apos;class&apos;:&apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 3&#125;;</div><div class="line">#创建名为Test的keyspace(默认创建时不区分大小写的，加上双引号就区分大小写了),采用simple存储策略，factor为存储策略的选项</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> CREATE KEYSPACE <span class="string">"Test"</span></span></div><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> WITH replication = &#123;<span class="string">'class'</span>:<span class="string">'SimpleStrategy'</span>, <span class="string">'replication_factor'</span> : 3&#125;;</span></div><div class="line"><span class="meta">#</span><span class="bash">创建名为Test的keyspace(默认创建时不区分大小写的，加上双引号就区分大小写了),采用simple存储策略，factor为存储策略的选项</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>复制策略介绍</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">org.apache.cassandra.locator.SimpleStrategy</div><div class="line">#SimpleStrategy针对是一个data center中的多个存储节点(node)的存储，strategy_options表示数据存储所有存储节点(node)的复本数量，选择node的规则是在data center中按照顺时针的方向进行选择；</div><div class="line">org.apache.cassandra.locator.NetworkTopologyStrategy</div><div class="line">#NetworkTopologyStrategy是针对多个data center的情况进行处理，这个是以防同一个data center中的所以节点同时出现问题，如掉电；</div><div class="line">org.apache.cassandra.locator.OldNetworkTopologyStrategy</div><div class="line">#OldNetworkT opologyStrategy，这个可能会很少用上了，对data center的个数及复本的数量支持的有限，有了NetworkTopologyStrategy就不需要OldNetworkTopologyStrategy了。</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">org.apache.cassandra.locator.SimpleStrategy</div><div class="line"><span class="meta">#</span><span class="bash">SimpleStrategy针对是一个data center中的多个存储节点(node)的存储，strategy_options表示数据存储所有存储节点(node)的复本数量，选择node的规则是在data center中按照顺时针的方向进行选择；</span></div><div class="line">org.apache.cassandra.locator.NetworkTopologyStrategy</div><div class="line"><span class="meta">#</span><span class="bash">NetworkTopologyStrategy是针对多个data center的情况进行处理，这个是以防同一个data center中的所以节点同时出现问题，如掉电；</span></div><div class="line">org.apache.cassandra.locator.OldNetworkTopologyStrategy</div><div class="line"><span class="meta">#</span><span class="bash">OldNetworkT opologyStrategy，这个可能会很少用上了，对data center的个数及复本的数量支持的有限，有了NetworkTopologyStrategy就不需要OldNetworkTopologyStrategy了。</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>删除keyspace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; drop keyspace &quot;Test&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> drop keyspace <span class="string">"Test"</span></span></div></pre></td></tr></table></figure>
 </li>
 <li><p>修改keyspace参数信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; ALTER KEYSPACE &quot;Test&quot; WITH REPLICATION = &#123; &apos;class&apos; : &apos;SimpleStrategy&apos;, &apos;replication_factor&apos; : 1 &#125;; </div><div class="line">#修改factor为1</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> ALTER KEYSPACE <span class="string">"Test"</span> WITH REPLICATION = &#123; <span class="string">'class'</span> : <span class="string">'SimpleStrategy'</span>, <span class="string">'replication_factor'</span> : 1 &#125;; </span></div><div class="line"><span class="meta">#</span><span class="bash">修改factor为1</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>进入keyspace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; use &quot;keyspace_name&quot;;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> use <span class="string">"keyspace_name"</span>;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>查看</p>
 <ul>
 <li><p>查看keyspace</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cqlsh&gt; SELECT * from system.schema_keyspaces;</div><div class="line">cqlsh&gt; describe keyspaces;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> SELECT * from system.schema_keyspaces;</span></div><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> describe keyspaces;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>查看已有表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; describe tables;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> describe tables;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>查看表结构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sqlsh&gt; use &quot;keyspace_name&quot;</div><div class="line">sqlsh&gt; describe table &quot;table_name&quot;;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> use <span class="string">"keyspace_name"</span></span></div><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> describe table <span class="string">"table_name"</span>;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -451,15 +451,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,15 +487,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,15 +499,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,15 +527,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,15 +543,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,14 +567,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -579,11 +575,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,15 +603,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

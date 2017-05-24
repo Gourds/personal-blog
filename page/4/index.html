@@ -179,19 +179,19 @@
         <p>Tips：很有用的几个选项</p>
 <h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ul>
 <li><p>定向匹配&amp;忽略大小写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#-B</div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line">#-A</div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line">#-C</div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line">#-i</div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-B</span></div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line"><span class="meta">#</span><span class="bash">-A</span></div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line"><span class="meta">#</span><span class="bash">-C</span></div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line"><span class="meta">#</span><span class="bash">-i</span></div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
 </li>
 <li><p>反选匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#-v</div><div class="line">egrep -v &quot;^#|^$&quot; filename #不显示filename中的空行和开头#的注释行，显示其余内容</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-v</span></div><div class="line">egrep -v "^#|^$" filename #不显示filename中的空行和开头#的注释行，显示其余内容</div></pre></td></tr></table></figure>
 </li>
 <li><p>计数匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -c part filename #显示匹配到part的行数</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -c part filename #显示匹配到part的行数</div></pre></td></tr></table></figure>
 </li>
 <li><p>显示文件名匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#-H</div><div class="line">grep part -H somefile #显示一群文件中含有part的文件名并显示匹配项相关</div><div class="line">#-l</div><div class="line">grep part -l somefile #只显示含有匹配项的文件名</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-H</span></div><div class="line">grep part -H somefile #显示一群文件中含有part的文件名并显示匹配项相关</div><div class="line"><span class="meta">#</span><span class="bash"><span class="_">-l</span></span></div><div class="line">grep part -l somefile #只显示含有匹配项的文件名</div></pre></td></tr></table></figure>
 </li>
 <li><p>其他选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-s或--no-messages   不显示错误信息。</div><div class="line">-w或--word-regexp   只显示全字符合的列。</div><div class="line">-x或--line-regexp   只显示全列符合的列。</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-s或--no-messages   不显示错误信息。</div><div class="line">-w或--word-regexp   只显示全字符合的列。</div><div class="line">-x或--line-regexp   只显示全列符合的列。</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h3><ul>
@@ -263,8 +263,6 @@
 <li>rsync服务器负载比较高，则使用独立启动模式</li>
 <li>rsync服务器负责较低，使用xinetd运行方式
         
-          <a class="article-more-a" href="/2016/04/11/CentOS搭建rsync服务/#more">more >></a>
-        
       
 
       
@@ -324,8 +322,6 @@
       
         <p>PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。<br>
         
-          <a class="article-more-a" href="/2016/04/03/4月读书计划/#more">more >></a>
-        
       
 
       
@@ -383,9 +379,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>摘要：</strong>由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的<a href="http://blog.arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/">–&gt;飞机票</a>,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。<br>
-        
-          <a class="article-more-a" href="/2016/03/25/CentOS搭建支持ftp的cdn服务/#more">more >></a>
+        <p><strong>摘要：</strong>由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的<a href="http://blog.arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/" target="_blank" rel="external">–&gt;飞机票</a>,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。<br>
         
       
 
@@ -450,8 +444,6 @@
       
         <p><strong>摘要：</strong>nginx有很多很强大的功能，可以做web，可以做代理、可以做SLB、还可以做缓存CDN等等，这里记录以下做缓存时的配置。<br>
         
-          <a class="article-more-a" href="/2016/03/03/Nginx搭建CDN源站/#more">more >></a>
-        
       
 
       
@@ -514,8 +506,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python<br>
-        
-          <a class="article-more-a" href="/2016/02/12/python2-6升级2-7记录/#more">more >></a>
         
       
 
@@ -741,15 +731,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,15 +767,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,15 +779,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,15 +807,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,15 +823,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -853,14 +847,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -869,11 +855,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -897,15 +883,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>

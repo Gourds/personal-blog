@@ -179,7 +179,7 @@
         <p>简述：在centOS6.5上使用pip安装ansible(version=2.1.1.0)时报错</p>
 <h3 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h3><ul>
 <li><p>报错如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> ERROR! Unexpected Exception: <span class="string">'module'</span> object has no attribute <span class="string">'HAVE_DECL_MPZ_POWM_SEC'</span></div><div class="line">the full traceback was:</div><div class="line"></div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"/usr/bin/ansible"</span>, line 81, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.cli.adhoc import AdHocCLI as mycli</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/cli/adhoc.py"</span>, line 28, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.executor.task_queue_manager import TaskQueueManager</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/executor/task_queue_manager.py"</span>, line 29, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.executor.process.result import ResultProcess</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/executor/process/result.py"</span>, line 34, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random import atfork</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/__init__.py"</span>, line 29, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random import _UserFriendlyRNG</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/_UserFriendlyRNG.py"</span>, line 38, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random.Fortuna import FortunaAccumulator</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/Fortuna/FortunaAccumulator.py"</span>, line 39, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    import FortunaGenerator</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/Fortuna/FortunaGenerator.py"</span>, line 34, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Util.number import ceil_<span class="built_in">shift</span>, exact_<span class="built_in">log</span>2, exact_div</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Util/number.py"</span>, line 56, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    <span class="keyword">if</span> _fastmath is not None and not _fastmath.HAVE_DECL_MPZ_POWM_SEC:</div><div class="line">AttributeError: <span class="string">'module'</span> object has no attribute <span class="string">'HAVE_DECL_MPZ_POWM_SEC'</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> ERROR! Unexpected Exception: <span class="string">'module'</span> object has no attribute <span class="string">'HAVE_DECL_MPZ_POWM_SEC'</span></div><div class="line">the full traceback was:</div><div class="line"></div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"/usr/bin/ansible"</span>, line 81, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.cli.adhoc import AdHocCLI as mycli</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/cli/adhoc.py"</span>, line 28, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.executor.task_queue_manager import TaskQueueManager</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/executor/task_queue_manager.py"</span>, line 29, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from ansible.executor.process.result import ResultProcess</div><div class="line">  File <span class="string">"/usr/lib/python2.6/site-packages/ansible/executor/process/result.py"</span>, line 34, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random import atfork</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/__init__.py"</span>, line 29, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random import _UserFriendlyRNG</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/_UserFriendlyRNG.py"</span>, line 38, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Random.Fortuna import FortunaAccumulator</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/Fortuna/FortunaAccumulator.py"</span>, line 39, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    import FortunaGenerator</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Random/Fortuna/FortunaGenerator.py"</span>, line 34, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from Crypto.Util.number import ceil_shift, exact_log2, exact_div</div><div class="line">  File <span class="string">"/usr/lib64/python2.6/site-packages/Crypto/Util/number.py"</span>, line 56, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    <span class="keyword">if</span> _fastmath is not None and not _fastmath.HAVE_DECL_MPZ_POWM_SEC:</div><div class="line">AttributeError: <span class="string">'module'</span> object has no attribute <span class="string">'HAVE_DECL_MPZ_POWM_SEC'</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>解决如下<br>分析为PyCrypto模块安装有问题，所以就直接卸载重装。。有能力的话我会进一步探究这个报错，不过现在以下方法可以解决，先这样吧</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip uninstall python-keyczar pycrypto pyasn1</div><div class="line">yum erase python-keyczar python-crypto pyasn1</div><div class="line">yum install python-keyczar</div></pre></td></tr></table></figure>
@@ -439,15 +439,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">problems</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,15 +475,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">problems</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,15 +487,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rsync</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cassandra</a>
+                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">zabbix</a>
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,15 +515,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iptables</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">netword</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,15 +531,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,14 +555,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ntp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">lvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
@@ -567,11 +563,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,15 +591,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">瞎掰</a>
               </li>
             
             <div class="clearfix"></div>
