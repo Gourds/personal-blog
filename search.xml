@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Jumpserver实践记录]]></title>
       <url>http://yoursite.com/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</url>
-      <content type="html"><![CDATA[<h1 id="Jumpserver搭建"><a href="#Jumpserver搭建" class="headerlink" title="Jumpserver搭建"></a>Jumpserver搭建</h1><p><strong>Jumpserver</strong>是一个开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><strong>Jumpserver</strong>是一个开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="==Environment=="></a>==Environment==</h3><ul>
 <li>aws ec2</li>
 <li>centos7.3</li>
