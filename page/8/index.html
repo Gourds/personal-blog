@@ -104,7 +104,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -282,124 +282,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/12/Perl语言入门（6th）课后习题/" itemprop="url">
-                  Perl语言入门（6th）课后习题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-12T16:00:21+08:00" content="2015-08-12">
-              2015-08-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/12/Perl语言入门（6th）课后习题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/Perl语言入门（6th）课后习题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/08/12/Perl语言入门（6th）课后习题/" class="leancloud_visitors" data-flag-title="Perl语言入门（6th）课后习题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          个人感觉课后习题单独分出来比较方便，这里有可能的话会多放些例子，ok，go
-###Chapter one
-
-计算半径为12.5的园的周长，可自行输入，小于0输出为012345#!/usr/bin/perlprint "Please input a number: ";$inputNumber = &
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/12/Perl语言入门（6th）课后习题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/08/10/Prel语言入门读书笔记/" itemprop="url">
                   Perl语言入门（一）
                 </a>
@@ -460,24 +342,278 @@
       
         
           
-          更新记录：
+            <p><strong>更新记录：</strong></p>
+<ul>
+<li>2015/08/10 DonePage45</li>
+<li>2015/08/11 DonePage68</li>
+<li>2015/08/17 Read list and array, do a new one.</li>
+</ul>
+<p>##前言杂记</p>
+<ul>
+<li>适合管理员使用的语言</li>
+<li>Arvon’s读书笔记</li>
+<li><p>sixth edtion for learning perl</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="number">5.014</span>;<span class="comment">#该脚本需要在Perl 5.14或更高版本才能正常运行</span></div><div class="line">perl -v<span class="comment">#查看perl的版本</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Hello，World</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">printf</span> <span class="string">"Hello, world!\n"</span>;</div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"Hello, world!"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>替换字符演示</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">@lines = <span class="string">`perldoc -u -fatan2`</span>;</div><div class="line"><span class="keyword">foreach</span> (@lines)&#123;</div><div class="line">    <span class="regexp">s/\w&lt;([^&gt;]+)&gt;/\U$1/g</span>;</div><div class="line">        <span class="keyword">print</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>##标量数据</p>
+<ul>
+<li>标量数据是Perl里面最简单的一种数据类型。对大部分标量来说，它要么是数字（如123或3.25e23），要<br>么是由字符组成的序列（如hello）。对Perl来说，数字和字符串大多情况下是可以在内部转换的。可以用操<br>作符对标量进行操作（如加法或字符串连接），产生的结果通常也是一个标量。标量可以存储在标量变量里，<br>也可以从文件和设备读取或写入这些位置。</li>
+</ul>
+<p>###数字</p>
+<p>####所有数字的内部格式都相同</p>
+<ul>
+<li>Perl内部，总是按“双精度浮点数（double-precision floating-point）”的要求来保存数字并进行运算<br>的。也就是说，Perl内部并不存在整数值–程序中用到的整数型常量会被转换成等效的浮点数值。</li>
+</ul>
+<p>####浮点数直接量</p>
+<ul>
+<li>直接量（literal）是指某个数字在Perl源代码中的写法。直接量并非运算结果，也不是I/O（输入/输出）<br>操作的结果，它只是直接键入源程序代码中的数据。</li>
+<li>Perl浮点数直接量的写法，小数点与前置的正负号都是可选的，数字后面也可以加上用“e”表示的10的次方<br>表示符（即指数表示法）。</li>
+<li>如下列写法<blockquote>
+<p>1.25<br>255.000<br>255.0<br>7.25e45    #7.25乘以10的45次方，其中e可以大写<br>-6.5e123</p>
+</blockquote>
+</li>
+</ul>
+<p>####整数直接量</p>
+<ul>
+<li>整数直接量：<blockquote>
+<p>0<br>1234<br>-4321<br>41023789873    #可以写成41_023_789_873,Perl允许在整数直接量插入下划线，方便辨认</p>
+</blockquote>
+</li>
+</ul>
+<p>####非十进制的整数直接量</p>
+<ul>
+<li>Perl语言和其他许多程序语言一样，允许使用十进制（decimal）意外的其他进制表示数字。八进制（octal）<br>直接量以0开头，十六进制（hexadecimal）直接量以ox开头，二进制（binary）直接量以ob开头。十六进制的<br>A到F（可以写成小写的a到f，来代表十进制的10到15）。例如<blockquote>
+<p>o377    #八进制的377，等于十进制的255<br>0xff    #十六进制的FF，等于十进制的255<br>ob11111111    #二进制的，等于十进制的255</p>
+</blockquote>
+</li>
+<li>这三个数字虽然看起来不同，但对Perl来说都是同一个数字</li>
+</ul>
+<p>####数字操作符</p>
+<ul>
+<li>Perl提供了各种常见的数字操作符，如加、减、乘、除、取模、次方。例如：<blockquote>
+<p>2+3<br>5.1-2.4<br>3<em>12<br>14/2<br>10.2/0.3<br>10/3<br>10%3    #取模，结果为1<br>2*</em>3    #次方，结果为8</p>
+</blockquote>
+</li>
+</ul>
+<p>###字符串</p>
+<ul>
+<li>字符串就是一个字符序列，如hello。字符串可以各种字符任意组合而成。最短的字符串不包含任何字符，也<br>叫做空字符串。最长的字符串的长度没有限制。这符合Perl遵守的“无内置限制（nobuilt-inlimits）”的原则。<br>字符串通常是由可输出地字母、数字及标点符号组成，其范围介于ASCII编码的32到126之间。由于字符串可以<br>包含任何字符，所以可用它来创建、扫描或操控二进制数据，这是许多其他工具语言望尘莫及的。例如：你可以<br>将一个图形文件或编译过的可执行文件读进Perl的字符串变变量，修改它的内容再写回去。</li>
+<li><p>Perl完全支持Unicode，所以在字符串中可以使用任意一个合法的Unicode字符。不过由于Perl的历史原因<br>它不会自动将程序源代码当做Unicode编码的文本读入，所以如果你想要在源代码中使用Unicode书写直接量<br>的话，需手工加上utf8编译指令：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> utf8;</div></pre></td></tr></table></figure>
+</li>
+<li><p>和数字一样，字符串也有直接量记法，也就是Perl程序中字符串的书写方式。包括单引号内的字符串和双引号<br>内的字符串。</p>
+</li>
+</ul>
+<p>####单引号内的字符串直接量</p>
+<ul>
+<li>除了单引号和反斜线之外，单引号内所有的字符串都代表他们自己。<blockquote>
+<p>‘fred’<br>‘hello’<br>‘’<br>‘#$@%’<br>‘Don\’t let me go!’<br>‘the last character is a backslash:\‘<br>‘\’\‘    #单引号后面紧接着反斜线<br>‘hi\n’    #单引号内的\n并不是换行符，而是表示字面上的两个字符</p>
+</blockquote>
+</li>
+</ul>
+<p>####双引号内的字符串直接量</p>
+<ul>
+<li>双引号中的反斜线更为强大<blockquote>
+<p>“hi\n”        #换行符<br>“love\tyou”        #水平制表符<br>“\r”    #回车<br>“\f”    #换页符<br>“\b”    #退格<br>“\e”    #Esc（ASCII编码的转义字符）<br>“\cC”    #控制符，就是COntrol键的代码（此例表示同时按下Ctrl和c键的返回码）<br>“\l”    #将下个字母转换为小写<br>“\L”    #将它后面的所有字母都转换为小写的，直到\E为止<br>“\u”    #将下个字符转换为大写<br>“\U”    #将它后面所有的字母都转换为大写，直到\E为止<br>“\E”    #结束\L、\U和\Q开始的作用范围</p>
+</blockquote>
+</li>
+</ul>
+<p>####字符串操作符</p>
+<ul>
+<li>字符串可以用.操作符链接起来<blockquote>
+<p>“hello”.”world”    #等同于”helloworld”<br>“hello” . ‘ ‘ . “world”    #等同于’hello world’<br>‘hello world’ . “\n”    #等同于”hello world\n”</p>
+</blockquote>
+</li>
+<li><code>注意</code>：链接运算符必须显示使用连接操作符（concatenation operator），而不是像其他一些语言<br>只需要把两个字符串放在一起就行。</li>
+<li><code>特殊的重复操作符，小写字母x</code>，此操作符会将其左边的操作数与它本身重复连接，重复次数由右边的<br>操作数（某个数字）指定。例子：<blockquote>
+<p>“fred” x 3    #得到“fredfredfred”<br>“barney” x (4+1)    #得到“barneybarneybarneybarneybarney”<br>5 x 4.8    #相当于5乘以4，它会把4.8当做4，因为这里是小写字母x而不是*</p>
+</blockquote>
+</li>
+</ul>
+<p>####数字与字符串之间的自动转换</p>
+<ul>
+<li>Perl根据操作符来确定你需要的是数字还是字符串。如操作符（比如+号）需要的是数字，Perl会将操作<br>数视为数字；在操作符（比如.）需要字符串时，Perl便会将数视为字符串。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#Todo: concatenation operator</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"5*4.8\n"</span>;</div><div class="line"><span class="keyword">printf</span> <span class="number">5</span> * <span class="number">4.8</span> . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">printf</span> <span class="number">5</span> <span class="keyword">x</span> <span class="number">4.8</span> . <span class="string">"\n"</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"z"</span> . <span class="number">5</span>*<span class="number">7</span> . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl string_repetition </span></div><div class="line"><span class="number">5</span>*<span class="number">4.8</span></div><div class="line"><span class="number">24</span></div><div class="line"><span class="number">5555</span></div><div class="line">z35</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###Perl的内置警告信息</p>
+<ul>
+<li><p>从Perl的5.6版本开始，可以通过编译指令开启警告功能</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> warnings;</div></pre></td></tr></table></figure>
+</li>
+<li><p>也可以在命令行上使用-w选项对要运行的程序开启警告功能</p>
+<blockquote>
+<p>$ perl -w program.pl</p>
+</blockquote>
+</li>
+<li><p>还可以在shebang行上指定命令行选项</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl -w</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果看不懂某个警告信息，可以利用diagnostics这个编译命令报告更为详尽的问题描述。在perdiag文档<br>中列有简要警告信息和详细诊断说明，该文档时理解diagnostics输出信息的最佳参考：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> diagnostics;	<span class="comment">#会使程序变慢，如果熟悉，尽量不使用</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###标量变量</p>
+<ul>
+<li>变量（variable）就是存储一个或多个值的容器的名称。而标量变量就是单单存储一个值的变量。变量的<br>名称在整个程序中保持不变，但它所持有的值是可以在程序运行时不断修改变化的。</li>
+<li>标量变量存储的是单个标量值。标量变量的名称是以$开头的，这个符号也称为魔符（sigil），然后是变<br>量Perl的标识符：由一个字母或下划线开头，后接多个字母、数字、下划线。标识符是区分大小写的：$Fred<br>和$fred是完全不同的变量。<blockquote>
+<p>$name<br>$Name<br>$NAME<br>$a_very_long_variable_that_ends_in_i</p>
+</blockquote>
+</li>
+<li>Perl通过变量标识符的魔符来区分它是什么类型的变量。所以不管取什么名字，都不会和Perl自带的函数<br>或操作符的写法相冲突。$的确切意思是“取单个东西”或者“取标量”。</li>
+<li>给变量取个好名字，例如：$my_name or $myName</li>
+</ul>
+<p>###标量的赋值（assignment）</p>
+<ul>
+<li>和其他程序语言差不多，Perl的赋值操作符为等号，等号的左边是变量名称，右边为某个表达式。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$fred = <span class="number">17</span>;</div><div class="line">$barney = <span class="string">'hello'</span>;</div><div class="line">$barney = $fred+<span class="number">3</span>;</div><div class="line">$barney = $barney*<span class="number">2</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>####双目赋值的操作符</p>
+<ul>
+<li><p>例子一</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$fred = $fred + <span class="number">5</span>;	<span class="comment">#相当于$fred += 5;</span></div><div class="line">$barney = $barney * <span class="number">3</span>;	<span class="comment">#相当于$barney *= 3;</span></div><div class="line">$str = $str. <span class="string">" "</span>;	<span class="comment">#相当于$str .= "";</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>例子二</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$fred = <span class="number">1</span>;</div><div class="line">$fred = $fred + <span class="number">5</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"now + 5 fred is "</span> . $fred . <span class="string">"\n"</span>;</div><div class="line">$fred += <span class="number">2</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"then + 2 fred is "</span> . $fred . <span class="string">"\n"</span>;</div><div class="line">$str = <span class="string">'hello'</span>;</div><div class="line">$str = $str . <span class="string">" "</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"the string \$str is "</span> . $str . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">root@Mo arvon_perl]<span class="comment"># perl double.pl </span></div><div class="line">now + <span class="number">5</span> fred is <span class="number">6</span></div><div class="line">then + <span class="number">2</span> fred is <span class="number">8</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串中的标量变量内插</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$meal = <span class="string">"love"</span>;</div><div class="line">$things = <span class="string">"arvon $meal mo"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"$things\n"</span>;</div><div class="line">$newThings = <span class="string">' arvon '</span> . $meal . <span class="string">' mo'</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">'now the $newThings is'</span> . $newThings . <span class="string">"\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output[root@Mo arvon_perl]# perl varInsert.pl </span></div><div class="line">arvon love mo</div><div class="line">now the $newThings is arvon love mo</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果变量从未被赋值过，就会用空字符串来替换</p>
+</li>
+<li><p>如果只是打印这个变量值，则不必使用变量内插的方式：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> <span class="string">"$fred"</span>；</div><div class="line"><span class="keyword">print</span> $fred；	<span class="comment">#用这个比较好</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>可以直接键入一些字符的代码点(code point)，再通过chr（）函数转换成对应字符,反过来我们可以通过<br>ord（）函数把字符转换为代码点</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$alef = <span class="keyword">chr</span>( <span class="number">0x05D</span>o ）；</div><div class="line">$codePoint = <span class="keyword">ord</span>(<span class="string">'?'</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###操作符的优先级与结合性</p>
+<ul>
+<li>在复杂的表达式里，先执行哪个操作再执行哪个操作，取决于操作符的优先级。在Perl里乘法的优先级高于<br>加法，可以使用括号改变执行的优先级</li>
+<li>当两个优先级相同的操作符抢着使用三个操作数时，优先级便交由结合性解决：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">4</span> ** <span class="number">3</span> ** <span class="number">2</span> <span class="comment">#4 ** (3 ** 2),得4 ** 9，向右结合</span></div><div class="line"><span class="number">72</span> / <span class="number">12</span> / <span class="number">3</span><span class="comment">#(72 / 12） / 3,得6 / 3，向左结合</span></div><div class="line"><span class="number">36</span> / <span class="number">6</span> * <span class="number">3</span>	<span class="comment">#(36 / 6) * 3</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###比较操作符</p>
+<ul>
+<li>perl的比较操作符类似于代数系统：&lt;,&lt;=,==,&gt;=,&gt;,!=。这些操作符的返回值要么是true要么是false。</li>
+<li>字符串比较时，使用lt、le、eq、ge、gt、ne。<code>注意:</code>字符在ASCII编码中的顺序并不总是对应于字<br>符本身意义上的顺序。</li>
+</ul>
+<p>##控制结构</p>
+<p>###if控制结构</p>
+<p>####例子<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#$name = 'fred';</span></div><div class="line">$name = <span class="string">'Nfred'</span>;</div><div class="line"><span class="keyword">if</span> ($name eq <span class="string">"fred"</span>)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"'$name' is 'fred' in\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"'$name' is not 'fred' is $name\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>####布尔值</p>
+<ul>
+<li><p>任何标量值都可以成为if控制结构里的判断条件。如果把表达式返回的真假值保存到变量中，那在判断时可以<br>直接检查该变量的值，读起来也方便：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#$name = 'fred';</span></div><div class="line">$name = <span class="string">'Nfred'</span>;</div><div class="line"><span class="keyword">if</span> ($name eq <span class="string">"fred"</span>)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"'$name' is 'fred' in\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"'$name' is not 'fred' is $name\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl Boolean_value.pl </span></div><div class="line">hello, world</div></pre></td></tr></table></figure>
+</li>
+<li><p>Perl和其他语言不同，Perl并没有专用的“布尔（boolean）”数据类型，它是靠一些简单的规则来判断的：</p>
+<blockquote>
+<ul>
+<li>如果是数字，0为假，所有其他数字都为真</li>
+<li>如果是字符串，空字符串（’’)为假；所有其他字符串为真。</li>
+<li>如果既不是数字也不是字符串，那就先转换成数字或字符串再进行判断。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>###获取用户输入</p>
+<ul>
+<li>用户输入的例子<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Input something please: "</span>;</div><div class="line">$line = &lt;STDIN&gt;;</div><div class="line"><span class="keyword">if</span> ($line eq <span class="string">"\n"</span>)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"That was just a blank line!\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"That line of input was: $line"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl stdin01.pl </span></div><div class="line">Input something please: </div><div class="line">That was just a blank line!</div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl stdin01.pl ]</span></div><div class="line">Input something please: hello</div><div class="line">That line of input was: hello</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###chomp操作符</p>
+<ul>
+<li><p>chomp（）操作符只能用于单个变量，且该变量的内容必须为字符串，如果该字符串的末尾是换行符，chomp（）<br>的任务就是去掉它。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$text = <span class="string">"a line of text\n"</span>;     <span class="comment">#or input by &lt;STDIN&gt;</span></div><div class="line"><span class="keyword">chomp</span>($text);   <span class="comment">#remove the \n</span></div><div class="line"><span class="keyword">print</span> $text;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl chompTraining.pl </span></div><div class="line">a line of text[root@Mo arvon_perl]<span class="comment">#</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>处理字符串变量</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">chomp</span>($text = &lt;STDIN&gt;); <span class="comment">#读入文字，略过最后的换行符</span></div><div class="line"><span class="comment">#$text = &lt;STDIN&gt;;       #等同于上面的写法</span></div><div class="line"><span class="comment">#chomp($text):</span></div><div class="line"><span class="keyword">print</span> $text;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl chompTraining02.pl </span></div><div class="line">hello,world</div><div class="line">hello,world[root@Mo arvon_perl]<span class="comment">#</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###while控制结构<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$count = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span> ($count &lt;  <span class="number">10</span>)&#123;</div><div class="line">    $count += <span class="number">2</span>;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Now the number is $count\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl whileCount.pl </span></div><div class="line">Now the number is <span class="number">2</span></div><div class="line">Now the number is <span class="number">4</span></div><div class="line">Now the number is <span class="number">6</span></div><div class="line">Now the number is <span class="number">8</span></div><div class="line">Now the number is <span class="number">10</span></div></pre></td></tr></table></figure></p>
+<p>###undef值</p>
+<ul>
+<li>我们未赋值时就用到了某个不存在标量变量，并不会让程序停止运行，当成数字使用，它会表现的像0；当<br>做字符串使用，它会表现的像空字符串。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#累加奇数</span></div><div class="line">$n = <span class="number">1</span>;</div><div class="line"><span class="keyword">while</span> ($n &lt; <span class="number">10</span>)&#123;</div><div class="line">    $sum += $n;</div><div class="line">    $n += <span class="number">2</span>;<span class="comment">#准备奇数</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">print</span> <span class="string">"The total was $sum.\n"</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl accumulation.pl </span></div><div class="line">The total was <span class="number">25</span>.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###definded函数</p>
+<ul>
+<li>行输入操作符<stdin>有时候会返回undef。要判断某个字符串是undef而不是空字符串，可以使用defined<br>函数。如果是undef，该函数返回假，否则返回真：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$madonna = &lt;STDIN&gt;;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">defined</span>($madonna))&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"The input was $madonna"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"No input available\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">#$madonna = undef;</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl undef01.pl </span></div><div class="line">No input available</div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl undef01.pl </span></div><div class="line">Mo</div><div class="line">The input was Mo</div><div class="line">[root@Mo arvon_perl]<span class="comment"># perl undef01.pl </span></div><div class="line"></div><div class="line">The input was</div></pre></td></tr></table></figure>
+</stdin></li>
+</ul>
+<p>##列表和数组</p>
+<ul>
+<li>如果Perl的标量代表单数（singular），那么列表和数组就表示复数（plural）。</li>
+<li>列表（list）是标量的有序集合，而数组（array）则是存储列表的变量。列表指的是数据，而数组指的是变<br>量。列表里的值不一定放在数组里，但每个数组变量都包含一个列表（即便是不含任何元素的空列表。</li>
+<li>数组或列表中的每个元素 （element）都是单独的标量变量，拥有独立的标量值。这些值是有序的，从开始到<br>终止元素的先后次序是固定的。</li>
+</ul>
+<p>###访问数组中的元素</p>
+<ul>
+<li>Example one<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="comment">#print "Hello world\n";</span></div><div class="line">$fred[<span class="number">0</span>] = <span class="string">"Hello"</span>;</div><div class="line">$fred[<span class="number">1</span>] = <span class="string">"My"</span>;</div><div class="line">$fred[<span class="number">2</span>] = <span class="string">"Name"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"$fred[0]\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">&gt;arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl array.pl </span></div><div class="line">Hello</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###特殊的数字索引</p>
+<ul>
+<li>Example two<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">$rocks[<span class="number">0</span>] = <span class="string">'hello'</span>;</div><div class="line">$rocks[<span class="number">1</span>] = <span class="string">'list'</span>;</div><div class="line">$rocks[<span class="number">2</span>] = <span class="string">'array'</span>;</div><div class="line">$rocks[<span class="number">3</span>] = <span class="string">'element'</span>;</div><div class="line">$rocks[<span class="number">4</span>] = <span class="string">'four'</span>;</div><div class="line">$rocks[<span class="number">9</span>] = <span class="string">'nine'</span>;</div><div class="line"><span class="comment">#</span></div><div class="line">$end = $#rocks;</div><div class="line"><span class="keyword">print</span> <span class="string">"\$end is $end\n"</span>;</div><div class="line"><span class="comment">#</span></div><div class="line">$number_of_rocks = $end + <span class="number">1</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"The number is $number_of_rocks\n"</span>;</div><div class="line"><span class="comment">#</span></div><div class="line">$rocks[ $#rocks ] = <span class="string">'hard rodk'</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl array_print.pl </span></div><div class="line">$end is 9</div><div class="line">The number is 10</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###列表直接量</p>
+<ul>
+<li>列表直接量（list literal），可以由圆括号内用逗号隔开的一组数据表示，而这些数据就称为元素。<br>for example<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">#(1, 2, 3,)相同的逗号会被忽略</span></div><div class="line">(<span class="string">"fred"</span>, <span class="number">4.5</span>)   <span class="comment">#两个元素，'fred'和4.5</span></div><div class="line">()  <span class="comment">#空列表，0个元素</span></div><div class="line">(<span class="number">1</span>..<span class="number">100</span>)    <span class="comment">#100个整数组成的列表</span></div><div class="line">(<span class="number">1</span>..<span class="number">5</span>)  <span class="comment">#..是范围操作符（range operator）</span></div><div class="line">(<span class="number">1.7</span>..<span class="number">5.7</span>)  <span class="comment">#同上，但两个数字的小数部分会被去掉</span></div><div class="line">(<span class="number">5</span>..<span class="number">1</span>)  <span class="comment">#表示空列表，只能正向计数</span></div><div class="line">($m..$n)    <span class="comment">#由$m和$n决定</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###<code>qw简写</code></p>
+<ul>
+<li>在perl程序中，经常会需要建立简单的单词列表。使用qw简写，可以省去键入的引号。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">(<span class="string">"Mo"</span>, <span class="string">"have"</span>, <span class="string">"rose"</span>, <span class="string">"you"</span>, <span class="string">"known"</span>);</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="string">qw( Mo have rose you known )</span>;</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="string">qw(Mo</span></div><div class="line">hava    rose</div><div class="line">you known);</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="string">qw(</span></div><div class="line">    Mo</div><div class="line">    have</div><div class="line">    rose</div><div class="line">    you</div><div class="line">    known</div><div class="line">);</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="keyword">qw</span>! Mo have rose you known!;</div><div class="line"><span class="keyword">qw</span>/ Mo have rose you known/;</div><div class="line"><span class="keyword">qw</span><span class="comment"># Mo have rose you known#;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###列表的赋值</p>
+<ul>
+<li>和标量赋值一样，列表值可以被赋值给变量<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">($fred, $barney, $dino) = (<span class="string">"flintstone"</span>, <span class="string">"rubble"</span>, <span class="keyword">undef</span>);</div><div class="line"><span class="comment">#左侧列表中的三个变量会依次被赋予右侧列表中对应的值，相当于分别做了三次独立的赋值操作；</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###pop和push操作符</p>
+<ul>
+<li>要增加元素到数组尾端时，只要将它存放到更高索引的新位置就可以了。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">@array = <span class="number">5</span>..<span class="number">9</span>;</div><div class="line">$mo = <span class="keyword">pop</span>(@array);</div><div class="line"><span class="keyword">printf</span> <span class="string">"now \$mo is $mo\n"</span>;</div><div class="line">$arvon = <span class="keyword">pop</span>(@array);</div><div class="line"><span class="keyword">printf</span> <span class="string">"now \$arvon is $arvon\n"</span>;</div><div class="line"><span class="keyword">push</span>(@array, <span class="number">0</span>);</div><div class="line"><span class="keyword">printf</span> <span class="string">"now \@array is @array\n"</span>;</div><div class="line"><span class="keyword">push</span>@array,<span class="number">3</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"now \@array is @array\n"</span>;</div><div class="line"><span class="keyword">push</span>@array,<span class="string">"Hello"</span>;</div><div class="line"><span class="keyword">printf</span> <span class="string">"now \@array is @array\n"</span>;</div><div class="line">@newOne = <span class="keyword">qw</span>/ <span class="keyword">my</span> name is arvon /;</div><div class="line"><span class="keyword">print</span> <span class="string">"@newOne\n"</span>;</div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl assignment_array.pl </span></div><div class="line">now $mo is 9</div><div class="line">now $arvon is 8</div><div class="line">now @array is 5 6 7 0</div><div class="line">now @array is 5 6 7 0 3</div><div class="line">now @array is 5 6 7 0 3 Hello</div><div class="line">my name is arvon</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###shift和unshift操作符</p>
+<ul>
+<li>相反，unshift和shift操作符是对数组的开头进行处理<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@array = <span class="keyword">qw</span>/ why are you so diao /;</div><div class="line">$one = <span class="keyword">shift</span>@array;<span class="comment">#$one is "why", @array = are you so diao</span></div><div class="line"><span class="keyword">print</span> <span class="string">"$one is not @array\n"</span>;</div><div class="line">$two = <span class="keyword">shift</span>(@array);<span class="comment">#$two is "are", @array = you so diao</span></div><div class="line"><span class="keyword">print</span> <span class="string">"$two is not @array\n"</span>;</div><div class="line">$three = <span class="keyword">shift</span>@array;<span class="comment">#$three is "you", @array= so diao</span></div><div class="line"><span class="keyword">print</span> <span class="string">"$three is not @array\n"</span>;</div><div class="line"><span class="comment">##</span></div><div class="line"><span class="keyword">unshift</span>(@array, <span class="number">4</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Now \@array is @array\n"</span>;</div><div class="line"><span class="keyword">unshift</span>(@array, <span class="number">5</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Now \@array is @array\n"</span>;</div><div class="line">@others = <span class="number">1</span>..<span class="number">3</span>;</div><div class="line"><span class="keyword">unshift</span> @array, @others; <span class="comment">#@array变成了(1, 2, 3, 4, 5, )</span></div><div class="line"><span class="keyword">print</span> <span class="string">"\@others is @others, But now \@array is already @array"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl unshift_str.pl </span></div><div class="line">why is not are you so diao</div><div class="line">are is not you so diao</div><div class="line">you is not so diao</div><div class="line">Now @array is 4 so diao</div><div class="line">Now @array is 5 4 so diao</div><div class="line">@others is 1 2 3, But now @array is already 1 2 3 5 4 so diao</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###splice操作符</p>
+<ul>
+<li>push-pop和shift-unshift操作符都是对数组首尾进行操作的，中间的话就用splice</li>
+<li><p>Example one</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@array = <span class="string">qw( pebbles dino fred barney betty )</span>;</div><div class="line">@removed = <span class="keyword">splice</span> @array, <span class="number">2</span>;<span class="comment">#在原来的数组中删掉fred及其后的元素</span></div><div class="line"><span class="comment">#@removed变成qw（fred barney betty）</span></div><div class="line"><span class="comment">#而原来的@array则变成qw（pebbles dino）</span></div><div class="line"><span class="keyword">print</span> <span class="string">"\@array now is @array\n"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"\@removed is @removed\n"</span>;</div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl splice_string.pl </span></div><div class="line">@array now is pebbles dino</div><div class="line">@removed is fred barney betty</div></pre></td></tr></table></figure>
+</li>
+<li><p>Example two</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@array = <span class="string">qw( pebbles dino fred barney betty )</span>;</div><div class="line"><span class="comment">#@removed = splice @array, 2;#在原来的数组中删掉fred及其后的元素</span></div><div class="line"><span class="comment">##@removed变成qw（fred barney betty）</span></div><div class="line"><span class="comment">##而原来的@array则变成qw（pebbles dino）</span></div><div class="line"><span class="comment">#print "\@array now is @array\n";</span></div><div class="line"><span class="comment">#print "\@removed is @removed\n";</span></div><div class="line"><span class="comment">#@removed = splice @array, 1, 2;</span></div><div class="line"><span class="comment">##This time @removed is (pebbles, barney, betty )</span></div><div class="line">@removed = <span class="keyword">splice</span> @array, <span class="number">1</span>, <span class="number">0</span>, <span class="string">qw(wilema)</span>;</div><div class="line"><span class="comment">##Just known @array is became (pebbles wilema dino fred barney betty)</span></div><div class="line"><span class="keyword">print</span> <span class="string">"now \@removed is @removed, and \@array is @array.\n"</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl splice_string.pl </span></div><div class="line">now @removed is , and @array is pebbles wilema dino fred barney betty.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###字符串的内插</p>
+<ul>
+<li><p>和标量一样，数组的内容同样可以被内插到双引号中。内插时，会在数组的各个元素之间自动添加分隔用的空格</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@rocks = <span class="keyword">qw</span>/ flintstone slate rubble /;</div><div class="line"><span class="keyword">print</span> <span class="string">"Quartz @rocks limestone\n"</span></div><div class="line"></div><div class="line"><span class="comment">###Output</span></div><div class="line">arvon@Mo:~<span class="regexp">/arvon_perl&gt; perl array_one.pl </span></div><div class="line">Quartz flintstone slate rubble limestone</div></pre></td></tr></table></figure>
+</li>
+<li><p>Example for index_expression</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@fred = <span class="string">qw(eating rocks is wrong)</span>;</div><div class="line">$fred = <span class="string">"right"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"This is $fred[3]\n"</span>;     <span class="comment">#just right</span></div><div class="line"><span class="keyword">print</span> <span class="string">"This is <span class="subst">$&#123;fred&#125;</span>[3]\n"</span>;   <span class="comment">#wrong</span></div><div class="line"><span class="keyword">print</span> <span class="string">"This is $fred"</span>.<span class="string">"[3]\n"</span>;  <span class="comment">#wrong</span></div><div class="line"><span class="keyword">print</span> <span class="string">"This is $fred\[3]\n"</span>;    <span class="comment">#still wrong</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>##后续下一篇，太长了不方便查阅</p>
+<ul>
+<li>So， Let’s go</li>
+</ul>
 
-2015/08/10 DonePage45
-2015/08/11 DonePage68
-2015/08/17 Read list and array, do a new one.
-
-##前言杂记
-
-适合管理员使用的语言
-Arvon’s读书笔记
-sixth edtion for lear
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/10/Prel语言入门读书笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -585,14 +721,10 @@ sixth edtion for lear
       
         
           
-          简介：LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安
-          ...
+            <p><strong>简介：</strong>LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空间。普通的磁盘分区管理方式在逻辑分区划分好之后就无法改变其大小，当一个逻辑分区存放不下某个文件时，这个文件因为受上层文件系统的限制，也不能跨越多个分区来存放，所以也不能同时放到别的磁盘上。而遇到出现某个分区空间耗尽时，解决的方法通常是使用符号链接，或者使用调整分区大小的工具，但这只是暂时解决办法，没有从根本上解决问题。随着Linux的逻辑卷管理功能的出现，这些问题都迎刃而解，用户在无需停机的情况下可以方便地调整各个分区大小。</p>
+<h2 id="手动将LVM挂载至linux系统"><a href="#手动将LVM挂载至linux系统" class="headerlink" title="手动将LVM挂载至linux系统"></a>手动将LVM挂载至linux系统</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">rpm -qa lvm2</div><div class="line"><span class="comment">#查看是否安装了lvm</span></div><div class="line">yum install lvm2</div><div class="line"><span class="comment">#安装lvm软件</span></div><div class="line">vgscan</div><div class="line"><span class="comment">#查找并显示系统中存在的LVN卷组</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看系统中存在哪些卷组以及它们的激活状态（注意：如果有两个卷组名一样，其中一个是无法挂载的，要想挂载，需要重命名一个卷组）</span></div><div class="line">vgdisplay LVMname | more</div><div class="line"><span class="comment">#显示所有名为LVMname卷组的详细信息，请记住你将要挂载卷组的 VG UUID。</span></div><div class="line">	vgrename o236o6-MGAQ-erKG-k6cH<span class="number">-12</span>Zs<span class="number">-8</span>NwX-CCqPG3 vgNewName</div><div class="line"><span class="comment">#卷组重新命名为vgNewName</span></div><div class="line">vgchange -ay /dev/vgNewName</div><div class="line"><span class="comment">#激活卷组vsNewName，此时你也并不能使用，需要挂载</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看现在的激活状态</span></div><div class="line">mount /dev/vgNewName /somePoint</div><div class="line"><span class="comment">#挂载LVM到挂载点，这样就可以访问了</span></div><div class="line">umount /dev/vgNewName<span class="comment"># or usr 'umount /somePoint'</span></div><div class="line"><span class="comment">#卸载LVM卷组</span></div><div class="line">vgchange -an /dev/vgNewName</div><div class="line"><span class="comment">#将卷组修改成不激活状态</span></div></pre></td></tr></table></figure>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/07/Linux挂载LVM分区/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -700,16 +832,17 @@ sixth edtion for lear
       
         
           
-          简介：ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：
+            <p><strong>简介：</strong>ansible是与puppet、saltstack类似的集群管理工具，其优点是仅需要ssh和Python即可使用，而不像puppet、saltstack那样都需要客户端。与puppet类似，ansible也支持丰富的功能：</p>
+<blockquote>
+<p>批量执行<br>支持模块化，支持playbook（相比puppet还是弱些）<br>上手容易（puppet上手有门槛）<br>权限控制</p>
+</blockquote>
+<p>##自用例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ansible -i hosts all -a <span class="string">'date -R'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line">ansible -i hosts all -a <span class="string">'ntpdate vn.pool.ntp.org'</span> --private-key=$&#123;PRIVATE_KEY_FILE&#125;</div><div class="line"><span class="comment">#ansible -i hosts gsservers -a 'sudo yum install -y telnet' --private-key=$&#123;PRIVATE_KEY_FILE&#125;</span></div><div class="line"></div><div class="line"><span class="comment">###example two</span></div><div class="line">ansible-playbook -i hosts list.yml --list-hosts	<span class="comment">#列出主机信息</span></div><div class="line">ansible-playbook -i hosts list.yml -v	<span class="comment">#显示详细过程</span></div></pre></td></tr></table></figure></p>
+<p>##配置使用手册</p>
+<p>###安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install ansible</div></pre></td></tr></table></figure></p>
+<p>###配置<br><code>主要涉及的是路径定义，具体参照github应用实例</code>，后期补充</p>
+<p>##参考文档<br><a href="http://www.tuicool.com/articles/2EVBJjv" target="_blank" rel="external">集群工具ansible使用方法</a><br><a href="https://linuxtoy.org/archives/hands-on-with-ansible.html" target="_blank" rel="external">Ansible快速上手</a></p>
 
-批量执行支持模块化，支持playbook（相比puppet还是弱些）
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/05/ansible自用手册/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -817,14 +950,22 @@ sixth edtion for lear
       
         
           
-          zabbix监控web服务在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需
-          ...
+            <h3 id="zabbix监控web服务"><a href="#zabbix监控web服务" class="headerlink" title="zabbix监控web服务"></a>zabbix监控web服务</h3><p>在host列可以看到web(0),在以前的版本这项是独立出来的，这个主要实现zabbix对web性能的监控，通过它可以了解web站点的可用性以及性能。最终将各项指标绘制到图形中，这样我们可以了解到一个站点的下载速度、响应速度等。需要注意的是在安装zabbix server需要增加libcurl的支持。</p>
+<p>选择一个主机（zabbix含有zabbix client的主机），由这台主机上的client对目标url发起访问。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>先选定一个主机，需要含有clent<br><img src="http://i3.tietuku.com/dda30fd3f166ea1b.png" alt=""></p>
+</li>
+<li><p>点击创建create scenario<br><img src="http://i3.tietuku.com/3e7210af7985249d.png" alt=""></p>
+</li>
+<li><p>填写scenario（方案）<br><img src="http://i3.tietuku.com/2252d1cbe47f1e39.png" alt=""></p>
+</li>
+<li><p>添加并填写steps<br><img src="http://i3.tietuku.com/c79306382b15ab42.png" alt=""></p>
+</li>
+<li><p>完成</p>
+</li>
+</ol>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/31/zabbix添加web监控/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -932,17 +1073,25 @@ sixth edtion for lear
       
         
           
-          由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等
+            <p>由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法<br><code>nc命令介绍:</code>可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等</p>
+<ul>
+<li><p>参数介绍</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</div><div class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</div><div class="line">-h 在线帮助。</div><div class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</div><div class="line">-l 使用监听模式，管控传入的资料。</div><div class="line">-n 直接使用IP地址，而不通过域名服务器。</div><div class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</div><div class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</div><div class="line">-r 乱数指定本地与远端主机的通信端口。</div><div class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</div><div class="line">-u 使用UDP传输协议。</div><div class="line">-v 显示指令执行过程。</div><div class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</div><div class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</div></pre></td></tr></table></figure>
+</li>
+<li><p>检测端口连通性</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">TCP</span></div><div class="line"><span class="meta">#</span><span class="bash">TCP单个端口或范围扫描</span></div><div class="line">nc -vz -w2 192.168.20.133 1870</div><div class="line">nc -vz -w2 192.168.20.133 1-1870</div><div class="line"><span class="meta">#</span><span class="bash">UDP</span></div><div class="line"><span class="meta">#</span><span class="bash">UDP单个端口或范围扫描</span></div><div class="line">nc -uz -w2 192.168.20.133 5000</div><div class="line">nc -uz -w2 192.168.20.133 4990-5000</div></pre></td></tr></table></figure>
+</li>
+<li><p>传输文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">目标文件主机命令，这个需要在文件传输之前执行，file.txt为文件传输过来后的文件名</span></div><div class="line">nc -l 1234 &gt; file.txt</div><div class="line"><span class="meta">#</span><span class="bash">源文件主机命令，hello.txt为传输文件，63为目标主机</span></div><div class="line">nc 172.17.18.63 1234 &lt; hello.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>聊天，与传输文件基本一样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -l 1234    #主机1</div><div class="line">nc 192.168.2.34 1234    #主机2</div></pre></td></tr></table></figure>
+</li>
+<li><p>操作memcache</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">存储数据</span></div><div class="line">printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">获取数据</span></div><div class="line">printf “get keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">删除数据</span></div><div class="line">printf “delete keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">查看状态</span></div><div class="line">printf “statsrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">模拟top命令查看状态</span></div><div class="line">watch “echo stats” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">清空缓存</span></div><div class="line">printf “flush_allrn” |nc 192.168.2.34 11211</div></pre></td></tr></table></figure></li>
+</ul>
 
-参数介绍
-1234567891011121314-g&l
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/30/nc命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -1049,29 +1198,151 @@ sixth edtion for lear
 
       
         
-          
-          #更新记录
-
-20150730 总结介绍
-20150731 控制流
-20150804 module
-20150806 脚本练手
-20150807 模块方法
-20150810 是时候结束了
-
-#介绍
-##简记
-
-这里使用的是CentOS release 6.6 (Final)
-
-12345678910
-          ...
-
+          <p><img src="http://oqfz9mxmq.bkt.clouddn.com/20150730-pythonnote-1.jpeg" alt="20150730-pythonnote-1"></p>
+<h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><ul>
+<li>20150730 总结介绍</li>
+<li>20150731 控制流</li>
+<li>20150804 module</li>
+<li>20150806 脚本练手</li>
+<li>20150807 模块方法</li>
+<li>20150810 是时候结束了
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/30/简明Python学习笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/29/awk用法实例/" itemprop="url">
+                  awk用法实例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-29T10:45:32+08:00" content="2015-07-29">
+              2015-07-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/29/awk用法实例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/29/awk用法实例/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/07/29/awk用法实例/" class="leancloud_visitors" data-flag-title="awk用法实例">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>简介：</strong>awk一种优秀的文本处理工具，Linux和Unix环境中现有的功能最强大的数据处理引擎之一。这个编程及数据操作语言其名称得自于它的创始人阿尔佛雷德·艾侯、彼得·温伯格和布莱恩·柯林汉姓氏的首个字母。<br>awk的处理文本和数据的方式是这样的，它逐行扫描文件，从第一行到最后一行，寻找匹配的特定模式的行，并在这些行上进行你想要的操作。如果没有指定处理动作，则把匹配的行显示到标准输出(屏幕)，如果没有指定<br>模式，则所有被操作所指定的行都被处理</p>
+<p>awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
+<ul>
+<li>使用方法：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk  <span class="string">'&#123;pattern + action&#125;'</span> <span class="string">&#123;filenames&#125;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。awk语言的最基本功能是在文件或者字符串中基于指定规则浏览和抽取信息，awk抽取信息后，才能进行其他文本操作。完整的awk脚本通常用来格式化文本文件中的信息。通常，awk是以文件的一行为处理单位的。awk每接收文件的一行，然后执行相应的命令，来处理文本。</p>
+<ul>
+<li>三种调用方式<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. 命令行方式</div><div class="line"><span class="comment">#tail /etc/fstab |awk '&#123;print $1&#125;'</span></div><div class="line"><span class="comment">#cat /etc/passwd |awk  -F ':'  '&#123;print $1&#125;'</span></div><div class="line"><span class="comment">#cat /etc/passwd |awk  -F ':'  '&#123;print $1"\t"$7&#125;'</span></div><div class="line"><span class="number">2</span>. shell脚本方式</div><div class="line"><span class="number">3</span>. awk命令插入为单独文件的方式</div><div class="line"><span class="comment">#awk -f awk-script-file input-file(s)</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="大实例"><a href="#大实例" class="headerlink" title="大实例"></a>大实例</h3><ul>
+<li><p>显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/passwd |awk  -F <span class="string">':'</span>  <span class="string">'BEGIN &#123;print "name,shell"&#125;  &#123;print $1","$7&#125; END &#123;print "blue,/bin/nosh"&#125;'</span></div><div class="line">name,shell</div><div class="line">root,<span class="regexp">/bin/bash</span></div><div class="line">daemon,<span class="regexp">/bin/sh</span></div><div class="line">bin,<span class="regexp">/bin/sh</span></div><div class="line">sys,<span class="regexp">/bin/sh</span></div><div class="line">....</div><div class="line">blue,<span class="regexp">/bin/nosh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>搜索/etc/passwd有root关键字的所有行</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#awk -F: '/root/' /etc/passwd</span></div><div class="line">root:<span class="keyword">x</span>:<span class="number">0</span>:<span class="number">0</span>:root:<span class="regexp">/root:/bin</span><span class="regexp">/bash</span></div><div class="line">```   </div><div class="line"></div><div class="line">- 统计/etc<span class="regexp">/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:</span></div><div class="line">```perl</div><div class="line">#awk  -F ':'  '&#123;print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0&#125;' /etc<span class="regexp">/passwd</span></div><div class="line">filename:/etc<span class="regexp">/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root</span>:<span class="regexp">/bin/bash</span></div><div class="line">filename:<span class="regexp">/etc/passwd</span>,linenumber:<span class="number">2</span>,columns:<span class="number">7</span>,linecontent:daemon:<span class="keyword">x</span>:<span class="number">1</span>:<span class="number">1</span>:daemon:<span class="regexp">/usr/sbin</span>:<span class="regexp">/bin/sh</span></div><div class="line">filename:<span class="regexp">/etc/passwd</span>,linenumber:<span class="number">3</span>,columns:<span class="number">7</span>,linecontent:bin:<span class="keyword">x</span>:<span class="number">2</span>:<span class="number">2</span>:bin:<span class="regexp">/bin:/bin</span><span class="regexp">/sh</span></div><div class="line">filename:/etc<span class="regexp">/passwd,linenumber:4,columns:7,linecontent:sys:x:3:3:sys:/dev</span>:<span class="regexp">/bin/sh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用printf替代print,可以让代码更加简洁，易读</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk  -F <span class="string">':'</span>  <span class="string">'&#123;printf("filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n",FILENAME,NR,NF,$0)&#125;'</span> /etc/passwd</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考这里"><a href="#参考这里" class="headerlink" title="参考这里"></a>参考这里</h3><p><a href="http://www.gnu.org/software/gawk/manual/gawk.html" title="awk官网" target="_blank" rel="external">awk官网</a><br><a href="http://man.lupaworld.com/content/manage/ringkee/awk.htm" title="awk学习笔记" target="_blank" rel="external">awk学习笔记</a><br><a href="http://www.aslibra.com/doc/awk.htm" title="awk手册" target="_blank" rel="external">awk手册</a><br><a href="http://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html" target="_blank" rel="external">参考博客</a></p>
+
+          
         
       
     </div>
@@ -1143,7 +1414,7 @@ sixth edtion for lear
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1153,7 +1424,7 @@ sixth edtion for lear
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1361,10 +1632,6 @@ sixth edtion for lear
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

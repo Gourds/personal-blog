@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tools," />
+  <meta name="keywords" content="运维工具," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能12dd if=/dev/zero of=testfil">
-<meta name="keywords" content="tools">
+<meta name="description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能 使用dd简单测试12dd if=/dev/zero o">
+<meta name="keywords" content="运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用fio工具测试linux的磁盘性能">
 <meta property="og:url" content="http://yoursite.com/2015/08/24/使用fio工具测试linux的磁盘性能/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能12dd if=/dev/zero of=testfil">
-<meta property="og:updated_time" content="2016-07-30T09:32:25.000Z">
+<meta property="og:description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能 使用dd简单测试12dd if=/dev/zero o">
+<meta property="og:updated_time" content="2017-05-25T04:32:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用fio工具测试linux的磁盘性能">
-<meta name="twitter:description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能12dd if=/dev/zero of=testfil">
+<meta name="twitter:description" content="很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等 简单测试写性能 使用dd简单测试12dd if=/dev/zero o">
 
 
 
@@ -106,7 +106,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -338,22 +338,24 @@
 
       
         <p>很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等</p>
-<h3 id="简单测试写性能"><a href="#简单测试写性能" class="headerlink" title="简单测试写性能"></a>简单测试写性能</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> of=testfile bs=<span class="number">1</span>M count=<span class="number">1024</span> oflag=dsync</div><div class="line"><span class="comment">#采用dd创建一个1G的文件的磁盘写速度，IO引擎为dsync</span></div></pre></td></tr></table></figure>
+<h3 id="简单测试写性能"><a href="#简单测试写性能" class="headerlink" title="简单测试写性能"></a>简单测试写性能</h3><ul>
+<li>使用dd简单测试<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> of=testfile bs=<span class="number">1</span>M count=<span class="number">1024</span> oflag=dsync</div><div class="line"><span class="comment">#采用dd创建一个1G的文件的磁盘写速度，IO引擎为dsync</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
 <h3 id="准备-amp-安装"><a href="#准备-amp-安装" class="headerlink" title="准备&amp;安装"></a>准备&amp;安装</h3><ul>
 <li><a href="http://freecode.com/projects/fio/" target="_blank" rel="external">FIO官网</a></li>
 <li>安装系统<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="regexp">//brick</span>.kernel.dk/snaps/fio-<span class="number">2.0</span>.<span class="number">7</span>.tar.gz</div><div class="line"><span class="comment">#download the software</span></div><div class="line">yum install libaio-devel</div><div class="line"><span class="comment">#安装依赖包</span></div><div class="line">tar -xvf fio-<span class="number">2.0</span>.<span class="number">7</span>.tar.gz</div><div class="line"><span class="comment">#decompression</span></div><div class="line">cd fio-<span class="number">2.0</span>.<span class="number">7</span></div><div class="line"><span class="comment">#进入解压目录</span></div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><ul>
-<li><p>fio选项说明</p>
-<blockquote>
+<li>fio选项说明<blockquote>
 <p>filename=/dev/sdb1       测试文件名称，通常选择需要测试的盘的data目录。<br>direct=1                 测试过程绕过机器自带的buffer。使测试结果更真实。<br>rw=randwrite             测试随机写的I/O<br>rw=randrw                测试随机写和读的I/O<br>bs=16k                   单次io的块文件大小为16k<br>bsrange=512-2048         同上，提定数据块的大小范围<br>size=5g    本次的测试文件大小为5g，以每次4k的io进行测试。<br>numjobs=30               本次的测试线程为30.<br>runtime=1000             测试时间为1000秒，如果不写则一直将5g文件分4k每次写完为止。<br>ioengine=psync           io引擎使用pync方式<br>rwmixwrite=30            在混合读写的模式下，写占30%<br>group_reporting          关于显示结果的，汇总每个进程的信息。<br>此外<br>lockmem=1g               只使用1g内存进行测试。<br>zero_buffers             用0初始化系统buffer。<br>nrfiles=8                每个进程生成文件的数量。</p>
 </blockquote>
 </li>
-<li><p>例子</p>
+<li>例子<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#随机读</span></div><div class="line">fio -filename=<span class="regexp">/root/filename</span> -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randread -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">10</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#顺序读</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">read</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#随机写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randwrite -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#顺序写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">write</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#混合随机读写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -rwmixread=<span class="number">70</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">100</span> -group_reporting -name=mytest -ioscheduler=noop</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#随机读</span></div><div class="line">fio -filename=<span class="regexp">/root/filename</span> -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randread -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">10</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#顺序读</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">read</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest</div><div class="line"><span class="comment">#随机写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randwrite -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest </div><div class="line"><span class="comment">#顺序写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=<span class="keyword">write</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">1000</span> -group_reporting -name=mytest </div><div class="line"><span class="comment">#混合随机读写</span></div><div class="line">fio -filename=filename -direct=<span class="number">1</span> -iodepth <span class="number">1</span> -thread -rw=randrw -rwmixread=<span class="number">70</span> -ioengine=psync -bs=<span class="number">16</span>k -size=<span class="number">2</span>G -numjobs=<span class="number">30</span> -runtime=<span class="number">100</span> -group_reporting -name=mytest -ioscheduler=noop</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -397,7 +399,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag">#tools</a>
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -488,7 +490,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -498,7 +500,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -721,10 +723,6 @@
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

@@ -104,7 +104,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -260,124 +260,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/15/grep命令/" itemprop="url">
-                  grep命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T00:00:00+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/15/grep命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/grep命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/15/grep命令/" class="leancloud_visitors" data-flag-title="grep命令">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Tips：很有用的几个选项
-常用
-定向匹配&amp;忽略大小写
-12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/15/grep命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
       
 
@@ -576,13 +458,12 @@
 
       
         
-          
-          PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。
-关于最近的学习方向
-ansibel
-最近购买了4本图书，买了就不能白买不是，而且也是机遇不错，现阶段也在使用ansibel，配置管理和版本控制对于运维确实是挺重要的，【奔跑吧ansible】预
-          ...
-
+          <p><img src="http://oqfz9mxmq.bkt.clouddn.com/20160403-aprilread-1.jpg" alt="20160403-aprilread-1"><br>PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。</p>
+<h3 id="关于最近的学习方向"><a href="#关于最近的学习方向" class="headerlink" title="关于最近的学习方向"></a>关于最近的学习方向</h3><ul>
+<li>ansibel<ul>
+<li>最近购买了4本图书，买了就不能白买不是，而且也是机遇不错，现阶段也在使用ansibel，配置管理和版本控制对于运维确实是挺重要的，【奔跑吧ansible】预计花费4周左右时间来学习。</li>
+<li>由于最近需要使用AWS，所需需要研究下ec2模块</li>
+<li>需要进行学习变量和遍历循环
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/03/4月读书计划/#more" rel="contents">
               阅读全文 &raquo;
@@ -1031,20 +912,146 @@ ansibel
       
         
           
-          iptablesCentos6.x
-临时关闭
-12service iptables stop/etc/init.d/iptabels stop
+            <h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><h4 id="Centos6-x"><a href="#Centos6-x" class="headerlink" title="Centos6.x"></a>Centos6.x</h4><ul>
+<li><p>临时关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service iptables stop</div><div class="line">/etc/init.d/iptabels stop</div></pre></td></tr></table></figure>
+</li>
+<li><p>永久关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chkconfig iptables off</div><div class="line">chkconfig iptables on    <span class="comment">#开启</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Centos7-x"><a href="#Centos7-x" class="headerlink" title="Centos7.x"></a>Centos7.x</h4><ul>
+<li><p>Centos7默认使用firewall</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">systemctl stop firewalld.service</div><div class="line"><span class="comment">#停止firewall </span></div><div class="line">systemctl <span class="built_in">disable</span> firewalld.service </div><div class="line"><span class="comment">#禁止firewall开机启动</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用iptables管理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">yum -y install iptables-services</div><div class="line"><span class="comment">#vi /etc/sysconfig/iptables</span></div><div class="line"><span class="comment">#修改iptables这个文件可以写入删除规则</span></div><div class="line"><span class="comment">#-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT</span></div><div class="line">systemctl restart iptables.service </div><div class="line"><span class="comment">#重启防火墙使配置生效</span></div><div class="line">systemctl <span class="built_in">enable</span> iptables.service </div><div class="line"><span class="comment">#设置防火墙开机启动</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h3><ul>
+<li><p>查看状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getenforce</div></pre></td></tr></table></figure>
+</li>
+<li><p>临时关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setenforce 0</div></pre></td></tr></table></figure>
+</li>
+<li><p>永久关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>以上</p>
 
-永久关闭
-12chkconfig iptables offchkconfig iptables on    #开启
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-Centos7.x
-Centos7
-          ...
+    
+      
 
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/20/centos搭建NTP服务器/" itemprop="url">
+                  CentOS搭建NTP服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-20T12:15:50+08:00" content="2016-01-20">
+              2016-01-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/20/centos搭建NTP服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/20/centos搭建NTP服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/01/20/centos搭建NTP服务器/" class="leancloud_visitors" data-flag-title="CentOS搭建NTP服务器">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">–&gt;另一篇关于时间的</a><br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/01/selinux和iptables关闭/#more" rel="contents">
+            <a class="btn" href="/2016/01/20/centos搭建NTP服务器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1119,7 +1126,7 @@ Centos7
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1129,7 +1136,7 @@ Centos7
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1337,10 +1344,6 @@ Centos7
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

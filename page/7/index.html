@@ -104,7 +104,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -282,133 +282,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/24/Ubuntu进行ssh连接/" itemprop="url">
-                  Ubuntu进行ssh连接
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-24T10:29:52+08:00" content="2015-08-24">
-              2015-08-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/24/Ubuntu进行ssh连接/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/24/Ubuntu进行ssh连接/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/08/24/Ubuntu进行ssh连接/" class="leancloud_visitors" data-flag-title="Ubuntu进行ssh连接">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          安装了Ubuntu进行测试，发现ssh连不上。发现没有ssh进程，so解决之
-步骤
-当然先看是不是已经有了ssh,有的话就算了
-1ps aux | grep ssh
-
-没有，就开个终端，装一个
-
-查看是否有了ssh进程
-
-然后就是进行连接了
-
-
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/24/Ubuntu进行ssh连接/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/08/21/yum源配置手册/" itemprop="url">
                   yum源配置手册
                 </a>
@@ -469,14 +342,26 @@
       
         
           
-          yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使
-          ...
+            <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 升级系统</span></div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line"><span class="meta">#</span><span class="bash">2. 安装指定的软件包</span></div><div class="line">yum -y install vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">3. 卸载指定的软件包</span></div><div class="line">yum -y remore vsftpd mysql</div><div class="line"><span class="meta">#</span><span class="bash">4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</span></div><div class="line">yum grouplist</div><div class="line"><span class="meta">#</span><span class="bash">5. 清除缓存中的rpm 头文件和包文件</span></div><div class="line">yum clean all</div><div class="line"><span class="meta">#</span><span class="bash">6. 搜索相关的软件包</span></div><div class="line">yum -y search Emacs</div><div class="line"><span class="meta">#</span><span class="bash">显示指定软件包的信息</span></div><div class="line">yum info Emacs</div><div class="line"><span class="meta">#</span><span class="bash">查询指定软件包的依赖信息，emacs依赖的模块不少啊</span></div><div class="line">yum deplist emacs</div><div class="line"><span class="meta">#</span><span class="bash">列出所有以 yum 开头的软件包</span></div><div class="line">yum list yum\*</div><div class="line"><span class="meta">#</span><span class="bash">10. 列出已经安装的但是不包含在资源库中的rpm 包</span></div><div class="line">yum list extras</div></pre></td></tr></table></figure>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</span></div><div class="line"><span class="meta">#</span><span class="bash">配置文件解释</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v '^#'</div><div class="line">[base]</div><div class="line"><span class="meta">#</span><span class="bash">表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line"><span class="meta">#</span><span class="bash">名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="meta">#</span><span class="bash">priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="meta">#</span><span class="bash">用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="meta">#</span><span class="bash">引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="meta">#</span><span class="bash">是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=1</div><div class="line"><span class="meta">#</span><span class="bash">enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=1</div><div class="line"><span class="meta">#</span><span class="bash">表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line"><span class="meta">#</span><span class="bash">定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
+<ul>
+<li>粘贴可用的epel的yum源<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span></span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]  </div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span>/debug</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1  </div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ol>
+<li>EPEL源</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">https://admin.fedoraproject.org/mirrormanager/</div><div class="line"><span class="meta">#</span><span class="bash">EPEL-REPO-RPM</span></div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">axel https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</div></pre></td></tr></table></figure>
+<ol>
+<li>ALI源</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line"><span class="meta">#</span><span class="bash">ALI-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-EPLE-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-FEDORA-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
+<h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
+<li>错误现象lock<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading "installonlyn" plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line"><span class="meta">#</span><span class="bash">解释</span></div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/21/yum源配置手册/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -584,14 +469,83 @@
       
         
           
-          简介：lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket
-          ...
+            <p><strong>简介：</strong>lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该有多有用。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>yum安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install lsof -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>源码安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://down1.chinaunix.net/distfiles/lsof_4.76.tar.gz</div><div class="line">tar -zxvf lsof.tar.gz</div><div class="line">cd lsof_4.78</div><div class="line">tar xvf lsof_4.78_srv.tar</div><div class="line">./configure lunux</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
+<li><p>lsof<br>不加参数的输出，是列出所有进程打开的所有文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof </div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND     PID         USER        FD      	TYPE 		DEVICE 			SIZE/OFF   NODE 	NAME</div><div class="line">进程的名称	进程标识符	进程所有者	文件描述符	文件类型	指定磁盘的名称		文件的大小 索引节点 打开文件的确切名称</div><div class="line">init          1       root  cwd   unknown                        /proc/1/cwd (readlink: Permission denied)</div><div class="line">init          1       root  rtd   unknown                        /proc/1/root (readlink: Permission denied)</div><div class="line">init          1       root  txt   unknown                        /proc/1/exe (readlink: Permission denied)</div><div class="line">init          1       root NOFD                                  /proc/1/fd (opendir: Permission denied)</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof /path/to/file /path/to/file2<br>找出谁在使用某个文件,可一次指定多个文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof /home/arvon</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25011 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25012 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof +D /usr/lib<br>加上+D参数，lsof会对指定目录进行递归查找，注意这个参数要比grep版本慢</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof +D /usr/lib</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER  FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon mem    REG    8,2   256324 445427 /usr/lib/locale/es_VE.utf8/LC_CTYPE</div><div class="line">bash    24519 arvon mem    REG    8,2       54 445420 /usr/lib/locale/om_ET/LC_NUMERIC</div><div class="line">bash    24519 arvon mem    REG    8,2     2454 431855 /usr/lib/locale/en_US.utf8/LC_TIME</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看文件、设备被哪些进程占用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /dev/tty1</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash       <span class="number">1770</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">2</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian  <span class="number">255</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控文件系统：指定目录、挂载点，可以看到有哪些进程打开了其下的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /data/</span></div><div class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash    <span class="number">15983</span> jian  cwd    DIR    <span class="number">8</span>,<span class="number">5</span>     <span class="number">4096</span> <span class="number">8252</span> /data/backup</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出被指定进程名打开的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c ssh -c init</span></div><div class="line"> </div><div class="line">COMMAND    PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">init         <span class="number">1</span>       root  txt    REG        <span class="number">8</span>,<span class="number">1</span>   <span class="number">124704</span>  <span class="number">917562</span> /sbin/init</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>  <span class="number">1434180</span> <span class="number">1442625</span> /lib/i386-linux-gnu/libc-<span class="number">2.13</span>.so</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>    <span class="number">30684</span> <span class="number">1442694</span> /lib/i386-linux-gnu/librt-<span class="number">2.13</span>.so</div><div class="line">...</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">1</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">2</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">3</span>u  unix <span class="number">0xdf70e240</span>      0t<span class="number">0</span>   <span class="number">10464</span> /tmp/ssh-sUymKXxw1495/agent.<span class="number">1495</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控进程：指定进程号，可以查看该进程打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -p 2064</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG       <span class="number">0</span>,<span class="number">16</span> <span class="number">67108904</span>   <span class="number">10203</span> /dev/shm/pulse-shm-<span class="number">3021850167</span></div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>当你想要杀掉某个用户所有打开的文件、设备，你可以这样：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">kill</span> -<span class="number">9</span> <span class="string">`lsof -t -u lakshmanan`</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控网络"><a href="#监控网络" class="headerlink" title="监控网络"></a>监控网络</h3><ul>
+<li><p>监控网络:查看<code>指定端口有哪些进程在使用</code>（lsof -i 列出所有的打开的网络连接）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i:22</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">3</span>u  IPv4  <span class="number">10303</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">4</span>u  IPv6  <span class="number">10305</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出被某个进程打开所有的网络文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i -a -p <span class="number">234</span></div><div class="line"><span class="comment">#lsof -i -a -c ssh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出所有 tcp、udp 连接：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp;</div><div class="line">lsof -i udp;</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出所有NFS文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -N -u lakshmanan -a</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定网口有哪些进程在使用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i@192.168.1.91</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">skype      <span class="number">1909</span> jian   <span class="number">54</span>u  IPv4   <span class="number">9116</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">40640</span>-&gt;<span class="number">64.4</span>.<span class="number">23.153</span>:<span class="number">40047</span> (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian    <span class="number">7</span>u  IPv4   <span class="number">6599</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">59311</span>-&gt;hx-in-f125.<span class="number">1</span>e10<span class="number">0</span>.net:https (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian   <span class="number">13</span>u  IPv4   <span class="number">9260</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">54447</span>-&gt;by2msg3010511.phx.gbl:msnp (ESTABLISHED)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控用户"><a href="#监控用户" class="headerlink" title="监控用户"></a>监控用户</h3><ul>
+<li><p>查看指定用戶打开的文件（lsof -u ^lakshmanan 可以排除某用户）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -u messagebus</span></div><div class="line">COMMAND    PID       USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  txt    REG        <span class="number">8</span>,<span class="number">6</span>  <span class="number">1235361</span> <span class="number">1834948</span> /usr/bin/dbus-daemon</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">190145</span> <span class="number">1700642</span> /lib/libnss_nis-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">490366</span> <span class="number">1700636</span> /lib/libnsl-<span class="number">2.15</span>.so</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定程序打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c firefox</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ul>
+<li><p>只有多个查询条件都满足， 用 “-a” 参数，默认是 -o 。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -a -c bash -u root</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME</div><div class="line">bash    <span class="number">1986</span> root  cwd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1701593</span> /root/lab</div><div class="line">bash    <span class="number">1986</span> root  rtd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">bash    <span class="number">1986</span> root  txt    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">1994157</span> <span class="number">1700632</span> /bin/bash</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">9690800</span>  <span class="number">405214</span> /usr/lib/locale/locale-archive</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>关于磁盘空间告警 df -h --max=1 与 du -hx --max=1 显示不一致的问题</code></p>
+</li>
+</ul>
+<blockquote>
+<p>最常见的的还是下面这种情况：</p>
+<p>lsof|grep -i delete</p>
+<p>看看被删除的文件：有些删了文件，但是进程没 reload，那些空间还是占用的，你可以理解为类似 windows 下的进程句柄没释放的概念吧~ 只是 windows 下如果有文件被进程使用，你一般是删不掉的，而 linux 虽然不做删除限制，但却要等到进程使用完文件才能完全释放，以防止进程奔溃，这是操作系统对资源的管理差异吧~<br>例如 nginx 会有很多临时文件占用了 /tmp 目录，删掉后，依然占用着空间，</p>
+<p>此时你可以：</p>
+<p>pkill -9 nginx &amp;&amp; /etc/init.d/nginx restart</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.ibm.com/developerworks/cn/aix/library/au-lsof.html" target="_blank" rel="external">使用lsof查找打开的文件</a><br><a href="http://ylinux.org/blog/article/276" target="_blank" rel="external">实用系统工具lsof</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/21/lsof命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -699,18 +653,24 @@
       
         
           
-          问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下
+            <p>问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下<br><img src="http://i1.tietuku.com/b005b2a0ab63699d.png" alt=""></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://i1.tietuku.com/ac251c031bf640e8.png" alt=""></h2><hr>
+<p>通过google有了一些眉目,以下摘自<a href="http://www.cnblogs.com/wgkgood/archive/2011/03/02/2066709.html" target="_blank" rel="external">google</a></p>
+<blockquote>
+<p>linux系统出现Too many open files 错误，这是因为文件描述符大小不够，或者有不正常的网络连接(Socket也是一种特殊的文件)、文件IO没有关闭并释放出文件描述符（文件句柄，File Operator）。<br>使用如下命令查看系统对允许打开最大文件描述符的配置：<br>ulimit -u 查看open files设置<br>ulimit -a 查看所有设置<br>ulimit -u 65535(新的open files 值)修改设置<br>ulimit -n 65536 设置用户可以同时打开的最大文件数（max open files）<br>　<br>如果本参数设置过小，对于并发访问量大的网站，可能会出现too many open files的错误 　<br>使用lsof -p pid [httpd进程的 pid、java的pid]来查看系统中apache进程和java运行时进程当前打开的文件资源，发现两者之和已经接近1024，大于了默认的设置。</p>
+<p>修改配置：</p>
+<p>修改/etc/security/limits.conf，在文件末加上</p>
+<ul>
+<li>soft nofile 65536</li>
+<li>hard nofile 65536</li>
+</ul>
+<p>系统级文件描述符极限还可以通过将以下三行添加到 /etc/rc.d/rc.local 启动脚本中来设置：</p>
+<ul>
+<li>Increase system-wide file descriptor limit.<br>echo 65536 &gt; /proc/sys/fs/file-max<br>echo 65536 &gt; /proc/sys/fs/inode-max</li>
+</ul>
+</blockquote>
 
-通过google有了一些眉目,以下摘自google
-
-linux系统出现Too many open files 错误，这是因为文件描述符大小不够
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/21/Too-many-open-files错误/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -818,15 +778,59 @@ linux系统出现Too many open files 错误，这是因为文件描述符大小�
       
         
           
-          sed命令在很有目的性的针对文本进行操作的时候还是十分有优势的。
-sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重
-          ...
+            <p>sed命令在很有目的性的针对文本进行操作的时候还是十分有优势的。</p>
+<p>sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
+<h3 id="sed使用参数"><a href="#sed使用参数" class="headerlink" title="sed使用参数"></a>sed使用参数</h3><ul>
+<li>命令概览<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[root@www ~]<span class="comment"># sed [-nefr] [动作]</span></div><div class="line">选项与参数：</div><div class="line">-n ：使用安静(silent)模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行(或者动作)才会被列出来。</div><div class="line">-e ：直接在命令列模式上进行 sed 的动作编辑；</div><div class="line">-f ：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作；</div><div class="line">-r ：sed 的动作支持的是延伸型正规表示法的语法。(默认是基础正规表示法语法)</div><div class="line">-i ：直接修改读取的文件内容，而不是输出到终端。</div><div class="line"></div><div class="line">动作说明： [n1[,n2]]function</div><div class="line">n1, n2 ：不见得会存在，一般代表『选择进行动作的行数』，举例来说，如果我的动作是需要在 <span class="number">10</span> 到 <span class="number">20</span> 行之间进行的，则『 <span class="number">10</span>,<span class="number">20</span>[动作行为] 』</div><div class="line"></div><div class="line">function：</div><div class="line">a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</div><div class="line">c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</div><div class="line">d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；</div><div class="line">i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</div><div class="line">p ：列印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～</div><div class="line"><span class="keyword">s</span> ：取代，可以直接进行取代的工作哩！通常这个 <span class="keyword">s</span> 的动作可以搭配正规表示法！例如 <span class="number">1</span>,<span class="number">20</span><span class="keyword">s</span>/old/new/g 就是啦！</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>将/etc/passwd内容列出，同事，将2-5行<code>删除</code></p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed <span class="string">'2, 5d'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/bash</span></div><div class="line">     6	gdm:x:107:112:Gnome Display Manager daemon:/var<span class="regexp">/lib/gdm</span>:<span class="regexp">/bin/false</span></div><div class="line">     <span class="number">7</span>	haldaemon:<span class="keyword">x</span>:<span class="number">101</span>:<span class="number">102</span>:User <span class="keyword">for</span> haldaemon:<span class="regexp">/var/run</span><span class="regexp">/hald:/bin</span><span class="regexp">/false</span></div><div class="line">     8	lp:x:4:7:Printing daemon:/var<span class="regexp">/spool/lpd</span>:<span class="regexp">/bin/bash</span></div><div class="line"><span class="comment">#只要删除第 2 行</span></div><div class="line">nl /etc/passwd | sed <span class="string">'2d'</span> </div><div class="line"><span class="comment">#删除3至最后一行</span></div><div class="line">nl /etc/passwd | sed <span class="string">'3,$d'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在第二行后(亦即是加在第三行)<code>加上</code>『drink tea?』字样！</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt;  nl /etc/passwd | sed <span class="string">'2a drink tea'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/bash</span></div><div class="line">     2	bin:x:1:1:bin:/bin:<span class="regexp">/bin/bash</span></div><div class="line">drink tea</div><div class="line">     <span class="number">3</span>	daemon:<span class="keyword">x</span>:<span class="number">2</span>:<span class="number">2</span>:Daemon:<span class="regexp">/sbin:/bin</span><span class="regexp">/bash</span></div><div class="line">#那如果是要在第二行前</div><div class="line">nl /etc<span class="regexp">/passwd | sed '2i drink tea'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果是要<code>增加两行</code>以上，在第二行后面加入两行字，例如『Drink tea or …..』与『drink beer?』</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@www ~]<span class="comment"># nl /etc/passwd | sed '2a Drink tea or ......\</span></div><div class="line">&gt; drink beer ?<span class="string">'</span></div><div class="line">1 root:x:0:0:root:/root:/bin/bash</div><div class="line">2 bin:x:1:1:bin:/bin:/sbin/nologin</div><div class="line">Drink tea or ......</div><div class="line">drink beer ?</div><div class="line">3 daemon:x:2:2:daemon:/sbin:/sbin/nologin</div><div class="line">.....(后面省略).....</div></pre></td></tr></table></figure>
+</li>
+<li><p>将第2-5行的内容<code>取代</code>成为『No 2-5 number』呢？</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed <span class="string">'2,5c No 2-5 number'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/bash</span></div><div class="line">No 2-5 number</div><div class="line">     6	gdm:x:107:112:Gnome Display Manager daemon:/var<span class="regexp">/lib/</span></div><div class="line">	 ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>仅<code>列出</code> /etc/passwd 文件内的第 5-7 行</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; cat /etc/passwd | sed -n <span class="string">'5,7p'</span></div><div class="line">games:<span class="keyword">x</span>:<span class="number">12</span>:<span class="number">100</span>:Games account:<span class="regexp">/var/games</span>:<span class="regexp">/bin/bash</span></div><div class="line">gdm:<span class="keyword">x</span>:<span class="number">107</span>:<span class="number">112</span>:Gnome Display Manager daemon:<span class="regexp">/var/lib</span><span class="regexp">/gdm:/bin</span><span class="regexp">/false</span></div><div class="line">haldaemon:x:101:102:User for haldaemon:/var<span class="regexp">/run/hald</span>:<span class="regexp">/bin/false</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>搜索</code> /etc/passwd有root关键字的行</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed <span class="string">'/root/p'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/bash</span></div><div class="line">     2	bin:x:1:1:bin:/bin:<span class="regexp">/bin/bash</span></div><div class="line">     <span class="number">3</span>	daemon:<span class="keyword">x</span>:<span class="number">2</span>:<span class="number">2</span>:Daemon:<span class="regexp">/sbin:/bin</span><span class="regexp">/bash</span></div><div class="line">     4	ftp:x:40:49:FTP account:/srv<span class="regexp">/ftp:/bin</span><span class="regexp">/bash</span></div><div class="line">     5	games:x:12:100:Games account:/var<span class="regexp">/games:/bin</span><span class="regexp">/bash</span></div><div class="line">     6	gdm:x:107:112:Gnome Display Manager daemon:/var<span class="regexp">/lib/gdm</span>:<span class="regexp">/bin/false</span></div><div class="line">     <span class="number">7</span>	haldaemon:<span class="keyword">x</span>:<span class="number">101</span>:<span class="number">102</span>:User <span class="keyword">for</span> haldaemon:<span class="regexp">/var/run</span><span class="regexp">/hald:/bin</span><span class="regexp">/false</span></div><div class="line">     8	lp:x:4:7:Printing daemon:/var<span class="regexp">/spool/lpd</span>:<span class="regexp">/bin/bash</span></div><div class="line">     <span class="number">9</span>	mail:<span class="keyword">x</span>:<span class="number">8</span>:<span class="number">12</span>:Mailer daemon:<span class="regexp">/var/spool</span><span class="regexp">/clientmqueue:/bin</span><span class="regexp">/false</span></div><div class="line">     ...</div><div class="line">#如果root找到，除了输出所有行，还会输出匹配行。</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用-n的时候将<code>只打印包含模板的行</code>。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed -n <span class="string">'/root/p'</span></div><div class="line">    <span class="number">19</span>	root:<span class="keyword">x</span>:<span class="number">0</span>:<span class="number">0</span>:root:<span class="regexp">/root:/bin</span><span class="regexp">/bash</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>删除</code>/etc/passwd所有包含root的行，其他行输出</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed <span class="string">'/root/d'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/bash</span></div><div class="line">     2	bin:x:1:1:bin:/bin:<span class="regexp">/bin/bash</span></div><div class="line">     <span class="number">3</span>	daemon:<span class="keyword">x</span>:<span class="number">2</span>:<span class="number">2</span>:Daemon:<span class="regexp">/sbin:/bin</span><span class="regexp">/bash</span></div><div class="line">     4	ftp:x:40:49:FTP account:/srv<span class="regexp">/ftp:/bin</span><span class="regexp">/bash</span></div><div class="line">     5	games:x:12:100:Games account:/var<span class="regexp">/games:/bin</span><span class="regexp">/bash</span></div><div class="line">     ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>搜索/etc/passwd,找到root对应的行，执行后面花括号中的一组命令，<code>每个命令之间用分号分隔，这里把bash替换为blueshell</code>，再输出这行：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed -n <span class="string">'/root/&#123;s/bash/blueshell/;p&#125;'</span></div><div class="line">    <span class="number">19</span>	root:<span class="keyword">x</span>:<span class="number">0</span>:<span class="number">0</span>:root:<span class="regexp">/root:/bin</span><span class="regexp">/blueshell</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果只<code>替换</code>/etc/passwd的第一个bash关键字为blueshell，就<code>退出</code></p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed -n <span class="string">'/bash/&#123;s/bash/blueshell/;p;q&#125;'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/blueshell</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>获取主机ip</code></p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; <span class="regexp">/sbin/ifconfig</span> eth<span class="number">0</span> | <span class="keyword">grep</span> <span class="string">'inet addr'</span> | sed <span class="string">'s/^.*addr://g'</span> | sed <span class="string">'s/Bcast.*$//g'</span></div><div class="line"><span class="number">192.168</span>.<span class="number">138.130</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>一条sed命令，删除/etc/passwd第三行到末尾的数据，并把bash替换为blueshell</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; nl /etc/passwd | sed -e <span class="string">'3,$d'</span> -e <span class="string">'s/bash/blueshell/'</span></div><div class="line">     <span class="number">1</span>	at:<span class="keyword">x</span>:<span class="number">25</span>:<span class="number">25</span>:Batch jobs daemon:<span class="regexp">/var/spool</span><span class="regexp">/atjobs:/bin</span><span class="regexp">/blueshell</span></div><div class="line">     2	bin:x:1:1:bin:/bin:<span class="regexp">/bin/blueshell</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>直接修改</code>文件内容</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#利用 sed 将 regular_express.txt 内每一行结尾若为 . 则换成 !</span></div><div class="line">[root@www ~]<span class="comment"># sed -i 's/\.$/\!/g' regular_express.txt</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>利用 sed <code>直接</code>在 regular_express.txt 最后一行加入『# This is a test』</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~<span class="regexp">/arvon_work&gt; sed -i '$a # THis is a test' hello</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat hello </div><div class="line">echo</div><div class="line">arvon</div><div class="line">is </div><div class="line">a </div><div class="line">good</div><div class="line">nor</div><div class="line"><span class="keyword">and</span></div><div class="line"><span class="keyword">or</span></div><div class="line"><span class="comment"># THis is a test</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.cnblogs.com/ggjucheng/archive/2013/01/13/2856901.html" target="_blank" rel="external">看的博客</a><br><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0330regularex_2.php#sed" target="_blank" rel="external">鸟哥私房菜</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/20/sed-命令实例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -934,21 +938,42 @@ sed 是一种在线编辑器，它一次处理一行内容。处理时，把当�
       
         
           
-          世界这么大，我想到翻过墙头看看。社会主义的GWF，真真是极好的
-环境准备
-Firefox（推荐英文版）
-Foxyproxy(Firefox插件）
-Xshell
-海外服务器（当让你在那要有个可以ssh的用户)
+            <p>世界这么大，我想到翻过墙头看看。社会主义的GWF，真真是极好的</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li><a href="http://www.firefox.com.cn/download/" target="_blank" rel="external">Firefox</a>（推荐英文版）</li>
+<li>Foxyproxy(Firefox插件）</li>
+<li><a href="http://xshell.en.softonic.com/download?ab=1#downloading" target="_blank" rel="external">Xshell</a></li>
+<li>海外服务器（当让你在那要有个可以ssh的用户)</li>
+</ul>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>使用Xshell建立sshtunnel，Firefox通过插件代理设置开全局翻墙，翻墙期间需要xshell对话保持正常连接，只有这个浏览器可以实现翻墙功能。</p>
+<p>###步骤&amp;截图详解</p>
+<ol>
+<li>安装Firefox</li>
+<li><p>安装Xshell</p>
+<ul>
+<li>新建会话</li>
+<li><p>连接会话<br><img src="http://i3.tietuku.com/0a4bea2b70af3dd6.png" alt=""></p>
+</li>
+<li><p>显示隧道窗格<br><img src="http://i3.tietuku.com/742820055e0e5ea1.png" alt=""></p>
+</li>
+<li><p>设置<br><img src="http://i3.tietuku.com/216adfa2f824c37f.png" alt=""><br><img src="http://i3.tietuku.com/b377198ff0f99aaf.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>安装Foxyproxy<br><img src="http://i3.tietuku.com/cb3e5724b92e169d.png" alt=""><br><img src="http://i3.tietuku.com/d32769d27e584944.png" alt=""></p>
+<ul>
+<li>安装Foxyproxy</li>
+<li><p>配置FoxyProxy，右键Froxyproxy图标（就是那个蓝色的狐狸标）<br><img src="http://i3.tietuku.com/4132dcf2ff808d40.png" alt=""><br><img src="http://i3.tietuku.com/651c54e55a6a57df.png" alt=""></p>
+</li>
+<li><p>右键FroxyProxy图标，选中Use Proxy ‘your mode’ for all URLS<br><img src="http://i3.tietuku.com/4132dcf2ff808d40.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>完成</p>
+</li>
+</ol>
 
-使用说明使用Xshell建立sshtunnel，Firefox通过插件代理设置开全局翻墙，
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/18/SSH-Tunnel翻墙/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -1056,18 +1081,261 @@ Xshell
       
         
           
-          更新记录2015/08/17    拆开来记，start with foreach2015/09/01 更新到子程序，最近有点懒惰了
-##结构
-###foreach控制结构
+            <p><strong>更新记录</strong><br>2015/08/17    拆开来记，start with foreach<br>2015/09/01 更新到子程序，最近有点懒惰了</p>
+<p>##结构</p>
+<p>###foreach控制结构</p>
+<ul>
+<li>Example one<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">foreach</span> $rock (<span class="keyword">qw</span>/ <span class="keyword">my</span> girlfriend is Mo /)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"One word is named $rock\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>arvon@Mo:~/arvon_perl&gt; perl foreach_one.pl<br>One word is named my<br>One word is named girlfriend<br>One word is named is<br>One word is named Mo</p>
+</blockquote>
+<ul>
+<li>Example two<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@rocks = <span class="keyword">qw</span>/ hello world Mo /;</div><div class="line"><span class="keyword">foreach</span> $rock(@rocks)&#123;</div><div class="line">    $rock = <span class="string">"\t$rock"</span>;</div><div class="line">    $rock .= <span class="string">"\n"</span>;</div><div class="line">    <span class="keyword">print</span> <span class="string">"\$rock now is $rock"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>arvon@Mo:~/arvon_perl&gt; perl foreach_two.pl<br>$rock now is     hello<br>$rock now is     world<br>$rock now is     Mo</p>
+</blockquote>
+<p>###Perl的默认变量$</p>
+<ul>
+<li>Example one<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">foreach</span> (<span class="number">1</span>..<span class="number">10</span>)&#123;    <span class="comment">#使用了默认变量$_</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"I can count to $_!\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>arvon@Mo:~/arvon_perl&gt; perl variable_one.pl<br>I can count to 1!<br>I can count to 2!<br>I can count to 3!<br>I can count to 4!<br>I can count to 5!<br>I can count to 6!<br>I can count to 7!<br>I can count to 8!<br>I can count to 9!<br>I can count to 10!</p>
+</blockquote>
+<p>###reverse操作符</p>
+<ul>
+<li>reverse操作符会读取列表的值，并按相反的次序返回该列表。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@fred = <span class="number">6</span>..<span class="number">10</span>;</div><div class="line">@barney = <span class="keyword">reverse</span>(@fred);</div><div class="line">@wilma = <span class="keyword">reverse</span> <span class="number">6</span>..<span class="number">10</span>;</div><div class="line">@fred = <span class="keyword">reverse</span> @fred;</div><div class="line"><span class="keyword">print</span> <span class="string">"@fred, @barney, @wilma, \n"</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>arvon@Mo:~/arvon_perl&gt; perl reverse_array.pl<br>10 9 8 7 6, 10 9 8 7 6, 10 9 8 7 6,</p>
+</blockquote>
+<p>###sort操作符</p>
+<ul>
+<li>其实啊，就是排序<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@rocks = <span class="keyword">qw</span>/ happy birthday to Mo /;</div><div class="line">@sorted = <span class="keyword">sort</span>(@rocks);</div><div class="line">@back = <span class="keyword">reverse</span> <span class="keyword">sort</span> @rocks;</div><div class="line">@rocks = <span class="keyword">sort</span> @rocks;</div><div class="line">@numbers = <span class="keyword">sort</span> <span class="number">97</span>..<span class="number">102</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"</span></div><div class="line">       @rocks \</div><div class="line">       @sorted\</div><div class="line">       @back\</div><div class="line">       @rocks\</div><div class="line">       @numbers";</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>arvon@Mo:~/arvon_perl&gt; perl sort_string.pl </p>
+</blockquote>
+<pre><code>Mo birthday happy to 
+Mo birthday happy to
+to happy birthday Mo
+Mo birthday happy to
+100 101 102 97 98 99
+</code></pre><p>###each操作符</p>
+<ul>
+<li>每次对数组调用each，会返回数组中下一个元素所对应的两个值–该元素的索引以及该元素的值<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.012</span>;</div><div class="line"><span class="keyword">my</span> @rocks = <span class="keyword">qw</span>/ bedrock slate rubble granite /;</div><div class="line"><span class="keyword">while</span>( <span class="keyword">my</span>( $index, $value ) = <span class="keyword">each</span> @rocks)&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$index: $value"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> $index(<span class="number">0</span> .. $#rocks )&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$index: $rocks[$index]\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="子程序"><a href="#子程序" class="headerlink" title="子程序"></a>子程序</h2><ul>
+<li>子程序名称<br>子程序名称以字母、数字、下划线组成，不能以数字开头，子程序名称属于独立的名字空间</li>
+</ul>
+<h3 id="定义子程序"><a href="#定义子程序" class="headerlink" title="定义子程序"></a>定义子程序</h3><ul>
+<li>定义子程序用sub、子程序名以及花括号封闭起来的代码块，for example：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">marine</span> </span>&#123;</div><div class="line">    $n += <span class="number">1</span>; <span class="comment">#全局变量$n</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"Hello, sailor number $n!\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="调用子程序"><a href="#调用子程序" class="headerlink" title="调用子程序"></a>调用子程序</h3><ul>
+<li>在任意表达式中使用程序名（前面加上与号）来调用它<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">marine</span></span>&#123;</div><div class="line">    $n += <span class="number">1</span>;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Hello, sailor number $n!\n"</span>;</div><div class="line">&#125;</div><div class="line">&amp;marine;    <span class="comment">#打印hello，sailor number 1！</span></div><div class="line">&amp;marine;    <span class="comment">#打印hello，sailor number 2！</span></div><div class="line">&amp;marine;    <span class="comment">#打印hello，sailor number 3！</span></div><div class="line">&amp;marine;    <span class="comment">#打印hello，sailor number 4！</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><ul>
+<li>任何的perl子程序都有返回值，但不是所有的返回值都是有用的，Larry将之简化，在子程序的执行过程中，它会不断进行运算，而最后一次运算的结果（不管是什么）都会被自动当成子程序的返回值。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$fred = <span class="number">2</span>;</div><div class="line">$barney = <span class="number">3</span>;</div><div class="line">$wilma = &amp;sum_of_fred_and_barney;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">sum_of_fred_and_barney</span></span>&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Hey, you called the sum_of_fred_and_barney subroutine!\n"</span>;</div><div class="line">    $fred + $barney;</div><div class="line">&#125;</div><div class="line"><span class="comment">#&amp;sum_of_fred_and_barney;</span></div><div class="line">$betty = <span class="number">3</span> * &amp;sum_of_fred_and_barney;</div><div class="line"><span class="keyword">print</span> <span class="string">"\$wilma is $wilma.\n"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"\$betty is $betty.\n"</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$fred = <span class="number">2</span>;</div><div class="line">$barney = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">larger_of_fred_or_barney</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> ($fred &gt; $barney)&#123;</div><div class="line">        $fred;</div><div class="line">        <span class="keyword">print</span> <span class="string">"\$fred is $fred\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        $barney;</div><div class="line">        <span class="keyword">print</span> <span class="string">"\$barney is $barney\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&amp;larger_of_fred_or_barney;</div></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>要传递参数列表到子程序里，只要在子程序调用的后面加上被括号圈引得列表表达式就可以了，for example：<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$n = &amp;max(<span class="number">10</span>, <span class="number">15</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">max</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> ($_[<span class="number">0</span>] &gt; $_[<span class="number">1</span>])&#123;</div><div class="line">        $_[<span class="number">0</span>];</div><div class="line">        <span class="keyword">print</span> <span class="string">"\$_[0] is $_[0]\n"</span>;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        $_[<span class="number">1</span>];</div><div class="line">        <span class="keyword">print</span> <span class="string">"\$_[1] is $_[1]\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$n = &amp;max(<span class="number">3</span>, <span class="number">4</span>);</div></pre></td></tr></table></figure>
+<h4 id="子程序中的私有变量"><a href="#子程序中的私有变量" class="headerlink" title="子程序中的私有变量"></a>子程序中的私有变量</h4><ul>
+<li>默认情况下，perl里的所有变量都是全局变量，即在程序的任何地方都可以访问他们。随时可以借助my操作符来创建私有变量（lexical variable）<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">max</span> </span>&#123;</div><div class="line">    <span class="keyword">my</span>($m, $n);</div><div class="line">    ($m, $n_) = @_;</div><div class="line">    <span class="keyword">if</span> ($m &gt; $n)&#123; $m &#125; <span class="keyword">else</span> &#123; $n &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="变长的参数列表"><a href="#变长的参数列表" class="headerlink" title="变长的参数列表"></a>变长的参数列表</h4><ul>
+<li>打印最大值，“高水线（high-watermark）”算法<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$maximum = &amp;max(<span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">6</span>);</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">max</span></span>&#123;</div><div class="line">    <span class="keyword">my</span>($max_so_far) = <span class="keyword">shift</span> @_;</div><div class="line">    <span class="keyword">foreach</span> (@_)&#123;</div><div class="line">        <span class="keyword">if</span> ($_ &gt; $max_so_far)&#123;</div><div class="line">            $max_so_far = $_;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    $max_so_far;</div><div class="line">    <span class="keyword">print</span> <span class="string">"Max is $max_so_far\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="空参数列表"><a href="#空参数列表" class="headerlink" title="空参数列表"></a>空参数列表</h4><h4 id="关于词法（my）变量"><a href="#关于词法（my）变量" class="headerlink" title="关于词法（my）变量"></a>关于词法（my）变量</h4><ul>
+<li>词法变量可以用在任何语句块内，而不仅限于子程序语句块。比如说，它可以在if、while或foreach的语句块里使用</li>
+<li><p>求次方</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">foreach</span> (<span class="number">1</span>..<span class="number">10</span>)&#123;</div><div class="line">    <span class="keyword">my</span>($square) = $_ * $_;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$_ squared is $square.\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>my操作符不加括号时，只能用来声明单个词法变量</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> $fred, $barney;  <span class="comment">#只声明了fred这一个变量</span></div><div class="line"><span class="keyword">my</span>（$fred, $barney); <span class="comment">#两个都声明了</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在日常perl编程中，你最好对每个新变量都使用my声明，最好对每个新变量都使用my声明，让它保持在自己所在的词法作用域内。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">foreach</span> <span class="keyword">my</span> $rock (<span class="keyword">qw</span>/bedrock slate lava /)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"One rock is $rock.\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="use-strict编译指令（pragma）"><a href="#use-strict编译指令（pragma）" class="headerlink" title="use strict编译指令（pragma）"></a>use strict编译指令（pragma）</h3><ul>
+<li><p>告诉perl我愿意接受更严格的限制使用use strict这个编译指令放在程序开头</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> strict;</div></pre></td></tr></table></figure>
+</li>
+<li><p>自perl5.12开始，如果使用编译指令指定最低perl版本号的话，就相当于隐式打开了约束指令</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="number">5.012</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="return操作符"><a href="#return操作符" class="headerlink" title="return操作符"></a>return操作符</h3><ul>
+<li>return操作符可以让子程序执行到一半的时候停止执行<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> strict;</div><div class="line"><span class="keyword">my</span> @names = <span class="keyword">qw</span>/ fred barney betty dino wilma pebbles bamm-bam /;</div><div class="line"><span class="keyword">my</span> $result = &amp;which_element_is(<span class="string">"dino"</span>, @names);</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">which_element_is</span></span>&#123;</div><div class="line">    <span class="keyword">my</span>($what, @array) = @_;</div><div class="line">    <span class="keyword">foreach</span> (<span class="number">0</span>..$#array)&#123;</div><div class="line">        <span class="keyword">if</span> ($what eq $array[$_])&#123;</div><div class="line">            <span class="keyword">return</span> $_;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    -<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
-Example one12345#!/usr/bin/perluse 5.010;foreach $rock (qw/ my
-          ...
+          
+        
+      
+    </div>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/17/Perl语言入门2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/12/Perl语言入门（6th）课后习题/" itemprop="url">
+                  Perl语言入门（6th）课后习题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-12T16:00:21+08:00" content="2015-08-12">
+              2015-08-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/12/Perl语言入门（6th）课后习题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/Perl语言入门（6th）课后习题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/12/Perl语言入门（6th）课后习题/" class="leancloud_visitors" data-flag-title="Perl语言入门（6th）课后习题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>个人感觉课后习题单独分出来比较方便，这里有可能的话会多放些例子，ok，go</p>
+<p>###Chapter one</p>
+<ol>
+<li>计算半径为12.5的园的周长，可自行输入，小于0输出为0<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Please input a number: "</span>;</div><div class="line">$inputNumber = &lt;STDIN&gt;;</div><div class="line">$perimeter = $inputNumber * <span class="number">2</span> * <span class="number">3.14</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"The perimeter is $perimeter\n"</span>;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>###Chapter two</p>
+<ol>
+<li><p>半径12.5圆，求周长</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">$pi = <span class="number">3.141592654</span>;</div><div class="line">$circ = <span class="number">2</span> * $pi * <span class="number">12.5</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"The circumference of a circle of radius 12.5 is $circ.\n"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>交互算周长</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl -w</span></div><div class="line">$pi = <span class="number">3.141592654</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"What is the radius?\n"</span>;</div><div class="line"><span class="keyword">chomp</span>($radius = &lt;STDIN&gt;);</div><div class="line">$circ = <span class="number">2</span> * $pi * $radius;</div><div class="line"><span class="keyword">print</span> <span class="string">"The circumference of a circlee of radius $radius is $circ.\n"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>加验证的交互算周长</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">$pi = <span class="number">3.1415926</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"What is the radius?"</span>;</div><div class="line"><span class="keyword">chomp</span>($radius = &lt;STDIN&gt;);</div><div class="line">$circ = <span class="number">2</span> * $pi * $radius;</div><div class="line"><span class="keyword">if</span> ($radius &lt; <span class="number">0</span>)&#123;</div><div class="line">    $circ = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">print</span> <span class="string">"The circumference of a circle of radius $radius is $circ.\n"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>交互求和</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Enter first number: "</span>;</div><div class="line"><span class="keyword">chomp</span>($one = &lt;STDIN&gt;);</div><div class="line"><span class="keyword">print</span> <span class="string">"Enter second number: "</span>;</div><div class="line"><span class="keyword">chomp</span>($two = &lt;STDIN&gt;);</div><div class="line">$result = $one + $two;</div><div class="line"><span class="keyword">print</span> <span class="string">"The result is $result.\n"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串重复术，中间的是小写字母x</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Enter a string: "</span>;</div><div class="line">$str = &lt;STDIN&gt;;</div><div class="line"><span class="keyword">print</span> <span class="string">"Enter a number of times: "</span>;</div><div class="line"><span class="keyword">chomp</span>($num = &lt;STDIN&gt;);</div><div class="line">$result = $str <span class="keyword">x</span> $num;</div><div class="line"><span class="keyword">print</span> <span class="string">"The result is:\n$result"</span>;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Chapter-three"><a href="#Chapter-three" class="headerlink" title="Chapter three"></a>Chapter three</h3><ol>
+<li><p>将输入的字符串倒序打印</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/binj/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"Enter some lines, then press Ctrl-D:\n"</span>;<span class="comment">#or try Ctrl-Z</span></div><div class="line">@lines = &lt;STDIN&gt;;</div><div class="line">@reverse_lines = <span class="keyword">reverse</span> @lines;</div><div class="line"><span class="keyword">print</span> <span class="string">"@reverse_lines"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>键入数字，输出对应的name</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line">@names = <span class="keyword">qw</span>/ guo qiu arvon mo love /;</div><div class="line"><span class="keyword">print</span> <span class="string">"Enter some number from 1 to 5, one per line, then press Ctrl-D:\n"</span>;</div><div class="line"><span class="comment">#print @names;</span></div><div class="line"><span class="keyword">chomp</span>(@number = &lt;STDIN&gt;);</div><div class="line"><span class="comment">#print "\@number is @number\n";</span></div><div class="line"><span class="keyword">foreach</span> $num (@number)&#123;</div><div class="line"><span class="comment">#    print "now \$num is $num";</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"$names[ $num -1 ]\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>注释的是在一行输入输入的，没注释的分行显示</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#chomp(@lines = &lt;STDIN&gt;);</span></div><div class="line"><span class="comment">#@sorted = sort @lines;</span></div><div class="line"><span class="comment">#print "@sorted\n";</span></div><div class="line"><span class="keyword">print</span> <span class="keyword">sort</span> &lt;STDIN&gt;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>###小代码块</p>
+<ul>
+<li>检查参数个数是否正确<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">max</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (@_ != <span class="number">2</span>)&#123;</div><div class="line">        <span class="keyword">print</span> <span class="string">"WAENING! &amp;max should get exactly two argumnets!\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment"># follow</span></div><div class="line">    <span class="comment">#...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -1139,7 +1407,7 @@ Example one12345#!/usr/bin/perluse 5.010;foreach $rock (qw/ my
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1149,7 +1417,7 @@ Example one12345#!/usr/bin/perluse 5.010;foreach $rock (qw/ my
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1357,10 +1625,6 @@ Example one12345#!/usr/bin/perluse 5.010;foreach $rock (qw/ my
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

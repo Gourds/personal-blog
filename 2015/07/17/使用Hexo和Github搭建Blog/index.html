@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,blog," />
+  <meta name="keywords" content="Hexo," />
 
 
 
@@ -84,17 +84,20 @@
 
 
 
-<meta name="description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。 更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
-<meta name="keywords" content="hexo,blog">
+<meta name="description" content="Update:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。">
+<meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Hexo和Github搭建Blog">
 <meta property="og:url" content="http://yoursite.com/2015/07/17/使用Hexo和Github搭建Blog/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。 更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
-<meta property="og:updated_time" content="2016-07-30T10:14:45.000Z">
+<meta property="og:description" content="Update:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。">
+<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-1.jpeg">
+<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-2.jpeg">
+<meta property="og:updated_time" content="2017-05-25T06:20:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo和Github搭建Blog">
-<meta name="twitter:description" content="Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。 更新记录 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改">
+<meta name="twitter:description" content="Update:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。">
+<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-1.jpeg">
 
 
 
@@ -106,7 +109,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -337,18 +340,25 @@
       
 
       
-        <p>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我<br>出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。<br>win上多有不便，还会在linux上进行搭建。</p>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=25706279&auto=1&height=66"></iframe>
+
+<p><strong>Update</strong>:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-1.jpeg" alt="20150717-hexoblog-1"><br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-2.jpeg" alt="20150717-hexoblog-2"><br>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。</p>
+<a id="more"></a>
 <h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p> 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改</p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
-<li>github账户设置<br>平台为win，需注册<a href="http://www.github.com" title="github account" target="_blank" rel="external">github account</a>登陆github后需要创建一个repository,然后就写个REpositoryname，<strong>注意要和Owner的name<br>一致</strong>（注意），然后勾选那个Initaalize this…什么的选项，然后就这样成了，不然就是像我一样不停的犯错，为何还有待考量，反<br>正现在听话就ok。</li>
+<li>github账户设置<br>平台为win，需注册<a href="http://www.github.com" title="github account" target="_blank" rel="external">github account</a>登陆github后需要创建一个repository,然后就写个REpositoryname，<strong>注意要和Owner的name一致</strong>（注意），然后勾选那个Initaalize this…什么的选项，然后就这样成了，不然就是像我一样不停的犯错，为何还有待考量，反正现在听话就ok。</li>
 <li>软件设置<br>需要的软件有node.js和git，实际最好再来个Visual Studio Code，你会发现有语法高亮就是舒心</li>
 <li>待补充昂<br>为了可以清晰一点，决定把Markdown和这个Blog分开记录。恩，就是这样</li>
 </ol>
-<h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><h3 id="安装node-js软件"><a href="#安装node-js软件" class="headerlink" title="安装node.js软件"></a>安装node.js软件</h3><p>下载地址戳：<a href="http://www.nodejs.org/download/" title="node.js" target="_blank" rel="external">node.js</a>,然后就开始一路下一步吧，然后你的发现带cmd多了一条np</p>
-<h3 id="安装git软件"><a href="#安装git软件" class="headerlink" title="安装git软件"></a>安装git软件</h3><p>下载地址戳：<a href="http://git-scm.com/download/" title="git" target="_blank" rel="external">git</a>,依旧下一步到底。昨天做着的时候没记录，真是一大败笔</p>
+<h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><h3 id="安装node-js软件"><a href="#安装node-js软件" class="headerlink" title="安装node.js软件"></a>安装node.js软件</h3><ul>
+<li>下载地址戳：<a href="http://www.nodejs.org/download/" title="node.js" target="_blank" rel="external">node.js</a>,然后就开始一路下一步吧，然后你的发现带cmd多了一条np</li>
+</ul>
+<h3 id="安装git软件"><a href="#安装git软件" class="headerlink" title="安装git软件"></a>安装git软件</h3><ul>
+<li>下载地址戳：<a href="http://git-scm.com/download/" title="git" target="_blank" rel="external">git</a>,依旧下一步到底。昨天做着的时候没记录，真是一大败笔</li>
+</ul>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ol>
 <li><p>进入Git bash,输入命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo	#hexo表示全局安装hexo</div><div class="line"><span class="meta">#</span><span class="bash">创建hexo文件夹，如/user/arvon/hexo-lxc</span></div><div class="line">hexo init	#初始化hexo</div><div class="line">npm install</div><div class="line">npm generate</div><div class="line">npm server</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo	#hexo表示全局安装hexo</div><div class="line"><span class="meta">#</span>创建hexo文件夹，如/user/arvon/hexo-lxc</div><div class="line">hexo init	#初始化hexo</div><div class="line">npm install</div><div class="line">npm generate</div><div class="line">npm server</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后可以通过访问localhost查看预览http：//localhost:4000/</p>
 </li>
@@ -356,22 +366,24 @@
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><ol>
 <li>将在github上创建的Repository，找到https那个url将其复制</li>
 <li><p>然后编辑位于你创建的文件夹下的文件，例如我就是：/user/arvon/hexo-lxc/_config.yml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">deploy:</span></div><div class="line">type: git</div><div class="line">repository: https://github.com/arvon2014/arvon2014.github.com</div><div class="line">branch: master</div><div class="line">github上的地址：https://github.com/Arvon2014/arvon2014.github.com.git</div><div class="line"><span class="meta">#</span><span class="bash">web上访问的为：http://arvon2014.github.io</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>deploy:</div><div class="line">type: git</div><div class="line">repository: https://github.com/arvon2014/arvon2014.github.com</div><div class="line">branch: master</div><div class="line">github上的地址：https://github.com/Arvon2014/arvon2014.github.com.git</div><div class="line"><span class="meta">#</span>web上访问的为：http://arvon2014.github.io</div></pre></td></tr></table></figure>
 </li>
 <li><p>设置ssh免密码访问</p>
-</li>
-</ol>
 <ul>
 <li>先查看本地是否已经存在ssh文件，如不存在直接跳过下面第二步</li>
 <li>删除已有的ssh的文件</li>
 <li><p>输入命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C "邮件地址@youremail.com" Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line">ssh -T git@github.com	#测试</div><div class="line">The authenticity of host 'github.com (207.97.227.239)' can't be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?	#说明成功</div><div class="line"><span class="meta"> $</span><span class="bash"> git config --global user.name <span class="string">"你的名字"</span> $ git config --global user.email <span class="string">"your_email@youremail.com"</span>	<span class="comment">#设置你的信息</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C "邮件地址@youremail.com" Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt; Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line">ssh -T git@github.com	#测试</div><div class="line">The authenticity of host 'github.com (207.97.227.239)' can't be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?	#说明成功</div><div class="line"><span class="meta"> $</span> git config --global user.name "你的名字" $ git config --global user.email "your_email@youremail.com"	#设置你的信息</div></pre></td></tr></table></figure>
 </li>
 <li><p>现在已经可以顺利将环境搭建完毕</p>
 </li>
 <li>进入你的Hexo目录，开始试验吧<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate = hexo g</div><div class="line">hexo server = hexo s	#部署本地预览</div><div class="line">hexo deploy = hexo d	#生成部署</div></pre></td></tr></table></figure>
 </li>
 </ul>
+</li>
+</ol>
+<hr>
+<p>以上，歌曲为一万次悲伤，推荐使用网易云音乐生成外链</p>
 
       
     </div>
@@ -415,9 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
-          
-            <a href="/tags/blog/" rel="tag">#blog</a>
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
           
         </div>
       
@@ -426,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/17/皮卡邱/" rel="next" title="Pikachu">
-                <i class="fa fa-chevron-left"></i> Pikachu
+              <a href="/2015/06/13/CentOS安装hexo记录/" rel="next" title="安装hexo记录">
+                <i class="fa fa-chevron-left"></i> 安装hexo记录
               </a>
             
           </div>
@@ -508,7 +518,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -518,7 +528,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -741,10 +751,6 @@
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

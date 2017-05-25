@@ -104,7 +104,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -282,124 +282,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/12/Ansible之HAVE-DECL-MPZ-POWM-SEC报错记录/" itemprop="url">
-                  Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-12T17:00:27+08:00" content="2015-10-12">
-              2015-10-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/12/Ansible之HAVE-DECL-MPZ-POWM-SEC报错记录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/12/Ansible之HAVE-DECL-MPZ-POWM-SEC报错记录/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/12/Ansible之HAVE-DECL-MPZ-POWM-SEC报错记录/" class="leancloud_visitors" data-flag-title="Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          简述：在centOS6.5上使用pip安装ansible(version=2.1.1.0)时报错
-报错解决
-报错如下
-1234567891011121314151617181920212223 ERROR! Unexpected Exception: 'module' object has no a
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/12/Ansible之HAVE-DECL-MPZ-POWM-SEC报错记录/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/16/crontab简记/" itemprop="url">
                   crontab简记
                 </a>
@@ -460,14 +342,30 @@
       
         
           
-          今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。介绍:crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο
-          ...
+            <p>今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。<br><strong>介绍:</strong>crontab命令<br>常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<em>crontab文件</em>包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。<br>crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。(ps:摘自百度百科)</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li>常用命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">crontab -e	#编辑，编辑后重启服务生效</div><div class="line">/etc/init.d/crond restart（stop/start）	#重启服务</div><div class="line">crontab -l	#查看</div><div class="line">crontab -l&gt;/home/backup/crontab/crontab\`date '+%Y%m%d'`.bak	#备份crontab</div><div class="line"><span class="meta">#</span><span class="bash">* 每分钟执行以下ls命令</span></div><div class="line">0 * * * * /bin/ls</div><div class="line"><span class="meta">#</span><span class="bash">* 周一到周五每天17点发email给arvon</span></div><div class="line">0 17 * * 1-5 mail -s "hi" alex@domain.name &lt; /tmp/maildata</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h2><ul>
+<li>参照man手册<blockquote>
+<ul>
+<li>f1 f2 f3 f4 f5 cmd/script</li>
+<li>其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程式。</li>
+<li>当 f1 为 <em> 时表示每分钟都要执行 program，f2 为 </em> 时表示每小时都要执行程式，其余类推</li>
+<li>当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其余类推</li>
+<li>当 f1 为 <em>/n 时表示每 n 分钟个时间间隔执行一次，f2 为 </em>/n 表示每 n 小时个时间间隔执行一次，其余类推</li>
+<li>当 f1 为 a, b, c,… 时表示第 a, b, c,… 分钟要执行，f2 为 a, b, c,… 时表示第 a, b, c…个小时要执行，其余类推</li>
+<li>使用者也可以将所有的设定先存放在档案 file 中，用 crontab file 的方式来设定时程表。</li>
+<li>由于unix版本不一样，所以部分语法有差别，例如在hp unix aix 中设定间隔执行如果采用*/n 方式将出现语法错误，在这类unix中 ，间隔执行只能以列举方式，详请见例子。</li>
+<li>使用方法:　　用VI编辑一个文件 cronfile，然后在这个文件中输入格式良好的时程表。编辑完成后，保存并退出。</li>
+<li>在命令行输入crontab cronfile这样就将cronfile文件提交给cron进程，同时，新创建cronfile的一个副本已经被放在/var/spoll/cron目录中，文件名就是用户名。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/16/crontab简记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -575,14 +473,24 @@
       
         
           
-          上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持za
-          ...
+            <p>上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。<br>Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境</p>
+<h2 id="实现环境"><a href="#实现环境" class="headerlink" title="实现环境"></a>实现环境</h2><ul>
+<li>已经完成了zabbix基本环境部署</li>
+<li>安装php环境</li>
+<li>使用epel源，下载所需组件</li>
+</ul>
+<h3 id="安装-amp-配置步骤"><a href="#安装-amp-配置步骤" class="headerlink" title="安装&amp;配置步骤"></a>安装&amp;配置步骤</h3><h4 id="下载Percona-Monitoring-Plugins"><a href="#下载Percona-Monitoring-Plugins" class="headerlink" title="下载Percona Monitoring Plugins"></a>下载Percona Monitoring Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#下载文件</div><div class="line">wget https://www.percona.com/downloads/percona-monitoring-plugins/1.1.1/percona-zabbix-templates-1.1.1-1.noarch.rpm</div><div class="line">#提取下载的rpm文件</div><div class="line">[root@localhost ~]# rpm2cpio percona-zabbix-templates-1.1.1-1.noarch.rpm |cpio -div</div><div class="line"></div><div class="line">```  </div><div class="line">**说明：**</div><div class="line">&gt;目录文件说明</div><div class="line">\#脚本文件路径</div><div class="line">var/lib/zabbix/percona/scripts/</div><div class="line">\#key文件位置</div><div class="line">var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf</div><div class="line">\#模板文件位置</div><div class="line">var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.1.xml</div><div class="line"></div><div class="line">#### 安装percona monitoring plugins</div></pre></td></tr></table></figure>
+<p>[root@localhost ~]# rpm -ivh percona-zabbix-templates-1.1.1-1.noarch.rpm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 安装php环境</div><div class="line">若以安装，可跳过，需求包如下图</div><div class="line">![](http://i3.tietuku.com/a647c48fd7daa899.png)</div></pre></td></tr></table></figure></p>
+<p>[root@localhost ~]# yum install php php-mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 复制文件</div><div class="line">将key的子配置文件复制到/etc/zabbix/zabbix_agentd.d/</div><div class="line">``插曲``由于版本不同，所以实际文件位置也不同，这个位置可以在agent的包里看到</div><div class="line">&gt;rpm -ql zabbix22-agent-2.2.1-5.el6.x86_64</div><div class="line">/usr/share/doc/zabbix22-agent-2.2.1/userparameter_mysql.conf</div></pre></td></tr></table></figure></p>
+<p>[root@localhost zabbix]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agentd.d/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 重启zabbix-agent服务</div></pre></td></tr></table></figure></p>
+<p>/etc/init.d/zabbix-agent restart<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 修改脚本</div><div class="line">修改脚本中的用户名和密码,用户名和密码为本机数据库的账户和密码，并不需要特别的权限</div></pre></td></tr></table></figure></p>
+<p>[root@localhost ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">修改字段如图</div><div class="line">![](http://i3.tietuku.com/2698b8e90e522cd6.png)</div><div class="line"></div><div class="line">##### 没有用户</div><div class="line">添加数据库的用户</div></pre></td></tr></table></figure></p>
+<p>mysql&gt; grant process,super,select on <em>.</em> to zabbix@localhost identified by ‘zabbix’;<br>mysql&gt; flush privileges;<br>```</p>
+<h4 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h4><p>运行脚本，只要不报error就是没问题<br><code>[root@centos-01 percona]# /var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh gg</code></p>
+<h4 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h4><p>先找到xml文件，上面的额位置就有，/var/lib/zabbix/percona/templates/，然后传到win下，然后再执行导入模板，看大图<br><img src="http://i3.tietuku.com/404d96621846ce53.png" alt=""><br><img src="http://i3.tietuku.com/8c345d59e2a24c37.png" alt=""><br>将导入的模板应用到主机<br><img src="http://i3.tietuku.com/e65c053544662725.png" alt=""></p>
+<h3 id="错误集锦"><a href="#错误集锦" class="headerlink" title="错误集锦"></a>错误集锦</h3><h4 id="One-连不上数据库"><a href="#One-连不上数据库" class="headerlink" title="One 连不上数据库"></a>One 连不上数据库</h4><p>描述：如图<br><img src="http://i3.tietuku.com/70ee7b048eb32974.png" alt=""></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/14/Zabbix使用Percona组件监控Mysql/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -690,15 +598,10 @@
       
         
           
-          问题：上周挂起了俩虚机（有一个弄的是克隆的），今天打开一启动，报错
-解决：右键我的电脑–&gt;管理 –&gt; 服务，找到VMware Authorization Service服务，将其启动，并设置为自动或自动延迟，可以看图解释，这个服务为授权服务，没有这个服务打开虚拟机软件时会出现相关权限缺失
-          ...
+            <p><code>问题：</code>上周挂起了俩虚机（有一个弄的是克隆的），今天打开一启动，报错<br><img src="http://i3.tietuku.com/8a00a6d333f7ecb4.png" alt=""></p>
+<p><strong>解决：</strong><br>右键我的电脑–&gt;管理 –&gt; 服务，找到VMware Authorization Service服务，将其启动，并设置为自动或自动延迟，可以看图<br><img src="http://i3.tietuku.com/b8dbe039996b6155.png" alt=""><br>解释，这个服务为授权服务，没有这个服务打开虚拟机软件时会出现相关权限缺失或文件路径错误等错误提示，使虚机无法启动</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/14/虚拟机错误/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -806,15 +709,57 @@
       
         
           
-          ##zabbix server更新：此版本为2.2版本，已更新3.0版本
-配置yum源12rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpmhttp://dl.fed
-          ...
+            <p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
+<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
+<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent	#这个装出来是1.8的版本。所以重来</div><div class="line"><span class="meta">#</span><span class="bash">* 下面是2.2版本的安装包	</span></div><div class="line">yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</div></pre></td></tr></table></figure>
+<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server</div></pre></td></tr></table></figure>
+<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v "(^#|^$)" 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line"><span class="meta">#</span><span class="bash">vi /etc/my.cnf</span></div><div class="line"><span class="meta">#</span><span class="bash">参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=<span class="literal">true</span>&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</span></div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"><span class="meta">#</span><span class="bash"> Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
+<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database zabbix character <span class="built_in">set</span> utf8;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all privileges on zabbix.* to zabbix@localhost identified by <span class="string">'zabbix'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></div></pre></td></tr></table></figure>
+<h3 id="创建zabbix的数据库"><a href="#创建zabbix的数据库" class="headerlink" title="创建zabbix的数据库"></a>创建zabbix的数据库</h3><ul>
+<li>zabbix连接数据：zabbix/zabbix<h3 id="导入zabbix的数据库"><a href="#导入zabbix的数据库" class="headerlink" title="导入zabbix的数据库"></a>导入zabbix的数据库</h3><h4 id="进入数据库导入"><a href="#进入数据库导入" class="headerlink" title="进入数据库导入"></a>进入数据库导入</h4>mysql&gt;use zabbix<br>###倒入sql一定按顺序<code>一定</code></li>
+<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###配置zabbix_server.conf</p>
+<ul>
+<li><p>默认参数：<br>  egrep -v “(^#|^$)” /etc/zabbix/zabbix_server.conf</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改后参数：<br>  主要添加字段为：DBpassword=zabbix</p>
+</li>
+</ul>
+<h4 id="iptables-amp-Selinux设置"><a href="#iptables-amp-Selinux设置" class="headerlink" title="iptables&amp;Selinux设置"></a>iptables&amp;Selinux设置</h4><ul>
+<li>iptables设置(注意顺序)<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --sport 10050 -j ACCEPT</div><div class="line"><span class="meta">#</span><span class="bash">* Selinux关闭</span></div><div class="line">[root@localhost ~]# setenforce 0</div><div class="line">[root@localhost ~]# getenforce</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/zabbix-server start</div><div class="line">sudo /etc/init.d/httpd start</div></pre></td></tr></table></figure>
+<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
+<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div></pre></td></tr></table></figure>
+<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v "(^#|^$)" /etc/zabbix/zabbix_agentd.conf </div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133	#server IP</div><div class="line">ServerActive=192.168.138.133	#server IP</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# /etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
+<h4 id="zabbix添加主机"><a href="#zabbix添加主机" class="headerlink" title="zabbix添加主机"></a>zabbix添加主机</h4><h5 id="手动添加"><a href="#手动添加" class="headerlink" title="手动添加"></a>手动添加</h5><p><img src="http://i1.tietuku.com/29ff780785f8142b.png" alt="看图"><br><img src="http://i1.tietuku.com/a5071fd29e260241.png" alt=""></p>
+<h5 id="自动添加"><a href="#自动添加" class="headerlink" title="自动添加"></a>自动添加</h5><p><img src="http://i1.tietuku.com/50818e58957d382a.png" alt=""><br><img src="http://i1.tietuku.com/5c8029d4a5750557.png" alt=""></p>
+<p>##报错解决</p>
+<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line"><span class="meta">#</span><span class="bash">添加字段：date.timezone = Asia/Shanghai</span></div></pre></td></tr></table></figure></p>
+<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改其中字段为以下</p>
+<p><directory "="" usr="" share="" zabbix"=""><br>    Options FollowSymLinks<br>    AllowOverride None<br>    Order allow,deny<br>    Allow from all<br>    php_value date:timezone Asia/Shanghai<br>    php_value max_execution_time 300<br>    php_value post_max_size 16M<br>    php_value max_input_time 300<br>    php_value memory_limit 128M<br>    php_value upload_max_filesize 2M<br></directory><br>然后重启httpd服务</p>
+</blockquote>
+<h4 id="默认登陆账号密码"><a href="#默认登陆账号密码" class="headerlink" title="默认登陆账号密码"></a>默认登陆账号密码</h4><p>账户：Admin<br>密码：zabbix</p>
+<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo -n arvon | openssl md5</div><div class="line">(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</div><div class="line"><span class="meta">&gt;</span><span class="bash">mysql -uname -ppassword</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">use zabbix;</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">select * from users;</span></div><div class="line"><span class="meta">#</span><span class="bash">先在外面生成的md5码该用了</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">update users <span class="built_in">set</span>  passwd=<span class="string">'e2798af12a7a0f4f70b4d69efbc25f4d'</span> <span class="built_in">where</span> userid = <span class="string">'1'</span>;</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://i1.tietuku.com/75f80ce9269b455a.png" alt=""></p>
+<h4 id="报错贴图“table-not-exist”"><a href="#报错贴图“table-not-exist”" class="headerlink" title="报错贴图“table not exist”"></a>报错贴图“table not exist”</h4><p><img src="http://i1.tietuku.com/3f75b678db942213.png" alt=""><br><img src="http://i1.tietuku.com/b585f7995c14ad19.png" alt=""></p>
+<h4 id="epel源错误"><a href="#epel源错误" class="headerlink" title="epel源错误"></a>epel源错误</h4><p><img src="http://i1.tietuku.com/c53075f14306cd61.png" alt=""><br>修改文件“/etc/yum.repos.d/epel.repo”， 第一项epel，将baseurl的注释取消， mirrorlist注释掉。即可</p>
+<h4 id="zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”"><a href="#zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”" class="headerlink" title="zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”"></a>zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”</h4><p><img src="http://i1.tietuku.com/281d34ca6408ac6e.png" alt=""></p>
+<blockquote>
+<p><a href="Zabbix discoverer processes more than 75% busy">参考</a></p>
+</blockquote>
+<h4 id="zabbix-server-is-not-running报错"><a href="#zabbix-server-is-not-running报错" class="headerlink" title="zabbix server is not running报错"></a>zabbix server is not running报错</h4><p><img src="http://i1.tietuku.com/21ba7ab71d649b6d.png" alt="错误如图"><br><img src="http://i1.tietuku.com/263e79625c329936.png" alt=""><br>解决：仅限于我个人使用，打死都想不到密码写错了，zabbix_server.conf里面的密码加了两个单引号，真是作死呀，就是看不出来</p>
+<p>参考文档：<br><a href="http://zabbix.org/wiki/InstallOnCentOS_RHEL#Database" target="_blank" rel="external">zabbix wike</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/09/CentOS环境搭建zabbix监控/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
       
     </div>
@@ -1033,15 +978,137 @@
 
       
         
-          
-          很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guas
-          ...
-
+          <p>很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等</p>
+<h3 id="简单测试写性能"><a href="#简单测试写性能" class="headerlink" title="简单测试写性能"></a>简单测试写性能</h3><ul>
+<li>使用dd简单测试<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> of=testfile bs=<span class="number">1</span>M count=<span class="number">1024</span> oflag=dsync</div><div class="line"><span class="comment">#采用dd创建一个1G的文件的磁盘写速度，IO引擎为dsync</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/24/使用fio工具测试linux的磁盘性能/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/24/Ubuntu进行ssh连接/" itemprop="url">
+                  Ubuntu进行ssh连接
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-24T10:29:52+08:00" content="2015-08-24">
+              2015-08-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/24/Ubuntu进行ssh连接/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/24/Ubuntu进行ssh连接/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/24/Ubuntu进行ssh连接/" class="leancloud_visitors" data-flag-title="Ubuntu进行ssh连接">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装了Ubuntu进行测试，发现ssh连不上。发现没有ssh进程，so解决之</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li><p>当然先看是不是已经有了ssh,有的话就算了</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | <span class="keyword">grep</span> ssh</div></pre></td></tr></table></figure>
+</li>
+<li><p>没有，就开个终端，装一个<br><img src="http://i1.tietuku.com/0e3b11fdb4002e49.png" alt=""><br><img src="http://i1.tietuku.com/6f17e8bdf2001a06.png" alt=""></p>
+</li>
+<li><p>查看是否有了ssh进程<br><img src="http://i1.tietuku.com/09713a7df77b3306.png" alt=""></p>
+</li>
+<li><p>然后就是进行连接了<br><img src="http://i1.tietuku.com/b61bac93f0ea20ca.png" alt=""></p>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -1113,7 +1180,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1123,7 +1190,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1331,10 +1398,6 @@
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

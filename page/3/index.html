@@ -104,7 +104,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: undefined,
       author: '博主'
     }
   };
@@ -260,118 +260,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/12/Tmux源码安装/" itemprop="url">
-                  Tmux源码安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-12T12:26:51+08:00" content="2016-08-12">
-              2016-08-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/12/Tmux源码安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/Tmux源码安装/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/12/Tmux源码安装/" class="leancloud_visitors" data-flag-title="Tmux源码安装">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>简述：</strong>之前其实有写过<a href="http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/" target="_blank" rel="external">一篇tmux的简单使用介绍</a>,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/12/Tmux源码安装/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
       
 
@@ -1014,16 +902,171 @@
       
         
           
-          Command record
-Yum Repo Install
-123#The system Version is CentOS7.2wget http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarc
-          ...
+            <h3 id="Command-record"><a href="#Command-record" class="headerlink" title="Command record"></a>Command record</h3><ul>
+<li><p>Yum Repo Install</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">The system Version is CentOS7.2</span></div><div class="line">wget http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</div><div class="line">rpm -ivh  zabbix-release-3.0-1.el6.noarch.rpm</div></pre></td></tr></table></figure>
+</li>
+<li><p>LAMP Environment</p>
+</li>
+<li>Warning<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">iptables</span></div><div class="line">systemctl stop iptables</div><div class="line"><span class="meta">#</span><span class="bash">selinux</span></div><div class="line">setenforce 0</div><div class="line"><span class="meta">#</span><span class="bash">install lamp package</span></div><div class="line">yum install mysql mysql mysql-server php php-mysql httpd </div><div class="line"><span class="meta">#</span><span class="bash">Installed:</span></div><div class="line"><span class="meta">#</span><span class="bash">  mysql-community-client.x86_64 0:5.6.30-2.el6       mysql-community-libs.x86_64 0:5.6.30-2.el6       mysql-community-server.x86_64 0:5.6.30-2.el6       nginx.x86_64 1:1.6.3-8.el7       php.x86_64 0:5.4.16-36.1.el7_2.1       php-mysql.x86_64 0:5.4.16-36.1.el7_2.1      </span></div><div class="line">/etc/init.d/mysqld start</div><div class="line">mysqladmin password</div><div class="line">mysql -uroot -padmin -e "create database zabbix character set utf8;"</div><div class="line">mysql -uroot -padmin -e "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"</div><div class="line">mysql -uroot -padmin -e "flush privileges;"</div><div class="line"><span class="meta">#</span><span class="bash">mysql -h<span class="variable">$zabbixIP</span> -uzabbix -pzabbix</span></div><div class="line">systemctl start httpd</div><div class="line">systemctl status httpd</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h4><ul>
+<li><p>Zabbix Server Install</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-get</div><div class="line"><span class="meta">#</span><span class="bash">Installed:</span></div><div class="line"><span class="meta">#</span><span class="bash">  zabbix-get.x86_64 0:3.0.3-1.el7                                                     zabbix-server-mysql.x86_64 0:3.0.3-1.el7                                                     zabbix-web-mysql.noarch 0:3.0.3-1.el7                </span></div><div class="line">cd /usr/share/doc/zabbix-server-mysql-3.0.3/</div><div class="line">zcat create.sql.gz | mysql -uroot -padmin zabbix</div></pre></td></tr></table></figure>
+</li>
+<li><p>Zabbix Modify config</p>
+</li>
+<li><p>zabbix_server.conf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">cat /etc/zabbix/zabbix_server.conf | egrep -v <span class="string">"^#|^$"</span></span></div><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix_server.pid</div><div class="line">DBHost=localhost</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBPassword=zabbix</div><div class="line">SNMPTrapperFile=/var/log/snmptrap/snmptrap.log</div><div class="line">Timeout=4</div><div class="line">AlertScriptsPath=/usr/lib/zabbix/alertscripts</div><div class="line">ExternalScripts=/usr/lib/zabbix/externalscripts</div><div class="line">LogSlowQueries=3000</div></pre></td></tr></table></figure>
+</li>
+<li><p>zabbix_config</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">vim /etc/httpd/conf.d/zabbix.conf </span></div><div class="line">    &lt;IfModule mod_php5.c&gt;</div><div class="line">        php_value max_execution_time 300</div><div class="line">        php_value memory_limit 128M</div><div class="line">        php_value post_max_size 16M</div><div class="line">        php_value upload_max_filesize 2M</div><div class="line">        php_value max_input_time 300</div><div class="line">        php_value always_populate_raw_post_data -1</div><div class="line">        php_value date.timezone Asia/Chongqing</div><div class="line">    &lt;/IfModule&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">* Start Zabbix</div><div class="line">``` shell</div><div class="line">systemctl enable zabbix-server</div><div class="line">systemctl start zabbix-server</div></pre></td></tr></table></figure>
+</li>
+<li><p>Zabbix Web Install</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">Use Web Access: http://<span class="variable">$IPADDRESS</span>/zabbix/setup.php</span></div><div class="line"><span class="meta">#</span><span class="bash">Mdodify Parameter Base： https://www.zabbix.com/documentation/3.0/manual/installation/install_from_packages</span></div><div class="line"><span class="meta">#</span><span class="bash">The web Default Name/Password is Admin/zabbix</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Zabbix-Agent"><a href="#Zabbix-Agent" class="headerlink" title="Zabbix Agent"></a>Zabbix Agent</h4><ul>
+<li><p>Install</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
+</li>
+<li><p>Modify config</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=127.0.0.1,172.17.18.64   #Add the agent IP</div><div class="line">ServerActive=172.17.18.64   #Modify</div><div class="line">Hostname=Zabbix server</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/30/zabbix3.0配置文档/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/15/grep命令/" itemprop="url">
+                  grep命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T00:00:00+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/grep命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/grep命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/15/grep命令/" class="leancloud_visitors" data-flag-title="grep命令">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Tips：很有用的几个选项</p>
+<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ul>
+<li><p>定向匹配&amp;忽略大小写</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-B</span></div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line"><span class="meta">#</span><span class="bash">-A</span></div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line"><span class="meta">#</span><span class="bash">-C</span></div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line"><span class="meta">#</span><span class="bash">-i</span></div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
+</li>
+<li><p>反选匹配</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-v</span></div><div class="line">egrep -v "^#|^$" filename #不显示filename中的空行和开头#的注释行，显示其余内容</div></pre></td></tr></table></figure>
+</li>
+<li><p>计数匹配</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -c part filename #显示匹配到part的行数</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示文件名匹配</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-H</span></div><div class="line">grep part -H somefile #显示一群文件中含有part的文件名并显示匹配项相关</div><div class="line"><span class="meta">#</span><span class="bash"><span class="_">-l</span></span></div><div class="line">grep part -l somefile #只显示含有匹配项的文件名</div></pre></td></tr></table></figure>
+</li>
+<li><p>其他选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-s或--no-messages   不显示错误信息。</div><div class="line">-w或--word-regexp   只显示全字符合的列。</div><div class="line">-x或--line-regexp   只显示全列符合的列。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h3><ul>
+<li>其他遗漏选项参考帮助文档 –help</li>
+<li>参考<a href="http://vbird.dic.ksu.edu.tw/linux_basic/0330regularex_2.php" target="_blank" rel="external">鸟哥文档</a></li>
+</ul>
+
+          
         
       
     </div>
@@ -1095,7 +1138,7 @@ Yum Repo Install
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">71</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1105,7 +1148,7 @@ Yum Repo Install
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1313,10 +1356,6 @@ Yum Repo Install
     })();
   </script>
 
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
