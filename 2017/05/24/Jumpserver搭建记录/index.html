@@ -84,13 +84,13 @@
 
 
 
-<meta name="description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！ Environment aws ec2 centos7.3 Python: 3.5 Django: 1.11 Mysql">
+<meta name="description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！">
 <meta name="keywords" content="运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jumpserver实践记录">
-<meta property="og:url" content="http://yoursite.com/2017/05/24/Jumpserver搭建记录/index.html">
+<meta property="og:url" content="http://arvon.top/2017/05/24/Jumpserver搭建记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！ Environment aws ec2 centos7.3 Python: 3.5 Django: 1.11 Mysql">
+<meta property="og:description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-2.png">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-3.jpeg">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-6.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-7.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-8.jpeg">
-<meta property="og:updated_time" content="2017-05-25T11:10:11.000Z">
+<meta property="og:updated_time" content="2017-05-25T11:15:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jumpserver实践记录">
-<meta name="twitter:description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！ Environment aws ec2 centos7.3 Python: 3.5 Django: 1.11 Mysql">
+<meta name="twitter:description" content="Jumpserver是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢作者开源！！">
 <meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg">
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/24/Jumpserver搭建记录/"/>
+  <link rel="canonical" href="http://arvon.top/2017/05/24/Jumpserver搭建记录/"/>
 
   <title> Jumpserver实践记录 | Arvon's Blog </title>
 </head>
@@ -347,6 +347,7 @@
 
       
         <p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg" alt="20170524-jumpserver-1"><br><strong>Jumpserver</strong>是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
+<a id="more"></a>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><ul>
 <li>aws ec2</li>
 <li>centos7.3</li>
@@ -354,7 +355,6 @@
 <li>Django: 1.11</li>
 <li>Mysql</li>
 </ul>
-<a id="more"></a>
 <h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><ul>
 <li><p>install rely env(使用Redhat)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm</div><div class="line">rpm -ivh mysql57-community-release-el7-7.noarch.rpm</div><div class="line">yum install -y mysql-community-server</div><div class="line">systemctl start mysqld.service</div><div class="line">mysqladmin -uroot -p password <span class="string">"your_password"</span></div><div class="line">pip uninstall pycrypto</div><div class="line">rm -rf /usr/lib64/python2.6/site-packages/Crypto/</div><div class="line">rm -rf  /usr/lib64/python2.6/site-packages/pycrypto-2.6.1-py2.6-linux-x86_64.egg</div><div class="line">pip install pycrypto==2.4.1</div><div class="line">wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz</div><div class="line">tar xvf Python-3.6.0.tar.xz;<span class="built_in">cd</span> Python-3.6.0</div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/python3</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
@@ -482,7 +482,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/05/24/Jumpserver搭建记录/"
-           data-title="Jumpserver实践记录" data-url="http://yoursite.com/2017/05/24/Jumpserver搭建记录/">
+           data-title="Jumpserver实践记录" data-url="http://arvon.top/2017/05/24/Jumpserver搭建记录/">
       </div>
     
   </div>

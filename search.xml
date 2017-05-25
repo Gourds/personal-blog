@@ -5,8 +5,9 @@
     
     <entry>
       <title><![CDATA[Jumpserver实践记录]]></title>
-      <url>http://yoursite.com/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg" alt="20170524-jumpserver-1"><br><strong>Jumpserver</strong>是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
+<a id="more"></a>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><ul>
 <li>aws ec2</li>
 <li>centos7.3</li>
@@ -14,7 +15,6 @@
 <li>Django: 1.11</li>
 <li>Mysql</li>
 </ul>
-<a id="more"></a>
 <h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><ul>
 <li><p>install rely env(使用Redhat)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm</div><div class="line">rpm -ivh mysql57-community-release-el7-7.noarch.rpm</div><div class="line">yum install -y mysql-community-server</div><div class="line">systemctl start mysqld.service</div><div class="line">mysqladmin -uroot -p password <span class="string">"your_password"</span></div><div class="line">pip uninstall pycrypto</div><div class="line">rm -rf /usr/lib64/python2.6/site-packages/Crypto/</div><div class="line">rm -rf  /usr/lib64/python2.6/site-packages/pycrypto-2.6.1-py2.6-linux-x86_64.egg</div><div class="line">pip install pycrypto==2.4.1</div><div class="line">wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz</div><div class="line">tar xvf Python-3.6.0.tar.xz;<span class="built_in">cd</span> Python-3.6.0</div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/python3</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
@@ -62,7 +62,7 @@
     
     <entry>
       <title><![CDATA[Iptables整理笔记]]></title>
-      <url>http://yoursite.com/2016/11/17/Iptables%E6%95%B4%E7%90%86%E7%AC%94%E8%AE%B0/</url>
+      <url>http://arvon.top/2016/11/17/Iptables%E6%95%B4%E7%90%86%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20161117-iptables-1.png" alt="20161117-iptables-1"><br>iptabels还是很实用的，分享下我的整理笔记<br><a id="more"></a></p>
 <h2 id="场景规则"><a href="#场景规则" class="headerlink" title="场景规则"></a>场景规则</h2> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#对本机lo回环地址放开</span></div><div class="line">iptables -I INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#对本机访问外部网络放开(ESTABLISHED表示tcp的一种状态，RELETED为ftp的一种状态)</span></div><div class="line">iptabels -I INPUT -m state --state ESTABLISHED,RELETED -j ACCEPT</div><div class="line"><span class="comment">#对所有地址开放本机tcp（80，22，10-21）端口</span></div><div class="line">iptabels -I INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">iptabels -I INPUT -p tcp --dports 10:21 -j ACCEPT -m comment --comment <span class="string">" 2015-09-24 by arvon"</span></div><div class="line"><span class="comment">#允许所有的地址开放本机的基于ICMP协议的数据包访问</span></div><div class="line">iptables -I INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#ftp主动模式下规则</span></div><div class="line">iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line"><span class="comment">#ftp被动模式下规则</span></div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line">  <span class="comment">##vim /etc/vsftpd/vsftpd.conf</span></div><div class="line">  <span class="comment">#pasv_min_port=50000</span></div><div class="line">  <span class="comment">#pasv_max_port=60000</span></div><div class="line">iptables -I INPUT -p tcp --dports 50000:60000 -j ACCEPT</div><div class="line"><span class="comment">#ftp被动模式下规则二</span></div><div class="line">iptables —I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line">  <span class="comment">#modprobe nf_conntrack_ftp #临时开启内核连接追踪模块ftp</span></div><div class="line">  <span class="comment">#vim /etc/sysconfig/iptables-config    #开机自动加载</span></div><div class="line">  <span class="comment">##IPTABLES_MODULES="nf_conntrack_ftp"</span></div><div class="line"><span class="comment">#防CC攻击</span></div><div class="line"><span class="comment">#对源地址为12并且并发大于10的数据包进行拒绝并返回错误信息</span></div><div class="line">iptables -I INPUT -p tcp --dport 80 <span class="_">-s</span> 192.168.1.12 -m connlimit --connlimit-above 10 -j REJECT</div><div class="line"><span class="comment">#当icmp不超过10个时放行，当超过10个每分钟放行1个</span></div><div class="line">iptables -A INPUT -p icmp -m <span class="built_in">limit</span> --limit 1/m --limit-burst 10 -j ACCEPT</div><div class="line">iptables -A INPUT -p icmp DROP</div><div class="line"><span class="comment">#防SYN攻击</span></div><div class="line">iptables -N syn-flood</div><div class="line">iptables -A INPUT -p tcp --syn -j syn-flood</div><div class="line">iptables -I syn-flood -p tcp -m <span class="built_in">limit</span> --limit 3/s --limit-burst 6 -j RETURN</div><div class="line">iptables -A syn-flood -j REJECT</div><div class="line"><span class="comment">#转发</span></div><div class="line">iptables -A FORWARD -p tcp <span class="_">-s</span> 10.10.0.0/24 -m multiport --dports 80,110,21 -j ACCEPT</div><div class="line"><span class="comment">#工作日工作时间禁止访问tencent的域名</span></div><div class="line">iptables -I FORWARD -p udp --dport 53 -m string --string <span class="string">"tencent"</span> -m time --timestart 8:00 --timestop 12:00 --days Mon,Tue,Wed,Thu,Fri,Sat -j DROP</div><div class="line"><span class="comment">#内核参数调整</span></div><div class="line">sysctl -w net.ipv4.ip_forward=1 <span class="comment">#开启内核数据包转发功能</span></div><div class="line">sysctl -w net.ipv4.tcp_syncookies=1 <span class="comment">#开启cookies验证，一定程度防止syn攻击</span></div></pre></td></tr></table></figure>
 <h2 id="Iptables命令"><a href="#Iptables命令" class="headerlink" title="Iptables命令"></a>Iptables命令</h2> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#列出所有规则</span></div><div class="line">iptables -nVL</div><div class="line"><span class="comment">#添加规则</span></div><div class="line">iptables -I INPUT <span class="_">-s</span> 192.168.1.0/24 -p tcp -m multiport --dport 22,80 -j ACCEPT</div><div class="line"><span class="comment">#删除一条规则</span></div><div class="line">iptables -D INPUT -p icmp -j ACCEPT</div><div class="line">iptables -D INPUT 2</div><div class="line"><span class="comment">#清除所有规则</span></div><div class="line">iptables -F</div><div class="line"><span class="comment">#SNAT</span></div><div class="line">iptables -t nat -A POSTROUTING <span class="_">-s</span> 10.10.10.177.0/24 -j SNAT --to 10.10.188.111</div><div class="line"><span class="comment">#DNAT</span></div><div class="line">iptables -t nat -A PREROUTING <span class="_">-d</span> 10.10.188.111 -p tcp --dport 80 -j DNAT --to 10.10.177.222:80</div><div class="line"><span class="comment">#在最后添加默认拒绝的规则</span></div><div class="line">iptables -P INPUT DROP</div></pre></td></tr></table></figure>
@@ -91,7 +91,7 @@
     
     <entry>
       <title><![CDATA[yum安装ffmpeg记录]]></title>
-      <url>http://yoursite.com/2016/10/25/yum%E5%AE%89%E8%A3%85ffmpeg%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2016/10/25/yum%E5%AE%89%E8%A3%85ffmpeg%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>Tips：最近安装一个名为ffmpeg的包，但是epel和ali的源都没有这个包。所以<br><a id="more"></a><br>就google了一下，但是网上提供的方案在我实际环境中并不好使，贴在后面了</p>
 <h3 id="个人好使"><a href="#个人好使" class="headerlink" title="个人好使"></a>个人好使</h3><ul>
 <li><p>code</p>
@@ -109,7 +109,7 @@
     
     <entry>
       <title><![CDATA[Notes：第一本Docker书]]></title>
-      <url>http://yoursite.com/2016/10/11/Notes%EF%BC%9A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6/</url>
+      <url>http://arvon.top/2016/10/11/Notes%EF%BC%9A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6/</url>
       <content type="html"><![CDATA[<p>图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。<br><a id="more"></a></p>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
 <li>Docker组件<blockquote>
@@ -137,7 +137,7 @@
     
     <entry>
       <title><![CDATA[yum 报错：rpmdb open failed]]></title>
-      <url>http://yoursite.com/2016/09/30/yum-%E6%8A%A5%E9%94%99%EF%BC%9Arpmdb-open-failed/</url>
+      <url>http://arvon.top/2016/09/30/yum-%E6%8A%A5%E9%94%99%EF%BC%9Arpmdb-open-failed/</url>
       <content type="html"><![CDATA[<p><strong>背景：</strong>刚刚直接kill掉yum进程后，yum报了rpmdb的报错，记一下解决方法<br><a id="more"></a></p>
 <ul>
 <li><p>报错如下</p>
@@ -152,7 +152,7 @@
     
     <entry>
       <title><![CDATA[Python复习笔记]]></title>
-      <url>http://yoursite.com/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      <url>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>python复习笔记</p>
 </blockquote>
@@ -598,7 +598,7 @@
     
     <entry>
       <title><![CDATA[Centos下搭建svn服务器]]></title>
-      <url>http://yoursite.com/2016/09/09/Centos%E4%B8%8B%E6%90%AD%E5%BB%BAsvn%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      <url>http://arvon.top/2016/09/09/Centos%E4%B8%8B%E6%90%AD%E5%BB%BAsvn%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
       <content type="html"><![CDATA[<p><strong>前言：</strong>因需求需搭建一个svn服务器，这里顺带记录一下svn的搭建及使用方法。<br><a id="more"></a></p>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
 <li>centos6.7 x_64</li>
@@ -651,7 +651,7 @@
     
     <entry>
       <title><![CDATA[CentOS6.8搭建个人dokuwiki]]></title>
-      <url>http://yoursite.com/2016/08/20/CentOS6-8%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAdokuwiki/</url>
+      <url>http://arvon.top/2016/08/20/CentOS6-8%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAdokuwiki/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong><a href="https://www.dokuwiki.org/wiki:dokuwiki" target="_blank" rel="external">dokuwiki</a>是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。</p>
 <a id="more"></a>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
@@ -680,7 +680,7 @@
     
     <entry>
       <title><![CDATA[Ubuntu14.04命令行连接无线网络]]></title>
-      <url>http://yoursite.com/2016/08/17/Ubuntu14-04%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/</url>
+      <url>http://arvon.top/2016/08/17/Ubuntu14-04%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/</url>
       <content type="html"><![CDATA[<p><strong><em>摘要：</em></strong>自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。<br><a id="more"></a></p>
 <h3 id="设置开机启动命令行"><a href="#设置开机启动命令行" class="headerlink" title="设置开机启动命令行"></a>设置开机启动命令行</h3><p> 我这里使用的是方法一</p>
 <h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><ul>
@@ -749,7 +749,7 @@
     
     <entry>
       <title><![CDATA[DNS端口使用解释]]></title>
-      <url>http://yoursite.com/2016/08/16/DNS%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E8%A7%A3%E9%87%8A/</url>
+      <url>http://arvon.top/2016/08/16/DNS%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E8%A7%A3%E9%87%8A/</url>
       <content type="html"><![CDATA[<p><strong>前言：</strong>我们公司有个面试题很有意思，DNS的默认查询端口是什么？可能大家都很熟悉dns使用53端口，那究竟是使用udp协议还是tcp协议呢，恩，我也不清楚，所以就看了个科普贴！<br><a id="more"></a></p>
 <h3 id="DNS端口有TCP53和UDP53两个端口"><a href="#DNS端口有TCP53和UDP53两个端口" class="headerlink" title="DNS端口有TCP53和UDP53两个端口"></a>DNS端口有TCP53和UDP53两个端口</h3><p>DNS在进行区域传输的时候使用TCP协议，其他时候则使用UDP协议</p>
 <h4 id="使用TCP53端口的情况"><a href="#使用TCP53端口的情况" class="headerlink" title="使用TCP53端口的情况"></a>使用TCP53端口的情况</h4><ul>
@@ -783,7 +783,7 @@
     
     <entry>
       <title><![CDATA[hexo之Next主题设置]]></title>
-      <url>http://yoursite.com/2016/08/15/hexo%E4%B9%8BNext%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E8%AE%BE%E7%BD%AE/</url>
+      <url>http://arvon.top/2016/08/15/hexo%E4%B9%8BNext%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E8%AE%BE%E7%BD%AE/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br>更新：打赏<br>更新：站内搜索</p>
 <a id="more"></a>
 <h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>这个头像就是站内侧边栏上那个头像</p>
@@ -840,7 +840,7 @@
     
     <entry>
       <title><![CDATA[8月读书计划]]></title>
-      <url>http://yoursite.com/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
+      <url>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20160813-augustread-1.jpg" alt="20160813-augustread-1"><br>前天入了三本图灵的图解系列丛书，要计划读一下，这里做个记录。</p>
 <h3 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h3><ul>
 <li><a href="https://www.amazon.cn/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%A1%AC%E4%BB%B6-%E4%B8%89%E8%BD%AE%E8%B4%A4%E4%B8%80/dp/B00LZZADJC/ref=pd_bxgy_14_img_3?ie=UTF8&amp;psc=1&amp;refRID=F6ZZB1SS4HR0R286HEJA" target="_blank" rel="external">图解网络硬件</a></li>
@@ -863,7 +863,7 @@
     
     <entry>
       <title><![CDATA[Git钩子在hexo中的应用]]></title>
-      <url>http://yoursite.com/2016/08/12/Git%E9%92%A9%E5%AD%90%E5%9C%A8hexo%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <url>http://arvon.top/2016/08/12/Git%E9%92%A9%E5%AD%90%E5%9C%A8hexo%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>早该记录了，最开始我的blog是使用hexo+github搭建的使用jacman主题，也是因为对git不够了解，当时绑定域名是使用直接在github上写CNAME文件。感觉太麻烦了，就买了空间换了WordPress，wp也是用了要有快一年，然后感觉markdown支持的真是不好，而且迁移很不爽，然后就换了现在的。关于现在这套blog架构，依然使用hexo作为blog框架，我自己的电脑用作服务器，然后VPS作为web服务器提供发布，使用git hook进行更新blog。</p>
 <h3 id="git钩子简介-–摘自git-scm"><a href="#git钩子简介-–摘自git-scm" class="headerlink" title="git钩子简介 –摘自git-scm"></a>git钩子简介 –摘自<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">git-scm</a></h3><p>Git 能在特定的重要动作发生时触发自定义脚本。 有两组这样的钩子：客户端的和服务器端的。 客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 你可以随心所欲地运用这些钩子。</p>
 <a id="more"></a>
@@ -900,7 +900,7 @@
     
     <entry>
       <title><![CDATA[Tmux源码安装]]></title>
-      <url>http://yoursite.com/2016/08/12/Tmux%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/</url>
+      <url>http://arvon.top/2016/08/12/Tmux%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/</url>
       <content type="html"><![CDATA[<p><strong>简述：</strong>之前其实有写过<a href="http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/" target="_blank" rel="external">一篇tmux的简单使用介绍</a>,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。<br><a id="more"></a></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>tmux依赖于ncurses-devel和libevent。所以要先安装ncurses-devel，然后libevent，然后tmux</p>
 <h4 id="关于libevent库"><a href="#关于libevent库" class="headerlink" title="关于libevent库"></a>关于libevent库</h4><ul>
@@ -922,7 +922,7 @@
     
     <entry>
       <title><![CDATA[sort小插曲]]></title>
-      <url>http://yoursite.com/2016/08/11/sort%E5%B0%8F%E6%8F%92%E6%9B%B2/</url>
+      <url>http://arvon.top/2016/08/11/sort%E5%B0%8F%E6%8F%92%E6%9B%B2/</url>
       <content type="html"><![CDATA[<p><strong>Tips:</strong>遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。<br><a id="more"></a></p>
 <h4 id="有意思的例子"><a href="#有意思的例子" class="headerlink" title="有意思的例子"></a>有意思的例子</h4><ul>
 <li><p>要求：将以下文本_按字母排序，_和-之间的按数字升序，-之后的按数字降序排列,不能破坏原本每行的数据，只对上下顺序排列.</p>
@@ -956,7 +956,7 @@
     
     <entry>
       <title><![CDATA[ssh无交互批量认证]]></title>
-      <url>http://yoursite.com/2016/08/08/ssh%E6%97%A0%E4%BA%A4%E4%BA%92%E6%89%B9%E9%87%8F%E8%AE%A4%E8%AF%81/</url>
+      <url>http://arvon.top/2016/08/08/ssh%E6%97%A0%E4%BA%A4%E4%BA%92%E6%89%B9%E9%87%8F%E8%AE%A4%E8%AF%81/</url>
       <content type="html"><![CDATA[<p><strong><em>Tips:</em></strong>在使用ansible部署服务器的时候，部署机需要先做好和其他服务器的免密码登陆，如果一台一台手动执行那就太low了，所以就需要脚本来批量完成这些繁琐的工作，下面是我写的脚本，主要使用了expect这个工具。<br><a id="more"></a></p>
 <h3 id="expect介绍"><a href="#expect介绍" class="headerlink" title="expect介绍"></a>expect介绍</h3><ul>
 <li>expect是用于提供自动交互的工具，它可以控制处理输入和输出流，然后提供自动填写数据等功能（主要就是替代原本需要人机交互需要做的事情）</li>
@@ -969,7 +969,7 @@
     
     <entry>
       <title><![CDATA[Cassandra简单使用记录]]></title>
-      <url>http://yoursite.com/2016/08/06/Cassandra%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2016/08/06/Cassandra%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p><strong>简述：</strong>在现在公司接触这个比较多，但是之前并不熟悉，所以需要简单记录下基础增删改查，以及简单介绍。我目前的理解就是这个nosql非常适合做集群，在吞吐量上应该远高于传统数据库。需要再以后工作学习中再深入了解，先简单记录一下吧。</p>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Apache Cassandra最初由Facebook创建，集Google BigTable的数据模型与Amazon Dynamo的完全分布式的架构于一身,是一个大规模可伸缩的开源NoSQL数据库。Cassandra完美地支持管理大量的结构化，半结构化和非结构化数据，且能够跨多个数据中心和云。Cassandra提供了持续可用性，线性扩展，操作简单，跨多个服务器而没有单点故障。且提供了一个有力的动态数据模型，支持最大的灵活性和快速响应。</p>
 <a id="more"></a>
@@ -1018,7 +1018,7 @@
     
     <entry>
       <title><![CDATA[Zabbix添加自定义监控项]]></title>
-      <url>http://yoursite.com/2016/08/05/Zabbix%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E9%A1%B9/</url>
+      <url>http://arvon.top/2016/08/05/Zabbix%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E9%A1%B9/</url>
       <content type="html"><![CDATA[<p><em>Intorduction:</em> 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正<br><a id="more"></a></p>
 <h3 id="部署思路"><a href="#部署思路" class="headerlink" title="部署思路"></a>部署思路</h3><ul>
 <li>zabbix的server端我是直接写脚本安装的。先前blog有记录过。</li>
@@ -1046,7 +1046,7 @@
     
     <entry>
       <title><![CDATA[Ansible根据excel自动生成inventory文件]]></title>
-      <url>http://yoursite.com/2016/08/05/Ansible%E6%A0%B9%E6%8D%AEexcel%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90inventory%E6%96%87%E4%BB%B6/</url>
+      <url>http://arvon.top/2016/08/05/Ansible%E6%A0%B9%E6%8D%AEexcel%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90inventory%E6%96%87%E4%BB%B6/</url>
       <content type="html"><![CDATA[<p>Tip: 根据excel表格手动写入inventory文件是个费时费力还容易出错的事情，这种事情本就应该使用脚本完成，刚好最近需要，然后就查阅文档，本来是想用shell的，毕竟相比python我还是对shell比较熟悉，奈何python的xlrd模块实在太合适所以就用python写了脚本（需要先安装xlrd模块）。<br>Update:现在不推荐使用xlrd模块了，原因是现在python3.0趋向于使用新模块openpyx，而且xlrd模块只是读取excel还需xlwd模块进行写入操作，不过现在这个模块已经支持不是很好了，我用pip没装上，所以现在使用openpyx模块，在<a href="http://arvon.top/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" target="_blank" rel="external">我博客Jumpserver</a>这篇文章里记录有这个模块的用法<br><a id="more"></a></p>
 <h3 id="安装xlrd模块"><a href="#安装xlrd模块" class="headerlink" title="安装xlrd模块"></a>安装xlrd模块</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pip install xlrd</div><div class="line"><span class="meta">#</span><span class="bash">想源码安装参照https://pypi.python.org/pypi/xlrd/</span></div></pre></td></tr></table></figure>
 <h3 id="Python脚本"><a href="#Python脚本" class="headerlink" title="Python脚本"></a>Python脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment">###############################################################################</span></div><div class="line"><span class="comment">#Author: arvon</span></div><div class="line"><span class="comment">#Email: yafeng2011@126.com</span></div><div class="line"><span class="comment">#Blog: http://arvon.top/</span></div><div class="line"><span class="comment">#Date: 2016/08/04</span></div><div class="line"><span class="comment">#Filename: excel_write_inventory.py</span></div><div class="line"><span class="comment">#Revision: 1.1</span></div><div class="line"><span class="comment">#License: GPL</span></div><div class="line"><span class="comment">#Description: use xlrd module auto create vars and file for ansible</span></div><div class="line"><span class="comment">#Notes:</span></div><div class="line"><span class="comment">###############################################################################</span></div><div class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> open_workbook</div><div class="line"></div><div class="line"><span class="comment">#input vars</span></div><div class="line">excel_file = <span class="string">'test.xlsx'</span></div><div class="line"><span class="comment">#input the excel file path</span></div><div class="line">inventory_path = <span class="string">'./'</span></div><div class="line"><span class="comment">#input the inventory file dir path</span></div><div class="line">ops_dir_path = <span class="string">'you/ansible/path'</span></div><div class="line"><span class="comment">#input the ops-repo dir path</span></div><div class="line">inventory_file = <span class="string">'inventory.yml'</span></div><div class="line"><span class="comment">#input the ansible's inventory filename</span></div><div class="line">inventory_name = <span class="string">'ssy'</span></div><div class="line"></div><div class="line"><span class="comment">#define vars</span></div><div class="line">data = open_workbook(excel_file)</div><div class="line">table = data.sheets()[<span class="number">0</span>]</div><div class="line"><span class="comment">#open the excel first sheets</span></div><div class="line">nrows = table.nrows</div><div class="line"><span class="comment">#nrows is the tables line numbers</span></div><div class="line"></div><div class="line"><span class="comment">#functions</span></div><div class="line"><span class="comment">#write title to inventory file</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_title</span><span class="params">()</span>:</span></div><div class="line">    f = open(inventory_path + inventory_file, <span class="string">'w'</span>)</div><div class="line">    input_msg = \</div><div class="line"><span class="string">'''\</span></div><div class="line">hosts_ops_path: /data/ops-repo/</div><div class="line">inventory:</div><div class="line">  name: ssy</div><div class="line">  hosts:</div><div class="line">'''</div><div class="line">    f.write(<span class="string">'host_ops_path: '</span> + ops_dir_path + <span class="string">'\n'</span>)</div><div class="line">    f.write(<span class="string">'inventory:'</span> + <span class="string">'\n'</span>)</div><div class="line">    f.write(<span class="string">'  name: '</span> + inventory_name + <span class="string">'\n'</span>)</div><div class="line">    f.write(<span class="string">'  hosts:'</span> + <span class="string">'\n'</span>)</div><div class="line">    f.close</div><div class="line"><span class="comment">#write all hosts</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_hosts</span><span class="params">(row_num,host_name,group_name,host_num = <span class="number">1</span>)</span>:</span></div><div class="line">    <span class="keyword">for</span> each_line_num <span class="keyword">in</span> range(nrows):</div><div class="line">        each_line = table.row_values(each_line_num)</div><div class="line">        <span class="keyword">if</span> each_line[row_num] == <span class="number">1</span>:</div><div class="line">            f = open(inventory_path + inventory_file, <span class="string">'a'</span>)</div><div class="line">            f.write(<span class="string">'  - name: '</span>+ host_name + str(host_num) + <span class="string">'\n'</span>)</div><div class="line">            host_num = host_num + <span class="number">1</span></div><div class="line">            f.write(<span class="string">'    ip: '</span> + str(each_line[<span class="number">1</span>]) + <span class="string">'\n'</span>)</div><div class="line">            f.write(<span class="string">'    group: '</span>+ group_name + <span class="string">'\n'</span>)</div><div class="line">            f.write(<span class="string">"\n"</span>)</div><div class="line">            f.close</div><div class="line"><span class="comment">#use functions</span></div><div class="line">write_title()</div><div class="line">write_hosts(<span class="number">4</span>,<span class="string">'db'</span>,<span class="string">'dbserver'</span>)</div><div class="line">write_hosts(<span class="number">5</span>,<span class="string">'redis'</span>,<span class="string">'redis'</span>)</div><div class="line">write_hosts(<span class="number">6</span>,<span class="string">'zk'</span>,<span class="string">'zookeeper'</span>)</div><div class="line">write_hosts(<span class="number">7</span>,<span class="string">'kafka'</span>,<span class="string">'kafka'</span>)</div><div class="line">write_hosts(<span class="number">8</span>,<span class="string">'mysql'</span>,<span class="string">'mysql'</span>)</div><div class="line">write_hosts(<span class="number">9</span>,<span class="string">'rest'</span>,<span class="string">'rest'</span>)</div><div class="line">write_hosts(<span class="number">10</span>,<span class="string">'thrift'</span>,<span class="string">'thrift'</span>)</div><div class="line">write_hosts(<span class="number">11</span>,<span class="string">'push'</span>,<span class="string">'push'</span>)</div><div class="line">write_hosts(<span class="number">12</span>,<span class="string">'db-ejabberd'</span>,<span class="string">'ejabberd-db'</span>)</div><div class="line">write_hosts(<span class="number">13</span>,<span class="string">'conn-ejabberd'</span>,<span class="string">'ejabberd-conn'</span>)</div><div class="line">write_hosts(<span class="number">14</span>,<span class="string">'nginx'</span>,<span class="string">'nginx'</span>)</div><div class="line">write_hosts(<span class="number">15</span>,<span class="string">'web'</span>,<span class="string">'web'</span>)</div><div class="line">write_hosts(<span class="number">16</span>,<span class="string">'turn'</span>,<span class="string">'turn'</span>)</div><div class="line">write_hosts(<span class="number">17</span>,<span class="string">'media'</span>,<span class="string">'media'</span>)</div><div class="line">write_hosts(<span class="number">18</span>,<span class="string">'coference'</span>,<span class="string">'coference'</span>)</div></pre></td></tr></table></figure>
@@ -1055,7 +1055,7 @@
     
     <entry>
       <title><![CDATA[zabbix3.0配置文档]]></title>
-      <url>http://yoursite.com/2016/07/30/zabbix3.0%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
+      <url>http://arvon.top/2016/07/30/zabbix3.0%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
       <content type="html"><![CDATA[<h3 id="Command-record"><a href="#Command-record" class="headerlink" title="Command record"></a>Command record</h3><ul>
 <li><p>Yum Repo Install</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">The system Version is CentOS7.2</span></div><div class="line">wget http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</div><div class="line">rpm -ivh  zabbix-release-3.0-1.el6.noarch.rpm</div></pre></td></tr></table></figure>
@@ -1093,7 +1093,7 @@
     
     <entry>
       <title><![CDATA[grep命令]]></title>
-      <url>http://yoursite.com/2016/07/15/grep%E5%91%BD%E4%BB%A4/</url>
+      <url>http://arvon.top/2016/07/15/grep%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p>Tips：很有用的几个选项</p>
 <h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ul>
 <li>定向匹配&amp;忽略大小写<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-B</span></div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line"><span class="meta">#</span><span class="bash">-A</span></div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line"><span class="meta">#</span><span class="bash">-C</span></div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line"><span class="meta">#</span><span class="bash">-i</span></div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
@@ -1123,7 +1123,7 @@
     
     <entry>
       <title><![CDATA[CentOS搭建rsync服务]]></title>
-      <url>http://yoursite.com/2016/04/11/CentOS%E6%90%AD%E5%BB%BArsync%E6%9C%8D%E5%8A%A1/</url>
+      <url>http://arvon.top/2016/04/11/CentOS%E6%90%AD%E5%BB%BArsync%E6%9C%8D%E5%8A%A1/</url>
       <content type="html"><![CDATA[<p>更新：本篇选择独立启动模式</p>
 <blockquote>
 <p>选择rsync服务器启动方式</p>
@@ -1193,7 +1193,7 @@
     
     <entry>
       <title><![CDATA[4月读书计划]]></title>
-      <url>http://yoursite.com/2016/04/03/4%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
+      <url>http://arvon.top/2016/04/03/4%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20160403-aprilread-1.jpg" alt="20160403-aprilread-1"><br>PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。</p>
 <h3 id="关于最近的学习方向"><a href="#关于最近的学习方向" class="headerlink" title="关于最近的学习方向"></a>关于最近的学习方向</h3><ul>
 <li>ansibel<ul>
@@ -1223,7 +1223,7 @@
     
     <entry>
       <title><![CDATA[CentOS搭建支持ftp的cdn服务]]></title>
-      <url>http://yoursite.com/2016/03/25/CentOS%E6%90%AD%E5%BB%BA%E6%94%AF%E6%8C%81ftp%E7%9A%84cdn%E6%9C%8D%E5%8A%A1/</url>
+      <url>http://arvon.top/2016/03/25/CentOS%E6%90%AD%E5%BB%BA%E6%94%AF%E6%8C%81ftp%E7%9A%84cdn%E6%9C%8D%E5%8A%A1/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>由于测试需要，需用nginx搭建cdn服务器，并要求可以使用ftp上传。送个之前nginx搭建cdn的<a href="http://blog.arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/" target="_blank" rel="external">–&gt;飞机票</a>,下面是主要vsftp的配置，nginx配置cdn参照飞机票那篇即可。<br><a id="more"></a></p>
 <h3 id="搭建nginx-cdn服务器"><a href="#搭建nginx-cdn服务器" class="headerlink" title="搭建nginx cdn服务器"></a>搭建nginx cdn服务器</h3><ul>
 <li>具体参照使用nginx作cdn源站</li>
@@ -1258,7 +1258,7 @@
     
     <entry>
       <title><![CDATA[Nginx搭建CDN源站记录]]></title>
-      <url>http://yoursite.com/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/</url>
+      <url>http://arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>nginx有很多很强大的功能，可以做web，可以做代理、可以做SLB、还可以做缓存CDN等等，这里记录以下做缓存时的配置。<br><a id="more"></a></p>
 <h3 id="Install-package"><a href="#Install-package" class="headerlink" title="Install package"></a>Install package</h3><ul>
 <li><p>yum.repo</p>
@@ -1289,7 +1289,7 @@
     
     <entry>
       <title><![CDATA[python2.6升级2.7记录]]></title>
-      <url>http://yoursite.com/2016/02/12/python2-6%E5%8D%87%E7%BA%A72-7%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2016/02/12/python2-6%E5%8D%87%E7%BA%A72-7%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python<br><a id="more"></a></p>
 <p>1.下载Python-2.7.3<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2</div></pre></td></tr></table></figure></p>
 <p>2.解压安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar -jxvf Python-2.7.3.tar.bz2  </div><div class="line">cd Python-2.7.3</div><div class="line">./configure</div><div class="line">make all  </div><div class="line">make install</div><div class="line">make clean</div><div class="line">make distclean</div></pre></td></tr></table></figure></p>
@@ -1302,7 +1302,7 @@
     
     <entry>
       <title><![CDATA[selinux和iptables关闭]]></title>
-      <url>http://yoursite.com/2016/02/01/selinux%E5%92%8Ciptables%E5%85%B3%E9%97%AD/</url>
+      <url>http://arvon.top/2016/02/01/selinux%E5%92%8Ciptables%E5%85%B3%E9%97%AD/</url>
       <content type="html"><![CDATA[<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><h4 id="Centos6-x"><a href="#Centos6-x" class="headerlink" title="Centos6.x"></a>Centos6.x</h4><ul>
 <li><p>临时关闭</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service iptables stop</div><div class="line">/etc/init.d/iptabels stop</div></pre></td></tr></table></figure>
@@ -1337,7 +1337,7 @@
     
     <entry>
       <title><![CDATA[CentOS搭建NTP服务器]]></title>
-      <url>http://yoursite.com/2016/01/20/centos%E6%90%AD%E5%BB%BANTP%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      <url>http://arvon.top/2016/01/20/centos%E6%90%AD%E5%BB%BANTP%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">–&gt;另一篇关于时间的</a></p>
 <p>NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以接受来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
 <a id="more"></a>
@@ -1394,7 +1394,7 @@
     
     <entry>
       <title><![CDATA[CentOS6.x挂载ntfs和xfs问题]]></title>
-      <url>http://yoursite.com/2016/01/13/CentOS6-x%E6%8C%82%E8%BD%BDntfs%E5%92%8Cxfs%E9%97%AE%E9%A2%98/</url>
+      <url>http://arvon.top/2016/01/13/CentOS6-x%E6%8C%82%E8%BD%BDntfs%E5%92%8Cxfs%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong> centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。</p>
 <h3 id="挂载xfs"><a href="#挂载xfs" class="headerlink" title="挂载xfs"></a>挂载xfs</h3><ul>
 <li>安装支持包<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line">yum install xfsprogs kmod-xfs xfsdump xfsprogs-devel</div><div class="line">mount -t xfs /dev/sdc1 /data3/sdc1/</div></pre></td></tr></table></figure>
@@ -1417,7 +1417,7 @@
     
     <entry>
       <title><![CDATA[Linux主机时间不准问题]]></title>
-      <url>http://yoursite.com/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/</url>
+      <url>http://arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。<br><a id="more"></a></p>
 <h3 id="查看分析"><a href="#查看分析" class="headerlink" title="查看分析"></a>查看分析</h3><ul>
 <li><p>查看服务器时间，即系统时间</p>
@@ -1452,7 +1452,7 @@
     
     <entry>
       <title><![CDATA[linux解压rar及xshell的rz]]></title>
-      <url>http://yoursite.com/2015/12/05/linux%E8%A7%A3%E5%8E%8Brar%E5%8F%8Axshell%E7%9A%84rz/</url>
+      <url>http://arvon.top/2015/12/05/linux%E8%A7%A3%E5%8E%8Brar%E5%8F%8Axshell%E7%9A%84rz/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。<br><a id="more"></a></p>
 <h3 id="解压rar"><a href="#解压rar" class="headerlink" title="解压rar"></a>解压rar</h3><ul>
 <li>需要下载rar软件，yum源中并没有提供。原因为rar并不属于开源软件<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#download</span></div><div class="line">wget http://www.rarlab.com/rar/rarlinux-x64-5.3.0.tar.gz</div><div class="line"><span class="comment">#install</span></div><div class="line">tar zxvf rarlinux-x64-5.3.0.tar.gz </div><div class="line">cp rar/rar /bin/</div><div class="line">cp rar/unrar /bin/</div><div class="line"><span class="comment">#usage:</span></div><div class="line">rar e name.rar    <span class="comment">#会解压至当前文件夹</span></div></pre></td></tr></table></figure>
@@ -1467,7 +1467,7 @@
     
     <entry>
       <title><![CDATA[cp和chown的几个好用选项]]></title>
-      <url>http://yoursite.com/2015/11/14/cp%E5%92%8Cchown%E7%9A%84%E5%87%A0%E4%B8%AA%E5%A5%BD%E7%94%A8%E9%80%89%E9%A1%B9/</url>
+      <url>http://arvon.top/2015/11/14/cp%E5%92%8Cchown%E7%9A%84%E5%87%A0%E4%B8%AA%E5%A5%BD%E7%94%A8%E9%80%89%E9%A1%B9/</url>
       <content type="html"><![CDATA[<p><strong>摘要：</strong>生产环境中对权限什么的要求是很严格的，而使用root用户进行操作，难免会变更权限信息，修改权限就变得十分有必要，而以下的选线都是很实用的。<br><a id="more"></a></p>
 <h3 id="关于copy的几个选项"><a href="#关于copy的几个选项" class="headerlink" title="关于copy的几个选项"></a>关于copy的几个选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-P</div><div class="line"><span class="comment">#-p 或 --preserve    保留源文件或目录的属性，包括所有者、所属组、权限与时间</span></div><div class="line">-R</div><div class="line"><span class="comment">#-R 或 --recursive   递归处理，将指定目录下的文件及子目录一并处理</span></div><div class="line"><span class="_">-a</span></div><div class="line"><span class="comment"># -a 或 --archive     此参数的效果和同时指定"-dpR"参数相同</span></div></pre></td></tr></table></figure>
 <h3 id="关于chown和chmod"><a href="#关于chown和chmod" class="headerlink" title="关于chown和chmod"></a>关于chown和chmod</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">--reference=dir_file</div><div class="line"><span class="comment">#修改文件权限与dir_file一致</span></div><div class="line">chmod --reference=xxx yyy</div><div class="line">chown --reference=xxx yyy</div></pre></td></tr></table></figure>
@@ -1482,7 +1482,7 @@
     
     <entry>
       <title><![CDATA[NFS服务安装部署记录]]></title>
-      <url>http://yoursite.com/2015/10/20/NFS%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2015/10/20/NFS%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p><strong>简述：</strong>其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。<br><a id="more"></a></p>
 <h3 id="nfs简介"><a href="#nfs简介" class="headerlink" title="nfs简介"></a>nfs简介</h3><p>多台服务器，其中一台用作NFSserver其余的主机作为client</p>
 <h3 id="安装nfs"><a href="#安装nfs" class="headerlink" title="安装nfs"></a>安装nfs</h3><ul>
@@ -1519,7 +1519,7 @@
     
     <entry>
       <title><![CDATA[Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录]]></title>
-      <url>http://yoursite.com/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>简述：在centOS6.5上使用pip安装ansible(version=2.1.1.0)时报错</p>
 <h3 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h3><ul>
 <li>解决如下<br>分析为PyCrypto模块安装有问题，所以就直接卸载重装。。有能力的话我会进一步探究这个报错，不过现在以下方法可以解决，先这样吧<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip uninstall python-keyczar pycrypto pyasn1</div><div class="line">yum erase python-keyczar python-crypto pyasn1</div><div class="line">yum install python-keyczar</div></pre></td></tr></table></figure>
@@ -1541,7 +1541,7 @@
     
     <entry>
       <title><![CDATA[crontab简记]]></title>
-      <url>http://yoursite.com/2015/09/16/crontab%E7%AE%80%E8%AE%B0/</url>
+      <url>http://arvon.top/2015/09/16/crontab%E7%AE%80%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p>今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。<br><strong>介绍:</strong>crontab命令<br>常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<em>crontab文件</em>包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。<br>crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。(ps:摘自百度百科)</p>
 <a id="more"></a>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
@@ -1570,7 +1570,7 @@
     
     <entry>
       <title><![CDATA[Zabbix使用Percona组件监控Mysql]]></title>
-      <url>http://yoursite.com/2015/09/14/Zabbix%E4%BD%BF%E7%94%A8Percona%E7%BB%84%E4%BB%B6%E7%9B%91%E6%8E%A7Mysql/</url>
+      <url>http://arvon.top/2015/09/14/Zabbix%E4%BD%BF%E7%94%A8Percona%E7%BB%84%E4%BB%B6%E7%9B%91%E6%8E%A7Mysql/</url>
       <content type="html"><![CDATA[<p>上周测试了使用percona Monitoring Plugins 监控mysql，确认可行。<br>Percona Monitoring Plugins是一个高质量的组件，为mysql数据库添加企业级的监控和图表功能。该插件可以和Nagios或者是Cati等监控系统集成，从Percona1.1开始支持zabbix监控。其脚本由php实现，所以需安装php环境</p>
 <h2 id="实现环境"><a href="#实现环境" class="headerlink" title="实现环境"></a>实现环境</h2><ul>
 <li>已经完成了zabbix基本环境部署</li>
@@ -1592,7 +1592,7 @@
     
     <entry>
       <title><![CDATA[CentOS环境搭建zabbix2.2监控]]></title>
-      <url>http://yoursite.com/2015/09/09/CentOS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAzabbix%E7%9B%91%E6%8E%A7/</url>
+      <url>http://arvon.top/2015/09/09/CentOS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAzabbix%E7%9B%91%E6%8E%A7/</url>
       <content type="html"><![CDATA[<p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
 <a id="more"></a>
 <h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
@@ -1648,7 +1648,7 @@
     
     <entry>
       <title><![CDATA[mysql + keepalive实现高可用]]></title>
-      <url>http://yoursite.com/2015/09/07/mysql-keepalive%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/</url>
+      <url>http://arvon.top/2015/09/07/mysql-keepalive%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>这篇题目占了好长时间了，一直说补上也没补上，今天没事，就弄个实验环境来记录一下。正所谓好记性不如烂笔头，那就写一下。<br><a id="more"></a></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
 <li><p>两台服务器</p>
@@ -1691,7 +1691,7 @@
     
     <entry>
       <title><![CDATA[使用fio工具测试linux的磁盘性能]]></title>
-      <url>http://yoursite.com/2015/08/24/%E4%BD%BF%E7%94%A8fio%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%95linux%E7%9A%84%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/</url>
+      <url>http://arvon.top/2015/08/24/%E4%BD%BF%E7%94%A8fio%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%95linux%E7%9A%84%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/</url>
       <content type="html"><![CDATA[<p>很多时候我们需要对服务器的性能进行评估，这就少不了运用合适的工具。其中fio是测试iops的一款很好用的工具，用来对硬件进行压力测试和验证，支持13中不同的I/O引擎，包括：sync、mmap、libaio、posixaio、SG v3、splice、null、network、syslet、guasi、solarisaio等等</p>
 <h3 id="简单测试写性能"><a href="#简单测试写性能" class="headerlink" title="简单测试写性能"></a>简单测试写性能</h3><ul>
 <li>使用dd简单测试<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> of=testfile bs=<span class="number">1</span>M count=<span class="number">1024</span> oflag=dsync</div><div class="line"><span class="comment">#采用dd创建一个1G的文件的磁盘写速度，IO引擎为dsync</span></div></pre></td></tr></table></figure>
@@ -1716,7 +1716,7 @@
     
     <entry>
       <title><![CDATA[Ubuntu进行ssh连接]]></title>
-      <url>http://yoursite.com/2015/08/24/Ubuntu%E8%BF%9B%E8%A1%8Cssh%E8%BF%9E%E6%8E%A5/</url>
+      <url>http://arvon.top/2015/08/24/Ubuntu%E8%BF%9B%E8%A1%8Cssh%E8%BF%9E%E6%8E%A5/</url>
       <content type="html"><![CDATA[<p>安装了Ubuntu进行测试，发现ssh连不上。发现没有ssh进程，so解决之</p>
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
 <li><p>当然先看是不是已经有了ssh,有的话就算了</p>
@@ -1734,7 +1734,7 @@
     
     <entry>
       <title><![CDATA[yum源配置手册]]></title>
-      <url>http://yoursite.com/2015/08/21/yum%E6%BA%90%E9%85%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
+      <url>http://arvon.top/2015/08/21/yum%E6%BA%90%E9%85%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
       <content type="html"><![CDATA[<p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 升级系统</span></div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line"><span class="meta">#</span><span class="bash">2. 安装指定的软件包</span></div><div class="line">yum -y install vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">3. 卸载指定的软件包</span></div><div class="line">yum -y remore vsftpd mysql</div><div class="line"><span class="meta">#</span><span class="bash">4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</span></div><div class="line">yum grouplist</div><div class="line"><span class="meta">#</span><span class="bash">5. 清除缓存中的rpm 头文件和包文件</span></div><div class="line">yum clean all</div><div class="line"><span class="meta">#</span><span class="bash">6. 搜索相关的软件包</span></div><div class="line">yum -y search Emacs</div><div class="line"><span class="meta">#</span><span class="bash">显示指定软件包的信息</span></div><div class="line">yum info Emacs</div><div class="line"><span class="meta">#</span><span class="bash">查询指定软件包的依赖信息，emacs依赖的模块不少啊</span></div><div class="line">yum deplist emacs</div><div class="line"><span class="meta">#</span><span class="bash">列出所有以 yum 开头的软件包</span></div><div class="line">yum list yum\*</div><div class="line"><span class="meta">#</span><span class="bash">10. 列出已经安装的但是不包含在资源库中的rpm 包</span></div><div class="line">yum list extras</div></pre></td></tr></table></figure>
 <h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</span></div><div class="line"><span class="meta">#</span><span class="bash">配置文件解释</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v '^#'</div><div class="line">[base]</div><div class="line"><span class="meta">#</span><span class="bash">表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line"><span class="meta">#</span><span class="bash">名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="meta">#</span><span class="bash">priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="meta">#</span><span class="bash">用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="meta">#</span><span class="bash">引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="meta">#</span><span class="bash">是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=1</div><div class="line"><span class="meta">#</span><span class="bash">enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=1</div><div class="line"><span class="meta">#</span><span class="bash">表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line"><span class="meta">#</span><span class="bash">定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
@@ -1758,7 +1758,7 @@
     
     <entry>
       <title><![CDATA[lsof命令]]></title>
-      <url>http://yoursite.com/2015/08/21/lsof%E5%91%BD%E4%BB%A4/</url>
+      <url>http://arvon.top/2015/08/21/lsof%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong>lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该有多有用。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
 <li><p>yum安装</p>
@@ -1839,7 +1839,7 @@
     
     <entry>
       <title><![CDATA[zabbix Too many open files错误]]></title>
-      <url>http://yoursite.com/2015/08/21/Too-many-open-files%E9%94%99%E8%AF%AF/</url>
+      <url>http://arvon.top/2015/08/21/Too-many-open-files%E9%94%99%E8%AF%AF/</url>
       <content type="html"><![CDATA[<p>问题描述：今天看了zabbix监控，又一个agent unreachable，然后惯例我要去重启agent，but并没有什么卵用。看报错，查log，如下<br><img src="http://i1.tietuku.com/b005b2a0ab63699d.png" alt=""></p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://i1.tietuku.com/ac251c031bf640e8.png" alt=""></h2><hr>
 <p>通过google有了一些眉目,以下摘自<a href="http://www.cnblogs.com/wgkgood/archive/2011/03/02/2066709.html" target="_blank" rel="external">google</a></p>
@@ -1861,7 +1861,7 @@
     
     <entry>
       <title><![CDATA[sed 命令实例]]></title>
-      <url>http://yoursite.com/2015/08/20/sed-%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B/</url>
+      <url>http://arvon.top/2015/08/20/sed-%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B/</url>
       <content type="html"><![CDATA[<p>sed命令在很有目的性的针对文本进行操作的时候还是十分有优势的。</p>
 <p>sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
 <h3 id="sed使用参数"><a href="#sed使用参数" class="headerlink" title="sed使用参数"></a>sed使用参数</h3><ul>
@@ -1918,7 +1918,7 @@
     
     <entry>
       <title><![CDATA[SSH-Tunnel翻墙]]></title>
-      <url>http://yoursite.com/2015/08/18/SSH-Tunnel%E7%BF%BB%E5%A2%99/</url>
+      <url>http://arvon.top/2015/08/18/SSH-Tunnel%E7%BF%BB%E5%A2%99/</url>
       <content type="html"><![CDATA[<p>世界这么大，我想到翻过墙头看看。社会主义的GWF，真真是极好的</p>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
 <li><a href="http://www.firefox.com.cn/download/" target="_blank" rel="external">Firefox</a>（推荐英文版）</li>
@@ -1958,7 +1958,7 @@
     
     <entry>
       <title><![CDATA[Perl语言入门]]></title>
-      <url>http://yoursite.com/2015/08/17/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A82/</url>
+      <url>http://arvon.top/2015/08/17/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A82/</url>
       <content type="html"><![CDATA[<p><strong>更新记录</strong><br>2015/08/17    拆开来记，start with foreach<br>2015/09/01 更新到子程序，最近有点懒惰了</p>
 <p>##结构</p>
 <p>###foreach控制结构</p>
@@ -2068,7 +2068,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Perl语言入门（6th）课后习题]]></title>
-      <url>http://yoursite.com/2015/08/12/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%EF%BC%886th%EF%BC%89%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98/</url>
+      <url>http://arvon.top/2015/08/12/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%EF%BC%886th%EF%BC%89%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98/</url>
       <content type="html"><![CDATA[<p>个人感觉课后习题单独分出来比较方便，这里有可能的话会多放些例子，ok，go</p>
 <p>###Chapter one</p>
 <ol>
@@ -2114,7 +2114,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Perl语言入门（一）]]></title>
-      <url>http://yoursite.com/2015/08/10/Prel%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
+      <url>http://arvon.top/2015/08/10/Prel%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p><strong>更新记录：</strong></p>
 <ul>
 <li>2015/08/10 DonePage45</li>
@@ -2390,7 +2390,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux挂载LVM分区]]></title>
-      <url>http://yoursite.com/2015/08/07/Linux%E6%8C%82%E8%BD%BDLVM%E5%88%86%E5%8C%BA/</url>
+      <url>http://arvon.top/2015/08/07/Linux%E6%8C%82%E8%BD%BDLVM%E5%88%86%E5%8C%BA/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong>LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空间。普通的磁盘分区管理方式在逻辑分区划分好之后就无法改变其大小，当一个逻辑分区存放不下某个文件时，这个文件因为受上层文件系统的限制，也不能跨越多个分区来存放，所以也不能同时放到别的磁盘上。而遇到出现某个分区空间耗尽时，解决的方法通常是使用符号链接，或者使用调整分区大小的工具，但这只是暂时解决办法，没有从根本上解决问题。随着Linux的逻辑卷管理功能的出现，这些问题都迎刃而解，用户在无需停机的情况下可以方便地调整各个分区大小。</p>
 <h2 id="手动将LVM挂载至linux系统"><a href="#手动将LVM挂载至linux系统" class="headerlink" title="手动将LVM挂载至linux系统"></a>手动将LVM挂载至linux系统</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">rpm -qa lvm2</div><div class="line"><span class="comment">#查看是否安装了lvm</span></div><div class="line">yum install lvm2</div><div class="line"><span class="comment">#安装lvm软件</span></div><div class="line">vgscan</div><div class="line"><span class="comment">#查找并显示系统中存在的LVN卷组</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看系统中存在哪些卷组以及它们的激活状态（注意：如果有两个卷组名一样，其中一个是无法挂载的，要想挂载，需要重命名一个卷组）</span></div><div class="line">vgdisplay LVMname | more</div><div class="line"><span class="comment">#显示所有名为LVMname卷组的详细信息，请记住你将要挂载卷组的 VG UUID。</span></div><div class="line">	vgrename o236o6-MGAQ-erKG-k6cH<span class="number">-12</span>Zs<span class="number">-8</span>NwX-CCqPG3 vgNewName</div><div class="line"><span class="comment">#卷组重新命名为vgNewName</span></div><div class="line">vgchange -ay /dev/vgNewName</div><div class="line"><span class="comment">#激活卷组vsNewName，此时你也并不能使用，需要挂载</span></div><div class="line">lvscan</div><div class="line"><span class="comment">#查看现在的激活状态</span></div><div class="line">mount /dev/vgNewName /somePoint</div><div class="line"><span class="comment">#挂载LVM到挂载点，这样就可以访问了</span></div><div class="line">umount /dev/vgNewName<span class="comment"># or usr 'umount /somePoint'</span></div><div class="line"><span class="comment">#卸载LVM卷组</span></div><div class="line">vgchange -an /dev/vgNewName</div><div class="line"><span class="comment">#将卷组修改成不激活状态</span></div></pre></td></tr></table></figure>
 ]]></content>
@@ -2398,7 +2398,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[nc命令]]></title>
-      <url>http://yoursite.com/2015/07/30/nc%E5%91%BD%E4%BB%A4/</url>
+      <url>http://arvon.top/2015/07/30/nc%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p>由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法<br><code>nc命令介绍:</code>可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等</p>
 <ul>
 <li><p>参数介绍</p>
@@ -2421,7 +2421,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[简明Python读书笔记]]></title>
-      <url>http://yoursite.com/2015/07/30/%E7%AE%80%E6%98%8EPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      <url>http://arvon.top/2015/07/30/%E7%AE%80%E6%98%8EPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20150730-pythonnote-1.jpeg" alt="20150730-pythonnote-1"></p>
 <h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><ul>
 <li>20150730 总结介绍</li>
@@ -2629,7 +2629,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[awk用法实例]]></title>
-      <url>http://yoursite.com/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/</url>
+      <url>http://arvon.top/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong>awk一种优秀的文本处理工具，Linux和Unix环境中现有的功能最强大的数据处理引擎之一。这个编程及数据操作语言其名称得自于它的创始人阿尔佛雷德·艾侯、彼得·温伯格和布莱恩·柯林汉姓氏的首个字母。awk的处理文本和数据的方式是这样的，它逐行扫描文件，从第一行到最后一行，寻找匹配的特定模式的行，并在这些行上进行你想要的操作。如果没有指定处理动作，则把匹配的行显示到标准输出(屏幕)，如果没有指定模式，则所有被操作所指定的行都被处理，awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
 <a id="more"></a>
 <h3 id="简单使用方法"><a href="#简单使用方法" class="headerlink" title="简单使用方法"></a>简单使用方法</h3><ul>
@@ -2657,7 +2657,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[SA运维资源]]></title>
-      <url>http://yoursite.com/2015/07/28/SA%E8%BF%90%E7%BB%B4%E8%B5%84%E6%BA%90/</url>
+      <url>http://arvon.top/2015/07/28/SA%E8%BF%90%E7%BB%B4%E8%B5%84%E6%BA%90/</url>
       <content type="html"><![CDATA[<p>###需学习技能</p>
 <ol>
 <li><p>系统管理语言</p>
@@ -2716,7 +2716,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux下搭建VSFTP服务器]]></title>
-      <url>http://yoursite.com/2015/07/28/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAvsftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      <url>http://arvon.top/2015/07/28/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAvsftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong>VSFTP（Very Secure FTP）是一个基于GPL发布的类Unix系统上使用的FTP服务器软件，设计者的初衷是代码的安全，<br>另外速度在使用ASCII代码的模式下在数据时，VSFTP的速度为Wu-FTp的两倍，如果Linux主机使用2.4.x的内核，在千兆以太网的<br>下的下载速度可以达到86MB/S。而且很稳定，在单机上支持4000以上的并发用户同时连接，根据RedHat和Ftp服务器的数据，VSFTP<br>服务器可以支持15000个并发用户</p>
 <h1 id="搭建VSFTP"><a href="#搭建VSFTP" class="headerlink" title="搭建VSFTP"></a>搭建VSFTP</h1><h2 id="VSFTP的优缺点"><a href="#VSFTP的优缺点" class="headerlink" title="VSFTP的优缺点"></a>VSFTP的优缺点</h2><h3 id="VSFTP的优点"><a href="#VSFTP的优点" class="headerlink" title="VSFTP的优点"></a>VSFTP的优点</h3><ol>
 <li>它是一个安全、高速、稳定的FTP服务器；</li>
@@ -2759,7 +2759,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux查看系统信息命令]]></title>
-      <url>http://yoursite.com/2015/07/27/Linux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/</url>
+      <url>http://arvon.top/2015/07/27/Linux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p><strong>Command Include：</strong>disk、memory、hostname、find</p>
 <h3 id="查看磁盘空间"><a href="#查看磁盘空间" class="headerlink" title="查看磁盘空间"></a>查看磁盘空间</h3><ul>
 <li><p>常用命令<br>df -hl 查看磁盘剩余空间<br>df -h 查看每个根路径的分区大小<br>du -sh [目录名] 返回该目录的大小<br>du -sm [文件夹] 返回该文件夹总M数</p>
@@ -2796,7 +2796,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux下hexo配置]]></title>
-      <url>http://yoursite.com/2015/07/23/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</url>
+      <url>http://arvon.top/2015/07/23/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<h1 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h3><ul>
 <li>CentOS6</li>
 <li>下载nvm（Node.js的版本管理器）软件<blockquote>
@@ -2857,7 +2857,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[mysql自用命令手册]]></title>
-      <url>http://yoursite.com/2015/07/22/mysql%E8%87%AA%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</url>
+      <url>http://arvon.top/2015/07/22/mysql%E8%87%AA%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</url>
       <content type="html"><![CDATA[<h3 id="连接登录数据库"><a href="#连接登录数据库" class="headerlink" title="连接登录数据库"></a>连接登录数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql –u用户名 [–h主机名或者IP地址] –p密码</div><div class="line">eggs: mysql -uusername -hIPaddress -p(password)</div><div class="line"><span class="meta">#</span><span class="bash">1. 连接到本机上的MYSQL。</span></div><div class="line"><span class="meta">#</span><span class="bash">首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码.</span></div><div class="line"><span class="meta">#</span><span class="bash">如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</span></div><div class="line"><span class="meta">#</span><span class="bash">2. 连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：</span></div><div class="line"><span class="meta">#</span><span class="bash">mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）</span></div><div class="line"><span class="meta">#</span><span class="bash">3. 退出MYSQL命令： <span class="built_in">exit</span> （回车） 或者 \q</span></div></pre></td></tr></table></figure>
 <h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">**格式：**mysqladmin -u用户名 -p旧密码 password 新密码(注：因为开始时root没有密码，所以-p旧密码一项就可以省略)</span></div><div class="line">mysqladmin -u root password ab12</div><div class="line">再将root的密码改为djg345</div><div class="line">mysqladmin -u root -p ab12 password djg345</div></pre></td></tr></table></figure>
 <h3 id="查看mysql数据库中所有用户及拥有的权限"><a href="#查看mysql数据库中所有用户及拥有的权限" class="headerlink" title="查看mysql数据库中所有用户及拥有的权限"></a>查看mysql数据库中所有用户及拥有的权限</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;</div></pre></td></tr></table></figure>
@@ -2881,7 +2881,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Tmux 使用简记]]></title>
-      <url>http://yoursite.com/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/</url>
+      <url>http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p>简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自<br>于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接<br>这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情况下工作现场不丢失)。</p>
 <h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><blockquote>
 <p>tmux new-session -s session-name    #创建一个新的tmux对话<br>tmux ls    #列出已有的tmux列表，相当于Ctrl-B s<br>tmux attach-session -t sessionname = tmux a -t sessionname（支持缩写匹配）    #进入一个tmux会话窗<br>使用Ctrl-B d返回主shell界面，tmux仍旧在后台运行，里面的命令也保持运行状态<br>tmux kill-session -t session-name    #关闭开启在后台的终端；在终端下也可以使用exit进行退出</p>
@@ -2899,7 +2899,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[SaltStack使用简明手册]]></title>
-      <url>http://yoursite.com/2015/07/21/salt%E7%AE%80%E6%98%8E%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+      <url>http://arvon.top/2015/07/21/salt%E7%AE%80%E6%98%8E%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
       <content type="html"><![CDATA[<p>介绍：salt是一种基础设施管理方式，部署简单，在几分钟内便可运行起来，扩展性好，很容易管理上万台服务器，速度够快，服务器之间秒级通讯。salt底层采用动态链接总线，使其可以用于编配，远程执行，配置管理等。</p>
 <p>###常用命令</p>
 <blockquote>
@@ -2910,7 +2910,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Markdown Introduction]]></title>
-      <url>http://yoursite.com/2015/07/21/Markdown-Introduction/</url>
+      <url>http://arvon.top/2015/07/21/Markdown-Introduction/</url>
       <content type="html"><![CDATA[<p><strong>简介：</strong>Markdown是一个web上使用的文本到HTML的转换工具，目前github、Stackoverflow等网站均支持这种格式，还有简书也是<br>很支持的呦。它存在的宗旨就是实现易读易写，称为适用于网络的书写语言。自我感觉也确实不错，很适合做IT的人记笔记用。</p>
 <h2 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h2><h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><ul>
 <li>在Markdown中，<em>、-、+3个符号的效果一致，称为Markdown符号，我习惯用\</em>号</li>
@@ -3025,7 +3025,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Hexo简明]]></title>
-      <url>http://yoursite.com/2015/07/20/Hexo%E7%AE%80%E6%98%8E/</url>
+      <url>http://arvon.top/2015/07/20/Hexo%E7%AE%80%E6%98%8E/</url>
       <content type="html"><![CDATA[<p><strong>简介</strong>：出自台湾某大学生之手，说是叫tommy351，感觉是叼了个扎天。是一个基于Node.js的静态博客程序，其<br>编译上百篇文字只需要几秒。hexo生成静态网页可以直接放到Github Pages，BAE，SAE等平台上。</p>
 <p>###常用的命令</p>
 <ul>
@@ -3086,7 +3086,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[使用Hexo和Github搭建Blog]]></title>
-      <url>http://yoursite.com/2015/07/17/%E4%BD%BF%E7%94%A8Hexo%E5%92%8CGithub%E6%90%AD%E5%BB%BABlog/</url>
+      <url>http://arvon.top/2015/07/17/%E4%BD%BF%E7%94%A8Hexo%E5%92%8CGithub%E6%90%AD%E5%BB%BABlog/</url>
       <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=25706279&auto=1&height=66"></iframe>
 
 <p><strong>Update</strong>:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-1.jpeg" alt="20150717-hexoblog-1"><br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-2.jpeg" alt="20150717-hexoblog-2"><br>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。</p>
@@ -3136,7 +3136,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[安装hexo记录]]></title>
-      <url>http://yoursite.com/2015/06/13/CentOS%E5%AE%89%E8%A3%85hexo%E8%AE%B0%E5%BD%95/</url>
+      <url>http://arvon.top/2015/06/13/CentOS%E5%AE%89%E8%A3%85hexo%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>简要记录一下在centos上安装hexo的过程<br>记录在CentOS环境下配置hexo博客环境记录</p>
 <h2 id="Install-Git"><a href="#Install-Git" class="headerlink" title="Install Git"></a>Install Git</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum remove git</div><div class="line">yum install git-core</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -3148,7 +3148,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux下关于文件属性的三个时间]]></title>
-      <url>http://yoursite.com/2015/05/13/Linux%E4%B8%8B%E5%85%B3%E4%BA%8E%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E7%9A%84%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4/</url>
+      <url>http://arvon.top/2015/05/13/Linux%E4%B8%8B%E5%85%B3%E4%BA%8E%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E7%9A%84%E4%B8%89%E4%B8%AA%E6%97%B6%E9%97%B4/</url>
       <content type="html"><![CDATA[<p>Tips: 主要区分linux下文件的三个时间属性，atime、mtime、ctime<br><a id="more"></a></p>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><ul>
 <li>文件的 Access time，atime 是在读取文件或者执行文件时更改的任何对inode的访问都会使此处改变。</li>
@@ -3172,7 +3172,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Linux查看主机信息]]></title>
-      <url>http://yoursite.com/2015/04/13/Linux%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9C%BA%E4%BF%A1%E6%81%AF/</url>
+      <url>http://arvon.top/2015/04/13/Linux%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9C%BA%E4%BF%A1%E6%81%AF/</url>
       <content type="html"><![CDATA[<p>这篇包括（系统版本、内核信息、核心数、主机名）还有一个关于系统信息查看的，<a href="http://blog.arvon.top/2015/07/27/Linux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" target="_blank" rel="external">–&gt;飞机票</a><br><a id="more"></a></p>
 <h3 id="查看主机版本信息"><a href="#查看主机版本信息" class="headerlink" title="查看主机版本信息"></a>查看主机版本信息</h3><ul>
 <li><p>系统信息</p>
@@ -3196,7 +3196,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[Centos搭建nginx+php环境]]></title>
-      <url>http://yoursite.com/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</url>
+      <url>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</url>
       <content type="html"><![CDATA[<p>Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。</p>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><ul>
 <li><p>yum</p>
@@ -3234,7 +3234,7 @@ Mo birthday happy to
     
     <entry>
       <title><![CDATA[windows批量修改文件后缀]]></title>
-      <url>http://yoursite.com/2015/01/23/windows%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
+      <url>http://arvon.top/2015/01/23/windows%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
       <content type="html"><![CDATA[<p>Ren命令可用于修改文件的名称，包括后缀名。比如，将D盘中的1.jpg重命名为2.png，只需在命令提示符中输入下面的命令，然后回车即可。<br><a id="more"></a></p>
 <blockquote>
 <p>ren D:\1.jpg 2.png<br>注意，如果提示权限不足，那么你需要以管理员身份运行命令提示符。<br>如果要批量修改后缀名，可借助通配符来实现。比如将D盘中的所有文件后缀名改为jpg的命令为：</p>
