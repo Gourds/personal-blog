@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="command," />
+  <meta name="keywords" content="正则," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写 12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i p">
-<meta name="keywords" content="command">
+<meta name="description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i pa">
+<meta name="keywords" content="正则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grep命令">
 <meta property="og:url" content="http://yoursite.com/2016/07/15/grep命令/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写 12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i p">
-<meta property="og:updated_time" content="2016-07-30T10:31:49.000Z">
+<meta property="og:description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i pa">
+<meta property="og:updated_time" content="2017-05-25T09:05:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grep命令">
-<meta name="twitter:description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写 12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i p">
+<meta name="twitter:description" content="Tips：很有用的几个选项 常用 定向匹配&amp;amp;忽略大小写12345678#-Bgrep -B 5 part filename #显示filename中匹配part的前5行#-Agrep -A 5 part filename #显示filename中匹配part的后5行#-Cgrep -C 5 part filename #显示filename中匹配part的前后5行#-igrep -i pa">
 
 
 
@@ -339,9 +339,11 @@
       
         <p>Tips：很有用的几个选项</p>
 <h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><ul>
-<li><p>定向匹配&amp;忽略大小写</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-B</span></div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line"><span class="meta">#</span><span class="bash">-A</span></div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line"><span class="meta">#</span><span class="bash">-C</span></div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line"><span class="meta">#</span><span class="bash">-i</span></div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
+<li>定向匹配&amp;忽略大小写<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-B</span></div><div class="line">grep -B 5 part filename #显示filename中匹配part的前5行</div><div class="line"><span class="meta">#</span><span class="bash">-A</span></div><div class="line">grep -A 5 part filename #显示filename中匹配part的后5行</div><div class="line"><span class="meta">#</span><span class="bash">-C</span></div><div class="line">grep -C 5 part filename #显示filename中匹配part的前后5行</div><div class="line"><span class="meta">#</span><span class="bash">-i</span></div><div class="line">grep -i part filename #匹配filename中的part不区分大小写</div></pre></td></tr></table></figure>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>反选匹配</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">-v</span></div><div class="line">egrep -v "^#|^$" filename #不显示filename中的空行和开头#的注释行，显示其余内容</div></pre></td></tr></table></figure>
 </li>
@@ -402,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/command/" rel="tag">#command</a>
+            <a href="/tags/正则/" rel="tag">#正则</a>
           
         </div>
       
@@ -493,7 +495,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -503,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

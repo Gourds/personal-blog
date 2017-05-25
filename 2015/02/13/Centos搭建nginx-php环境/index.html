@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="php,nginx," />
+  <meta name="keywords" content="Linux,Nginx," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。">
-<meta name="keywords" content="php,nginx">
+<meta name="description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。 Environment yum 1wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm  CentOS6.3_x64">
+<meta name="keywords" content="Linux,Nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos搭建nginx+php环境">
 <meta property="og:url" content="http://yoursite.com/2015/02/13/Centos搭建nginx-php环境/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。">
+<meta property="og:description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。 Environment yum 1wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm  CentOS6.3_x64">
 <meta property="og:image" content="http://i5.tietuku.com/0c55e4e5fbfb6ca3.png">
-<meta property="og:updated_time" content="2016-08-20T04:09:15.000Z">
+<meta property="og:updated_time" content="2017-05-25T08:57:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos搭建nginx+php环境">
-<meta name="twitter:description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。">
+<meta name="twitter:description" content="Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。 Environment yum 1wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm  CentOS6.3_x64">
 <meta name="twitter:image" content="http://i5.tietuku.com/0c55e4e5fbfb6ca3.png">
 
 
@@ -339,7 +339,7 @@
       
 
       
-        <p>Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。<br><a id="more"></a></p>
+        <p>Tips：线上pfsense中添加bandwidthd监控流量的功能存在问题，需要配置一个支持php的web环境来进行支持，这里选择了nginx+php。</p>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><ul>
 <li><p>yum</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
@@ -347,12 +347,13 @@
 <li><p>CentOS6.3_x64</p>
 </li>
 </ul>
+<a id="more"></a>
 <h3 id="Install-software"><a href="#Install-software" class="headerlink" title="Install software"></a>Install software</h3><ul>
 <li><p>Install nginx</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">yum install nginx</div><div class="line"><span class="comment">#GeoIP.x86_64 0:1.6.5-1.el6                                         </span></div><div class="line"><span class="comment">#GeoIP-GeoLite-data.noarch 0:2015.04-2.el6                          </span></div><div class="line"><span class="comment">#GeoIP-GeoLite-data-extra.noarch 0:2015.04-2.el6                    </span></div><div class="line"><span class="comment">#geoipupdate.x86_64 0:2.2.1-2.el6                                   </span></div><div class="line"><span class="comment">#libxslt.x86_64 0:1.1.26-2.el6_3.1                                  </span></div><div class="line"><span class="comment">#nginx-filesystem.noarch 0:1.0.15-12.el6</span></div><div class="line">chkconfig nginx on</div><div class="line">/etc/init.d/nginx restart</div></pre></td></tr></table></figure>
 </li>
 <li><p>Install php-fpm</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm</div><div class="line"><span class="comment">#Installing : php-common-5.3.3-46.el6_6.x86_64                  1/2 </span></div><div class="line"><span class="comment">#Installing : php-fpm-5.3.3-46.el6_6.x86_64                     2/2 </span></div><div class="line"><span class="comment">#Verifying  : php-fpm-5.3.3-46.el6_6.x86_64                     1/2 </span></div><div class="line"><span class="comment">#Verifying  : php-common-5.3.3-46.el6_6.x86_64                  2/2</span></div><div class="line">chkconfig php-fpm on</div><div class="line">/etc/init.d/php-fpm restart</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm</div><div class="line"><span class="comment">#Installing : php-common-5.3.3-46.el6_6.x86_64                  1/2</span></div><div class="line"><span class="comment">#Installing : php-fpm-5.3.3-46.el6_6.x86_64                     2/2</span></div><div class="line"><span class="comment">#Verifying  : php-fpm-5.3.3-46.el6_6.x86_64                     1/2</span></div><div class="line"><span class="comment">#Verifying  : php-common-5.3.3-46.el6_6.x86_64                  2/2</span></div><div class="line">chkconfig php-fpm on</div><div class="line">/etc/init.d/php-fpm restart</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="Edit-config"><a href="#Edit-config" class="headerlink" title="Edit config"></a>Edit config</h3><ul>
@@ -413,9 +414,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/php/" rel="tag">#php</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/tags/nginx/" rel="tag">#nginx</a>
+            <a href="/tags/Nginx/" rel="tag">#Nginx</a>
           
         </div>
       
@@ -506,7 +507,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -516,7 +517,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

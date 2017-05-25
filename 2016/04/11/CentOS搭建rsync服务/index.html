@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="rsync," />
+  <meta name="keywords" content="运维工具," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式   rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式">
-<meta name="keywords" content="rsync">
+<meta name="description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式  rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式   Tips：由于需要将线上大量数据迁移至本地，直接使用ftp或scp会很不方便，使用rsync可以有断点续传功能，而且搭建起来十分快捷方便。 环境 本地CentOS release 6.7 线上CentOS release 6.5 这里">
+<meta name="keywords" content="运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS搭建rsync服务">
 <meta property="og:url" content="http://yoursite.com/2016/04/11/CentOS搭建rsync服务/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式   rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式">
-<meta property="og:updated_time" content="2016-08-13T05:23:09.000Z">
+<meta property="og:description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式  rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式   Tips：由于需要将线上大量数据迁移至本地，直接使用ftp或scp会很不方便，使用rsync可以有断点续传功能，而且搭建起来十分快捷方便。 环境 本地CentOS release 6.7 线上CentOS release 6.5 这里">
+<meta property="og:updated_time" content="2017-05-25T08:58:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建rsync服务">
-<meta name="twitter:description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式   rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式">
+<meta name="twitter:description" content="更新：本篇选择独立启动模式  选择rsync服务器启动方式  rsync服务器负载比较高，则使用独立启动模式 rsync服务器负责较低，使用xinetd运行方式   Tips：由于需要将线上大量数据迁移至本地，直接使用ftp或scp会很不方便，使用rsync可以有断点续传功能，而且搭建起来十分快捷方便。 环境 本地CentOS release 6.7 线上CentOS release 6.5 这里">
 
 
 
@@ -339,11 +339,10 @@
       
         <p>更新：本篇选择独立启动模式</p>
 <blockquote>
-<p>选择rsync服务器启动方式 </p>
+<p>选择rsync服务器启动方式</p>
 <ul>
 <li>rsync服务器负载比较高，则使用独立启动模式</li>
-<li>rsync服务器负责较低，使用xinetd运行方式<a id="more"></a>
-</li>
+<li>rsync服务器负责较低，使用xinetd运行方式</li>
 </ul>
 </blockquote>
 <p>Tips：由于需要将线上大量数据迁移至本地，直接使用ftp或scp会很不方便，使用rsync可以有断点续传功能，而且搭建起来十分快捷方便。</p>
@@ -352,12 +351,16 @@
 <li>线上CentOS release 6.5</li>
 <li>这里是将线上数据拉至本地，本地主机在局域网中 ，并没有单独的公网IP，故线上服务器做rsync的服务端，本地PC做rsync的客户端</li>
 </ul>
+<a id="more"></a>
 <h4 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h4><ul>
 <li><p>Install packge</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install rsync -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>Command</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"> mkdir /etc/rsyncd</div><div class="line"> touch /etc/rsyncd/rsyncd.conf    <span class="comment">#主配置文件</span></div><div class="line"> touch /etc/rsyncd/rsyncd.secrets  <span class="comment">#客户端连接时使用的用户和密码</span></div><div class="line"> touch /etc/rsyncd/rsyncd.motd    <span class="comment">#服务端提示信息文件</span></div><div class="line"> chmod 600 /etc/rsyncd/rsyncd.secrets</div><div class="line"> chown root:root /etc/rsyncd/rsyncd.secrets</div><div class="line"> ``` </div><div class="line">- Main_config</div><div class="line"> ```bash</div><div class="line"> uid = root</div><div class="line"> gid = root</div><div class="line"> use chroot = no</div><div class="line"> <span class="built_in">read</span> only = yes          <span class="comment">#只读，不让客户端上传文件到服务器</span></div><div class="line"> address = 203.66.131.14  <span class="comment">#服务端的IP，写错将无法启动进程</span></div><div class="line"> port = 873</div><div class="line"> <span class="comment">#hosts allow = 192.168.1.0/24 172.16.0.0/255.255.0.0</span></div><div class="line"> hosts allow = 0.0.0.0/0.0.0.0</div><div class="line"> hosts deny = *</div><div class="line"> max connections = 5</div><div class="line"> pid file = /var/run/rsyncd.pid</div><div class="line"> motd file = /etc/rsyncd/rsyncd.motd</div><div class="line"> secrets file = /etc/rsyncd/rsyncd.secrets</div><div class="line"> <span class="built_in">log</span> file = /var/<span class="built_in">log</span>/rsync.log</div><div class="line"> transfer logging = yes</div><div class="line"> <span class="built_in">log</span> format = %t %a %m %f %b</div><div class="line"> syslog facility = <span class="built_in">local</span>3</div><div class="line"> timeout = 300</div><div class="line"> [mytmp]</div><div class="line"> path = /data/nfsd/backup/arvon_backup</div><div class="line"> list = yes</div><div class="line"> ignore errors</div><div class="line"> auth users = rsync  <span class="comment">#只有rsyncd.secrets文件中的zhang3用户可以同步此目录</span></div><div class="line"> [townhome]</div><div class="line"> path = /home/town</div><div class="line"> list = no           <span class="comment">#服务器上同步数据的目录在服务器模块上列出来</span></div><div class="line"> ignore errors       <span class="comment">#忽略IO错误</span></div><div class="line"> auth users = rsync   <span class="comment">#只有rsyncd.secrets文件中的town用户可以同步此目录</span></div><div class="line"> comment = hitown    <span class="comment">#客户端连接时的提示</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir /etc/rsyncd</div><div class="line">touch /etc/rsyncd/rsyncd.conf    <span class="comment">#主配置文件</span></div><div class="line">touch /etc/rsyncd/rsyncd.secrets  <span class="comment">#客户端连接时使用的用户和密码</span></div><div class="line">touch /etc/rsyncd/rsyncd.motd    <span class="comment">#服务端提示信息文件</span></div><div class="line">chmod 600 /etc/rsyncd/rsyncd.secrets</div><div class="line">chown root:root /etc/rsyncd/rsyncd.secrets</div></pre></td></tr></table></figure>
+</li>
+<li><p>Main_config</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">uid = root</div><div class="line">gid = root</div><div class="line">use chroot = no</div><div class="line"><span class="built_in">read</span> only = yes          <span class="comment">#只读，不让客户端上传文件到服务器</span></div><div class="line">address = 203.66.131.14  <span class="comment">#服务端的IP，写错将无法启动进程</span></div><div class="line">port = 873</div><div class="line"><span class="comment">#hosts allow = 192.168.1.0/24 172.16.0.0/255.255.0.0</span></div><div class="line">hosts allow = 0.0.0.0/0.0.0.0</div><div class="line">hosts deny = *</div><div class="line">max connections = 5</div><div class="line">pid file = /var/run/rsyncd.pid</div><div class="line">motd file = /etc/rsyncd/rsyncd.motd</div><div class="line">secrets file = /etc/rsyncd/rsyncd.secrets</div><div class="line"><span class="built_in">log</span> file = /var/<span class="built_in">log</span>/rsync.log</div><div class="line">transfer logging = yes</div><div class="line"><span class="built_in">log</span> format = %t %a %m %f %b</div><div class="line">syslog facility = <span class="built_in">local</span>3</div><div class="line">timeout = 300</div><div class="line">[mytmp]</div><div class="line">path = /data/nfsd/backup/arvon_backup</div><div class="line">list = yes</div><div class="line">ignore errors</div><div class="line">auth users = rsync  <span class="comment">#只有rsyncd.secrets文件中的zhang3用户可以同步此目录</span></div><div class="line">[townhome]</div><div class="line">path = /home/town</div><div class="line">list = no           <span class="comment">#服务器上同步数据的目录在服务器模块上列出来</span></div><div class="line">ignore errors       <span class="comment">#忽略IO错误</span></div><div class="line">auth users = rsync   <span class="comment">#只有rsyncd.secrets文件中的town用户可以同步此目录</span></div><div class="line">comment = hitown    <span class="comment">#客户端连接时的提示</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>Password_config</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[hello@host]$ sudo cat /etc/rsyncd/rsyncd.secrets</div><div class="line">rsync:123456</div></pre></td></tr></table></figure>
@@ -370,7 +373,7 @@
 </li>
 </ul>
 <h4 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h4><ul>
-<li><p>Install </p>
+<li><p>Install</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install rsync -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>Config</p>
@@ -382,10 +385,10 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rsync --list-only --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp</div><div class="line"><span class="meta">#</span><span class="bash">这个mytmp是体现在主配置 文件的，也就是/etc/rsyncd/rsyncd.conf</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>同步文件到本地的目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">rsync -auvzP --delete --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</span></div><div class="line"><span class="meta">#</span><span class="bash">由于这里只是需要将线上数据拉到本地，并不需要完全一致，所以可以不用--delete参数，能不用则不用，删除总归是危险操作 </span></div><div class="line">rsync -auvzP  --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">rsync -auvzP --delete --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</span></div><div class="line"><span class="meta">#</span><span class="bash">由于这里只是需要将线上数据拉到本地，并不需要完全一致，所以可以不用--delete参数，能不用则不用，删除总归是危险操作</span></div><div class="line">rsync -auvzP  --password-file=/etc/rsync.password rsync@rsync_server_ip::mytmp /your/want/path</div></pre></td></tr></table></figure>
 </li>
 <li><p>参数说明</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="_">-a</span> 相当于-rlptgoD</div><div class="line">-r是递归 </div><div class="line"><span class="_">-l</span>是链接文件，意思是拷贝链接文件；</div><div class="line">-p表示保持文件原有权限；</div><div class="line">-t保持文件原有时间；</div><div class="line">-g保持文件原有用户组；</div><div class="line">-o 保持文件原有属主；</div><div class="line">-D 相当于块设备文件；</div><div class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件) </div><div class="line">-z 传输时压缩；</div><div class="line">-P 传输进度；</div><div class="line">-v 传输时的进度等信息，和-P有点关系，自己试试。</div><div class="line">--delete 表示客户端的数据要与服务器端完全一致，如果客户端目录里有服务器上不存在的文件，则删除。</div><div class="line"><span class="comment">#执行rsync同步时，慎用-z参数！一旦启用了-z参数，则数据在传输前会先经过压缩，如果文件比较大的话，压缩会很慢！进而出现，明明网速很快，却同步缓慢的情况。</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="_">-a</span> 相当于-rlptgoD</div><div class="line">-r是递归</div><div class="line"><span class="_">-l</span>是链接文件，意思是拷贝链接文件；</div><div class="line">-p表示保持文件原有权限；</div><div class="line">-t保持文件原有时间；</div><div class="line">-g保持文件原有用户组；</div><div class="line">-o 保持文件原有属主；</div><div class="line">-D 相当于块设备文件；</div><div class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)</div><div class="line">-z 传输时压缩；</div><div class="line">-P 传输进度；</div><div class="line">-v 传输时的进度等信息，和-P有点关系，自己试试。</div><div class="line">--delete 表示客户端的数据要与服务器端完全一致，如果客户端目录里有服务器上不存在的文件，则删除。</div><div class="line"><span class="comment">#执行rsync同步时，慎用-z参数！一旦启用了-z参数，则数据在传输前会先经过压缩，如果文件比较大的话，压缩会很慢！进而出现，明明网速很快，却同步缓慢的情况。</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h4><ul>
@@ -441,7 +444,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/rsync/" rel="tag">#rsync</a>
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -532,7 +535,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -542,7 +545,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

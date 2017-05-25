@@ -341,7 +341,7 @@
 
       
         
-          <p><strong>摘要：</strong><a href="https://www.dokuwiki.org/wiki:dokuwiki" target="_blank" rel="external">dokuwiki</a>是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。<br>
+          <p><strong>摘要：</strong><a href="https://www.dokuwiki.org/wiki:dokuwiki" target="_blank" rel="external">dokuwiki</a>是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/20/CentOS6-8搭建个人dokuwiki/#more" rel="contents">
               阅读全文 &raquo;
@@ -677,7 +677,7 @@
 
       
         
-          <p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br>
+          <p><strong>摘要：</strong>使用Next主题搭建了博客，虽然说头像什么的都是浮云，但是没有还是略显不爽，但恕我愚昧只按照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>没弄出来，官方写的太简略了，记录一下较为详细的步骤。<br>更新：打赏<br>更新：站内搜索</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/15/hexo之Next主题头像设置/#more" rel="contents">
               阅读全文 &raquo;
@@ -905,39 +905,13 @@
 
       
         
-          
-            <p><strong>摘要：</strong>早该记录了，最开始我的blog是使用hexo+github搭建的使用jacman主题，也是因为对git不够了解，当时绑定域名是使用直接在github上写CNAME文件。感觉太麻烦了，就买了空间换了WordPress，wp也是用了要有快一年，然后感觉markdown支持的真是不好，而且迁移很不爽，然后就换了现在的。<br>关于现在这套blog架构，依然使用hexo作为blog框架，我自己的电脑用作服务器，然后VPS作为web服务器提供发布，使用git hook进行更新blog。</p>
-<h3 id="git钩子简介-–摘自git-scm"><a href="#git钩子简介-–摘自git-scm" class="headerlink" title="git钩子简介 –摘自git-scm"></a>git钩子简介 –摘自<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">git-scm</a></h3><p>Git 能在特定的重要动作发生时触发自定义脚本。 有两组这样的钩子：客户端的和服务器端的。 客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 你可以随心所欲地运用这些钩子。 </p>
-<h4 id="git-hook概述"><a href="#git-hook概述" class="headerlink" title="git hook概述"></a>git hook概述</h4><p>钩子都被存储在 Git 目录下的 hooks 子目录中。 也即绝大部分项目中的 .git/hooks 。 当你用 git init 初始化一个新版本库时，Git 默认会在这个目录中放置一些示例脚本。这些脚本除了本身可以被调用外，它们还透露了被触发时所传入的参数。 所有的示例都是 shell 脚本，其中一些还混杂了 Perl 代码，不过，任何正确命名的可执行脚本都可以正常使用 —— 你可以用 Ruby 或 Python，或其它语言编写它们。 这些示例的名字都是以 .sample 结尾，如果你想启用它们，得先移除这个后缀。<br>把一个正确命名且可执行的文件放入 Git 目录下的 hooks 子目录中，即可激活该钩子脚本。 这样一来，它就能被 Git 调用。<br>Git Hooks 就是一些触发特定事件的脚本。比如 commit、push、merge 等等，也区分本地 Hooks 和服务端 Hooks。</p>
-<h4 id="使用post-reveive"><a href="#使用post-reveive" class="headerlink" title="使用post-reveive"></a>使用post-reveive</h4><p>当用户在本地仓库执行git-push命令时，服务器上远程仓库就会对应执行git-receive-pack命令，而git-receive-pack命令会调用pre-receive钩子。<br>使用git部署时的流程：本地git-push –&gt; VPS上Git服务器更新并Hook –&gt;VPS上执行pre-receive脚本，同步到服务器本地仓库目录</p>
-<h3 id="git部署blog过程记录"><a href="#git部署blog过程记录" class="headerlink" title="git部署blog过程记录"></a>git部署blog过程记录</h3><h4 id="VPS安装git"><a href="#VPS安装git" class="headerlink" title="VPS安装git"></a>VPS安装git</h4><ul>
-<li>安装初始化<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum install git-core -y</div><div class="line">adduser git-blog</div><div class="line"><span class="built_in">cd</span> /home/git-blog</div><div class="line">git init --bare blog.git</div><div class="line"><span class="comment">#使用--bare参数是创建一个裸仓库，没有工作区，这里不再裸仓库进行操作，只为共享而存在</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="创建信任"><a href="#创建信任" class="headerlink" title="创建信任"></a>创建信任</h4><ul>
-<li>创建从我本机到VPS上git-blog用户的信任<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-copy-id git-blog@VPShost</div><div class="line"><span class="comment">#就是把~/.ssh/id_rsa.pub中的内容添加到VPS主机上~/.ssh/authorized_keys文件中</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="本地配置git发布"><a href="#本地配置git发布" class="headerlink" title="本地配置git发布"></a>本地配置git发布</h4><ul>
-<li>Hexo主配置文件_config.yml如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line"> <span class="built_in">type</span>: git</div><div class="line"> message: Arvon</div><div class="line"> repo: ssh://git-blog@blog.arvon.top:12345/home/arvon/blog.git</div><div class="line"> <span class="comment">#repo: git-blog@blog.arvon.top:/home/arvon/blog.git</span></div><div class="line"> branch: master</div><div class="line"><span class="comment">#注意的地方，搬来repo那是直接写主机地址就可以了但是，我这主机ssh端口不是默认端口所以就需要写成ssh的形式。</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="服务器配置git-hook"><a href="#服务器配置git-hook" class="headerlink" title="服务器配置git hook"></a>服务器配置git hook</h4><ul>
-<li>编辑blog.git/hooks下新建post-receive文件，内容如下<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line">git --work-tree=/usr/nginx/html/myblog --git-dir=/home/git-blog/blog.git checkout <span class="_">-f</span></div><div class="line"><span class="comment">#这个意思是发布的内容推送到/usr/nginx/html/myblog目录下</span></div><div class="line"><span class="comment">#别忘了 chmod +x post-receive</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><ul>
-<li><p>本地操作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git new <span class="string">"test"</span></div><div class="line">git g <span class="_">-d</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>参考文档<br><a href="http://www.swiftyper.com/2016/04/17/deploy-hexo-with-git-hook/" target="_blank" rel="external">swiftyper的blog</a><br><a href="http://www.imys.net/20160303/hexo-nginx-auto-deploy.html" target="_blank" rel="external">imys的blog</a></p>
-</li>
-<li>之前关于hexo的文章<br><a href="http://arvon.top/2015/07/23/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">linux下hexo配置</a><br><a href="http://arvon.top/2015/07/20/Hexo%E7%AE%80%E6%98%8E/" target="_blank" rel="external">hexo简明</a><br><a href="http://arvon.top/2015/07/17/%E4%BD%BF%E7%94%A8Hexo%E5%92%8CGithub%E6%90%AD%E5%BB%BABlog/" target="_blank" rel="external">使用Hexo和Github搭建Blog</a></li>
-</ul>
-<hr>
-<p>ok,以上，以后还会补充git的东西</p>
-
-          
+          <p><strong>摘要：</strong>早该记录了，最开始我的blog是使用hexo+github搭建的使用jacman主题，也是因为对git不够了解，当时绑定域名是使用直接在github上写CNAME文件。感觉太麻烦了，就买了空间换了WordPress，wp也是用了要有快一年，然后感觉markdown支持的真是不好，而且迁移很不爽，然后就换了现在的。关于现在这套blog架构，依然使用hexo作为blog框架，我自己的电脑用作服务器，然后VPS作为web服务器提供发布，使用git hook进行更新blog。</p>
+<h3 id="git钩子简介-–摘自git-scm"><a href="#git钩子简介-–摘自git-scm" class="headerlink" title="git钩子简介 –摘自git-scm"></a>git钩子简介 –摘自<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">git-scm</a></h3><p>Git 能在特定的重要动作发生时触发自定义脚本。 有两组这样的钩子：客户端的和服务器端的。 客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 你可以随心所欲地运用这些钩子。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/12/Git钩子在hexo中的应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1080,7 +1054,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1121,7 +1095,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1131,7 +1105,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

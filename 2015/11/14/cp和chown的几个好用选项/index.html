@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="command," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="摘要：生产环境中对权限什么的要求是很严格的，而使用root用户进行操作，难免会变更权限信息，修改权限就变得十分有必要，而以下的选线都是很实用的。">
-<meta name="keywords" content="command">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cp和chown的几个好用选项">
 <meta property="og:url" content="http://yoursite.com/2015/11/14/cp和chown的几个好用选项/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="摘要：生产环境中对权限什么的要求是很严格的，而使用root用户进行操作，难免会变更权限信息，修改权限就变得十分有必要，而以下的选线都是很实用的。">
-<meta property="og:updated_time" content="2016-08-13T02:33:03.000Z">
+<meta property="og:updated_time" content="2017-05-25T09:00:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cp和chown的几个好用选项">
 <meta name="twitter:description" content="摘要：生产环境中对权限什么的要求是很严格的，而使用root用户进行操作，难免会变更权限信息，修改权限就变得十分有必要，而以下的选线都是很实用的。">
@@ -340,9 +340,9 @@
         <p><strong>摘要：</strong>生产环境中对权限什么的要求是很严格的，而使用root用户进行操作，难免会变更权限信息，修改权限就变得十分有必要，而以下的选线都是很实用的。<br><a id="more"></a></p>
 <h3 id="关于copy的几个选项"><a href="#关于copy的几个选项" class="headerlink" title="关于copy的几个选项"></a>关于copy的几个选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-P</div><div class="line"><span class="comment">#-p 或 --preserve    保留源文件或目录的属性，包括所有者、所属组、权限与时间</span></div><div class="line">-R</div><div class="line"><span class="comment">#-R 或 --recursive   递归处理，将指定目录下的文件及子目录一并处理</span></div><div class="line"><span class="_">-a</span></div><div class="line"><span class="comment"># -a 或 --archive     此参数的效果和同时指定"-dpR"参数相同</span></div></pre></td></tr></table></figure>
 <h3 id="关于chown和chmod"><a href="#关于chown和chmod" class="headerlink" title="关于chown和chmod"></a>关于chown和chmod</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">--reference=dir_file</div><div class="line"><span class="comment">#修改文件权限与dir_file一致</span></div><div class="line">chmod --reference=xxx yyy</div><div class="line">chown --reference=xxx yyy</div></pre></td></tr></table></figure>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="copy命令"><a href="#copy命令" class="headerlink" title="copy命令"></a>copy命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="_">-a</span>：此参数的效果和同时指定<span class="string">"-dpR"</span>参数相同；</div><div class="line"><span class="_">-d</span>：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录； </div><div class="line"><span class="_">-f</span>：强行复制文件或目录，不论目标文件或目录是否已存在； </div><div class="line">-i：覆盖既有文件之前先询问用户； </div><div class="line"><span class="_">-l</span>：对源文件建立硬连接，而非复制文件； </div><div class="line">-p：保留源文件或目录的属性； </div><div class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理； </div><div class="line"><span class="_">-s</span>：对源文件建立符号连接，而非复制文件； </div><div class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件； </div><div class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀； </div><div class="line">-b：覆盖已存在的文件目标前将目标文件备份； </div><div class="line">-v：详细显示命令执行的操作。</div></pre></td></tr></table></figure>
-<h4 id="chown命令"><a href="#chown命令" class="headerlink" title="chown命令"></a>chown命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#chown -R arvon /usr/arvon</span></div><div class="line">-c或——changes：效果类似“</div><div class="line">-v”参数，但仅回报更改的部分； </div><div class="line"><span class="_">-f</span>或--quite或——silent：不显示错误信息； </div><div class="line">-h或--no-dereference：只对符号连接的文件作修改，而不更改其他任何相关文件； </div><div class="line">-R或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理； </div><div class="line">-v或——version：显示指令执行过程； </div><div class="line">--dereference：效果和“-h”参数相同； </div><div class="line">--help：在线帮助； </div><div class="line">--reference=&lt;参考文件或目录&gt;：把指定文件或目录的拥有者与所属群组全部设成和参考文件或目录的拥有者与所属群组相同； </div><div class="line">--version：显示版本信息。</div></pre></td></tr></table></figure>
-<h4 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#权限指定说明</span></div><div class="line">u User，即文件或目录的拥有者； </div><div class="line">g Group，即文件或目录的所属群组； </div><div class="line">o Other，除了文件或目录拥有者或所属群组之外，其他用户皆属于这个范围； </div><div class="line">a All，即全部的用户，包含拥有者，所属群组以及其他用户； </div><div class="line">r 读取权限，数字代号为“4”; w 写入权限，数字代号为“2”； </div><div class="line">x 执行或切换权限，数字代号为“1”； </div><div class="line">- 不具任何权限，数字代号为“0”； </div><div class="line">s 特殊功能说明：变更文件或目录的权限。</div><div class="line"><span class="comment">#选项说明</span></div><div class="line">-c或——changes：效果类似“-v”参数，但仅回报更改的部分； </div><div class="line"><span class="_">-f</span>或--quiet或——silent：不显示错误信息； </div><div class="line">-R或——recursive：递归处理，将指令目录下的所有文件及子目录一并处理； </div><div class="line">-v或——verbose：显示指令执行过程； </div><div class="line">--reference=&lt;参考文件或目录&gt;：把指定文件或目录的所属群组全部设成和参考文件或目录的所属群组相同；</div><div class="line">&lt;权限范围&gt;+&lt;权限设置&gt;：开启权限范围的文件或目录的该选项权限设置； </div><div class="line">&lt;权限范围&gt;-&lt;权限设置&gt;：关闭权限范围的文件或目录的该选项权限设置； </div><div class="line">&lt;权限范围&gt;=&lt;权限设置&gt;：指定权限范围的文件或目录的该选项权限设置；</div><div class="line"><span class="comment">#chmod u=rwx,g=rw,o=r hi.txt</span></div></pre></td></tr></table></figure>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="copy命令"><a href="#copy命令" class="headerlink" title="copy命令"></a>copy命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="_">-a</span>：此参数的效果和同时指定<span class="string">"-dpR"</span>参数相同；</div><div class="line"><span class="_">-d</span>：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</div><div class="line"><span class="_">-f</span>：强行复制文件或目录，不论目标文件或目录是否已存在；</div><div class="line">-i：覆盖既有文件之前先询问用户；</div><div class="line"><span class="_">-l</span>：对源文件建立硬连接，而非复制文件；</div><div class="line">-p：保留源文件或目录的属性；</div><div class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</div><div class="line"><span class="_">-s</span>：对源文件建立符号连接，而非复制文件；</div><div class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</div><div class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</div><div class="line">-b：覆盖已存在的文件目标前将目标文件备份；</div><div class="line">-v：详细显示命令执行的操作。</div></pre></td></tr></table></figure>
+<h4 id="chown命令"><a href="#chown命令" class="headerlink" title="chown命令"></a>chown命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#chown -R arvon /usr/arvon</span></div><div class="line">-c或——changes：效果类似“</div><div class="line">-v”参数，但仅回报更改的部分；</div><div class="line"><span class="_">-f</span>或--quite或——silent：不显示错误信息；</div><div class="line">-h或--no-dereference：只对符号连接的文件作修改，而不更改其他任何相关文件；</div><div class="line">-R或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理；</div><div class="line">-v或——version：显示指令执行过程；</div><div class="line">--dereference：效果和“-h”参数相同；</div><div class="line">--help：在线帮助；</div><div class="line">--reference=&lt;参考文件或目录&gt;：把指定文件或目录的拥有者与所属群组全部设成和参考文件或目录的拥有者与所属群组相同；</div><div class="line">--version：显示版本信息。</div></pre></td></tr></table></figure>
+<h4 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#权限指定说明</span></div><div class="line">u User，即文件或目录的拥有者；</div><div class="line">g Group，即文件或目录的所属群组；</div><div class="line">o Other，除了文件或目录拥有者或所属群组之外，其他用户皆属于这个范围；</div><div class="line">a All，即全部的用户，包含拥有者，所属群组以及其他用户；</div><div class="line">r 读取权限，数字代号为“4”; w 写入权限，数字代号为“2”；</div><div class="line">x 执行或切换权限，数字代号为“1”；</div><div class="line">- 不具任何权限，数字代号为“0”；</div><div class="line">s 特殊功能说明：变更文件或目录的权限。</div><div class="line"><span class="comment">#选项说明</span></div><div class="line">-c或——changes：效果类似“-v”参数，但仅回报更改的部分；</div><div class="line"><span class="_">-f</span>或--quiet或——silent：不显示错误信息；</div><div class="line">-R或——recursive：递归处理，将指令目录下的所有文件及子目录一并处理；</div><div class="line">-v或——verbose：显示指令执行过程；</div><div class="line">--reference=&lt;参考文件或目录&gt;：把指定文件或目录的所属群组全部设成和参考文件或目录的所属群组相同；</div><div class="line">&lt;权限范围&gt;+&lt;权限设置&gt;：开启权限范围的文件或目录的该选项权限设置；</div><div class="line">&lt;权限范围&gt;-&lt;权限设置&gt;：关闭权限范围的文件或目录的该选项权限设置；</div><div class="line">&lt;权限范围&gt;=&lt;权限设置&gt;：指定权限范围的文件或目录的该选项权限设置；</div><div class="line"><span class="comment">#chmod u=rwx,g=rw,o=r hi.txt</span></div></pre></td></tr></table></figure>
 <h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://man.linuxde.net" target="_blank" rel="external">Linux命令大全</a><br><a href="http://www.hi-docs.com/linux/chmod.html" target="_blank" rel="external">Hi doc</a><br><a href="https://www.linuxyw.com/a/wenjianguanli/20130429/148.html" target="_blank" rel="external">儒峰的网站</a></p>
 <hr>
 <p>以上</p>
@@ -389,7 +389,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/command/" rel="tag">#command</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -398,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/03/Centos6.4升级6.7/" rel="next" title="Centos6.4升级6.7记录">
-                <i class="fa fa-chevron-left"></i> Centos6.4升级6.7记录
+              <a href="/2015/10/20/NFS服务安装部署记录/" rel="next" title="NFS服务安装部署记录">
+                <i class="fa fa-chevron-left"></i> NFS服务安装部署记录
               </a>
             
           </div>
@@ -480,7 +480,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +490,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

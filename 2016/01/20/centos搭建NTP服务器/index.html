@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ntp," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的">
-<meta name="keywords" content="ntp">
+<meta name="description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS搭建NTP服务器">
 <meta property="og:url" content="http://yoursite.com/2016/01/20/centos搭建NTP服务器/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的">
-<meta property="og:updated_time" content="2016-08-13T04:28:31.000Z">
+<meta property="og:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
+<meta property="og:updated_time" content="2017-05-25T08:57:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建NTP服务器">
-<meta name="twitter:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的">
+<meta name="twitter:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
 
 
 
@@ -337,7 +337,9 @@
       
 
       
-        <p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">–&gt;另一篇关于时间的</a><br><a id="more"></a><br>NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以接受来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
+        <p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">–&gt;另一篇关于时间的</a></p>
+<p>NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以接受来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
+<a id="more"></a>
 <h3 id="NTP服务器搭建"><a href="#NTP服务器搭建" class="headerlink" title="NTP服务器搭建"></a>NTP服务器搭建</h3><p><code>Tips: hadoop对局域网时间同步要求非常高，所以适合搭建使用ntp服务器</code></p>
 <ul>
 <li>主要包括两个文件<ul>
@@ -348,7 +350,7 @@
 </ul>
 <h4 id="服务器端（转自搭建ntp服务器）"><a href="#服务器端（转自搭建ntp服务器）" class="headerlink" title="服务器端（转自搭建ntp服务器）"></a>服务器端（转自<a href="http://www.linuxidc.com/Linux/2014-02/97205.htm" target="_blank" rel="external">搭建ntp服务器</a>）</h4><ul>
 <li>1.搭建环境<br>环境：CentOS6.4<br>Server192.168.126.1<br>Client192.168.126.2</li>
-<li><p>2.安装NTP </p>
+<li><p>2.安装NTP</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y install ntp</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.修改配置文件添加一行</p>
@@ -375,7 +377,7 @@
 <p>使用crontab –e</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0 21 * * * ntpdate 192.168.126.1 &gt;&gt; /root/ntpdate.log 2&gt;&amp;1</div></pre></td></tr></table></figure>
 </li>
-<li><p>2.查看同步状况 </p>
+<li><p>2.查看同步状况</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ntpq –p</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.防火墙需要开123端口或者关闭防火墙</p>
@@ -429,7 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ntp/" rel="tag">#ntp</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -520,7 +522,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -530,7 +532,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

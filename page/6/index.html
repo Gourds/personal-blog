@@ -282,137 +282,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/16/crontab简记/" itemprop="url">
-                  crontab简记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-16T17:01:58+08:00" content="2015-09-16">
-              2015-09-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/16/crontab简记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/16/crontab简记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/09/16/crontab简记/" class="leancloud_visitors" data-flag-title="crontab简记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。<br><strong>介绍:</strong>crontab命令<br>常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<em>crontab文件</em>包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。<br>crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。(ps:摘自百度百科)</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
-<li>常用命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">crontab -e	#编辑，编辑后重启服务生效</div><div class="line">/etc/init.d/crond restart（stop/start）	#重启服务</div><div class="line">crontab -l	#查看</div><div class="line">crontab -l&gt;/home/backup/crontab/crontab\`date '+%Y%m%d'`.bak	#备份crontab</div><div class="line"><span class="meta">#</span><span class="bash">* 每分钟执行以下ls命令</span></div><div class="line">0 * * * * /bin/ls</div><div class="line"><span class="meta">#</span><span class="bash">* 周一到周五每天17点发email给arvon</span></div><div class="line">0 17 * * 1-5 mail -s "hi" alex@domain.name &lt; /tmp/maildata</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h2><ul>
-<li>参照man手册<blockquote>
-<ul>
-<li>f1 f2 f3 f4 f5 cmd/script</li>
-<li>其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程式。</li>
-<li>当 f1 为 <em> 时表示每分钟都要执行 program，f2 为 </em> 时表示每小时都要执行程式，其余类推</li>
-<li>当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其余类推</li>
-<li>当 f1 为 <em>/n 时表示每 n 分钟个时间间隔执行一次，f2 为 </em>/n 表示每 n 小时个时间间隔执行一次，其余类推</li>
-<li>当 f1 为 a, b, c,… 时表示第 a, b, c,… 分钟要执行，f2 为 a, b, c,… 时表示第 a, b, c…个小时要执行，其余类推</li>
-<li>使用者也可以将所有的设定先存放在档案 file 中，用 crontab file 的方式来设定时程表。</li>
-<li>由于unix版本不一样，所以部分语法有差别，例如在hp unix aix 中设定间隔执行如果采用*/n 方式将出现语法错误，在这类unix中 ，间隔执行只能以列举方式，详请见例子。</li>
-<li>使用方法:　　用VI编辑一个文件 cronfile，然后在这个文件中输入格式良好的时程表。编辑完成后，保存并退出。</li>
-<li>在命令行输入crontab cronfile这样就将cronfile文件提交给cron进程，同时，新创建cronfile的一个副本已经被放在/var/spoll/cron目录中，文件名就是用户名。</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/14/Zabbix使用Percona组件监控Mysql/" itemprop="url">
                   Zabbix使用Percona组件监控Mysql
                 </a>
@@ -538,117 +407,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/14/虚拟机错误/" itemprop="url">
-                  虚拟机错误
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-14T17:14:45+08:00" content="2015-09-14">
-              2015-09-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/14/虚拟机错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/虚拟机错误/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/09/14/虚拟机错误/" class="leancloud_visitors" data-flag-title="虚拟机错误">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>问题：</code>上周挂起了俩虚机（有一个弄的是克隆的），今天打开一启动，报错<br><img src="http://i3.tietuku.com/8a00a6d333f7ecb4.png" alt=""></p>
-<p><strong>解决：</strong><br>右键我的电脑–&gt;管理 –&gt; 服务，找到VMware Authorization Service服务，将其启动，并设置为自动或自动延迟，可以看图<br><img src="http://i3.tietuku.com/b8dbe039996b6155.png" alt=""><br>解释，这个服务为授权服务，没有这个服务打开虚拟机软件时会出现相关权限缺失或文件路径错误等错误提示，使虚机无法启动</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/09/CentOS环境搭建zabbix监控/" itemprop="url">
                   CentOS环境搭建zabbix2.2监控
                 </a>
@@ -708,58 +466,12 @@
 
       
         
-          
-            <p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
-<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
-<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent	#这个装出来是1.8的版本。所以重来</div><div class="line"><span class="meta">#</span><span class="bash">* 下面是2.2版本的安装包	</span></div><div class="line">yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</div></pre></td></tr></table></figure>
-<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server</div></pre></td></tr></table></figure>
-<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v "(^#|^$)" 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line"><span class="meta">#</span><span class="bash">vi /etc/my.cnf</span></div><div class="line"><span class="meta">#</span><span class="bash">参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=<span class="literal">true</span>&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</span></div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"><span class="meta">#</span><span class="bash"> Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
-<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
-<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database zabbix character <span class="built_in">set</span> utf8;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all privileges on zabbix.* to zabbix@localhost identified by <span class="string">'zabbix'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></div></pre></td></tr></table></figure>
-<h3 id="创建zabbix的数据库"><a href="#创建zabbix的数据库" class="headerlink" title="创建zabbix的数据库"></a>创建zabbix的数据库</h3><ul>
-<li>zabbix连接数据：zabbix/zabbix<h3 id="导入zabbix的数据库"><a href="#导入zabbix的数据库" class="headerlink" title="导入zabbix的数据库"></a>导入zabbix的数据库</h3><h4 id="进入数据库导入"><a href="#进入数据库导入" class="headerlink" title="进入数据库导入"></a>进入数据库导入</h4>mysql&gt;use zabbix<br>###倒入sql一定按顺序<code>一定</code></li>
-<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>###配置zabbix_server.conf</p>
-<ul>
-<li><p>默认参数：<br>  egrep -v “(^#|^$)” /etc/zabbix/zabbix_server.conf</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改后参数：<br>  主要添加字段为：DBpassword=zabbix</p>
-</li>
-</ul>
-<h4 id="iptables-amp-Selinux设置"><a href="#iptables-amp-Selinux设置" class="headerlink" title="iptables&amp;Selinux设置"></a>iptables&amp;Selinux设置</h4><ul>
-<li>iptables设置(注意顺序)<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --sport 10050 -j ACCEPT</div><div class="line"><span class="meta">#</span><span class="bash">* Selinux关闭</span></div><div class="line">[root@localhost ~]# setenforce 0</div><div class="line">[root@localhost ~]# getenforce</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/zabbix-server start</div><div class="line">sudo /etc/init.d/httpd start</div></pre></td></tr></table></figure>
-<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
-<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div></pre></td></tr></table></figure>
-<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v "(^#|^$)" /etc/zabbix/zabbix_agentd.conf </div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133	#server IP</div><div class="line">ServerActive=192.168.138.133	#server IP</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# /etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
-<h4 id="zabbix添加主机"><a href="#zabbix添加主机" class="headerlink" title="zabbix添加主机"></a>zabbix添加主机</h4><h5 id="手动添加"><a href="#手动添加" class="headerlink" title="手动添加"></a>手动添加</h5><p><img src="http://i1.tietuku.com/29ff780785f8142b.png" alt="看图"><br><img src="http://i1.tietuku.com/a5071fd29e260241.png" alt=""></p>
-<h5 id="自动添加"><a href="#自动添加" class="headerlink" title="自动添加"></a>自动添加</h5><p><img src="http://i1.tietuku.com/50818e58957d382a.png" alt=""><br><img src="http://i1.tietuku.com/5c8029d4a5750557.png" alt=""></p>
-<p>##报错解决</p>
-<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line"><span class="meta">#</span><span class="bash">添加字段：date.timezone = Asia/Shanghai</span></div></pre></td></tr></table></figure></p>
-<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>修改其中字段为以下</p>
-<p><directory "="" usr="" share="" zabbix"=""><br>    Options FollowSymLinks<br>    AllowOverride None<br>    Order allow,deny<br>    Allow from all<br>    php_value date:timezone Asia/Shanghai<br>    php_value max_execution_time 300<br>    php_value post_max_size 16M<br>    php_value max_input_time 300<br>    php_value memory_limit 128M<br>    php_value upload_max_filesize 2M<br></directory><br>然后重启httpd服务</p>
-</blockquote>
-<h4 id="默认登陆账号密码"><a href="#默认登陆账号密码" class="headerlink" title="默认登陆账号密码"></a>默认登陆账号密码</h4><p>账户：Admin<br>密码：zabbix</p>
-<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo -n arvon | openssl md5</div><div class="line">(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</div><div class="line"><span class="meta">&gt;</span><span class="bash">mysql -uname -ppassword</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">use zabbix;</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">select * from users;</span></div><div class="line"><span class="meta">#</span><span class="bash">先在外面生成的md5码该用了</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">update users <span class="built_in">set</span>  passwd=<span class="string">'e2798af12a7a0f4f70b4d69efbc25f4d'</span> <span class="built_in">where</span> userid = <span class="string">'1'</span>;</span></div></pre></td></tr></table></figure></p>
-<p><img src="http://i1.tietuku.com/75f80ce9269b455a.png" alt=""></p>
-<h4 id="报错贴图“table-not-exist”"><a href="#报错贴图“table-not-exist”" class="headerlink" title="报错贴图“table not exist”"></a>报错贴图“table not exist”</h4><p><img src="http://i1.tietuku.com/3f75b678db942213.png" alt=""><br><img src="http://i1.tietuku.com/b585f7995c14ad19.png" alt=""></p>
-<h4 id="epel源错误"><a href="#epel源错误" class="headerlink" title="epel源错误"></a>epel源错误</h4><p><img src="http://i1.tietuku.com/c53075f14306cd61.png" alt=""><br>修改文件“/etc/yum.repos.d/epel.repo”， 第一项epel，将baseurl的注释取消， mirrorlist注释掉。即可</p>
-<h4 id="zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”"><a href="#zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”" class="headerlink" title="zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”"></a>zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”</h4><p><img src="http://i1.tietuku.com/281d34ca6408ac6e.png" alt=""></p>
-<blockquote>
-<p><a href="Zabbix discoverer processes more than 75% busy">参考</a></p>
-</blockquote>
-<h4 id="zabbix-server-is-not-running报错"><a href="#zabbix-server-is-not-running报错" class="headerlink" title="zabbix server is not running报错"></a>zabbix server is not running报错</h4><p><img src="http://i1.tietuku.com/21ba7ab71d649b6d.png" alt="错误如图"><br><img src="http://i1.tietuku.com/263e79625c329936.png" alt=""><br>解决：仅限于我个人使用，打死都想不到密码写错了，zabbix_server.conf里面的密码加了两个单引号，真是作死呀，就是看不出来</p>
-<p>参考文档：<br><a href="http://zabbix.org/wiki/InstallOnCentOS_RHEL#Database" target="_blank" rel="external">zabbix wike</a></p>
-
-          
+          <p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/09/09/CentOS环境搭建zabbix监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1135,11 +847,322 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/21/yum源配置手册/" itemprop="url">
+                  yum源配置手册
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T15:07:07+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/21/yum源配置手册/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/yum源配置手册/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/21/yum源配置手册/" class="leancloud_visitors" data-flag-title="yum源配置手册">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 升级系统</span></div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line"><span class="meta">#</span><span class="bash">2. 安装指定的软件包</span></div><div class="line">yum -y install vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">3. 卸载指定的软件包</span></div><div class="line">yum -y remore vsftpd mysql</div><div class="line"><span class="meta">#</span><span class="bash">4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</span></div><div class="line">yum grouplist</div><div class="line"><span class="meta">#</span><span class="bash">5. 清除缓存中的rpm 头文件和包文件</span></div><div class="line">yum clean all</div><div class="line"><span class="meta">#</span><span class="bash">6. 搜索相关的软件包</span></div><div class="line">yum -y search Emacs</div><div class="line"><span class="meta">#</span><span class="bash">显示指定软件包的信息</span></div><div class="line">yum info Emacs</div><div class="line"><span class="meta">#</span><span class="bash">查询指定软件包的依赖信息，emacs依赖的模块不少啊</span></div><div class="line">yum deplist emacs</div><div class="line"><span class="meta">#</span><span class="bash">列出所有以 yum 开头的软件包</span></div><div class="line">yum list yum\*</div><div class="line"><span class="meta">#</span><span class="bash">10. 列出已经安装的但是不包含在资源库中的rpm 包</span></div><div class="line">yum list extras</div></pre></td></tr></table></figure>
+<h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</span></div><div class="line"><span class="meta">#</span><span class="bash">配置文件解释</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v '^#'</div><div class="line">[base]</div><div class="line"><span class="meta">#</span><span class="bash">表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line"><span class="meta">#</span><span class="bash">名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="meta">#</span><span class="bash">priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="meta">#</span><span class="bash">用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="meta">#</span><span class="bash">引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="meta">#</span><span class="bash">是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=1</div><div class="line"><span class="meta">#</span><span class="bash">enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=1</div><div class="line"><span class="meta">#</span><span class="bash">表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line"><span class="meta">#</span><span class="bash">定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
+<ul>
+<li>粘贴可用的epel的yum源<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span></span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]  </div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/<span class="variable">$basearch</span>/debug</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1  </div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line"><span class="meta">#</span><span class="bash">baseurl=http://download.fedoraproject.org/pub/epel/6/SRPMS</span></div><div class="line">mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用的yum源站"><a href="#常用的yum源站" class="headerlink" title="常用的yum源站"></a>常用的yum源站</h3><ol>
+<li>EPEL源</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">https://admin.fedoraproject.org/mirrormanager/</div><div class="line"><span class="meta">#</span><span class="bash">EPEL-REPO-RPM</span></div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm</div><div class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</div><div class="line">axel https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</div></pre></td></tr></table></figure>
+<ol>
+<li>ALI源</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line"><span class="meta">#</span><span class="bash">ALI-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-EPLE-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-FEDORA-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
+<h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
+<li>错误现象lock<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading "installonlyn" plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line"><span class="meta">#</span><span class="bash">解释</span></div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/21/lsof命令/" itemprop="url">
+                  lsof命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-21T10:37:24+08:00" content="2015-08-21">
+              2015-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/21/lsof命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/21/lsof命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/21/lsof命令/" class="leancloud_visitors" data-flag-title="lsof命令">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>简介：</strong>lsof命令既（list open files）Lsof 是遵从Unix 哲学的典范，它只做一件事情，并且做的相当完美——它可以列出某个进程打开的所有文件信息。打开的文件可能是普通的文件，目录，NFS文件，块文件，字符文件，共享库，常规管道，明明管道，符号链接，Socket流，网络Socket，UNIX域Socket，以及其它更多。因为Unix系统中几乎所有东西都是文件，你可以想象lsof该有多有用。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>yum安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install lsof -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>源码安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://down1.chinaunix.net/distfiles/lsof_4.76.tar.gz</div><div class="line">tar -zxvf lsof.tar.gz</div><div class="line">cd lsof_4.78</div><div class="line">tar xvf lsof_4.78_srv.tar</div><div class="line">./configure lunux</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
+<li><p>lsof<br>不加参数的输出，是列出所有进程打开的所有文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof </div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND     PID         USER        FD      	TYPE 		DEVICE 			SIZE/OFF   NODE 	NAME</div><div class="line">进程的名称	进程标识符	进程所有者	文件描述符	文件类型	指定磁盘的名称		文件的大小 索引节点 打开文件的确切名称</div><div class="line">init          1       root  cwd   unknown                        /proc/1/cwd (readlink: Permission denied)</div><div class="line">init          1       root  rtd   unknown                        /proc/1/root (readlink: Permission denied)</div><div class="line">init          1       root  txt   unknown                        /proc/1/exe (readlink: Permission denied)</div><div class="line">init          1       root NOFD                                  /proc/1/fd (opendir: Permission denied)</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof /path/to/file /path/to/file2<br>找出谁在使用某个文件,可一次指定多个文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof /home/arvon</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25011 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div><div class="line">lsof    25012 arvon  cwd    DIR    8,2     4096 463289 /home/arvon</div></pre></td></tr></table></figure>
+</li>
+<li><p>lsof +D /usr/lib<br>加上+D参数，lsof会对指定目录进行递归查找，注意这个参数要比grep版本慢</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arvon@Mo:~&gt; lsof +D /usr/lib</div><div class="line">lsof: WARNING: can<span class="string">'t stat() fuse.gvfs-fuse-daemon file system /root/.gvfs</span></div><div class="line">      Output information may be incomplete.</div><div class="line">COMMAND   PID  USER  FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">bash    24519 arvon mem    REG    8,2   256324 445427 /usr/lib/locale/es_VE.utf8/LC_CTYPE</div><div class="line">bash    24519 arvon mem    REG    8,2       54 445420 /usr/lib/locale/om_ET/LC_NUMERIC</div><div class="line">bash    24519 arvon mem    REG    8,2     2454 431855 /usr/lib/locale/en_US.utf8/LC_TIME</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看文件、设备被哪些进程占用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /dev/tty1</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash       <span class="number">1770</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian    <span class="number">2</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">bash       <span class="number">1770</span> jian  <span class="number">255</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    0u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">startx     <span class="number">1845</span> jian    <span class="number">1</span>u   CHR    <span class="number">4</span>,<span class="number">1</span>      0t<span class="number">0</span> <span class="number">1045</span> /dev/tty1</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控文件系统：指定目录、挂载点，可以看到有哪些进程打开了其下的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof /data/</span></div><div class="line">COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">bash    <span class="number">15983</span> jian  cwd    DIR    <span class="number">8</span>,<span class="number">5</span>     <span class="number">4096</span> <span class="number">8252</span> /data/backup</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出被指定进程名打开的文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c ssh -c init</span></div><div class="line"> </div><div class="line">COMMAND    PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME</div><div class="line">init         <span class="number">1</span>       root  txt    REG        <span class="number">8</span>,<span class="number">1</span>   <span class="number">124704</span>  <span class="number">917562</span> /sbin/init</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>  <span class="number">1434180</span> <span class="number">1442625</span> /lib/i386-linux-gnu/libc-<span class="number">2.13</span>.so</div><div class="line">init         <span class="number">1</span>       root  mem    REG        <span class="number">8</span>,<span class="number">1</span>    <span class="number">30684</span> <span class="number">1442694</span> /lib/i386-linux-gnu/librt-<span class="number">2.13</span>.so</div><div class="line">...</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">1</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">2</span>u   CHR        <span class="number">1</span>,<span class="number">3</span>      0t<span class="number">0</span>    <span class="number">4369</span> /dev/null</div><div class="line">ssh-agent <span class="number">1528</span> lakshmanan    <span class="number">3</span>u  unix <span class="number">0xdf70e240</span>      0t<span class="number">0</span>   <span class="number">10464</span> /tmp/ssh-sUymKXxw1495/agent.<span class="number">1495</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控进程：指定进程号，可以查看该进程打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -p 2064</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG       <span class="number">0</span>,<span class="number">16</span> <span class="number">67108904</span>   <span class="number">10203</span> /dev/shm/pulse-shm-<span class="number">3021850167</span></div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>当你想要杀掉某个用户所有打开的文件、设备，你可以这样：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">kill</span> -<span class="number">9</span> <span class="string">`lsof -t -u lakshmanan`</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控网络"><a href="#监控网络" class="headerlink" title="监控网络"></a>监控网络</h3><ul>
+<li><p>监控网络:查看<code>指定端口有哪些进程在使用</code>（lsof -i 列出所有的打开的网络连接）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i:22</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">3</span>u  IPv4  <span class="number">10303</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">sshd    <span class="number">1569</span> root    <span class="number">4</span>u  IPv6  <span class="number">10305</span>      0t<span class="number">0</span>  TCP *:ssh (LISTEN)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出被某个进程打开所有的网络文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i -a -p <span class="number">234</span></div><div class="line"><span class="comment">#lsof -i -a -c ssh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>监控网络：列出所有 tcp、udp 连接：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp;</div><div class="line">lsof -i udp;</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出所有NFS文件</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -N -u lakshmanan -a</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定网口有哪些进程在使用</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -i@192.168.1.91</span></div><div class="line">COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</div><div class="line">skype      <span class="number">1909</span> jian   <span class="number">54</span>u  IPv4   <span class="number">9116</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">40640</span>-&gt;<span class="number">64.4</span>.<span class="number">23.153</span>:<span class="number">40047</span> (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian    <span class="number">7</span>u  IPv4   <span class="number">6599</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">59311</span>-&gt;hx-in-f125.<span class="number">1</span>e10<span class="number">0</span>.net:https (ESTABLISHED)</div><div class="line">pidgin     <span class="number">1973</span> jian   <span class="number">13</span>u  IPv4   <span class="number">9260</span>      0t<span class="number">0</span>  TCP <span class="number">192.168</span>.<span class="number">1.91</span>:<span class="number">54447</span>-&gt;by2msg3010511.phx.gbl:msnp (ESTABLISHED)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监控用户"><a href="#监控用户" class="headerlink" title="监控用户"></a>监控用户</h3><ul>
+<li><p>查看指定用戶打开的文件（lsof -u ^lakshmanan 可以排除某用户）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -u messagebus</span></div><div class="line">COMMAND    PID       USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  txt    REG        <span class="number">8</span>,<span class="number">6</span>  <span class="number">1235361</span> <span class="number">1834948</span> /usr/bin/dbus-daemon</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">190145</span> <span class="number">1700642</span> /lib/libnss_nis-<span class="number">2.15</span>.so</div><div class="line">dbus-daem <span class="number">1805</span> messagebus  mem    REG        <span class="number">8</span>,<span class="number">6</span>   <span class="number">490366</span> <span class="number">1700636</span> /lib/libnsl-<span class="number">2.15</span>.so</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定程序打开的文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -c firefox</span></div><div class="line">COMMAND  PID USER   FD   TYPE     DEVICE SIZE/OFF    NODE NAME</div><div class="line">firefox <span class="number">2064</span> jian  cwd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1571780</span> /home/jian</div><div class="line">firefox <span class="number">2064</span> jian  rtd    DIR        <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">firefox <span class="number">2064</span> jian  txt    REG        <span class="number">8</span>,<span class="number">6</span>    <span class="number">44224</span> <span class="number">1985670</span> /usr/lib/firefox-<span class="number">12.0</span>/firefox</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">14707012</span>  <span class="number">925361</span> /usr/share/fonts/chinese/msyhbd.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">15067744</span>  <span class="number">925362</span> /usr/share/fonts/chinese/msyh.ttf</div><div class="line">firefox <span class="number">2064</span> jian  mem    REG        <span class="number">8</span>,<span class="number">6</span> <span class="number">16791251</span> <span class="number">1701681</span> /usr/share/fonts/wenquanyi/wqy-zenhei.ttc</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ul>
+<li><p>只有多个查询条件都满足， 用 “-a” 参数，默认是 -o 。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># lsof -a -c bash -u root</span></div><div class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME</div><div class="line">bash    <span class="number">1986</span> root  cwd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span> <span class="number">1701593</span> /root/lab</div><div class="line">bash    <span class="number">1986</span> root  rtd    DIR    <span class="number">8</span>,<span class="number">6</span>     <span class="number">4096</span>       <span class="number">2</span> /</div><div class="line">bash    <span class="number">1986</span> root  txt    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">1994157</span> <span class="number">1700632</span> /bin/bash</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>  <span class="number">9690800</span>  <span class="number">405214</span> /usr/lib/locale/locale-archive</div><div class="line">bash    <span class="number">1986</span> root  mem    REG    <span class="number">8</span>,<span class="number">6</span>   <span class="number">210473</span> <span class="number">1700647</span> /lib/libnss_files-<span class="number">2.15</span>.so</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>关于磁盘空间告警 df -h --max=1 与 du -hx --max=1 显示不一致的问题</code></p>
+</li>
+</ul>
+<blockquote>
+<p>最常见的的还是下面这种情况：</p>
+<p>lsof|grep -i delete</p>
+<p>看看被删除的文件：有些删了文件，但是进程没 reload，那些空间还是占用的，你可以理解为类似 windows 下的进程句柄没释放的概念吧~ 只是 windows 下如果有文件被进程使用，你一般是删不掉的，而 linux 虽然不做删除限制，但却要等到进程使用完文件才能完全释放，以防止进程奔溃，这是操作系统对资源的管理差异吧~<br>例如 nginx 会有很多临时文件占用了 /tmp 目录，删掉后，依然占用着空间，</p>
+<p>此时你可以：</p>
+<p>pkill -9 nginx &amp;&amp; /etc/init.d/nginx restart</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.ibm.com/developerworks/cn/aix/library/au-lsof.html" target="_blank" rel="external">使用lsof查找打开的文件</a><br><a href="http://ylinux.org/blog/article/276" target="_blank" rel="external">实用系统工具lsof</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1180,7 +1203,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1190,7 +1213,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

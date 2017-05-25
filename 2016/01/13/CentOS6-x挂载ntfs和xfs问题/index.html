@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="os,command," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
-<meta name="keywords" content="os,command">
+<meta name="description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。 挂载xfs 安装支持包123wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpmyum install xf">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS6.x挂载ntfs和xfs问题">
 <meta property="og:url" content="http://yoursite.com/2016/01/13/CentOS6-x挂载ntfs和xfs问题/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
-<meta property="og:updated_time" content="2016-08-13T04:07:14.000Z">
+<meta property="og:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。 挂载xfs 安装支持包123wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpmyum install xf">
+<meta property="og:updated_time" content="2017-05-25T08:49:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6.x挂载ntfs和xfs问题">
-<meta name="twitter:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。">
+<meta name="twitter:description" content="摘要： centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。 挂载xfs 安装支持包123wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpmyum install xf">
 
 
 
@@ -337,13 +337,14 @@
       
 
       
-        <p><strong>摘要：</strong> centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。<br><a id="more"></a></p>
+        <p><strong>摘要：</strong> centos6.x默认是ext4的文件系统，而centos7.x是默认xfs的文件系统，所以直接挂载是会出问题的，另外ntfs是windows上的文件系统，挂载也会出问题，这里记录一下如何解决。</p>
 <h3 id="挂载xfs"><a href="#挂载xfs" class="headerlink" title="挂载xfs"></a>挂载xfs</h3><ul>
-<li><p>安装支持包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line">yum install xfsprogs kmod-xfs xfsdump xfsprogs-devel</div><div class="line">mount -t xfs /dev/sdc1 /data3/sdc1/</div></pre></td></tr></table></figure>
+<li>安装支持包<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line">yum install xfsprogs kmod-xfs xfsdump xfsprogs-devel</div><div class="line">mount -t xfs /dev/sdc1 /data3/sdc1/</div></pre></td></tr></table></figure>
 </li>
-<li><p>报错解决</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#需要安装 lvm2:  yum install lvm2</span></div><div class="line"><span class="comment">#然后按一下步骤：</span></div><div class="line"><span class="comment">#1、查看物理卷：pvs</span></div><div class="line">PV       VG       Fmt   Attr PSize PFree </div><div class="line">  /dev/sda2   VolGroup00 lvm2 a- 279.22G 32.00M</div><div class="line"><span class="comment">#2、查看卷组：vgs</span></div><div class="line">VG       <span class="comment">#PV #LV #SN Attr VSize VFree </span></div><div class="line">  VolGroup00 1 4 0 wz--n- 279.22G 32.00M</div><div class="line"><span class="comment">#3、查看逻辑卷：lvdisplay</span></div><div class="line">--- Logical volume ---</div><div class="line">  LV Name             /dev/VolGroup00/LogVol03</div><div class="line">  VG Name             VolGroup00</div><div class="line">  LV UUID             YhG8Fu-ZGPk-qt8D-AxgC-DzOU-dg1F-z71feI</div><div class="line">  LV Write Access        <span class="built_in">read</span>/write</div><div class="line"> LV Status              unenable</div><div class="line">  <span class="comment"># open                 1</span></div><div class="line">  LV Size             245.97 GB</div><div class="line">  Current LE          7871</div><div class="line">  Segments             1</div><div class="line">  Allocation          inherit</div><div class="line">  Read ahead sectors     auto</div><div class="line">  - currently <span class="built_in">set</span> to     256</div><div class="line">  Block device           253:2</div><div class="line"><span class="comment">#4、如未激活，需要激活逻辑卷：vgchange -ay /dev/VolGroup00</span></div><div class="line">LV Status              available</div><div class="line"><span class="comment">#5、挂载逻辑卷：mount   /dev/VolGroup00/LogVol03   /home/lvm</span></div></pre></td></tr></table></figure>
+</ul>
+<a id="more"></a>
+<ul>
+<li>报错解决<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#需要安装 lvm2:  yum install lvm2</span></div><div class="line"><span class="comment">#然后按一下步骤：</span></div><div class="line"><span class="comment">#1、查看物理卷：pvs</span></div><div class="line">PV       VG       Fmt   Attr PSize PFree</div><div class="line">  /dev/sda2   VolGroup00 lvm2 a- 279.22G 32.00M</div><div class="line"><span class="comment">#2、查看卷组：vgs</span></div><div class="line">VG       <span class="comment">#PV #LV #SN Attr VSize VFree</span></div><div class="line">  VolGroup00 1 4 0 wz--n- 279.22G 32.00M</div><div class="line"><span class="comment">#3、查看逻辑卷：lvdisplay</span></div><div class="line">--- Logical volume ---</div><div class="line">  LV Name             /dev/VolGroup00/LogVol03</div><div class="line">  VG Name             VolGroup00</div><div class="line">  LV UUID             YhG8Fu-ZGPk-qt8D-AxgC-DzOU-dg1F-z71feI</div><div class="line">  LV Write Access        <span class="built_in">read</span>/write</div><div class="line"> LV Status              unenable</div><div class="line">  <span class="comment"># open                 1</span></div><div class="line">  LV Size             245.97 GB</div><div class="line">  Current LE          7871</div><div class="line">  Segments             1</div><div class="line">  Allocation          inherit</div><div class="line">  Read ahead sectors     auto</div><div class="line">  - currently <span class="built_in">set</span> to     256</div><div class="line">  Block device           253:2</div><div class="line"><span class="comment">#4、如未激活，需要激活逻辑卷：vgchange -ay /dev/VolGroup00</span></div><div class="line">LV Status              available</div><div class="line"><span class="comment">#5、挂载逻辑卷：mount   /dev/VolGroup00/LogVol03   /home/lvm</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="挂载ntfs"><a href="#挂载ntfs" class="headerlink" title="挂载ntfs"></a>挂载ntfs</h3><ul>
@@ -396,9 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/os/" rel="tag">#os</a>
-          
-            <a href="/tags/command/" rel="tag">#command</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -489,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +498,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

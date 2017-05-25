@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="command," />
+  <meta name="keywords" content="运维工具," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。介绍:crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查">
-<meta name="keywords" content="command">
+<meta name="keywords" content="运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="crontab简记">
 <meta property="og:url" content="http://yoursite.com/2015/09/16/crontab简记/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。介绍:crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查">
-<meta property="og:updated_time" content="2016-07-30T03:47:30.000Z">
+<meta property="og:updated_time" content="2017-05-25T09:01:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="crontab简记">
 <meta name="twitter:description" content="今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。介绍:crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查">
@@ -338,6 +338,7 @@
 
       
         <p>今天刚好要备份线上的crontab，就顺便记下来，省得忘了以后还要去上网找。<br><strong>介绍:</strong>crontab命令<br>常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语 chronos(χρνο)，原意是时间。常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。<em>crontab文件</em>包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。<br>crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。(ps:摘自百度百科)</p>
+<a id="more"></a>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
 <li>常用命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">crontab -e	#编辑，编辑后重启服务生效</div><div class="line">/etc/init.d/crond restart（stop/start）	#重启服务</div><div class="line">crontab -l	#查看</div><div class="line">crontab -l&gt;/home/backup/crontab/crontab\`date '+%Y%m%d'`.bak	#备份crontab</div><div class="line"><span class="meta">#</span><span class="bash">* 每分钟执行以下ls命令</span></div><div class="line">0 * * * * /bin/ls</div><div class="line"><span class="meta">#</span><span class="bash">* 周一到周五每天17点发email给arvon</span></div><div class="line">0 17 * * 1-5 mail -s "hi" alex@domain.name &lt; /tmp/maildata</div></pre></td></tr></table></figure>
 </li>
@@ -402,7 +403,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/command/" rel="tag">#command</a>
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -493,7 +494,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -503,7 +504,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

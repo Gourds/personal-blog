@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="wiki,php," />
+  <meta name="keywords" content="知识管理," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="摘要：dokuwiki是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。">
-<meta name="keywords" content="wiki,php">
+<meta name="keywords" content="知识管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS6.8搭建个人dokuwiki">
 <meta property="og:url" content="http://yoursite.com/2016/08/20/CentOS6-8搭建个人dokuwiki/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="摘要：dokuwiki是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。">
-<meta property="og:updated_time" content="2016-08-20T04:08:11.000Z">
+<meta property="og:updated_time" content="2017-05-25T08:11:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6.8搭建个人dokuwiki">
 <meta name="twitter:description" content="摘要：dokuwiki是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。">
@@ -337,15 +337,19 @@
       
 
       
-        <p><strong>摘要：</strong><a href="https://www.dokuwiki.org/wiki:dokuwiki" target="_blank" rel="external">dokuwiki</a>是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。<br><a id="more"></a></p>
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p> 这里使用的是CentOS6.8系统安装。使用nginx+php发布,另外dokuwiki不需要数据库，这点我很喜欢。</p>
+        <p><strong>摘要：</strong><a href="https://www.dokuwiki.org/wiki:dokuwiki" target="_blank" rel="external">dokuwiki</a>是一个开源的wiki引擎程序，非常适合知识库管理，因为有的东西知识不完善不好用blog写，有时也许即时记录一下想法什么的，所以这个还是很有必要的。之前也对比过其他的wiki程序，不过这个比较符合我的要求，所以就用这个程序，这里主要对安装配置做一下记录。</p>
+<a id="more"></a>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li>这里使用的是CentOS6.8系统安装。</li>
+<li>使用nginx+php发布,另外dokuwiki不需要数据库，这点我很喜欢。</li>
+</ul>
 <h4 id="nginx-php环境准备"><a href="#nginx-php环境准备" class="headerlink" title="nginx+php环境准备"></a>nginx+php环境准备</h4><ul>
 <li>参照我之前的<a href="http://blog.arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">nginx+php环境搭建</a></li>
 <li>注意安装完成php-fpm完成后记得查看php进程是否正常，php-fpm进程默认是9000端口</li>
 </ul>
 <h4 id="安装dokuwiki"><a href="#安装dokuwiki" class="headerlink" title="安装dokuwiki"></a>安装dokuwiki</h4><ul>
 <li>下载dokuwiki<br>下载地址<a href="https://download.dokuwiki.org/" target="_blank" rel="external">https://download.dokuwiki.org/</a><br><code>注意:</code>下载的时候会让选择语言，这里我没直接贴链接的原因也是这个，选一个中文即可，英文默认必须安装。</li>
-<li>安装dokuwiki<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#解压</span></div><div class="line">tar xvf dokuwiki<span class="_">-a</span>1b9b25f129b085a00920bd821719ccd.tgz </div><div class="line"><span class="comment">#移动到nginx网页存放目录</span></div><div class="line">mv dokuwiki /usr/share/nginx/html/</div><div class="line"><span class="comment">#修改权限</span></div><div class="line">chmod -R 777 /usr/share/nginx/html/dokuwiki/data/</div><div class="line">chmod -R 777 /usr/share/nginx/html/dokuwiki/conf/</div><div class="line"><span class="comment">#重启nginx和php-fpm</span></div><div class="line">/etc/init.d/nginx restart</div><div class="line">/etc/init.d/php-fpm restart</div></pre></td></tr></table></figure>
+<li>安装dokuwiki<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#解压</span></div><div class="line">tar xvf dokuwiki<span class="_">-a</span>1b9b25f129b085a00920bd821719ccd.tgz</div><div class="line"><span class="comment">#移动到nginx网页存放目录</span></div><div class="line">mv dokuwiki /usr/share/nginx/html/</div><div class="line"><span class="comment">#修改权限</span></div><div class="line">chmod -R 777 /usr/share/nginx/html/dokuwiki/data/</div><div class="line">chmod -R 777 /usr/share/nginx/html/dokuwiki/conf/</div><div class="line"><span class="comment">#重启nginx和php-fpm</span></div><div class="line">/etc/init.d/nginx restart</div><div class="line">/etc/init.d/php-fpm restart</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="网页安装配置"><a href="#网页安装配置" class="headerlink" title="网页安装配置"></a>网页安装配置</h4><ul>
@@ -399,9 +403,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/wiki/" rel="tag">#wiki</a>
-          
-            <a href="/tags/php/" rel="tag">#php</a>
+            <a href="/tags/知识管理/" rel="tag">#知识管理</a>
           
         </div>
       
@@ -492,7 +494,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">71</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -502,7 +504,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
