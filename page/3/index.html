@@ -341,7 +341,7 @@
 
       
         
-          <p><strong>Tips:</strong>遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。<br>
+          <p><strong>Tips:</strong>遇见一个有趣的sort命令问题，很有意思，这里记录一下，顺便也再复习一下sort命令。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/11/sort小插曲/#more" rel="contents">
               阅读全文 &raquo;
@@ -453,7 +453,7 @@
 
       
         
-          <p><strong><em>Tips:</em></strong>在使用ansible部署服务器的时候，部署机需要先做好和其他服务器的免密码登陆，如果一台一台手动执行那就太low了，所以就需要脚本来批量完成这些繁琐的工作，下面是我写的脚本，主要使用了expect这个工具。<br>
+          <p><strong><em>Tips:</em></strong>在使用ansible部署服务器的时候，部署机需要先做好和其他服务器的免密码登陆，如果一台一台手动执行那就太low了，所以就需要脚本来批量完成这些繁琐的工作，下面是我写的脚本，主要使用了expect这个工具。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/08/ssh无交互批量认证/#more" rel="contents">
               阅读全文 &raquo;
@@ -678,7 +678,7 @@
 
       
         
-          <p><em>Intorduction:</em> 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正<br>
+          <p><em>Intorduction:</em> 最近一直有使用zabbix，根据需求需要自己手动监控一些服务，这时就需要自己动手自己写一些小脚本了，我这里写了一个比较简单的小脚本，主要用来监控monit监控的服务状态，听起来有些拗口，不过就是这样的。 这里尽可以详细的记录一下，哪里有不对欢迎指正</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/05/Zabbix添加自定义监控项/#more" rel="contents">
               阅读全文 &raquo;
@@ -902,41 +902,12 @@
 
       
         
-          
-            <h3 id="Command-record"><a href="#Command-record" class="headerlink" title="Command record"></a>Command record</h3><ul>
-<li><p>Yum Repo Install</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">The system Version is CentOS7.2</span></div><div class="line">wget http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</div><div class="line">rpm -ivh  zabbix-release-3.0-1.el6.noarch.rpm</div></pre></td></tr></table></figure>
-</li>
-<li><p>LAMP Environment</p>
-</li>
-<li>Warning<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">iptables</span></div><div class="line">systemctl stop iptables</div><div class="line"><span class="meta">#</span><span class="bash">selinux</span></div><div class="line">setenforce 0</div><div class="line"><span class="meta">#</span><span class="bash">install lamp package</span></div><div class="line">yum install mysql mysql mysql-server php php-mysql httpd </div><div class="line"><span class="meta">#</span><span class="bash">Installed:</span></div><div class="line"><span class="meta">#</span><span class="bash">  mysql-community-client.x86_64 0:5.6.30-2.el6       mysql-community-libs.x86_64 0:5.6.30-2.el6       mysql-community-server.x86_64 0:5.6.30-2.el6       nginx.x86_64 1:1.6.3-8.el7       php.x86_64 0:5.4.16-36.1.el7_2.1       php-mysql.x86_64 0:5.4.16-36.1.el7_2.1      </span></div><div class="line">/etc/init.d/mysqld start</div><div class="line">mysqladmin password</div><div class="line">mysql -uroot -padmin -e "create database zabbix character set utf8;"</div><div class="line">mysql -uroot -padmin -e "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"</div><div class="line">mysql -uroot -padmin -e "flush privileges;"</div><div class="line"><span class="meta">#</span><span class="bash">mysql -h<span class="variable">$zabbixIP</span> -uzabbix -pzabbix</span></div><div class="line">systemctl start httpd</div><div class="line">systemctl status httpd</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h4><ul>
-<li><p>Zabbix Server Install</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-get</div><div class="line"><span class="meta">#</span><span class="bash">Installed:</span></div><div class="line"><span class="meta">#</span><span class="bash">  zabbix-get.x86_64 0:3.0.3-1.el7                                                     zabbix-server-mysql.x86_64 0:3.0.3-1.el7                                                     zabbix-web-mysql.noarch 0:3.0.3-1.el7                </span></div><div class="line">cd /usr/share/doc/zabbix-server-mysql-3.0.3/</div><div class="line">zcat create.sql.gz | mysql -uroot -padmin zabbix</div></pre></td></tr></table></figure>
-</li>
-<li><p>Zabbix Modify config</p>
-</li>
-<li><p>zabbix_server.conf</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">cat /etc/zabbix/zabbix_server.conf | egrep -v <span class="string">"^#|^$"</span></span></div><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix_server.pid</div><div class="line">DBHost=localhost</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBPassword=zabbix</div><div class="line">SNMPTrapperFile=/var/log/snmptrap/snmptrap.log</div><div class="line">Timeout=4</div><div class="line">AlertScriptsPath=/usr/lib/zabbix/alertscripts</div><div class="line">ExternalScripts=/usr/lib/zabbix/externalscripts</div><div class="line">LogSlowQueries=3000</div></pre></td></tr></table></figure>
-</li>
-<li><p>zabbix_config</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">vim /etc/httpd/conf.d/zabbix.conf </span></div><div class="line">    &lt;IfModule mod_php5.c&gt;</div><div class="line">        php_value max_execution_time 300</div><div class="line">        php_value memory_limit 128M</div><div class="line">        php_value post_max_size 16M</div><div class="line">        php_value upload_max_filesize 2M</div><div class="line">        php_value max_input_time 300</div><div class="line">        php_value always_populate_raw_post_data -1</div><div class="line">        php_value date.timezone Asia/Chongqing</div><div class="line">    &lt;/IfModule&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">* Start Zabbix</div><div class="line">``` shell</div><div class="line">systemctl enable zabbix-server</div><div class="line">systemctl start zabbix-server</div></pre></td></tr></table></figure>
-</li>
-<li><p>Zabbix Web Install</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">Use Web Access: http://<span class="variable">$IPADDRESS</span>/zabbix/setup.php</span></div><div class="line"><span class="meta">#</span><span class="bash">Mdodify Parameter Base： https://www.zabbix.com/documentation/3.0/manual/installation/install_from_packages</span></div><div class="line"><span class="meta">#</span><span class="bash">The web Default Name/Password is Admin/zabbix</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="Zabbix-Agent"><a href="#Zabbix-Agent" class="headerlink" title="Zabbix Agent"></a>Zabbix Agent</h4><ul>
-<li><p>Install</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
-</li>
-<li><p>Modify config</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=127.0.0.1,172.17.18.64   #Add the agent IP</div><div class="line">ServerActive=172.17.18.64   #Modify</div><div class="line">Hostname=Zabbix server</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure></li>
-</ul>
-
-          
+          <p> zabbix安装配置记录</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/30/zabbix3.0配置文档/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1124,7 +1095,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1134,7 +1105,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

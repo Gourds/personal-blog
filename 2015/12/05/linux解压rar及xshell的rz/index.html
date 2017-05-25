@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tools,os," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="摘要：有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。">
-<meta name="keywords" content="tools,os">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux解压rar及xshell的rz">
 <meta property="og:url" content="http://arvon.top/2015/12/05/linux解压rar及xshell的rz/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="摘要：有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。">
-<meta property="og:updated_time" content="2016-08-13T03:57:43.000Z">
+<meta property="og:updated_time" content="2017-05-25T13:22:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux解压rar及xshell的rz">
 <meta name="twitter:description" content="摘要：有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。">
@@ -337,13 +337,17 @@
       
 
       
-        <p><strong>摘要：</strong>有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。<br><a id="more"></a></p>
-<h3 id="解压rar"><a href="#解压rar" class="headerlink" title="解压rar"></a>解压rar</h3><ul>
-<li>需要下载rar软件，yum源中并没有提供。原因为rar并不属于开源软件<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#download</span></div><div class="line">wget http://www.rarlab.com/rar/rarlinux-x64-5.3.0.tar.gz</div><div class="line"><span class="comment">#install</span></div><div class="line">tar zxvf rarlinux-x64-5.3.0.tar.gz </div><div class="line">cp rar/rar /bin/</div><div class="line">cp rar/unrar /bin/</div><div class="line"><span class="comment">#usage:</span></div><div class="line">rar e name.rar    <span class="comment">#会解压至当前文件夹</span></div></pre></td></tr></table></figure>
+        <p><strong>摘要：</strong>有时会遇到要在linux下解压rar包，这就很不舒服，毕竟rar是win下不开源的东西，所以建议还是少用，另外rz这个小工具在使用xshell想上传个小东西的时候非常方便，大文件还是建议ftp或者弄个rsync。</p>
+<a id="more"></a>
+<ul>
+<li><p>解压rar<br>需要下载rar软件，yum源中并没有提供。原因为rar并不属于开源软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#download</span></div><div class="line">wget http://www.rarlab.com/rar/rarlinux-x64-5.3.0.tar.gz</div><div class="line"><span class="comment">#install</span></div><div class="line">tar zxvf rarlinux-x64-5.3.0.tar.gz</div><div class="line">cp rar/rar /bin/</div><div class="line">cp rar/unrar /bin/</div><div class="line"><span class="comment">#usage:</span></div><div class="line">rar e name.rar    <span class="comment">#会解压至当前文件夹</span></div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="使用lrzsz"><a href="#使用lrzsz" class="headerlink" title="使用lrzsz"></a>使用lrzsz</h3><ul>
-<li>需要直接向xshell拉小文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum search rz</div><div class="line">yum install lrzsz.x86_64 0:0.12.20-27.1.el6</div></pre></td></tr></table></figure>
+<li><p>使用lrzsz<br>需要直接向xshell拉小文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum search rz</div><div class="line">yum install lrzsz.x86_64 0:0.12.20-27.1.el6</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用unzip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install unzip -y</div><div class="line">unzip xxx.zip</div></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -389,9 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag">#tools</a>
-          
-            <a href="/tags/os/" rel="tag">#os</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -482,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -492,7 +494,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -584,7 +586,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解压rar"><span class="nav-number">1.</span> <span class="nav-text">解压rar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用lrzsz"><span class="nav-number">2.</span> <span class="nav-text">使用lrzsz</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

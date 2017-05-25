@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tools,tmux," />
+  <meta name="keywords" content="Linux,运维工具," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情">
-<meta name="keywords" content="tools,tmux">
+<meta name="keywords" content="Linux,运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tmux 使用简记">
 <meta property="og:url" content="http://arvon.top/2015/07/22/Tmux-使用简记/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情">
-<meta property="og:updated_time" content="2016-07-30T09:57:30.000Z">
+<meta property="og:updated_time" content="2017-05-25T14:58:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tmux 使用简记">
 <meta name="twitter:description" content="简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情">
@@ -337,10 +337,9 @@
       
 
       
-        <p>简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自<br>于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接<br>这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情况下工作现场不丢失)。</p>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><blockquote>
-<p>tmux new-session -s session-name    #创建一个新的tmux对话<br>tmux ls    #列出已有的tmux列表，相当于Ctrl-B s<br>tmux attach-session -t sessionname = tmux a -t sessionname（支持缩写匹配）    #进入一个tmux会话窗<br>使用Ctrl-B d返回主shell界面，tmux仍旧在后台运行，里面的命令也保持运行状态<br>tmux kill-session -t session-name    #关闭开启在后台的终端；在终端下也可以使用exit进行退出</p>
-</blockquote>
+        <p>简述：tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件。tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；个人更注重工作环境的连续性，可以进行会话保持(保证可以在网络情况不佳的情况下工作现场不丢失)。</p>
+<a id="more"></a>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tmux new-session -s session-name	#创建一个新的tmux对话</div><div class="line">tmux ls	#列出已有的tmux列表，相当于Ctrl-B s</div><div class="line">tmux attach-session -t sessionname = tmux a -t sessionname（支持缩写匹配）	#进入一个tmux会话窗</div><div class="line">使用Ctrl-B d返回主shell界面，tmux仍旧在后台运行，里面的命令也保持运行状态</div><div class="line">tmux kill-session -t session-name	#关闭开启在后台的终端；在终端下也可以使用exit进行退出</div></pre></td></tr></table></figure>
 <h3 id="快捷键操作"><a href="#快捷键操作" class="headerlink" title="快捷键操作"></a>快捷键操作</h3><blockquote>
 <p>C-b c    #创建一个新的窗口<br>C-b n    #切换到下一个窗口<br>C-b p    #切换到上一个窗口<br>C-b d    #临时断开会话，还可以连上的<br>C-b pageup/pagedown    #向上或向下翻页</p>
 </blockquote>
@@ -392,9 +391,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag">#tools</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/tags/tmux/" rel="tag">#tmux</a>
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -403,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/21/salt简明使用手册/" rel="next" title="SaltStack使用简明手册">
-                <i class="fa fa-chevron-left"></i> SaltStack使用简明手册
+              <a href="/2015/07/21/Markdown-Introduction/" rel="next" title="Markdown Introduction">
+                <i class="fa fa-chevron-left"></i> Markdown Introduction
               </a>
             
           </div>
@@ -485,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -495,7 +494,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

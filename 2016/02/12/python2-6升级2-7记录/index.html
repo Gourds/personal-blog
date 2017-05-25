@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python">
-<meta name="keywords" content="python">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python2.6升级2.7记录">
 <meta property="og:url" content="http://arvon.top/2016/02/12/python2-6升级2-7记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python">
-<meta property="og:updated_time" content="2016-08-13T04:10:29.000Z">
+<meta property="og:updated_time" content="2017-05-25T14:46:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python2.6升级2.7记录">
 <meta name="twitter:description" content="Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python">
@@ -338,10 +338,20 @@
 
       
         <p>Tips:由于想自己用Django搭建blog，需要2.7的python环境而centos6.7默认是2.6版本，所以升级了python<br><a id="more"></a></p>
-<p>1.下载Python-2.7.3<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2</div></pre></td></tr></table></figure></p>
-<p>2.解压安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar -jxvf Python-2.7.3.tar.bz2  </div><div class="line">cd Python-2.7.3</div><div class="line">./configure</div><div class="line">make all  </div><div class="line">make install</div><div class="line">make clean</div><div class="line">make distclean</div></pre></td></tr></table></figure></p>
-<p>3.建立软连接，使系统默认的 python指向 python2.7<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">python -V  </div><div class="line">/usr/local/bin/python2.7 -V</div><div class="line">mv /usr/bin/python /usr/bin/python2.6.6  </div><div class="line">ln -s /usr/local/bin/python2.7 /usr/bin/python  </div><div class="line">python -V</div></pre></td></tr></table></figure></p>
-<p>4.解决系统 Python 软链接指向 Python2.7 版本后，因为yum是不兼容 Python 2.7的，所以yum不能正常工作，我们需要指定 yum 的Python版本<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">vi /usr/bin/yum  </span></div><div class="line"><span class="meta">#</span><span class="bash">将文件头部的</span></div><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python</span></div><div class="line"><span class="meta">#</span><span class="bash">改成</span></div><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python2.6.6</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>下载Python-2.7.3</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar -jxvf Python-2.7.3.tar.bz2  </div><div class="line">cd Python-2.7.3</div><div class="line">./configure</div><div class="line">make all  </div><div class="line">make install</div><div class="line">make clean</div><div class="line">make distclean</div></pre></td></tr></table></figure>
+</li>
+<li><p>建立软连接，使系统默认的 python指向 python2.7</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">python -V  </div><div class="line">/usr/local/bin/python2.7 -V</div><div class="line">mv /usr/bin/python /usr/bin/python2.6.6  </div><div class="line">ln -s /usr/local/bin/python2.7 /usr/bin/python  </div><div class="line">python -V</div></pre></td></tr></table></figure>
+</li>
+<li><p>解决系统 Python 软链接指向 Python2.7 版本后，因为yum是不兼容 Python 2.7的，所以yum不能正常工作，我们需要指定 yum 的Python版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">vi /usr/bin/yum  </span></div><div class="line"><span class="meta">#</span><span class="bash">将文件头部的</span></div><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python</span></div><div class="line"><span class="meta">#</span><span class="bash">改成</span></div><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python2.6.6</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
 <hr>
 <p>以上</p>
 
@@ -387,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag">#python</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
         </div>
       
@@ -478,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -488,7 +498,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

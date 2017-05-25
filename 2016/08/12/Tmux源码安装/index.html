@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tools,tmux," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="简述：之前其实有写过一篇tmux的简单使用介绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
-<meta name="keywords" content="tools,tmux">
+<meta name="description" content="简述：之前其实有写过一篇tmux的简单使用绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tmux源码安装">
 <meta property="og:url" content="http://arvon.top/2016/08/12/Tmux源码安装/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="简述：之前其实有写过一篇tmux的简单使用介绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
-<meta property="og:updated_time" content="2016-08-12T04:52:53.000Z">
+<meta property="og:description" content="简述：之前其实有写过一篇tmux的简单使用绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
+<meta property="og:updated_time" content="2017-05-25T14:59:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tmux源码安装">
-<meta name="twitter:description" content="简述：之前其实有写过一篇tmux的简单使用介绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
+<meta name="twitter:description" content="简述：之前其实有写过一篇tmux的简单使用绍,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。">
 
 
 
@@ -337,7 +337,8 @@
       
 
       
-        <p><strong>简述：</strong>之前其实有写过<a href="http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/">一篇tmux的简单使用介绍</a>,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。<br><a id="more"></a></p>
+        <p><strong>简述：</strong>之前其实有写过<a href="http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/">一篇tmux的简单使用绍</a>,但是不够详尽，而且当时也并没有出现几个问题，当yum不好使的时候，就要上源码了。</p>
+<a id="more"></a>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>tmux依赖于ncurses-devel和libevent。所以要先安装ncurses-devel，然后libevent，然后tmux</p>
 <h4 id="关于libevent库"><a href="#关于libevent库" class="headerlink" title="关于libevent库"></a>关于libevent库</h4><ul>
 <li><p>先装开发库</p>
@@ -349,7 +350,7 @@
 </ul>
 <h4 id="关于tmux源码"><a href="#关于tmux源码" class="headerlink" title="关于tmux源码"></a>关于tmux源码</h4><p>现在装tmux就比较顺滑了</p>
 <ul>
-<li>下载tmux源码，方式有多种（tmux、curl、git均可）<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里我使用了2.0版本</span></div><div class="line">wget https://github.com/tmux/tmux/releases/download/2.0/tmux-2.0.tar.gz</div><div class="line"><span class="comment">#curl -OL http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz</span></div><div class="line"><span class="comment">#git clone git://git.code.sf.net/p/tmux/tmux-code</span></div><div class="line"><span class="comment">#根据下载源码具体情况安装</span></div><div class="line">tar xvf tmux-2.0.tar.gz</div><div class="line"><span class="built_in">cd</span> tmux-2.0</div><div class="line">./configure </div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<li>下载tmux源码，方式有多种（tmux、curl、git均可）<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里我使用了2.0版本</span></div><div class="line">wget https://github.com/tmux/tmux/releases/download/2.0/tmux-2.0.tar.gz</div><div class="line"><span class="comment">#curl -OL http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz</span></div><div class="line"><span class="comment">#git clone git://git.code.sf.net/p/tmux/tmux-code</span></div><div class="line"><span class="comment">#根据下载源码具体情况安装</span></div><div class="line">tar xvf tmux-2.0.tar.gz</div><div class="line"><span class="built_in">cd</span> tmux-2.0</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>ok, 开始愉快的使用吧,简单使用命令参照我之前的那一篇就可以<br><a href="https://tmux.github.io/" target="_blank" rel="external">Tmux官方</a><br><a href="http://cenalulu.github.io/linux/tmux/" target="_blank" rel="external">很好的普及文章</a><br><a href="https://gist.github.com/rothgar/cecfbd74597cc35a6018" target="_blank" rel="external">本篇参考</a></p>
@@ -396,9 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag">#tools</a>
-          
-            <a href="/tags/tmux/" rel="tag">#tmux</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -489,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +498,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

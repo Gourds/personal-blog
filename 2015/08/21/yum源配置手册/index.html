@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="yum," />
+  <meta name="keywords" content="Linux,运维工具," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍 常用命令123456789101112131415">
-<meta name="keywords" content="yum">
+<meta name="description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍">
+<meta name="keywords" content="Linux,运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yum源配置手册">
 <meta property="og:url" content="http://arvon.top/2015/08/21/yum源配置手册/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍 常用命令123456789101112131415">
-<meta property="og:updated_time" content="2016-07-30T03:35:32.000Z">
+<meta property="og:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍">
+<meta property="og:updated_time" content="2017-05-25T15:05:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yum源配置手册">
-<meta name="twitter:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍 常用命令123456789101112131415">
+<meta name="twitter:description" content="yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍">
 
 
 
@@ -337,7 +337,8 @@
       
 
       
-        <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。<br>系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+        <p>yum（yellow dog updater， modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器，能够从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，并且一次安装所有的依赖关系软件包。系统管理过程中，难免要找软件装软件，如果定制性不高的话，使用yum安装不失为一个好办法，废话少说，开始介绍</p>
+<a id="more"></a>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 升级系统</span></div><div class="line">yum update</div><div class="line">yum -y update mysql	#升级特定的软件</div><div class="line"><span class="meta">#</span><span class="bash">2. 安装指定的软件包</span></div><div class="line">yum -y install vsftpd</div><div class="line"><span class="meta">#</span><span class="bash">3. 卸载指定的软件包</span></div><div class="line">yum -y remore vsftpd mysql</div><div class="line"><span class="meta">#</span><span class="bash">4. 查看系统中已经安装的和可用的软件组，对于可用的软件组，你可以选择安装</span></div><div class="line">yum grouplist</div><div class="line"><span class="meta">#</span><span class="bash">5. 清除缓存中的rpm 头文件和包文件</span></div><div class="line">yum clean all</div><div class="line"><span class="meta">#</span><span class="bash">6. 搜索相关的软件包</span></div><div class="line">yum -y search Emacs</div><div class="line"><span class="meta">#</span><span class="bash">显示指定软件包的信息</span></div><div class="line">yum info Emacs</div><div class="line"><span class="meta">#</span><span class="bash">查询指定软件包的依赖信息，emacs依赖的模块不少啊</span></div><div class="line">yum deplist emacs</div><div class="line"><span class="meta">#</span><span class="bash">列出所有以 yum 开头的软件包</span></div><div class="line">yum list yum\*</div><div class="line"><span class="meta">#</span><span class="bash">10. 列出已经安装的但是不包含在资源库中的rpm 包</span></div><div class="line">yum list extras</div></pre></td></tr></table></figure>
 <h3 id="Repo配置文件"><a href="#Repo配置文件" class="headerlink" title="Repo配置文件"></a>Repo配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">配置文件位于``/etc/yum.repos.d/*.repo``,扩展名都为Repo，要想不生效，可直接修改后缀，如改为*.reop_bak</span></div><div class="line"><span class="meta">#</span><span class="bash">配置文件解释</span></div><div class="line">arvon@Mo:~/arvon_work&gt; cat CentOS6-Base-163.repo | grep -v '^#'</div><div class="line">[base]</div><div class="line"><span class="meta">#</span><span class="bash">表示标识名称</span></div><div class="line">name=CentOS-$releasever - Base - 163.com</div><div class="line"><span class="meta">#</span><span class="bash">名字，其实可以随便起</span></div><div class="line">faliovermethod=priority</div><div class="line"><span class="meta">#</span><span class="bash">priority是默认值表示从列出的baseurl中顺序选择镜像服务器地址，roundrobin表示随机选择</span></div><div class="line">exclude=compiz**compiz*fusion-icon*</div><div class="line"><span class="meta">#</span><span class="bash">用来禁止这个仓库某些软件包的安装，可使用通配符，并以空格分隔。视情况添加</span></div><div class="line">baseurl=http://mirrors.163.com/centos/$releasever/os/$basearch/</div><div class="line"><span class="meta">#</span><span class="bash">引用的地址,http://网站  file://本地		ftp://文件服务器</span></div><div class="line">mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever$arch=$basearch</div><div class="line"><span class="meta">#</span><span class="bash">是指一个镜像服务器地址列表，通常是开启的，在浏览器打开据说可以看到可用的镜像服务器列表</span></div><div class="line">enabled=1</div><div class="line"><span class="meta">#</span><span class="bash">enabled=1为启用这个源，0为不启用这个源</span></div><div class="line">gpgcheck=1</div><div class="line"><span class="meta">#</span><span class="bash">表示这个repo中下载的rpm将惊醒gpg校验，以确定rpm包的来源是有效和安全的</span></div><div class="line">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6</div><div class="line"><span class="meta">#</span><span class="bash">定义用于校验的gpg密匙</span></div></pre></td></tr></table></figure>
 <ul>
@@ -353,7 +354,8 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">URL</span></div><div class="line">http://mirrors.aliyun.com/repo/</div><div class="line"><span class="meta">#</span><span class="bash">ALI-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/Centos-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/Centos-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-EPLE-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/epel-6.repo</div><div class="line">axel http://mirrors.aliyun.com/repo/epel-7.repo</div><div class="line"><span class="meta">#</span><span class="bash">ALI-FEDORA-REPO</span></div><div class="line">wget http://mirrors.aliyun.com/repo/fedora.repo</div></pre></td></tr></table></figure>
 <h3 id="可能错误"><a href="#可能错误" class="headerlink" title="可能错误"></a>可能错误</h3><ul>
-<li>错误现象lock<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading "installonlyn" plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line"><span class="meta">#</span><span class="bash">解释</span></div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure></li>
+<li>错误现象lock<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Loading "installonlyn" plugin</div><div class="line">Existing lock /var/run/yum.pid: another copy is running. Aborting.</div><div class="line"><span class="meta">#</span><span class="bash">解释</span></div><div class="line">这是因为yum在更新， 此时是kill不掉的该进程的， 正确的解决方法是让它停止更新即可。</div><div class="line">可以直接输入 rm -f /var/run/yum.pid</div><div class="line">也可以/etc/init.d/yum-updatesd stop</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -398,7 +400,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/yum/" rel="tag">#yum</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -415,8 +419,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/24/Ubuntu进行ssh连接/" rel="prev" title="Ubuntu进行ssh连接">
-                Ubuntu进行ssh连接 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/08/24/使用fio工具测试linux的磁盘性能/" rel="prev" title="使用fio工具测试linux的磁盘性能">
+                使用fio工具测试linux的磁盘性能 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,7 +493,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +503,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

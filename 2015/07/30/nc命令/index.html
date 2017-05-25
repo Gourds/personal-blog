@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="command," />
+  <meta name="keywords" content="Linux,运维工具," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等  参数介绍 1234567891011121314-g&amp;lt;网关&amp;gt; 设置路由器跃程通信网关，最多可设置8个。-G&amp;lt;指向器数目&amp;gt; 设置来源路">
-<meta name="keywords" content="command">
+<meta name="description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等">
+<meta name="keywords" content="Linux,运维工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nc命令">
 <meta property="og:url" content="http://arvon.top/2015/07/30/nc命令/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等  参数介绍 1234567891011121314-g&amp;lt;网关&amp;gt; 设置路由器跃程通信网关，最多可设置8个。-G&amp;lt;指向器数目&amp;gt; 设置来源路">
-<meta property="og:updated_time" content="2016-07-30T10:14:31.000Z">
+<meta property="og:description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等">
+<meta property="og:updated_time" content="2017-05-25T14:10:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nc命令">
-<meta name="twitter:description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等  参数介绍 1234567891011121314-g&amp;lt;网关&amp;gt; 设置路由器跃程通信网关，最多可设置8个。-G&amp;lt;指向器数目&amp;gt; 设置来源路">
+<meta name="twitter:description" content="由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法nc命令介绍:可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等">
 
 
 
@@ -338,22 +338,12 @@
 
       
         <p>由于telnet不能测试udp端口联通性，nc命令可以检测udp端口连接状态，这里记录一下用法<br><code>nc命令介绍:</code>可以检测tcp/udp端口连通性、端口扫描、远程传输文件、克隆硬盘或分区、保存web页面、模拟http Headers、简单聊天等等</p>
-<ul>
-<li><p>参数介绍</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</div><div class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</div><div class="line">-h 在线帮助。</div><div class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</div><div class="line">-l 使用监听模式，管控传入的资料。</div><div class="line">-n 直接使用IP地址，而不通过域名服务器。</div><div class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</div><div class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</div><div class="line">-r 乱数指定本地与远端主机的通信端口。</div><div class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</div><div class="line">-u 使用UDP传输协议。</div><div class="line">-v 显示指令执行过程。</div><div class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</div><div class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</div></pre></td></tr></table></figure>
-</li>
-<li><p>检测端口连通性</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">TCP</span></div><div class="line"><span class="meta">#</span><span class="bash">TCP单个端口或范围扫描</span></div><div class="line">nc -vz -w2 192.168.20.133 1870</div><div class="line">nc -vz -w2 192.168.20.133 1-1870</div><div class="line"><span class="meta">#</span><span class="bash">UDP</span></div><div class="line"><span class="meta">#</span><span class="bash">UDP单个端口或范围扫描</span></div><div class="line">nc -uz -w2 192.168.20.133 5000</div><div class="line">nc -uz -w2 192.168.20.133 4990-5000</div></pre></td></tr></table></figure>
-</li>
-<li><p>传输文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">目标文件主机命令，这个需要在文件传输之前执行，file.txt为文件传输过来后的文件名</span></div><div class="line">nc -l 1234 &gt; file.txt</div><div class="line"><span class="meta">#</span><span class="bash">源文件主机命令，hello.txt为传输文件，63为目标主机</span></div><div class="line">nc 172.17.18.63 1234 &lt; hello.txt</div></pre></td></tr></table></figure>
-</li>
-<li><p>聊天，与传输文件基本一样</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -l 1234    #主机1</div><div class="line">nc 192.168.2.34 1234    #主机2</div></pre></td></tr></table></figure>
-</li>
-<li><p>操作memcache</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">存储数据</span></div><div class="line">printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">获取数据</span></div><div class="line">printf “get keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">删除数据</span></div><div class="line">printf “delete keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">查看状态</span></div><div class="line">printf “statsrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">模拟top命令查看状态</span></div><div class="line">watch “echo stats” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">清空缓存</span></div><div class="line">printf “flush_allrn” |nc 192.168.2.34 11211</div></pre></td></tr></table></figure></li>
-</ul>
+<a id="more"></a>
+<h3 id="参数介绍"><a href="#参数介绍" class="headerlink" title="参数介绍"></a>参数介绍</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</div><div class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</div><div class="line">-h 在线帮助。</div><div class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</div><div class="line">-l 使用监听模式，管控传入的资料。</div><div class="line">-n 直接使用IP地址，而不通过域名服务器。</div><div class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</div><div class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</div><div class="line">-r 乱数指定本地与远端主机的通信端口。</div><div class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</div><div class="line">-u 使用UDP传输协议。</div><div class="line">-v 显示指令执行过程。</div><div class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</div><div class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</div></pre></td></tr></table></figure>
+<h3 id="检测端口连通性"><a href="#检测端口连通性" class="headerlink" title="检测端口连通性"></a>检测端口连通性</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">TCP</span></div><div class="line"><span class="meta">#</span><span class="bash">TCP单个端口或范围扫描</span></div><div class="line">nc -vz -w2 192.168.20.133 1870</div><div class="line">nc -vz -w2 192.168.20.133 1-1870</div><div class="line"><span class="meta">#</span><span class="bash">UDP</span></div><div class="line"><span class="meta">#</span><span class="bash">UDP单个端口或范围扫描</span></div><div class="line">nc -uz -w2 192.168.20.133 5000</div><div class="line">nc -uz -w2 192.168.20.133 4990-5000</div></pre></td></tr></table></figure>
+<h3 id="传输文件"><a href="#传输文件" class="headerlink" title="传输文件"></a>传输文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">目标文件主机命令，这个需要在文件传输之前执行，file.txt为文件传输过来后的文件名</span></div><div class="line">nc -l 1234 &gt; file.txt</div><div class="line"><span class="meta">#</span><span class="bash">源文件主机命令，hello.txt为传输文件，63为目标主机</span></div><div class="line">nc 172.17.18.63 1234 &lt; hello.txt</div></pre></td></tr></table></figure>
+<h3 id="聊天与传输文件基本一样"><a href="#聊天与传输文件基本一样" class="headerlink" title="聊天与传输文件基本一样"></a>聊天与传输文件基本一样</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -l 1234    #主机1</div><div class="line">nc 192.168.2.34 1234    #主机2</div></pre></td></tr></table></figure>
+<h3 id="操作memcache"><a href="#操作memcache" class="headerlink" title="操作memcache"></a>操作memcache</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">存储数据</span></div><div class="line">printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">获取数据</span></div><div class="line">printf “get keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">删除数据</span></div><div class="line">printf “delete keyrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">查看状态</span></div><div class="line">printf “statsrn” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">模拟top命令查看状态</span></div><div class="line">watch “echo stats” |nc 192.168.2.34 11211</div><div class="line"><span class="meta">#</span><span class="bash">清空缓存</span></div><div class="line">printf “flush_allrn” |nc 192.168.2.34 11211</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -397,7 +387,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/command/" rel="tag">#command</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/运维工具/" rel="tag">#运维工具</a>
           
         </div>
       
@@ -488,7 +480,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -498,7 +490,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -590,7 +582,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数介绍"><span class="nav-number">1.</span> <span class="nav-text">参数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测端口连通性"><span class="nav-number">2.</span> <span class="nav-text">检测端口连通性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输文件"><span class="nav-number">3.</span> <span class="nav-text">传输文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊天与传输文件基本一样"><span class="nav-number">4.</span> <span class="nav-text">聊天与传输文件基本一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作memcache"><span class="nav-number">5.</span> <span class="nav-text">操作memcache</span></a></li></ol></div>
             
           </div>
         </section>

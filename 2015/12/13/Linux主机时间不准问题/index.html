@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux,ntp," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="摘要：linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。">
-<meta name="keywords" content="linux,ntp">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux主机时间不准问题">
 <meta property="og:url" content="http://arvon.top/2015/12/13/Linux主机时间不准问题/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="摘要：linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。">
-<meta property="og:updated_time" content="2016-08-13T03:27:20.000Z">
+<meta property="og:updated_time" content="2017-05-25T13:46:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux主机时间不准问题">
 <meta name="twitter:description" content="摘要：linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。">
@@ -337,7 +337,8 @@
       
 
       
-        <p><strong>摘要：</strong>linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。<br><a id="more"></a></p>
+        <p><strong>摘要：</strong>linux主机时间过一段时间就会发现时间不对了，查阅资料这个大概是因为硬件时间和服务器时间不一致导致的。</p>
+<a id="more"></a>
 <h3 id="查看分析"><a href="#查看分析" class="headerlink" title="查看分析"></a>查看分析</h3><ul>
 <li><p>查看服务器时间，即系统时间</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">date</div></pre></td></tr></table></figure>
@@ -352,7 +353,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hwclock  --hctosys           //把硬件时间同步到系统时间</div><div class="line">hwclock  --systohc            //系统时间同步到硬件时间</div></pre></td></tr></table></figure>
 </li>
 <li><p>查看当前使用的时区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> cat /etc/sysconfig/clock</div><div class="line"> <span class="comment"># The timezone of the system is defined by the contents of /etc/localtime.</span></div><div class="line">ZONE=<span class="string">"America/New_York"</span></div><div class="line"> <span class="comment">#UTC=true</span></div><div class="line"> <span class="comment">#ARC=false</span></div><div class="line"> <span class="comment">#这个时区采用的是美国时间，所以即时进行了时间同步，也是同步成美国时区的时间，而不是中国时区的时间。</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysconfig/clock</div><div class="line"><span class="comment"># The timezone of the system is defined by the contents of /etc/localtime.</span></div><div class="line">ZONE=<span class="string">"America/New_York"</span></div><div class="line"><span class="comment">#UTC=true</span></div><div class="line"><span class="comment">#ARC=false</span></div><div class="line"><span class="comment">#这个时区采用的是美国时间，所以即时进行了时间同步，也是同步成美国时区的时间，而不是中国时区的时间。</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>时间同步操作命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/sbin/ntpdate cn.pool.ntp.org</div><div class="line">/usr/sbin/ntpdate ntp.api.bz</div></pre></td></tr></table></figure>
@@ -360,7 +361,7 @@
 </ul>
 <h3 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h3><ul>
 <li>常用时区介绍<blockquote>
-<p>CST：<br>中国标准时间（China Standard Time），这个解释可能是针对RedHat Linux。<br>UTC：<br>协调世界时，又称世界标准时间，简称UTC，从英文国际时间/法文协调时间”Universal Time/Temps Cordonné”而来。中国大陆、香港、澳门、台湾、蒙古国、新加坡、马来西亚、菲律宾、澳洲西部的时间与UTC的时差均为+8，也就是UTC+8。<br>GMT：<br>格林尼治标准时间（英语：Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，因为本初子午线被定义在通过那里的经线。</p>
+<p>CST：<br>中国标准时间（China Standard Time），这个解释可能是针对RedHat Linux。<br>UTC：<br>协调世界时，又称世界标准时间，简称UTC，从英文国际时间/法文协调时间”Universal Time/Temps Cordonné”而来。中国大陆、香港、澳门、台湾  、蒙古国、新加坡、马来西亚、菲律宾、澳洲西部的时间与UTC的时差均为+8，也就是UTC+8。<br>GMT：<br>格林尼治标准时间（英语：Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，因为本初子午线被定义在通过那里  的经线。</p>
 </blockquote>
 </li>
 </ul>
@@ -409,9 +410,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
-          
-            <a href="/tags/ntp/" rel="tag">#ntp</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -502,7 +501,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -512,7 +511,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

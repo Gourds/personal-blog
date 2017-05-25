@@ -919,8 +919,7 @@
 
       
         
-          
-            <h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><h4 id="Centos6-x"><a href="#Centos6-x" class="headerlink" title="Centos6.x"></a>Centos6.x</h4><ul>
+          <h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><h4 id="Centos6-x"><a href="#Centos6-x" class="headerlink" title="Centos6.x"></a>Centos6.x</h4><ul>
 <li><p>临时关闭</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service iptables stop</div><div class="line">/etc/init.d/iptabels stop</div></pre></td></tr></table></figure>
 </li>
@@ -928,29 +927,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chkconfig iptables off</div><div class="line">chkconfig iptables on    <span class="comment">#开启</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="Centos7-x"><a href="#Centos7-x" class="headerlink" title="Centos7.x"></a>Centos7.x</h4><ul>
-<li><p>Centos7默认使用firewall</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">systemctl stop firewalld.service</div><div class="line"><span class="comment">#停止firewall </span></div><div class="line">systemctl <span class="built_in">disable</span> firewalld.service </div><div class="line"><span class="comment">#禁止firewall开机启动</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>使用iptables管理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">yum -y install iptables-services</div><div class="line"><span class="comment">#vi /etc/sysconfig/iptables</span></div><div class="line"><span class="comment">#修改iptables这个文件可以写入删除规则</span></div><div class="line"><span class="comment">#-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT</span></div><div class="line">systemctl restart iptables.service </div><div class="line"><span class="comment">#重启防火墙使配置生效</span></div><div class="line">systemctl <span class="built_in">enable</span> iptables.service </div><div class="line"><span class="comment">#设置防火墙开机启动</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h3><ul>
-<li><p>查看状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getenforce</div></pre></td></tr></table></figure>
-</li>
-<li><p>临时关闭</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setenforce 0</div></pre></td></tr></table></figure>
-</li>
-<li><p>永久关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<p>以上</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/01/selinux和iptables关闭/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1135,7 +1116,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1145,7 +1126,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="os,network," />
+  <meta name="keywords" content="其他OS," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 <meta name="description" content="摘要：自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。">
-<meta name="keywords" content="os,network">
+<meta name="keywords" content="其他OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu14.04命令行连接无线网络">
 <meta property="og:url" content="http://arvon.top/2016/08/17/Ubuntu14-04命令行连接无线网络/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="摘要：自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。">
-<meta property="og:updated_time" content="2016-08-17T05:23:21.000Z">
+<meta property="og:updated_time" content="2017-05-25T15:03:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu14.04命令行连接无线网络">
 <meta name="twitter:description" content="摘要：自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。">
@@ -337,7 +337,8 @@
       
 
       
-        <p><strong><em>摘要：</em></strong>自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。<br><a id="more"></a></p>
+        <p><strong><em>摘要：</em></strong>自己有个性能一般的ThinkPad本子，装了Ubuntu14.04，不过最近感觉触摸板很不好用，就打算使用命令行直接使用不用图形界面了，也更省资源。命令行启动后遇见个问题，我不会用命令行直接连接无线网络，真是尴尬，这里记录一下解决过程。</p>
+<a id="more"></a>
 <h3 id="设置开机启动命令行"><a href="#设置开机启动命令行" class="headerlink" title="设置开机启动命令行"></a>设置开机启动命令行</h3><p> 我这里使用的是方法一</p>
 <h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><ul>
 <li><p>修改grup文件</p>
@@ -349,7 +350,7 @@
 </ul>
 <h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><ul>
 <li><p>编写配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo chmod +w /boot/grub/grub.cfg </span></div><div class="line"><span class="comment">#sudo vim /boot/grub/grub.cfg</span></div><div class="line"><span class="comment">#复制以下内容</span></div><div class="line"> menuentry <span class="string">'Ubuntu，Linux 3.2.0-24-generic-pae'</span> --class ubuntu --class gnu-linux --class gnu --class os &#123;</div><div class="line">    recordfail</div><div class="line">    gfxmode <span class="variable">$linux_gfx_mode</span></div><div class="line">    insmod gzio</div><div class="line">    insmod part_msdos</div><div class="line">    insmod ext2</div><div class="line">    <span class="built_in">set</span> root=<span class="string">'(hd0,msdos8)'</span></div><div class="line">    search --no-floppy --fs-uuid --set=root 689a61a1-06fd-4ffe-95d7-8671e97bbe81</div><div class="line">    linux    /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=689a61a1-06fd-4ffe-95d7-8671e97bbe81 ro   quiet splash <span class="variable">$vt_handoff</span></div><div class="line">    initrd    /boot/initrd.img-3.2.0-24-generic-pae</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo chmod +w /boot/grub/grub.cfg</span></div><div class="line"><span class="comment">#sudo vim /boot/grub/grub.cfg</span></div><div class="line"><span class="comment">#复制以下内容</span></div><div class="line"> menuentry <span class="string">'Ubuntu，Linux 3.2.0-24-generic-pae'</span> --class ubuntu --class gnu-linux --class gnu --class os &#123;</div><div class="line">    recordfail</div><div class="line">    gfxmode <span class="variable">$linux_gfx_mode</span></div><div class="line">    insmod gzio</div><div class="line">    insmod part_msdos</div><div class="line">    insmod ext2</div><div class="line">    <span class="built_in">set</span> root=<span class="string">'(hd0,msdos8)'</span></div><div class="line">    search --no-floppy --fs-uuid --set=root 689a61a1-06fd-4ffe-95d7-8671e97bbe81</div><div class="line">    linux    /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=689a61a1-06fd-4ffe-95d7-8671e97bbe81 ro   quiet splash <span class="variable">$vt_handoff</span></div><div class="line">    initrd    /boot/initrd.img-3.2.0-24-generic-pae</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>粘贴复制的内容并修改</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#参照如下</span></div><div class="line">menuentry <span class="string">'Ubuntu，Linux 3.2.0-24-generic-pae(command mode)'</span> --class ubuntu --class gnu-linux --class gnu --class os &#123;</div><div class="line">    recordfail</div><div class="line">    gfxmode <span class="variable">$linux_gfx_mode</span></div><div class="line">    insmod gzio</div><div class="line">    insmod part_msdos</div><div class="line">    insmod ext2</div><div class="line">    <span class="built_in">set</span> root=<span class="string">'(hd0,msdos8)'</span></div><div class="line">    search --no-floppy --fs-uuid --set=root 689a61a1-06fd-4ffe-95d7-8671e97bbe81</div><div class="line">    linux    /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=689a61a1-06fd-4ffe-95d7-8671e97bbe81 ro text</div><div class="line">    initrd    /boot/initrd.img-3.2.0-24-generic-pae</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -443,9 +444,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/os/" rel="tag">#os</a>
-          
-            <a href="/tags/network/" rel="tag">#network</a>
+            <a href="/tags/其他OS/" rel="tag">#其他OS</a>
           
         </div>
       
@@ -536,7 +535,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -546,7 +545,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

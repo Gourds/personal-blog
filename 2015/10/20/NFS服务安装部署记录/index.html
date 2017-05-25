@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="nfs,fs," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。">
-<meta name="keywords" content="nfs,fs">
+<meta name="description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。实验环境为多台服务器，其中一台用作NFSserver其余的主机作为client">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NFS服务安装部署记录">
 <meta property="og:url" content="http://arvon.top/2015/10/20/NFS服务安装部署记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。">
-<meta property="og:updated_time" content="2016-08-12T17:23:58.000Z">
+<meta property="og:description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。实验环境为多台服务器，其中一台用作NFSserver其余的主机作为client">
+<meta property="og:updated_time" content="2017-05-25T14:32:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NFS服务安装部署记录">
-<meta name="twitter:description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。">
+<meta name="twitter:description" content="简述：其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。实验环境为多台服务器，其中一台用作NFSserver其余的主机作为client">
 
 
 
@@ -337,9 +337,9 @@
       
 
       
-        <p><strong>简述：</strong>其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。<br><a id="more"></a></p>
-<h3 id="nfs简介"><a href="#nfs简介" class="headerlink" title="nfs简介"></a>nfs简介</h3><p>多台服务器，其中一台用作NFSserver其余的主机作为client</p>
-<h3 id="安装nfs"><a href="#安装nfs" class="headerlink" title="安装nfs"></a>安装nfs</h3><ul>
+        <p><strong>简述：</strong>其实在部署多台服务器时搭建一个nfs服务器是个共享资源非常好的方案，可以实现脚本共享，也可以实现数据集中备份，是个非常好用的网络文件系统。实验环境为多台服务器，其中一台用作NFSserver其余的主机作为client</p>
+<a id="more"></a>
+<h4 id="安装yum源"><a href="#安装yum源" class="headerlink" title="安装yum源"></a>安装yum源</h4><ul>
 <li>安装yum源<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.opencas.cn/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line"><span class="comment">#package: nfs-utils.x86_64</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -348,7 +348,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">yum install nfs-utils.x86_64</div><div class="line">chkconfig rpcbind on</div><div class="line">chkconfig nfs on</div><div class="line">mkdir /data/nfs</div><div class="line">chown -R nfsnobody:nfsnobody /data/nfs</div><div class="line"><span class="comment">#为防止客户端的读取写入可以顺利进行，将共享目录权限设置为nfsnobody</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>Server端修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/exports</span></div><div class="line">/data/nfsd/deploy 192.168.1.2/32(rw,root_squash,all_squash)</div><div class="line">/data/nfsd/deploy 192.168.1.4/32(rw,root_squash,all_squash)</div><div class="line">/data/nfsd/deploy 192.168.1.5/32(rw,root_squash,all_squash) </div><div class="line"><span class="comment">#指定哪些机器可以访问共享目录deploy，以及以何种方式访问</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/exports</span></div><div class="line">/data/nfsd/deploy 192.168.1.2/32(rw,root_squash,all_squash)</div><div class="line">/data/nfsd/deploy 192.168.1.4/32(rw,root_squash,all_squash)</div><div class="line">/data/nfsd/deploy 192.168.1.5/32(rw,root_squash,all_squash)</div><div class="line"><span class="comment">#指定哪些机器可以访问共享目录deploy，以及以何种方式访问</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>启动测试</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">service rpcbind start</div><div class="line">service nfs start</div><div class="line">rpcinfo -p    <span class="comment">#確認nfs服務啟動成功</span></div><div class="line">exportfs    <span class="comment">#检查 NFS 服务器是否输出我们想共享的目录</span></div></pre></td></tr></table></figure>
@@ -411,9 +411,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nfs/" rel="tag">#nfs</a>
-          
-            <a href="/tags/fs/" rel="tag">#fs</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -504,7 +502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -514,7 +512,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -606,7 +604,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nfs简介"><span class="nav-number">1.</span> <span class="nav-text">nfs简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nfs"><span class="nav-number">2.</span> <span class="nav-text">安装nfs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Server端配置"><span class="nav-number">2.1.</span> <span class="nav-text">Server端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client端配置"><span class="nav-number">2.2.</span> <span class="nav-text">Client端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动挂载"><span class="nav-number">2.3.</span> <span class="nav-text">自动挂载</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装yum源"><span class="nav-number">1.</span> <span class="nav-text">安装yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Server端配置"><span class="nav-number">2.</span> <span class="nav-text">Server端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client端配置"><span class="nav-number">3.</span> <span class="nav-text">Client端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动挂载"><span class="nav-number">4.</span> <span class="nav-text">自动挂载</span></a></li></ol></div>
             
           </div>
         </section>
