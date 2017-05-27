@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://arvon.top/about/index.html</loc>
+    
+    <lastmod>2017-05-27T02:21:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://arvon.top/2016/08/05/Zabbix%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E9%A1%B9/</loc>
     
     <lastmod>2017-05-25T15:26:41.000Z</lastmod>
@@ -418,13 +425,6 @@
     <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2017-05-25T07:26:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://arvon.top/about/index.html</loc>
-    
-    <lastmod>2017-05-25T06:37:24.000Z</lastmod>
     
   </url>
   
