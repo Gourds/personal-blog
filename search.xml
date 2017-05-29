@@ -61,6 +61,43 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Nginx重定向及域名CNAME问题]]></title>
+      <url>http://arvon.top/2017/05/24/Nginx%E9%87%8D%E5%AE%9A%E5%90%91%E5%8F%8A%E5%9F%9F%E5%90%8DCNAME%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170529-nginxcname-1.jpeg" alt="20170529-nginxcname-1"><br><strong>关于域名解析</strong>的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。</p>
+<h3 id="关于DNS的CNAME解析"><a href="#关于DNS的CNAME解析" class="headerlink" title="关于DNS的CNAME解析"></a>关于DNS的CNAME解析</h3><blockquote>
+<p>其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记录是域名解析到域名。所以通过域名的CNAME记录对web访问时没有任何影响的，它只是改变了域名解析的过程而已。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="关于URL重定向"><a href="#关于URL重定向" class="headerlink" title="关于URL重定向"></a>关于URL重定向</h3><blockquote>
+<p>所谓URL重定向其实就是URL跳转，这个可以通过Nginx的HttpRewriteModule设置重写http请求头。URL重定向氛围302临时重定向和301永久重定向，301永久重定向会使搜索引擎抓取新的内容时使用重定向后的新地址，而302临时重定向会使搜索引擎抓取新内容时保留重定向前的旧地址。<br>nginx的rewrite相当于apache的rewriterule(大多数情况下可以把原有apache的rewrite规则加上引号就可以直接使用)，它可以用在server,location 和IF条件判断块中,命令格式如下：<br>rewrite 正则表达式 替换目标 flag标记<br>flag标记可以用以下几种格式：<br>last – 基本上都用这个Flag。<br>break – 中止Rewirte，不在继续匹配<br>redirect – 返回临时重定向的HTTP状态302<br>permanent – 返回永久重定向的HTTP状态301</p>
+</blockquote>
+<ul>
+<li><p>301永久重定向Nginx代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'www.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 permanent;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>302临时重定向Nginx代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'blog.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 redirect;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Nginx地址重定向"><a href="#Nginx地址重定向" class="headerlink" title="Nginx地址重定向"></a>Nginx地址重定向</h3><blockquote>
+<p>使用alias或root进行网站路径定义，也可进行资源路径重定向。</p>
+</blockquote>
+<ul>
+<li><p>使用root定义<br>语法：root path;<br>默认：root html;<br>配置块：http、server、location、if</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">location /download/ &#123;  </div><div class="line">root /opt/web/html/;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用alias定义<br>语法：alias path;<br>配置块： location;</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /conf &#123;  </div><div class="line">    alias /usr/local/nginx/conf/;      </div><div class="line">&#125;</div><div class="line"><span class="meta">#</span><span class="bash">如果用root，则如</span></div><div class="line">location /conf &#123;  </div><div class="line">       root /usr/local/nginx/;          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>使用alias时，在URI向实际文件路径的映射过程中，已经把location后配置的/conf这部分字符串丢弃掉，因此，/conf/nginx.conf请求将根据alias path映射为path/nginx.conf。root则不然，它会根据完整的URI请求来映射，因此，/conf/nginx.conf请求会根据root path映射为path/conf/nginx.conf。这也是root可以放置到http、server、location或if块中，而alias只能放置到location块中的原因。</p>
+</blockquote>
+<h3 id="更详细的说明"><a href="#更详细的说明" class="headerlink" title="更详细的说明"></a>更详细的说明</h3><p><a href="http://lansgg.blog.51cto.com/5675165/1575274" target="_blank" rel="external">1. 大风的博客：nginx配置url重定向-反向代理</a><br><a href="http://blief.blog.51cto.com/6170059/1736787" target="_blank" rel="external">2. 网站路径定义</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Iptables整理笔记]]></title>
       <url>http://arvon.top/2016/11/17/Iptables%E6%95%B4%E7%90%86%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20161117-iptables-1.png" alt="20161117-iptables-1"><br>iptabels还是很实用的，分享下我的整理笔记<br><a id="more"></a></p>
@@ -1014,32 +1051,32 @@
 <li><p>创建keyspace（秘钥空间）</p>
 <ul>
 <li><p>主要包括复制策略和durable_writes</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> CREATE KEYSPACE <span class="string">"Test"</span></span></div><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> WITH replication = &#123;<span class="string">'class'</span>:<span class="string">'SimpleStrategy'</span>, <span class="string">'replication_factor'</span> : 3&#125;;</span></div><div class="line"><span class="meta">#</span><span class="bash">创建名为Test的keyspace(默认创建时不区分大小写的，加上双引号就区分大小写了),采用simple存储策略，factor为存储策略的选项</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span> CREATE KEYSPACE "Test"</div><div class="line"><span class="meta">cqlsh&gt;</span> WITH replication = &#123;'class':'SimpleStrategy', 'replication_factor' : 3&#125;;</div><div class="line"><span class="meta">#</span>创建名为Test的keyspace(默认创建时不区分大小写的，加上双引号就区分大小写了),采用simple存储策略，factor为存储策略的选项</div></pre></td></tr></table></figure>
 </li>
 <li><p>复制策略介绍</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">org.apache.cassandra.locator.SimpleStrategy</div><div class="line"><span class="meta">#</span><span class="bash">SimpleStrategy针对是一个data center中的多个存储节点(node)的存储，strategy_options表示数据存储所有存储节点(node)的复本数量，选择node的规则是在data center中按照顺时针的方向进行选择；</span></div><div class="line">org.apache.cassandra.locator.NetworkTopologyStrategy</div><div class="line"><span class="meta">#</span><span class="bash">NetworkTopologyStrategy是针对多个data center的情况进行处理，这个是以防同一个data center中的所以节点同时出现问题，如掉电；</span></div><div class="line">org.apache.cassandra.locator.OldNetworkTopologyStrategy</div><div class="line"><span class="meta">#</span><span class="bash">OldNetworkT opologyStrategy，这个可能会很少用上了，对data center的个数及复本的数量支持的有限，有了NetworkTopologyStrategy就不需要OldNetworkTopologyStrategy了。</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">org.apache.cassandra.locator.SimpleStrategy</div><div class="line"><span class="meta">#</span>SimpleStrategy针对是一个data center中的多个存储节点(node)的存储，strategy_options表示数据存储所有存储节点(node)的复本数量，选择node的规则是在data center中按照顺时针的方向进行选择；</div><div class="line">org.apache.cassandra.locator.NetworkTopologyStrategy</div><div class="line"><span class="meta">#</span>NetworkTopologyStrategy是针对多个data center的情况进行处理，这个是以防同一个data center中的所以节点同时出现问题，如掉电；</div><div class="line">org.apache.cassandra.locator.OldNetworkTopologyStrategy</div><div class="line"><span class="meta">#</span>OldNetworkT opologyStrategy，这个可能会很少用上了，对data center的个数及复本的数量支持的有限，有了NetworkTopologyStrategy就不需要OldNetworkTopologyStrategy了。</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>删除keyspace</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> drop keyspace <span class="string">"Test"</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span> drop keyspace "Test"</div></pre></td></tr></table></figure>
 </li>
 <li><p>修改keyspace参数信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> ALTER KEYSPACE <span class="string">"Test"</span> WITH REPLICATION = &#123; <span class="string">'class'</span> : <span class="string">'SimpleStrategy'</span>, <span class="string">'replication_factor'</span> : 1 &#125;;</span></div><div class="line"><span class="meta">#</span><span class="bash">修改factor为1</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span> ALTER KEYSPACE "Test" WITH REPLICATION = &#123; 'class' : 'SimpleStrategy', 'replication_factor' : 1 &#125;;</div><div class="line"><span class="meta">#</span>修改factor为1</div></pre></td></tr></table></figure>
 </li>
 <li><p>进入keyspace</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> use <span class="string">"keyspace_name"</span>;</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span> use "keyspace_name";</div></pre></td></tr></table></figure>
 </li>
 <li><p>查看</p>
 <ul>
 <li><p>查看keyspace</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> SELECT * from system.schema_keyspaces;</span></div><div class="line"><span class="meta">cqlsh&gt;</span><span class="bash"> describe keyspaces;</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">cqlsh&gt;</span> SELECT * from system.schema_keyspaces;</div><div class="line"><span class="meta">cqlsh&gt;</span> describe keyspaces;</div></pre></td></tr></table></figure>
 </li>
 <li><p>查看已有表</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> describe tables;</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span> describe tables;</div></pre></td></tr></table></figure>
 </li>
 <li><p>查看表结构</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> use <span class="string">"keyspace_name"</span></span></div><div class="line"><span class="meta">sqlsh&gt;</span><span class="bash"> describe table <span class="string">"table_name"</span>;</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">sqlsh&gt;</span> use "keyspace_name"</div><div class="line"><span class="meta">sqlsh&gt;</span> describe table "table_name";</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -2895,7 +2932,7 @@ Mo birthday happy to
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#64;&#101;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#64;&#101;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;</a></p>
+<p>Email 邮件：<br><a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#101;&#120;&#x61;&#109;&#x70;&#108;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#101;&#120;&#x61;&#109;&#x70;&#108;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>
