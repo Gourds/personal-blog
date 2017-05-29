@@ -4,6 +4,43 @@
   
     
     <entry>
+      <title><![CDATA[Nginx重定向及域名CNAME问题]]></title>
+      <url>http://arvon.top/2017/05/29/Nginx%E9%87%8D%E5%AE%9A%E5%90%91%E5%8F%8A%E5%9F%9F%E5%90%8DCNAME%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170529-nginxcname-1.jpeg" alt="20170529-nginxcname-1"><br><strong>关于域名解析</strong>的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。</p>
+<h3 id="关于DNS的CNAME解析"><a href="#关于DNS的CNAME解析" class="headerlink" title="关于DNS的CNAME解析"></a>关于DNS的CNAME解析</h3><blockquote>
+<p>其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记录是域名解析到域名。所以通过域名的CNAME记录对web访问时没有任何影响的，它只是改变了域名解析的过程而已。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="关于URL重定向"><a href="#关于URL重定向" class="headerlink" title="关于URL重定向"></a>关于URL重定向</h3><blockquote>
+<p>所谓URL重定向其实就是URL跳转，这个可以通过Nginx的HttpRewriteModule设置重写http请求头。URL重定向氛围302临时重定向和301永久重定向，301永久重定向会使搜索引擎抓取新的内容时使用重定向后的新地址，而302临时重定向会使搜索引擎抓取新内容时保留重定向前的旧地址。<br>nginx的rewrite相当于apache的rewriterule(大多数情况下可以把原有apache的rewrite规则加上引号就可以直接使用)，它可以用在server,location 和IF条件判断块中,命令格式如下：<br>rewrite 正则表达式 替换目标 flag标记<br>flag标记可以用以下几种格式：<br>last – 基本上都用这个Flag。<br>break – 中止Rewirte，不在继续匹配<br>redirect – 返回临时重定向的HTTP状态302<br>permanent – 返回永久重定向的HTTP状态301</p>
+</blockquote>
+<ul>
+<li><p>301永久重定向Nginx代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'www.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 permanent;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>302临时重定向Nginx代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'blog.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 redirect;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Nginx地址重定向"><a href="#Nginx地址重定向" class="headerlink" title="Nginx地址重定向"></a>Nginx地址重定向</h3><blockquote>
+<p>使用alias或root进行网站路径定义，也可进行资源路径重定向。</p>
+</blockquote>
+<ul>
+<li><p>使用root定义<br>语法：root path;<br>默认：root html;<br>配置块：http、server、location、if</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">location /download/ &#123;  </div><div class="line">root /opt/web/html/;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用alias定义<br>语法：alias path;<br>配置块： location;</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /conf &#123;  </div><div class="line">    alias /usr/local/nginx/conf/;      </div><div class="line">&#125;</div><div class="line"><span class="meta">#</span>如果用root，则如</div><div class="line">location /conf &#123;  </div><div class="line">       root /usr/local/nginx/;          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>使用alias时，在URI向实际文件路径的映射过程中，已经把location后配置的/conf这部分字符串丢弃掉，因此，/conf/nginx.conf请求将根据alias path映射为path/nginx.conf。root则不然，它会根据完整的URI请求来映射，因此，/conf/nginx.conf请求会根据root path映射为path/conf/nginx.conf。这也是root可以放置到http、server、location或if块中，而alias只能放置到location块中的原因。</p>
+</blockquote>
+<h3 id="更详细的说明"><a href="#更详细的说明" class="headerlink" title="更详细的说明"></a>更详细的说明</h3><p><a href="http://lansgg.blog.51cto.com/5675165/1575274" target="_blank" rel="external">1. 大风的博客：nginx配置url重定向-反向代理</a><br><a href="http://blief.blog.51cto.com/6170059/1736787" target="_blank" rel="external">2. 网站路径定义</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Jumpserver实践记录]]></title>
       <url>http://arvon.top/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg" alt="20170524-jumpserver-1"><br><strong>Jumpserver</strong>是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
@@ -57,43 +94,6 @@
 <li><a href="https://github.com/jumpserver/jumpserver" target="_blank" rel="external">jumpserver_doc</a></li>
 <li><a href="https://github.com/jumpserver/jumpserver/wiki/%E5%AE%89%E8%A3%85%E5%9B%BE%E8%A7%A3" target="_blank" rel="external">install doc</a></li>
 </ul>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Nginx重定向及域名CNAME问题]]></title>
-      <url>http://arvon.top/2017/05/24/Nginx%E9%87%8D%E5%AE%9A%E5%90%91%E5%8F%8A%E5%9F%9F%E5%90%8DCNAME%E8%AE%B0%E5%BD%95/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170529-nginxcname-1.jpeg" alt="20170529-nginxcname-1"><br><strong>关于域名解析</strong>的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。</p>
-<h3 id="关于DNS的CNAME解析"><a href="#关于DNS的CNAME解析" class="headerlink" title="关于DNS的CNAME解析"></a>关于DNS的CNAME解析</h3><blockquote>
-<p>其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记录是域名解析到域名。所以通过域名的CNAME记录对web访问时没有任何影响的，它只是改变了域名解析的过程而已。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="关于URL重定向"><a href="#关于URL重定向" class="headerlink" title="关于URL重定向"></a>关于URL重定向</h3><blockquote>
-<p>所谓URL重定向其实就是URL跳转，这个可以通过Nginx的HttpRewriteModule设置重写http请求头。URL重定向氛围302临时重定向和301永久重定向，301永久重定向会使搜索引擎抓取新的内容时使用重定向后的新地址，而302临时重定向会使搜索引擎抓取新内容时保留重定向前的旧地址。<br>nginx的rewrite相当于apache的rewriterule(大多数情况下可以把原有apache的rewrite规则加上引号就可以直接使用)，它可以用在server,location 和IF条件判断块中,命令格式如下：<br>rewrite 正则表达式 替换目标 flag标记<br>flag标记可以用以下几种格式：<br>last – 基本上都用这个Flag。<br>break – 中止Rewirte，不在继续匹配<br>redirect – 返回临时重定向的HTTP状态302<br>permanent – 返回永久重定向的HTTP状态301</p>
-</blockquote>
-<ul>
-<li><p>301永久重定向Nginx代码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'www.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 permanent;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>302临时重定向Nginx代码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  arvon.top;</div><div class="line">        if ($host = 'blog.arvon.top' ) &#123;</div><div class="line">            rewrite ^/(.*)$ http://arvon.top/$1 redirect;</div><div class="line">                   &#125;</div><div class="line">        location / &#123;</div><div class="line">            root   html/public;</div><div class="line">            index  index.html;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="Nginx地址重定向"><a href="#Nginx地址重定向" class="headerlink" title="Nginx地址重定向"></a>Nginx地址重定向</h3><blockquote>
-<p>使用alias或root进行网站路径定义，也可进行资源路径重定向。</p>
-</blockquote>
-<ul>
-<li><p>使用root定义<br>语法：root path;<br>默认：root html;<br>配置块：http、server、location、if</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">location /download/ &#123;  </div><div class="line">root /opt/web/html/;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用alias定义<br>语法：alias path;<br>配置块： location;</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /conf &#123;  </div><div class="line">    alias /usr/local/nginx/conf/;      </div><div class="line">&#125;</div><div class="line"><span class="meta">#</span><span class="bash">如果用root，则如</span></div><div class="line">location /conf &#123;  </div><div class="line">       root /usr/local/nginx/;          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>使用alias时，在URI向实际文件路径的映射过程中，已经把location后配置的/conf这部分字符串丢弃掉，因此，/conf/nginx.conf请求将根据alias path映射为path/nginx.conf。root则不然，它会根据完整的URI请求来映射，因此，/conf/nginx.conf请求会根据root path映射为path/conf/nginx.conf。这也是root可以放置到http、server、location或if块中，而alias只能放置到location块中的原因。</p>
-</blockquote>
-<h3 id="更详细的说明"><a href="#更详细的说明" class="headerlink" title="更详细的说明"></a>更详细的说明</h3><p><a href="http://lansgg.blog.51cto.com/5675165/1575274" target="_blank" rel="external">1. 大风的博客：nginx配置url重定向-反向代理</a><br><a href="http://blief.blog.51cto.com/6170059/1736787" target="_blank" rel="external">2. 网站路径定义</a></p>
 ]]></content>
     </entry>
     

@@ -112,11 +112,11 @@
 <meta name="keywords" content="Nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx重定向及域名CNAME问题">
-<meta property="og:url" content="http://arvon.top/2017/05/24/Nginx重定向及域名CNAME记录/index.html">
+<meta property="og:url" content="http://arvon.top/2017/05/29/Nginx重定向及域名CNAME记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="关于域名解析的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。 关于DNS的CNAME解析 其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170529-nginxcname-1.jpeg">
-<meta property="og:updated_time" content="2017-05-29T09:09:43.000Z">
+<meta property="og:updated_time" content="2017-05-29T09:12:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx重定向及域名CNAME问题">
 <meta name="twitter:description" content="关于域名解析的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。 关于DNS的CNAME解析 其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记">
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://arvon.top/2017/05/24/Nginx重定向及域名CNAME记录/"/>
+  <link rel="canonical" href="http://arvon.top/2017/05/29/Nginx重定向及域名CNAME记录/"/>
 
 
 
@@ -328,7 +328,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/05/24/Nginx重定向及域名CNAME记录/">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/05/29/Nginx重定向及域名CNAME记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Arvon">
@@ -357,8 +357,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T12:32:05+08:00">
-                2017-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-29T17:12:05+08:00">
+                2017-05-29
               </time>
             
 
@@ -376,7 +376,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/24/Nginx重定向及域名CNAME记录/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/05/29/Nginx重定向及域名CNAME记录/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -385,7 +385,7 @@
 
           
           
-             <span id="/2017/05/24/Nginx重定向及域名CNAME记录/" class="leancloud_visitors" data-flag-title="Nginx重定向及域名CNAME问题">
+             <span id="/2017/05/29/Nginx重定向及域名CNAME记录/" class="leancloud_visitors" data-flag-title="Nginx重定向及域名CNAME问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -437,7 +437,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">location /download/ &#123;  </div><div class="line">root /opt/web/html/;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用alias定义<br>语法：alias path;<br>配置块： location;</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /conf &#123;  </div><div class="line">    alias /usr/local/nginx/conf/;      </div><div class="line">&#125;</div><div class="line"><span class="meta">#</span><span class="bash">如果用root，则如</span></div><div class="line">location /conf &#123;  </div><div class="line">       root /usr/local/nginx/;          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /conf &#123;  </div><div class="line">    alias /usr/local/nginx/conf/;      </div><div class="line">&#125;</div><div class="line"><span class="meta">#</span>如果用root，则如</div><div class="line">location /conf &#123;  </div><div class="line">       root /usr/local/nginx/;          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -507,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/17/Iptables整理笔记/" rel="next" title="Iptables整理笔记">
-                <i class="fa fa-chevron-left"></i> Iptables整理笔记
+              <a href="/2017/05/24/Jumpserver搭建记录/" rel="next" title="Jumpserver实践记录">
+                <i class="fa fa-chevron-left"></i> Jumpserver实践记录
               </a>
             
           </div>
@@ -516,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/24/Jumpserver搭建记录/" rel="prev" title="Jumpserver实践记录">
-                Jumpserver实践记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
