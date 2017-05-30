@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/05/30/%E5%B8%B8%E8%A7%81%E5%8E%8B%E7%BC%A9%E6%A0%BC%E5%BC%8F%E5%AF%B9%E6%AF%94/</loc>
+    <lastmod>2017-05-30T06:48:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>常见压缩格式对比</title>
+        <pubTime>2017-05-29T16:00:00.000Z</pubTime>
+        
+        <tag>系统原理</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/05/29/Nginx%E9%87%8D%E5%AE%9A%E5%90%91%E5%8F%8A%E5%9F%9F%E5%90%8DCNAME%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-05-29T09:12:20.000Z</lastmod>
     <data>
@@ -30,23 +47,6 @@
         <pubTime>2015-08-10T06:55:36.000Z</pubTime>
         
         <tag>学习笔记</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
-        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
-        
-        <tag>Ansible</tag>
          
          
            
@@ -1118,7 +1118,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://arvon.top/2016/08/06/Cassandra%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
@@ -1128,6 +1127,24 @@
         <pubTime>2016-08-05T16:14:09.000Z</pubTime>
         
         <tag>Nosql</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
+        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
+        
+        <tag>Ansible</tag>
          
          
            
