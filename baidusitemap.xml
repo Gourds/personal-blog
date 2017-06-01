@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/06/01/GTX%E7%9B%B4%E5%8E%8B%E4%B8%8A%E4%BA%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2017-06-01T12:33:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>GTX直压上云技术实践</title>
+        <pubTime>2017-05-31T16:00:00.000Z</pubTime>
+        
+        <tag>运维工具</tag>
+         
+        <tag>AWS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/05/30/%E5%B8%B8%E8%A7%81%E5%8E%8B%E7%BC%A9%E6%A0%BC%E5%BC%8F%E5%AF%B9%E6%AF%94/</loc>
     <lastmod>2017-05-30T06:48:22.000Z</lastmod>
     <data>
@@ -39,31 +58,16 @@
     
     
   <url>
-    <loc>http://arvon.top/2016/08/12/Tmux%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/</loc>
+    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Tmux源码安装</title>
-        <pubTime>2016-08-12T04:26:51.000Z</pubTime>
+        <title>Python复习笔记</title>
+        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
         
-        <tag>Linux</tag>
+        <tag>Python</tag>
          
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2016/08/06/Cassandra%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Cassandra简单使用记录</title>
-        <pubTime>2016-08-05T16:14:09.000Z</pubTime>
-        
-        <tag>Nosql</tag>
+        <tag>学习笔记</tag>
          
          
            
@@ -576,14 +580,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
+    <loc>http://arvon.top/2016/08/12/Tmux%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>8月读书计划</title>
-        <pubTime>2016-08-12T16:38:24.000Z</pubTime>
+        <title>Tmux源码安装</title>
+        <pubTime>2016-08-12T04:26:51.000Z</pubTime>
         
-        <tag>读书</tag>
+        <tag>Linux</tag>
          
          
            
@@ -593,16 +597,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Python复习笔记</title>
-        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
+        <title>8月读书计划</title>
+        <pubTime>2016-08-12T16:38:24.000Z</pubTime>
         
-        <tag>Python</tag>
-         
-        <tag>学习笔记</tag>
+        <tag>读书</tag>
          
          
            
@@ -1144,6 +1146,23 @@
         <pubTime>2016-08-04T16:00:00.000Z</pubTime>
         
         <tag>Python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2016/08/06/Cassandra%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Cassandra简单使用记录</title>
+        <pubTime>2016-08-05T16:14:09.000Z</pubTime>
+        
+        <tag>Nosql</tag>
          
          
            
