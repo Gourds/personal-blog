@@ -235,6 +235,195 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Linux管理员的瑞士军刀-AWK]]></title>
+      <url>http://arvon.top/2017/05/24/Linux%E7%AE%A1%E7%90%86%E5%91%98%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80-AWK/</url>
+      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-awkcommand-1.jpeg" alt="1"><br>作为Linux系统管理员的瑞士小军刀，awk的作用是显而易见的，但是一般情况下使用的都是很简单的分割打印，但有时候需要稍微复杂一些的用法，这里进行一下我的总结。其实之前有写过一篇awk的博客，不过写的比较基础，这次作为补充并尽可能覆盖常用用法，之前的地址<a href="http://arvon.top/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/">戳这里</a><br><a id="more"></a></p>
+<h3 id="感受一下"><a href="#感受一下" class="headerlink" title="感受一下"></a>感受一下</h3><p>通过一个简单的实例来进行说明，实例数据如下：</p>
+<table>
+<thead>
+<tr>
+<th>NumID</th>
+<th>Name</th>
+<th>Math</th>
+<th>English</th>
+<th>Chinese</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M5</td>
+<td>Arvon</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Mo</td>
+<td>92</td>
+<td>02</td>
+<td>26</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>Pikachu</td>
+<td>52</td>
+<td>10</td>
+<td>11</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>Steavn</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>World</td>
+<td>4</td>
+<td>5</td>
+<td>56</td>
+</tr>
+</tbody>
+</table>
+<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><ul>
+<li>内建变量</li>
+<li>Record（记录）:awk从数据文件上读取数据的基本单位，默认内建变量RS为换行<br>如：例子中的“M5    Arvon    13    14    15”就是一条记录</li>
+<li>Field（字段）：记录中被分隔开的子字符串，默认内建变量FS为空格<br>如：例子中第一条记录的第一个字符串为M5，第二个为Arvon</li>
+</ul>
+<h4 id="内建变量"><a href="#内建变量" class="headerlink" title="内建变量"></a>内建变量</h4><table>
+<thead>
+<tr>
+<th>变量名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\$n</td>
+<td>当前记录的第n个字段，字段间由FS分隔</td>
+</tr>
+<tr>
+<td>$0</td>
+<td>完整的输入记录</td>
+</tr>
+<tr>
+<td>ARGC</td>
+<td>命令行参数的数目</td>
+</tr>
+<tr>
+<td>ARGIND</td>
+<td>命令行中当前文件的位置(从0开始算)</td>
+</tr>
+<tr>
+<td>ARGV</td>
+<td>包含命令行参数的数组</td>
+</tr>
+<tr>
+<td>CONVFMT</td>
+<td>数字转换格式(默认值为%.6g)ENVIRON环境变量关联数组</td>
+</tr>
+<tr>
+<td>ERRNO</td>
+<td>最后一个系统错误的描述</td>
+</tr>
+<tr>
+<td>FIELDWIDTHS</td>
+<td>字段宽度列表(用空格键分隔)</td>
+</tr>
+<tr>
+<td>FILENAME</td>
+<td>当前文件名</td>
+</tr>
+<tr>
+<td>FNR</td>
+<td>各文件分别计数的行号</td>
+</tr>
+<tr>
+<td>FS</td>
+<td>字段分隔符(默认是任何空格)</td>
+</tr>
+<tr>
+<td>IGNORECASE</td>
+<td>如果为真，则进行忽略大小写的匹配</td>
+</tr>
+<tr>
+<td>NF</td>
+<td>输入字段分割符</td>
+</tr>
+<tr>
+<td>NR</td>
+<td>已经读出的记录数，就是行号，从1开始</td>
+</tr>
+<tr>
+<td>OFMT</td>
+<td>数字的输出格式(默认值是%.6g)</td>
+</tr>
+<tr>
+<td>OFS</td>
+<td>输出记录分隔符（输出换行符），输出时用指定的符号代替换行符</td>
+</tr>
+<tr>
+<td>ORS</td>
+<td>输出记录分隔符(默认值是一个换行符)</td>
+</tr>
+<tr>
+<td>RLENGTH</td>
+<td>由match函数所匹配的字符串的长度</td>
+</tr>
+<tr>
+<td>RS</td>
+<td>记录分隔符(默认是一个换行符)</td>
+</tr>
+<tr>
+<td>RSTART</td>
+<td>由match函数所匹配的字符串的第一个位置</td>
+</tr>
+<tr>
+<td>SUBSEP</td>
+<td>数组下标分隔符(默认值是/034)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="鲜活的小栗子"><a href="#鲜活的小栗子" class="headerlink" title="鲜活的小栗子"></a>鲜活的小栗子</h4><ul>
+<li><p>基础1：获取姓名和英语成绩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk -F<span class="string">' '</span> <span class="string">'&#123;print $2,$4&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>基础2：设置输入和输出分隔符的姓名和成绩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=" ";OFS="---"&#125;&#123;print $2,$4&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>基础3： 输出行号列数带描述的姓名和成绩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=" ";OFS="---"&#125;&#123;print "filename:" FILENAME, "lineNum:"NR, "leishu:"NF, $2,$4&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>基础4：添加Title和结束符并设置输入输出分隔符的例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;print "T1","T2","T3","T4"&#125;&#123;FS=" ";OFS="---"&#125;&#123;print "filename:" FILENAME, "lineNum:"NR, "leishu:"NF, $2,$4&#125;END&#123;print "Game Over"&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>基础5： 带匹配的，例如匹配Arvon并输出成绩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=" "&#125;/Arvon/&#123;print $0&#125;'</span> xxx.txt</div><div class="line">awk <span class="string">'BEGIN&#123;FS=" "&#125;/M[1-9]/&#123;print $0&#125;'</span> xxx.txt</div><div class="line">awk <span class="string">'BEGIN&#123;FS=" "&#125;/M./&#123;print $0&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="嗨嗨的大栗子"><a href="#嗨嗨的大栗子" class="headerlink" title="嗨嗨的大栗子"></a>嗨嗨的大栗子</h4><p><strong>说明一下：</strong>awk的条件是从C语言借鉴而来，反正C我也不会，但awk应该会，关于AWK变成的资料极多，我这里就写一些常用简单的啦~<br><strong>还有还有–&gt;awk工作流程：</strong>先执行BEGIN，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。</p>
+<ul>
+<li><p>高阶1：行计数累加，获取每个人的成绩总和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=" "&#125;/M[1-9]|F[1-9]/&#123;print $0,$3+$4+$5&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>高阶2：列累加，获取所有人每科成绩的总和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=" "&#125;/F[1-9]|M[1-9]/&#123;sMath=sMath+$3;sEnglish=sEnglish+$4;sChinese=sChinese+$5&#125;END&#123;print sMath,sEnglish,sChinese&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>高阶3：数据筛选计数，获取数学成绩大于10的人数，并列出是谁</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;renshu=0&#125;&#123;FS=" "&#125;/F[1-9]|M[1-9]/&#123;if ($3&gt;10) &#123;print $0; renshu+=1&#125;&#125;END&#123;print "totleNum:" renshu&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>高阶5：带过滤筛选的求和，求英语成绩大于等于5的人的各科成绩总和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;sMath=0;sEng=0;sChi=0&#125;/F[1-9]|M[1-9]/&#123;if($4&gt;=5)&#123;print $0;sMath+=$3;sEng+=$4;sChi+=$5&#125;&#125;END&#123;print "sMath:" sMath, "sEng:" sEng, "sChi:" sChi&#125;'</span> xxx.txt</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>以上，还有很多用法暂时就先这样吧，有了再补充，awk编程也是厉害了</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Iptables整理笔记]]></title>
       <url>http://arvon.top/2016/11/17/Iptables%E6%95%B4%E7%90%86%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20161117-iptables-1.png" alt="20161117-iptables-1"><br>iptabels还是很实用的，分享下我的整理笔记<br><a id="more"></a></p>
