@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/05/24/Linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BC%98%E5%85%88%E7%BA%A7/</loc>
+    <lastmod>2017-06-26T09:44:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux后台执行执行程序及环境变量优先级</title>
+        <pubTime>2017-05-23T17:23:45.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>系统原理</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/06/25/Linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
     <lastmod>2017-06-26T06:50:03.000Z</lastmod>
     <data>
@@ -106,23 +125,6 @@
         <pubTime>2015-08-10T06:55:36.000Z</pubTime>
         
         <tag>学习笔记</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/06/13/CentOS%E5%AE%89%E8%A3%85hexo%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>安装hexo记录</title>
-        <pubTime>2015-06-13T02:00:02.000Z</pubTime>
-        
-        <tag>Hexo</tag>
          
          
            
@@ -1203,6 +1205,23 @@
         <pubTime>2016-01-13T03:30:24.000Z</pubTime>
         
         <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/06/13/CentOS%E5%AE%89%E8%A3%85hexo%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>安装hexo记录</title>
+        <pubTime>2015-06-13T02:00:02.000Z</pubTime>
+        
+        <tag>Hexo</tag>
          
          
            
