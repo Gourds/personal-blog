@@ -4,6 +4,98 @@
   
     
     <entry>
+      <title><![CDATA[open-falcon安装部署记录]]></title>
+      <url>http://arvon.top/2017/06/29/open-falcon%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p>监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有前景的，不妨尝试一下，现在只是基本搭建完成，TAG系统和表达式这些还没开始尝试，最近应该还会了解这个，以下是安装配置及简单调试使用过程。<br><a id="more"></a></p>
+<h3 id="架构图及组件说明"><a href="#架构图及组件说明" class="headerlink" title="架构图及组件说明"></a>架构图及组件说明</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png" alt="jiagou-4"></p>
+<blockquote>
+<p><strong>Agent: </strong>部署在目标机器采集机器监控项<br><strong>Transfer： </strong>数据接收端，转发数据到后端Graph和Judge<br><strong>Graph：</strong> 操作rrd文件，存储监控数据<br><strong>Query：</strong>查询各个Graph数据，提供统一http查询接口<br><strong>Dashboard： </strong>查询监控历史趋势图的web端<br><strong>Alarm：</strong>主要负责告警<br><strong>Task： </strong>负责一些定时任务，索引全量更新，垃圾索引清理，自身组件监控</p>
+</blockquote>
+<h3 id="安装搭建"><a href="#安装搭建" class="headerlink" title="安装搭建"></a>安装搭建</h3><h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p><strong>我的版本环境：</strong></p>
+<blockquote>
+<p><strong>version:</strong> Amazon 2015.03<br><strong>Type:</strong> t2.large<br><strong>Git version:</strong> 2.7.5  (need &gt;= 1.7.5)<br><strong>GO version:</strong> 1.8.3 (need &gt;= 1.6)</p>
+</blockquote>
+<ul>
+<li><p>安装环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y redis</div><div class="line">yum install -y mysql-server</div><div class="line">yum install -y git</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装go环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HOME=/home/tai_ops</div><div class="line"><span class="built_in">export</span> WORKSPACE=<span class="variable">$HOME</span>/open-falcon</div><div class="line">go_pkg=<span class="string">'go1.8.3.linux-amd64.tar.gz'</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$HOME</span></div><div class="line"><span class="comment">#wget http://dinp.qiniudn.com/go1.4.1.linux-amd64.tar.gz</span></div><div class="line"><span class="comment">#wget https://storage.googleapis.com/golang/$&#123;go_pkg&#125;</span></div><div class="line">tar zxf <span class="variable">$&#123;go_pkg&#125;</span></div><div class="line">mkdir -p <span class="variable">$&#123;WORKSPACE&#125;</span>/src</div><div class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; .bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export GOROOT=$HOME/go'</span> &gt;&gt; .bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export GOPATH=$HOME/$&#123;WORKSPACE&#125;'</span> &gt;&gt; .bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$GOROOT/bin:$GOPATH/bin:$PATH'</span> &gt;&gt; .bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">""</span> &gt;&gt; .bashrc</div><div class="line"><span class="built_in">source</span> .bashrc</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -p <span class="variable">$GOPATH</span>/src/github.com/open-falcon</div><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/open-falcon</div><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/open-falcon/falcon-plus.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mysql_host=<span class="string">'localhost'</span></div><div class="line">mysql_user=<span class="string">'root'</span></div><div class="line">mysql_pass=<span class="string">'arvon2014'</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/open-falcon/falcon-plus/scripts/mysql/db_schema/</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `ls`;<span class="keyword">do</span></div><div class="line">    mysql -h <span class="variable">$&#123;mysql_host&#125;</span> -u<span class="variable">$&#123;mysql_user&#125;</span>  -p<span class="variable">$&#123;mysql_pass&#125;</span> &lt; <span class="variable">$i</span></div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment">#mysql -h $&#123;mysql_host&#125; -u$&#123;mysql_user&#125;  -p$&#123;mysql_pass&#125; &lt; db_schema/graph-db-schema.sql</span></div><div class="line"><span class="comment">#mysql -h $&#123;mysql_host&#125; -u$&#123;mysql_user&#125;  -p$&#123;mysql_pass&#125; &lt; db_schema/dashboard-db-schema.sql</span></div><div class="line"><span class="comment">#mysql -h $&#123;mysql_host&#125; -u$&#123;mysql_user&#125;  -p$&#123;mysql_pass&#125; &lt; db_schema/portal-db-schema.sql</span></div><div class="line"><span class="comment">#mysql -h $&#123;mysql_host&#125; -u$&#123;mysql_user&#125;  -p$&#123;mysql_pass&#125; &lt; db_schema/links-db-schema.sql</span></div><div class="line"><span class="comment">#mysql -h $&#123;mysql_host&#125; -u$&#123;mysql_user&#125;  -p$&#123;mysql_pass&#125; &lt; db_schema/uic-db-schema.sql</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Build安装包<br>可选是build全部组件还是个别组件,我这里选择了全部build</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/open-falcon/falcon-plus/</div><div class="line"><span class="comment"># make all modules</span></div><div class="line">make all</div><div class="line"><span class="comment">## make specified module</span></div><div class="line"><span class="comment">#make agent</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">## pack all modules</span></div><div class="line">make pack</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="基础组件安装配置"><a href="#基础组件安装配置" class="headerlink" title="基础组件安装配置"></a>基础组件安装配置</h4><ul>
+<li><p>解压build安装包到需要的安装路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir -pv /data/tai-falcon</div><div class="line">cp <span class="variable">$GOPATH</span>/src/github.com/open-falcon/falcon-plus/open-falcon-v0.2.0.tar.gz /data</div><div class="line"><span class="built_in">cd</span> /data/</div><div class="line">tar -xvf open-falcon-v0.2.0.tar.gz -C /data/tai-falcon</div></pre></td></tr></table></figure>
+</li>
+<li><p>调试各个组件<br>主要就是要修改数据库等信息,如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># /data/tai-falcon/hbs/config/cfg.json:    "database": "root:arvon2014@tcp(127.0.0.1:3306)/falcon_portal?loc=Local&amp;parseTime=true",</span></div><div class="line"><span class="comment"># /data/tai-falcon/aggregator/config/cfg.json:        "addr": "root:arvon2014@tcp(127.0.0.1:3306)/falcon_portal?loc=Local&amp;parseTime=true",</span></div><div class="line"><span class="comment"># /data/tai-falcon/nodata/config/cfg.json:        "dsn": "root:arvon2014@tcp(127.0.0.1:3306)/falcon_portal?loc=Local&amp;parseTime=true&amp;wait_timeout=604800",</span></div><div class="line"><span class="comment"># /data/tai-falcon/alarm/config/cfg.json:        "addr": "root:arvon2014@tcp(127.0.0.1:3306)/alarms?charset=utf8&amp;loc=Asia%2FChongqing",</span></div><div class="line"><span class="comment"># /data/tai-falcon/api/config/cfg.json:		"faclon_portal": "root:arvon2014@tcp(127.0.0.1:3306)/falcon_portal?charset=utf8&amp;parseTime=True&amp;loc=Local",</span></div><div class="line"><span class="comment"># /data/tai-falcon/api/config/cfg.json:		"graph": "root:arvon2014@tcp(127.0.0.1:3306)/graph?charset=utf8&amp;parseTime=True&amp;loc=Local",</span></div><div class="line"><span class="comment"># /data/tai-falcon/api/config/cfg.json:		"uic": "root:arvon2014@tcp(127.0.0.1:3306)/uic?charset=utf8&amp;parseTime=True&amp;loc=Local",</span></div><div class="line"><span class="comment"># /data/tai-falcon/api/config/cfg.json:		"dashboard": "root:arvon2014@tcp(127.0.0.1:3306)/dashboard?charset=utf8&amp;parseTime=True&amp;loc=Local",</span></div><div class="line"><span class="comment"># /data/tai-falcon/api/config/cfg.json:		"alarms": "root:arvon2014@tcp(127.0.0.1:3306)/alarms?charset=utf8&amp;parseTime=True&amp;loc=Local",</span></div><div class="line"><span class="comment"># /data/tai-falcon/graph/config/cfg.json:        "dsn": "root:arvon2014@tcp(127.0.0.1:3306)/graph?loc=Local&amp;parseTime=true",</span></div></pre></td></tr></table></figure>
+<p><strong>推荐启动顺序：</strong>judge &gt; graph &gt; transfer &gt; agent &gt; alarm &gt; api &gt; aggregator &gt; nodata &gt; gateway<br><strong>提示：</strong>主要调试直接看对应模块下的log即可</p>
+</li>
+</ul>
+<h4 id="dashboard安装配置"><a href="#dashboard安装配置" class="headerlink" title="dashboard安装配置"></a>dashboard安装配置</h4><ul>
+<li><p>安装开发包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pip install virtualenv</div><div class="line">yum install -y python-devel</div><div class="line">yum install -y openldap-devel</div><div class="line">yum install -y mysql-devel</div><div class="line">yum groupinstall <span class="string">"Development tools"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>下载dashboard的源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/open-falcon</div><div class="line">git <span class="built_in">clone</span> https://github.com/open-falcon/dashboard</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装环境依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/open-falcon/dashboard/</div><div class="line">virtualenv ./env</div><div class="line">./env/bin/pip install -r pip_requirements.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim ./gunicorn.conf</div><div class="line">vim ./rrd/config.py</div><div class="line"><span class="comment">#主要也是修改数据库，也可以修改服务端口</span></div><div class="line">./control start</div></pre></td></tr></table></figure>
+</li>
+<li><p>访问dashboard测试<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-1.jpeg" alt="dashboard-1"><br>这个没有默认的用户密码，自己注册后即可登录，且注册不会验证邮箱，登录后如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-2.jpeg" alt="dashboard-2"></p>
+</li>
+</ul>
+<h4 id="Agent端配置"><a href="#Agent端配置" class="headerlink" title="Agent端配置"></a>Agent端配置</h4><ul>
+<li><p>生成agent部署包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/open-falcon/falcon-plus/modules/agent</div><div class="line">./control pack</div><div class="line"><span class="comment">#pack 即可打出agent包，我这里是falcon-agent-5.1.2.tar.gz，然后把这个包部署到需要监控的机器上</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置启动agent</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir ~/falcon_aget;<span class="built_in">cd</span> ~/falcon_agent</div><div class="line">cp falcon-agent-5.1.2.tar.gz ./</div><div class="line">tar xvf falcon-agent-5.1.2.tar.gz</div><div class="line"><span class="comment">##然后修改配置</span></div><div class="line">cp cfg.example.json cfg.json</div><div class="line"><span class="comment">#vim cfg.jsoon</span></div><div class="line"><span class="comment">#修改heartbeat、transfer的配置地址端口等改为对应配置即可</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>可以通过浏览器查看上报的监控数据<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-3.jpeg" alt="agent-3"></p>
+</li>
+</ul>
+<h4 id="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"><a href="#报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）" class="headerlink" title="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"></a>报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）</h4><ul>
+<li>下载邮件封装程序源码<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/github.com/open-falcon/</div><div class="line">git <span class="built_in">clone</span> https://github.com/open-falcon/mail-provider.git</div><div class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/github.com/open-falcon/mail-provider/</div><div class="line"><span class="comment"># 开始build出包</span></div><div class="line">go get ./...</div><div class="line">./control build</div><div class="line">./control pack</div><div class="line"><span class="comment">#测试邮件</span></div><div class="line">curl http://127.0.0.1:4000/sender/mail <span class="_">-d</span> <span class="string">"tos=youremail@126.com&amp;subject='hello'&amp;content='world'"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="报警配置"><a href="#报警配置" class="headerlink" title="报警配置"></a>报警配置</h3><blockquote>
+<p><strong>简要说明：</strong>大概说三种情况</p>
+<ol>
+<li>正常：创建主机组–&gt;根据主机组创建监控模板–&gt;主机组关联模板</li>
+<li>模板继承：在一种的情况下，很可能存在一个主机组里个别机器可能需要的阈值并不一样，这时可以继承这个主机组的通用模板，在此基础上做特别的设置，除此之外的监控项还按这个主机组的通用模板</li>
+<li>TAG模式：这种模式可独立于模板模式进行，比较适合监控同个项目或者个别重要业务的场景</li>
+</ol>
+</blockquote>
+<h4 id="设置Hostgroup（主机组）"><a href="#设置Hostgroup（主机组）" class="headerlink" title="设置Hostgroup（主机组）"></a>设置Hostgroup（主机组）</h4><ul>
+<li>创建主机组<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-5.jpeg" alt="5"></li>
+<li>为主机组添加主机(主机填写hostname主机名即可)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-6.jpeg" alt="6"></li>
+</ul>
+<h4 id="设置Templates（模板）"><a href="#设置Templates（模板）" class="headerlink" title="设置Templates（模板）"></a>设置Templates（模板）</h4><ul>
+<li>创建模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-7.jpeg" alt="7"></li>
+<li>设置报警策略<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-8.jpeg" alt="8"></li>
+<li>主机组关联模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-9.jpeg" alt="9"></li>
+</ul>
+<h4 id="查看报警"><a href="#查看报警" class="headerlink" title="查看报警"></a>查看报警</h4><ul>
+<li>报警<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-10.jpeg" alt="10"></li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://book.open-falcon.org/zh_0_2/index.html" target="_blank" rel="external">小米官方手册0.2.0</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Linux启动流程]]></title>
       <url>http://arvon.top/2017/06/25/Linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
       <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-1.jpeg" alt="1"><br><strong>背景故事：</strong>为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有<strong>BUT</strong>，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。。。不过总结一下还是对系统层认识不够生动，所以就补一篇日志，万一我最棒的媳妇看到了呢，那就点点点~<br><a id="more"></a></p>

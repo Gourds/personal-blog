@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/06/29/open-falcon%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-06-29T12:14:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>open-falcon安装部署记录</title>
+        <pubTime>2017-06-29T11:50:45.000Z</pubTime>
+        
+        <tag>运维工具</tag>
+         
+        <tag>falcon</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%A6%E9%87%8F%E5%8D%95%E4%BD%8D%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2017-06-27T06:07:01.000Z</lastmod>
     <data>
@@ -180,25 +199,6 @@
         <pubTime>2015-09-14T09:40:45.000Z</pubTime>
         
         <tag>Zabbix</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Centos搭建nginx+php环境</title>
-        <pubTime>2015-02-13T04:58:28.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>Nginx</tag>
          
          
            
@@ -1277,6 +1277,25 @@
         <pubTime>2016-09-09T08:57:56.000Z</pubTime>
         
         <tag>版本控制</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Centos搭建nginx+php环境</title>
+        <pubTime>2015-02-13T04:58:28.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Nginx</tag>
          
          
            
