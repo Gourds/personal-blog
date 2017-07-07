@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-8.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-9.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-10.jpeg">
-<meta property="og:updated_time" content="2017-06-29T12:14:37.000Z">
+<meta property="og:updated_time" content="2017-06-29T12:16:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="open-falcon安装部署记录">
 <meta name="twitter:description" content="监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有">
@@ -423,7 +423,7 @@
 
       
         <p>监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有前景的，不妨尝试一下，现在只是基本搭建完成，TAG系统和表达式这些还没开始尝试，最近应该还会了解这个，以下是安装配置及简单调试使用过程。<br><a id="more"></a></p>
-<h3 id="架构图及组件说明"><a href="#架构图及组件说明" class="headerlink" title="架构图及组件说明"></a>架构图及组件说明</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png" alt="jiagou-4"></p>
+<h3 id="架构图-来自小米官方-及组件说明"><a href="#架构图-来自小米官方-及组件说明" class="headerlink" title="架构图(来自小米官方)及组件说明"></a>架构图(来自小米官方)及组件说明</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png" alt="jiagou-4"></p>
 <blockquote>
 <p><strong>Agent: </strong>部署在目标机器采集机器监控项<br><strong>Transfer： </strong>数据接收端，转发数据到后端Graph和Judge<br><strong>Graph：</strong> 操作rrd文件，存储监控数据<br><strong>Query：</strong>查询各个Graph数据，提供统一http查询接口<br><strong>Dashboard： </strong>查询监控历史趋势图的web端<br><strong>Alarm：</strong>主要负责告警<br><strong>Task： </strong>负责一些定时任务，索引全量更新，垃圾索引清理，自身组件监控</p>
 </blockquote>
@@ -583,6 +583,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/07/06/open-falcon业务监控实践/" rel="prev" title="open-falcon业务监控实践">
+                open-falcon业务监控实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -655,7 +659,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -753,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构图及组件说明"><span class="nav-number">1.</span> <span class="nav-text">架构图及组件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装搭建"><span class="nav-number">2.</span> <span class="nav-text">安装搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境准备"><span class="nav-number">2.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基础组件安装配置"><span class="nav-number">2.2.</span> <span class="nav-text">基础组件安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dashboard安装配置"><span class="nav-number">2.3.</span> <span class="nav-text">dashboard安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Agent端配置"><span class="nav-number">2.4.</span> <span class="nav-text">Agent端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"><span class="nav-number">2.5.</span> <span class="nav-text">报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报警配置"><span class="nav-number">3.</span> <span class="nav-text">报警配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置Hostgroup（主机组）"><span class="nav-number">3.1.</span> <span class="nav-text">设置Hostgroup（主机组）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置Templates（模板）"><span class="nav-number">3.2.</span> <span class="nav-text">设置Templates（模板）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看报警"><span class="nav-number">3.3.</span> <span class="nav-text">查看报警</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构图-来自小米官方-及组件说明"><span class="nav-number">1.</span> <span class="nav-text">架构图(来自小米官方)及组件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装搭建"><span class="nav-number">2.</span> <span class="nav-text">安装搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境准备"><span class="nav-number">2.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基础组件安装配置"><span class="nav-number">2.2.</span> <span class="nav-text">基础组件安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dashboard安装配置"><span class="nav-number">2.3.</span> <span class="nav-text">dashboard安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Agent端配置"><span class="nav-number">2.4.</span> <span class="nav-text">Agent端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"><span class="nav-number">2.5.</span> <span class="nav-text">报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报警配置"><span class="nav-number">3.</span> <span class="nav-text">报警配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置Hostgroup（主机组）"><span class="nav-number">3.1.</span> <span class="nav-text">设置Hostgroup（主机组）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置Templates（模板）"><span class="nav-number">3.2.</span> <span class="nav-text">设置Templates（模板）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看报警"><span class="nav-number">3.3.</span> <span class="nav-text">查看报警</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
