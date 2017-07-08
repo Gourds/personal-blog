@@ -4,6 +4,48 @@
   
     
     <entry>
+      <title><![CDATA[记ARDB频繁崩溃错误]]></title>
+      <url>http://arvon.top/2017/07/07/%E8%AE%B0ARDB%E9%A2%91%E7%B9%81%E5%B4%A9%E6%BA%83%E9%94%99%E8%AF%AF/</url>
+      <content type="html"><![CDATA[<p><strong>背景：</strong>在业务规模对db没有高需求的情况下使用redis存储其实是有些浪费的，毕竟内存要比磁盘贵很多。这也就是我们要把部分db从redis迁移到ardb的原因，虽然在上线之前已经做了内网测试以及线上部分db替换测试，但是并未触发ardb的这个bug，其中线上测试了30d，现在分析看来，应该是因为线上替换的这个db压力不高，用户基数小。记录一下，关于ardb可以<a href="https://github.com/yinqiwen/ardb" target="_blank" rel="external">看这里</a><br><a id="more"></a></p>
+<h4 id="从崩溃到崩溃"><a href="#从崩溃到崩溃" class="headerlink" title="从崩溃到崩溃"></a>从崩溃到崩溃</h4><ul>
+<li>现象：<br>直接dwon掉，ardb的log没有记录</li>
+<li>系统日志：<br><strong>在/var/log/message</strong>中有如下日志<blockquote>
+<p>kernel: [20758288.642227] rocksdb:bg7[25004]: segfault at 7f370d206e7e ip 0000000000578f46 sp 00007f370fbfde90 error 6 in ardb-server[400000+423000]</p>
+</blockquote>
+</li>
+<li><p>addr2排查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@ip-10-33-4-xx ardb-0.9.4]<span class="comment"># addr2line -e ./src/ardb-server 0000000000578f46</span></div><div class="line">/opt/ardb/ardb-0.9.4/src/db/rocksdb/rocksdb_engine.cpp:222</div></pre></td></tr></table></figure>
+</li>
+<li><p>撸源码报错段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (n &gt; 0 &amp;&amp; NULL != buffer)</div><div class="line">&#123;</div><div class="line">    buffer[n] = 0;</div><div class="line">    LOG_WITH_LEVEL(level, <span class="string">"[RocksDB]%s"</span>, buffer);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>撸代码修改为（rocksdb_engine.cpp:222修改源代码中这个文件的222行）<br><strong>说明：</strong>这个代码经经沟通是一个临界问题，在win下和Linux下表现是不一样的，截取字符串存在问题，下面给出的是修复代码。因我并不懂C++所以理解有限，欢迎更正补充。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (n &gt; 0)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (n &gt;= buf_len)</div><div class="line">    &#123;</div><div class="line">        buffer[buf_len-1] = 0;</div><div class="line">        LOG_WITH_LEVEL(level, <span class="string">"[RocksDB]%s"</span>, buffer);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        buffer[n] = 0;</div><div class="line">        LOG_WITH_LEVEL(level, <span class="string">"[RocksDB]%s"</span>, buffer);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>总结<br>这里我个人说三点对于更换DB的注意事项</p>
+<blockquote>
+<p>1.数据备份，并需考虑备份数据对于前后DB的可用性，如Redis的备份数据ARDB是否可用，是否备份还原策略可以准确顺利<br>2.对新DB的调研一定要充分。如系统平台、程序版本、底层依赖、bug反馈修复速率<br>3.新DB是否有大量的成功企业实践，实践企业反馈<br>4.回滚至原有DB方案制定、可行性实践及分析<br>5.新DB备份策略</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="排查手段"><a href="#排查手段" class="headerlink" title="排查手段"></a>排查手段</h4><p>这里介绍一下Linux下的core dump机制</p>
+<blockquote>
+<p>1.什么是core dump<br>当程序运行的过程中异常终止或崩溃，操作系统会将程序当时的内存状态记录下来，保存在一个文件中，这种行为就叫做Core Dump（中文有的翻译成“核心转储”)。我们可以认为 core dump 是“内存快照”，但实际上，除了内存信息之外，还有些关键的程序运行状态也会同时 dump 下来，例如寄存器信息（包括程序指针、栈指针等）、内存管理信息、其他处理器和操作系统状态和信息。core dump 对于编程人员诊断和调试程序是非常有帮助的，因为对于有些程序错误是很难重现的，例如指针异常，而 core dump 文件可以再现程序出错时的情景。<br>2.如何产生core dump<br>参考这个吧<a href="http://www.cnblogs.com/hazir/p/linxu_core_dump.html" target="_blank" rel="external">http://www.cnblogs.com/hazir/p/linxu_core_dump.html</a><br>这个链接包含了详细信息，不过为了方便我还是在下面啰嗦一下</p>
+</blockquote>
+<ul>
+<li><p>如何开启core dump</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#立即开启，重启后失效</span></div><div class="line"><span class="built_in">ulimit</span> -c unlimited</div><div class="line"><span class="comment">#修改配置，重启后生效</span></div><div class="line">vim /etc/security/limits.conf   <span class="comment">#添加如下行</span></div><div class="line">*          soft     core   unlimited</div></pre></td></tr></table></figure>
+</li>
+<li><p>如何查看调试core文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gdb core_demo core_demo.core.24816</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>以上，换DB事情蛮大的，还是要慎重再慎重，表示线上频繁崩溃很绝望，记录一下引以为戒。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[open-falcon业务监控实践]]></title>
       <url>http://arvon.top/2017/07/06/open-falcon%E4%B8%9A%E5%8A%A1%E7%9B%91%E6%8E%A7%E5%AE%9E%E8%B7%B5/</url>
       <content type="html"><![CDATA[<p>上一篇已经写了falcon的基础安装配置以及简单的使用说明，现在来记录下一些业务相关的监控如何做，截图居多。心疼流量三秒…其实实现方法都不难，设计一个良好的命名规范以及科学的分组，实际上对监控来说是十分必要的。还有就是要对监控指标的判断做个性化设置，最好就是看图的话一眼就概览全局（要让图清晰直观的反应状况），报警的话做到真实有效人性化。这篇里面只涉及如何对常见服务进行配置。</p>
@@ -22,7 +64,7 @@
 <li>模板关联至主机组</li>
 <li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
 </ul>
-<h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p>**Tips：官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
+<h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p><strong>Tips：</strong>官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
 <ul>
 <li><p>获取两个字段</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  ps axu | grep mysql</div><div class="line">  <span class="comment">#root      5465  0.0  0.0 113176  1600 ?        S    May18   0:00 /bin/sh /usr/libexec/mysql55/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span></div><div class="line"><span class="comment">#mysql     5658  0.0  1.2 1336076 101032 ?      Sl   May18  27:08 /usr/libexec/mysql55/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock</span></div><div class="line"><span class="comment">#tai_ops  28522  0.0  0.0 110408   868 pts/0    S+   03:04   0:00 grep mysql</span></div><div class="line">  cat /proc/5465/status  | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld_safe</span></div><div class="line">  cat /proc/5465/cmdline</div><div class="line">  <span class="comment">#/bin/sh/usr/libexec/mysql55/mysqld_safe--datadir=/var/lib/mysql--socket=/var/lib/mysql/mysql.sock--pid-file=/var/run/mysqld/mysqld.pid--basedir=/usr--user=mysql</span></div><div class="line">  cat /proc/5658/status | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld</span></div><div class="line">  cat /proc/5658/cmdline</div><div class="line">  <span class="comment">#/usr/libexec/mysql55/mysqld--basedir=/usr--datadir=/var/lib/mysql--plugin-dir=/usr/lib64/mysql/plugin--user=mysql--log-error=/var/log/mysqld.log--pid-file=/var/run/mysqld/m</span></div></pre></td></tr></table></figure>

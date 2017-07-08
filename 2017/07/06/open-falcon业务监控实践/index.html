@@ -123,7 +123,7 @@
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-6.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-7.jpeg">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-8.jpeg">
-<meta property="og:updated_time" content="2017-07-07T06:16:31.000Z">
+<meta property="og:updated_time" content="2017-07-07T13:00:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="open-falcon业务监控实践">
 <meta name="twitter:description" content="上一篇已经写了falcon的基础安装配置以及简单的使用说明，现在来记录下一些业务相关的监控如何做，截图居多。心疼流量三秒…其实实现方法都不难，设计一个良好的命名规范以及科学的分组，实际上对监控来说是十分必要的。还有就是要对监控指标的判断做个性化设置，最好就是看图的话一眼就概览全局（要让图清晰直观的反应状况），报警的话做到真实有效人性化。这篇里面只涉及如何对常见服务进行配置。   对于基础监控：cp">
@@ -436,7 +436,7 @@
 <li>模板关联至主机组</li>
 <li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
 </ul>
-<h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p>**Tips：官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
+<h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p><strong>Tips：</strong>官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
 <ul>
 <li><p>获取两个字段</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  ps axu | grep mysql</div><div class="line">  <span class="comment">#root      5465  0.0  0.0 113176  1600 ?        S    May18   0:00 /bin/sh /usr/libexec/mysql55/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span></div><div class="line"><span class="comment">#mysql     5658  0.0  1.2 1336076 101032 ?      Sl   May18  27:08 /usr/libexec/mysql55/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock</span></div><div class="line"><span class="comment">#tai_ops  28522  0.0  0.0 110408   868 pts/0    S+   03:04   0:00 grep mysql</span></div><div class="line">  cat /proc/5465/status  | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld_safe</span></div><div class="line">  cat /proc/5465/cmdline</div><div class="line">  <span class="comment">#/bin/sh/usr/libexec/mysql55/mysqld_safe--datadir=/var/lib/mysql--socket=/var/lib/mysql/mysql.sock--pid-file=/var/run/mysqld/mysqld.pid--basedir=/usr--user=mysql</span></div><div class="line">  cat /proc/5658/status | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld</span></div><div class="line">  cat /proc/5658/cmdline</div><div class="line">  <span class="comment">#/usr/libexec/mysql55/mysqld--basedir=/usr--datadir=/var/lib/mysql--plugin-dir=/usr/lib64/mysql/plugin--user=mysql--log-error=/var/log/mysqld.log--pid-file=/var/run/mysqld/m</span></div></pre></td></tr></table></figure>
@@ -550,6 +550,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/07/07/记ARDB频繁崩溃错误/" rel="prev" title="记ARDB频繁崩溃错误">
+                记ARDB频繁崩溃错误 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -622,7 +626,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -635,7 +639,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
