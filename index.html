@@ -326,6 +326,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/07/08/AWS-cli操作S3及DynamoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/08/AWS-cli操作S3及DynamoDB/" itemprop="url">AWS-cli操作S3及DynamoDB</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T18:23:45+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/08/AWS-cli操作S3及DynamoDB/" class="leancloud_visitors" data-flag-title="AWS-cli操作S3及DynamoDB">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>AWS的cli还是挺好用的，文档也比较全面，其实看个文档就可以使用，但是我毕竟是我，记下来，减少查询搜索的时间也是挺赚的，不是么。。话说“懒人使世界进步”，其实有个很重要的前提就是你这个懒人做出了可以帮你出色完成原定任务的东西，这时你才有资格懒。很显然，我没有。。。But我一直在实现这个前提的路上前进</p>
+</blockquote>
+<h4 id="S3操作"><a href="#S3操作" class="headerlink" title="S3操作"></a>S3操作</h4><p><strong>Tips：</strong>官方文档<a href="http://docs.aws.amazon.com/cli/latest/reference/s3/index.html" target="_blank" rel="external">看这里</a>，好吧，中文<a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/delete-or-empty-bucket.html#delete-bucket" target="_blank" rel="external">看这里</a></p>
+<ul>
+<li><p>创建bucket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aws s3 mb s3://arvon-test-bucket1</div></pre></td></tr></table></figure>
+</li>
+<li><p>上传文件到bucket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#上传文件</span></div><div class="line">aws s3 cp README.md  s3://arvon-test-bucket1/</div><div class="line"><span class="comment">#上传目录</span></div><div class="line">aws s3 cp files  s3://arvon-test-bucket1/files --recursive</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除文件或目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#删除文件</span></div><div class="line">aws s3 rm s3://arvon-test-bucket1/README.md</div><div class="line"><span class="comment">#删除目录</span></div><div class="line">aws s3 rm s3://arvon-test-bucket1/files --recursive</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载文件或目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载文件</span></div><div class="line">aws s3 cp s3://arvon-test-bucket1/README.md  ./</div><div class="line"><span class="comment">#下载目录</span></div><div class="line">aws --region ap-southeast-1 s3 cp s3://arvon-test-bucket1 ./  --recursive</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除bucket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#删除空bucket</span></div><div class="line">aws s3 rb s3://arvon-test-bucket1</div><div class="line"><span class="comment">#删除非空bucket</span></div><div class="line">aws s3 rb s3://arvon-test-bucket1 --force</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="DynamoDB操作"><a href="#DynamoDB操作" class="headerlink" title="DynamoDB操作"></a>DynamoDB操作</h4><p><strong>Tips:</strong>官方文档<a href="http://docs.aws.amazon.com/cli/latest/reference/dynamodb/index.html" target="_blank" rel="external">看这里</a>,为了方便自己记忆就动手实践一遍，顺便记录一下，当然还有<a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.CLI.html" target="_blank" rel="external">国语版</a></p>
+<blockquote>
+<p>啰嗦几个点<br>1）创建含排序键的表示，指定key-schema时一定是先指定HASH这个类型再指定RANGE这个，不然一定报错<br>2）如需修改读写容量修改命令最后的provisioned-throughput下面对应值即可<br>3）就是需要提前设置连接服务器的环境变量如key及region，不然需命令行指定</p>
+</blockquote>
+<ul>
+<li><p>创建dynamoDB表<br>创建表<strong>含排序键</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aws dynamodb create-table --table-name Arvon-test1 --attribute-definitions AttributeName=ArvonMeID,AttributeType=S AttributeName=moid,AttributeType=S --key-schema AttributeName=ArvonMeID,KeyType=HASH AttributeName=moid,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5</div></pre></td></tr></table></figure>
+<p>创建表<strong>不含排序建</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aws dynamodb create-table --table-name Arvon-test2 --attribute-definitions  AttributeName=Hello,AttributeType=S  --key-schema  AttributeName=Hello,KeyType=HASH  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除dynamo表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aws dynamodb delete-table --table-name Arvon-test1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://aws.amazon.com/cn/documentation/" target="_blank" rel="external">官方就是好用</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/07/07/记ARDB频繁崩溃错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1086,136 +1244,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/06/01/GTX直压上云技术实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Arvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/uploads/suolong.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Arvon's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/01/GTX直压上云技术实践/" itemprop="url">GTX直压上云技术实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T00:00:00+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/06/01/GTX直压上云技术实践/" class="leancloud_visitors" data-flag-title="GTX直压上云技术实践">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>update:</strong>测试时出现二进制文件大小恰好为256M整数倍时解压不退出的bug,提交至维护人员后已经解决，不得不说反馈速度真的是快，从我提出到解决总共用了不到1天时间。给点个赞，棒棒哒<br>GTX Compressor(直压上云技术)调研,由于现业务存在大规模业务数据上传云存储，云厂商提供接口具有一些局限性，现在尝试gtz这个工具。该工具目前支持阿里云及AWS非常符合业务场景，具有高压缩比、高性能、高速直压云等特点，且有数据校验机制，而且开包即用，<strong>不依赖当前系统其他任何库</strong>。</p>
-<blockquote>
-<p><strong>介绍：</strong>GTX Compressor是Genetalks公司GTX Lab实验室开发的面向大型数据（数GB甚至数TB数据，尤其是生物信息数据）上云，而量身定制的复杂通用数据压缩打包系统，可以对任意基因测序数据以及数据目录进行高压缩率的快速打包，形成单个压缩数据文件，以方便存储档与远程传输、校验。区别于以往的压缩工具，GT Compressor系统着力于 高压缩率，高速率，方便的数据抽取 。<br>——————摘自<a href="https://github.com/Genetalks/gtz/blob/master/README_chs.md" target="_blank" rel="external">Github上该项目官方介绍</a></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/01/GTX直压上云技术实践/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1265,7 +1293,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
