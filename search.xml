@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title><![CDATA[弱网终端替代工具Mosh]]></title>
+      <url>http://arvon.top/2017/07/17/%E5%BC%B1%E7%BD%91%E7%BB%88%E7%AB%AF%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7Mosh/</url>
+      <content type="html"><![CDATA[<p><strong>应用背景：</strong>当有海外服务器维护需求的时候，常常会遇到使用ssh终端延时高并经常性假死的情况，非常影响维护效率。然后一个能缓解延时假死的小工具就是十分有用的，Mosh正是这样一个工具。Mosh是一个用于从客户端跨互联网连接远程服务器的命令行工具，程序最初由Keith Winstein 编写，用于类Unix的操作系统中，发布于GNU GPL V3协议下，基于UDP方式进行数据传输。<br><a id="more"></a></p>
+<p><strong>Mosh的优缺点：</strong></p>
+<blockquote>
+<p><strong>优点</strong>：<br>1.回话保持（会话的中断不会导致当前正在前端执行的命令中断；会话在中断过后，会自动在当前会话重新连接）<br>2.基本支持全平台（Linux、FreeBSD、Solaris、Mac OS X和Android）<br>3.切换网络/暂时断网后回话自动连接</p>
+<p><strong>缺点</strong>：<br>1.需要开启额外UDP端口<br>2.在网络状况良好的状况下不宜使用<br>3.状态同步、维持心跳、协助预测的ACK包都增加了传输的数据量</p>
+</blockquote>
+<h3 id="Mosh-Server安装配置"><a href="#Mosh-Server安装配置" class="headerlink" title="Mosh Server安装配置"></a>Mosh Server安装配置</h3><p><strong>Tips：</strong>我的环境为aws的ec2，另外需要开放一些UDP端口，官方默认是让开60000-61000端口，生产环境下最好对端口进行更改</p>
+<ul>
+<li><p>安装环境依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y autoconf automake libtool curl  make g++ unzip  zlib zlib-devel ncurses-devel openssl-devel</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装protobuf的依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/google/protobuf/releases/download/v3.3.0/protobuf-cpp-3.3.0.tar.gz</div><div class="line">tar xvf protobuf-cpp-3.3.0.tar.gz</div><div class="line"><span class="built_in">cd</span> protobuf-cpp-3.3.0</div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/protobuf</div><div class="line">make</div><div class="line">make check</div><div class="line">make install</div><div class="line"><span class="built_in">echo</span> <span class="string">"/usr/local/protobuf/lib/"</span> &gt;&gt; /etc/ld.so.conf</div><div class="line">ldconfig</div></pre></td></tr></table></figure>
+</li>
+<li><p>可能需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#export LD_LIBRARY_PATH=/usr/local/protobuf/lib/</span></div><div class="line"><span class="comment">#export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/protobuf/lib/</span></div><div class="line"><span class="comment">#export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装mosh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://mosh.org/mosh-1.3.0.tar.gz</div><div class="line">tar xvf mosh-1.3.0.tar.gz</div><div class="line"><span class="built_in">cd</span> mosh-1.3.0</div><div class="line">./autogen.sh</div><div class="line">./configure  --prefix=/usr/<span class="built_in">local</span>/mosh</div><div class="line">make</div><div class="line">make install</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/mosh/bin/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Mosh-Clinet安装配置"><a href="#Mosh-Clinet安装配置" class="headerlink" title="Mosh Clinet安装配置"></a>Mosh Clinet安装配置</h3><p>支持全平台，我这是mac系统，所以就只写了mac的，如有需要在<a href="https://mosh.org/#getting" target="_blank" rel="external">官方文档处</a>进行查看，做对应的安装</p>
+<ul>
+<li>MacOS客户端<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install mobile-shell</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://mosh.org/#getting" target="_blank" rel="external">Mosh官方介绍</a><br><a href="https://github.com/mobile-shell/mosh" target="_blank" rel="external">Github项目Mosh</a><br><a href="https://www.binss.me/blog/using-mosh-to-solve-ssh-delay-problem/" target="_blank" rel="external">BINSITE的blog</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[AWS-cli操作S3及DynamoDB]]></title>
       <url>http://arvon.top/2017/07/08/AWS-cli%E6%93%8D%E4%BD%9CS3%E5%8F%8ADynamoDB/</url>
       <content type="html"><![CDATA[<blockquote>
