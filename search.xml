@@ -26,10 +26,17 @@
 <li><p>安装mosh</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">wget https://mosh.org/mosh-1.3.0.tar.gz</div><div class="line">tar xvf mosh-1.3.0.tar.gz</div><div class="line"><span class="built_in">cd</span> mosh-1.3.0</div><div class="line">./autogen.sh</div><div class="line">./configure  --prefix=/usr/<span class="built_in">local</span>/mosh</div><div class="line">make</div><div class="line">make install</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/mosh/bin/</div></pre></td></tr></table></figure>
 </li>
+<li><p>启动mosh server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 启动进程</span></div><div class="line">/usr/<span class="built_in">local</span>/bin/mosh-server</div><div class="line"><span class="comment"># 查看进程是否正常</span></div><div class="line">ps axu | grep mosh</div><div class="line"><span class="comment">#Auser  1866  0.0  0.0 163172  5900 ?        S    02:33   0:00 mosh-server new -c 256 -s -l LANG=zh_CN.UTF-8</span></div><div class="line"><span class="comment">#Auser  2181  0.0  0.0 162612  5184 ?        S    03:25   0:00 mosh-server new -c 256 -s -l LANG=zh_CN.UTF-8</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h3 id="Mosh-Clinet安装配置"><a href="#Mosh-Clinet安装配置" class="headerlink" title="Mosh Clinet安装配置"></a>Mosh Clinet安装配置</h3><p>支持全平台，我这是mac系统，所以就只写了mac的，如有需要在<a href="https://mosh.org/#getting" target="_blank" rel="external">官方文档处</a>进行查看，做对应的安装</p>
 <ul>
-<li>MacOS客户端<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install mobile-shell</div></pre></td></tr></table></figure>
+<li><p>MacOS客户端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install mobile-shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用mosh连接服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#我这里是先将本地的公钥写到要连接服务器的authorized_keys文件中</span></div><div class="line">/usr/<span class="built_in">local</span>/bin/mosh  --ssh=<span class="string">"ssh -p 7777 "</span> Auser@arvon.top</div><div class="line"><span class="comment">#我这里由于ssh的默认端口更改了，所以需要指定端口7777</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://mosh.org/#getting" target="_blank" rel="external">Mosh官方介绍</a><br><a href="https://github.com/mobile-shell/mosh" target="_blank" rel="external">Github项目Mosh</a><br><a href="https://www.binss.me/blog/using-mosh-to-solve-ssh-delay-problem/" target="_blank" rel="external">BINSITE的blog</a></p>
