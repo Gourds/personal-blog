@@ -92,7 +92,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Nginx,网络安全," />
 
 
 
@@ -108,15 +108,17 @@
 
 
 
-<meta name="description" content="不要为了看别人而走错了自己脚下的路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arvon&#39;s Blog">
-<meta property="og:url" content="http://arvon.top/tags/版本控制/index.html">
+<meta name="description" content="之前在爆Zabbix漏洞的时候，在未进行漏洞升级修复的情况下，可以先对nginx的web入口加一个认证，这样就能很大程度上降低被黑的风险。同理在使用Nginx代理一些服务的时候，也可以用这种方法进行安全上的加固。做起来比较简单，却行之有效。Nginx上一般使用的认证方式有2种，分别是auth_basic（本机认证）及ngx_http_auth_request_module（第三方认证）">
+<meta name="keywords" content="Nginx,网络安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx添加登录认证">
+<meta property="og:url" content="http://arvon.top/2017/07/16/Nginx添加登录认证/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="不要为了看别人而走错了自己脚下的路">
+<meta property="og:description" content="之前在爆Zabbix漏洞的时候，在未进行漏洞升级修复的情况下，可以先对nginx的web入口加一个认证，这样就能很大程度上降低被黑的风险。同理在使用Nginx代理一些服务的时候，也可以用这种方法进行安全上的加固。做起来比较简单，却行之有效。Nginx上一般使用的认证方式有2种，分别是auth_basic（本机认证）及ngx_http_auth_request_module（第三方认证）">
+<meta property="og:updated_time" content="2017-07-18T08:45:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arvon&#39;s Blog">
-<meta name="twitter:description" content="不要为了看别人而走错了自己脚下的路">
+<meta name="twitter:title" content="Nginx添加登录认证">
+<meta name="twitter:description" content="之前在爆Zabbix漏洞的时候，在未进行漏洞升级修复的情况下，可以先对nginx的web入口加一个认证，这样就能很大程度上降低被黑的风险。同理在使用Nginx代理一些服务的时候，也可以用这种方法进行安全上的加固。做起来比较简单，却行之有效。Nginx上一般使用的认证方式有2种，分别是auth_basic（本机认证）及ngx_http_auth_request_module（第三方认证）">
 
 
 
@@ -144,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://arvon.top/tags/版本控制/"/>
+  <link rel="canonical" href="http://arvon.top/2017/07/16/Nginx添加登录认证/"/>
 
 
 
 
 
-  <title>标签: 版本控制 | Arvon's Blog</title>
+  <title>Nginx添加登录认证 | Arvon's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -186,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -314,72 +316,229 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>版本控制<small>标签</small>
-      </h1>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/09/Centos下搭建svn服务器/" itemprop="url">
-              
-                <span itemprop="name">Centos下搭建svn服务器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-09T16:57:56+08:00"
-              content="2016-09-09" >
-          09-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/08/12/Git钩子在hexo中的应用/" itemprop="url">
-              
-                <span itemprop="name">Git钩子在hexo中的应用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-12T15:12:44+08:00"
-              content="2016-08-12" >
-          08-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/07/16/Nginx添加登录认证/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nginx添加登录认证</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T13:23:00+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/07/16/Nginx添加登录认证/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/07/16/Nginx添加登录认证/" class="leancloud_visitors" data-flag-title="Nginx添加登录认证">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前在爆Zabbix漏洞的时候，在未进行漏洞升级修复的情况下，可以先对nginx的web入口加一个认证，这样就能很大程度上降低被黑的风险。同理在使用Nginx代理一些服务的时候，也可以用这种方法进行安全上的加固。做起来比较简单，却行之有效。Nginx上一般使用的认证方式有2种，分别是auth_basic（本机认证）及ngx_http_auth_request_module（第三方认证）<br><a id="more"></a></p>
+<h3 id="auth-basic-本机认证-配置"><a href="#auth-basic-本机认证-配置" class="headerlink" title="auth_basic(本机认证)配置"></a>auth_basic(本机认证)配置</h3><ul>
+<li><p>如给web服务设置代理nginx配置文件如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       7777;</div><div class="line">        server_name  127.0.0.1;</div><div class="line">        auth_basic <span class="string">"test-web"</span>;</div><div class="line">        auth_basic_user_file /usr/<span class="built_in">local</span>/nginx/testweb.db;</div><div class="line">        location / &#123;</div><div class="line">                   proxy_pass http://11.11.11.5:80;</div><div class="line">                   proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</div><div class="line">                   proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">                   proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">                   proxy_redirect off;</div><div class="line">          &#125;       <span class="comment">#charset koi8-r;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建登录密码文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#可以使用htpasswd，或者使用openssl</span></div><div class="line"> <span class="built_in">printf</span> <span class="string">"taiyouxi:<span class="variable">$(openssl passwd -crypt YourPassword)</span>\n"</span> &gt;/usr/<span class="built_in">local</span>/nginx/testweb.db</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置说明：</p>
+<blockquote>
+<p>–<strong>开启认证</strong>–<br>默认值:     auth_basic off;<br>语法:     auth_basic string | off;<br>如使用auth_basic “test-web”;会在弹窗上显示test-web的字样<br>–<strong>密码文件说明</strong>–<br>语法:     auth_basic_user_file file;<br>配置段:     http, server, location, limit_except</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ngx-http-auth-request-module（第三方认证）配置"><a href="#ngx-http-auth-request-module（第三方认证）配置" class="headerlink" title="ngx_http_auth_request_module（第三方认证）配置"></a>ngx_http_auth_request_module（第三方认证）配置</h3><p>由于这个模块并不属于内置模块，默认使用yum安装是不会带这个模块的，可以下载源码重新带上这个模块编译安装。</p>
+<ul>
+<li><p>原yum默认编译参数查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@ip-10-222-0-85 nginx]<span class="comment"># nginx -V</span></div><div class="line"><span class="comment">#结果太多不贴了，就是没有所需的这个模块，所以就再编一个测试</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>先源码安装nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">yum -y install gcc gcc-c++ make libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel</div><div class="line">wget http://nginx.org/download/nginx-1.10.3.tar.gz</div><div class="line">tar xvf  nginx-1.10.3.tar.gz</div><div class="line">git <span class="built_in">clone</span> git://github.com/perusio/nginx-auth-request-module.git</div><div class="line"><span class="built_in">cd</span> nginx-1.10.3</div><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/nginx --add-module=../nginx-auth-request-module</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       20010;</div><div class="line">        server_name  127.0.0.1;</div><div class="line">        location / &#123;</div><div class="line">            auth_request /auth;</div><div class="line">            proxy_pass http://127.0.0.1:80;</div><div class="line">            proxy_set_header Host <span class="variable">$host</span>:<span class="variable">$server_port</span>;</div><div class="line">            proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">            proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">            proxy_redirect off;</div><div class="line">            <span class="comment">#charset koi8-r;</span></div><div class="line">        &#125;</div><div class="line">        location = /auth &#123;</div><div class="line">            proxy_pass http://127.0.0.1:80/passwd/HttpBasicAuthenticate.php;</div><div class="line">            proxy_pass_request_body off;</div><div class="line">            proxy_set_header Content-Length <span class="string">""</span>;</div><div class="line">            proxy_set_header X-Original-URI <span class="variable">$request_uri</span>;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>php认证代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim html/passwd/HttpBasicAuthenticate.php</span></div><div class="line">&lt;?php</div><div class="line"></div><div class="line"><span class="keyword">if</span>(isset(<span class="variable">$_SERVER</span>[<span class="string">'PHP_AUTH_USER'</span>], <span class="variable">$_SERVER</span>[<span class="string">'PHP_AUTH_PW'</span>]))&#123;</div><div class="line">    <span class="variable">$username</span> = <span class="variable">$_SERVER</span>[<span class="string">'PHP_AUTH_USER'</span>];</div><div class="line">    <span class="variable">$password</span> = <span class="variable">$_SERVER</span>[<span class="string">'PHP_AUTH_PW'</span>];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="variable">$username</span> == <span class="string">'wang'</span> &amp;&amp; <span class="variable">$password</span> == <span class="string">'123456'</span>)&#123;</div><div class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">header(<span class="string">'WWW-Authenticate: Basic realm="Git Server"'</span>);</div><div class="line">header(<span class="string">'HTTP/1.0 401 Unauthorized'</span>);</div><div class="line"></div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>说明</p>
+<blockquote>
+<p>用户访问server 弹出框中输入的用户名、密码保存在 $_SERVER 变量中<br>中间 if 段，只做演示用实际中应该是拿用户输入的用户名、密码跟数据库中的数据做比较<br>参考：<a href="http://www.cnblogs.com/wangxiaoqiangs/p/6184181.html" target="_blank" rel="external">http://www.cnblogs.com/wangxiaoqiangs/p/6184181.html</a></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+            <a href="/tags/网络安全/" rel="tag"># 网络安全</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/08/AWS-cli操作S3及DynamoDB/" rel="next" title="AWS-cli操作S3及DynamoDB">
+                <i class="fa fa-chevron-left"></i> AWS-cli操作S3及DynamoDB
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/17/弱网终端替代工具Mosh/" rel="prev" title="弱网终端替代工具Mosh">
+                弱网终端替代工具Mosh <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -387,6 +546,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>
         
@@ -406,8 +571,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/uploads/suolong.jpg"
@@ -510,6 +684,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#auth-basic-本机认证-配置"><span class="nav-number">1.</span> <span class="nav-text">auth_basic(本机认证)配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ngx-http-auth-request-module（第三方认证）配置"><span class="nav-number">2.</span> <span class="nav-text">ngx_http_auth_request_module（第三方认证）配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -623,6 +813,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
