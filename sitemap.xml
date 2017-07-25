@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://arvon.top/2017/07/24/Rsync%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2017-07-25T06:10:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://arvon.top/2017/07/16/Nginx%E6%B7%BB%E5%8A%A0%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/</loc>
     
     <lastmod>2017-07-18T08:45:31.000Z</lastmod>
@@ -115,13 +122,6 @@
   
   <url>
     <loc>http://arvon.top/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/</loc>
-    
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://arvon.top/2015/03/13/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     
@@ -556,6 +556,13 @@
   
   <url>
     <loc>http://arvon.top/2015/07/20/Hexo%E7%AE%80%E6%98%8E/</loc>
+    
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://arvon.top/2015/03/13/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     

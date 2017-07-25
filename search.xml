@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title><![CDATA[Rsync服务安装配置记录]]></title>
+      <url>http://arvon.top/2017/07/24/Rsync%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p>关于RSYNC，个人理解传送大量资源文件或较多小文件时适合使用传输，具有数据验证、断点续传、增量传输、差异传输等特性。优于scp及ftp等工具。</p>
+<blockquote>
+<p>rsync是unix/linux下同步文件的一个高效算法，它能同步更新两处计算机的文件与目录，并适当利用查找文件中的不同块以减少数据传输。rsync中一项与其他大部分类似程序或协定中所未见的重要特性是镜像是只对有变更的部分进行传送。rsync可拷贝／显示目录属性，以及拷贝文件，并可选择性的压缩以及递归拷贝。rsync利用由Andrew Tridgell发明的算法…                                                           </p>
+<p>摘自<a href="http://coolshell.cn/articles/7425.html" target="_blank" rel="external">Rsync的核心算法</a><br><a id="more"></a></p>
+</blockquote>
+<h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><ul>
+<li><p>安装服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">yum install xinetd -y</div><div class="line">yum install rsync -y</div><div class="line">mkdir /etc/rsyncd</div><div class="line">touch /etc/rsyncd/rsyncd.pwd</div><div class="line">chmod 600 /etc/rsyncd/rsyncd.pwd</div><div class="line"><span class="comment">#创建密码文件并更改权限</span></div><div class="line">touch /etc/rsyncd/rsyncd.motd</div><div class="line"><span class="built_in">echo</span> <span class="string">"---Hello It's Rsync---"</span> &gt; /etc/rsyncd/rsyncd.motd</div><div class="line"><span class="comment">#创建欢迎信息</span></div><div class="line">touch /etc/rsyncd/rsyncd.conf</div><div class="line"><span class="comment">#创建配置文件</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/rsyncd/rsyncd.conf</span></div><div class="line">pid file = /var/run/rsyncd.pid</div><div class="line">port = 873</div><div class="line"><span class="comment">#address = 192.168.1.11 #监听地址，可不填</span></div><div class="line">uid = root</div><div class="line">gid = root</div><div class="line"><span class="comment">#为避免权限问题，此处使用root，此用户操作的是xinted</span></div><div class="line">use chroot = yes</div><div class="line"><span class="built_in">read</span> only = no</div><div class="line"><span class="comment">#只读选择，只让客户端从服务器上读取文件</span></div><div class="line"><span class="comment">#write only = yes #只写选择，只让客户端到服务器上写入</span></div><div class="line">hosts allow = xxxxxxxx/24</div><div class="line">max connections = 5</div><div class="line">motd file = /etc/rsyncd/rsyncd.motd</div><div class="line"><span class="built_in">log</span> file = /var/<span class="built_in">log</span>/rsync.log</div><div class="line">transfer logging = yes</div><div class="line"><span class="built_in">log</span> format = %t %a %m %f %b</div><div class="line">syslog facility = <span class="built_in">local</span>3</div><div class="line">timeout = 0</div><div class="line"><span class="comment"># 设置为0为无限制，简易为600</span></div><div class="line"><span class="comment">#----Mode rsync---</span></div><div class="line">[binlogshome]</div><div class="line">path = /data/bilogs_S3_haiwai/userinfo_guildinfo_zip/</div><div class="line">list = no</div><div class="line"><span class="comment">#当查看服务器上提供了哪些目录时是否列出来，no比较安全</span></div><div class="line">ignore errors</div><div class="line"><span class="comment">#忽略I/O错误</span></div><div class="line">secrets file = /etc/rsyncd/rsyncd.pwd</div><div class="line"><span class="comment">#exclude = error_log httpd.pid #忽略的文件或目录</span></div><div class="line"><span class="comment">#comment this is my log #本模块注释</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>编辑密码文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/rsyncd/rsyncd.pwd</span></div><div class="line">arvon123:A35q3FhoXTJ4FRMqm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="启动Rsync服务"><a href="#启动Rsync服务" class="headerlink" title="启动Rsync服务"></a>启动Rsync服务</h3><ul>
+<li><p>命令行启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/rsync --daemon --config=/etc/rsyncd/rsyncd.conf</div></pre></td></tr></table></figure>
+</li>
+<li><p>xinetd方式启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/xinetd.d/rsync</span></div><div class="line"><span class="comment">#service rsync</span></div><div class="line"><span class="comment">#&#123;</span></div><div class="line"><span class="comment">#        disable = no</span></div><div class="line"><span class="comment">#        socket_type     = stream</span></div><div class="line"><span class="comment">#        wait            = no</span></div><div class="line"><span class="comment">#        user            = root</span></div><div class="line"><span class="comment">#        server          = /usr/bin/rsync</span></div><div class="line"><span class="comment">#        server_args     = --daemon</span></div><div class="line"><span class="comment">#        log_on_failure  += USERID</span></div><div class="line"><span class="comment">#&#125;</span></div><div class="line">ln <span class="_">-s</span> /etc/rsyncd/rsyncd.conf /etc/rsyncd.conf</div><div class="line"><span class="comment">#xinted 默认会去/etc下查找配置，所以做个软链就可以了</span></div><div class="line">/etc/init.d/xinted start</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="客服端命令"><a href="#客服端命令" class="headerlink" title="客服端命令"></a>客服端命令</h3><ul>
+<li>安装rsync命令</li>
+<li><p>设置密码文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"A35q3FhoXTJ4FRMqm"</span> &gt;/etc/rsync.password</div></pre></td></tr></table></figure>
+</li>
+<li><p>同步命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -avzP arvon123@xxxxxx::binlogshome /data/bilogs_S3_haiwai/ --password-file=/etc/rsync.password</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="常用优化相关"><a href="#常用优化相关" class="headerlink" title="常用优化相关"></a>常用优化相关</h3><ul>
+<li>传输大量备份文件<blockquote>
+<p>半夜花了一个多小时查看了rsync的文档，发现有一个参数能快速恢复大文件的增量同步，–append。设置–append参数会在增量同步时计算文件大小并直接追加新的数据到文件，这样就省了费IO校验的过程。不过这个参数最好只在源文件和目标文件都不会更改的时候使用比较安全，比如备份的文件。</p>
+</blockquote>
+</li>
+<li>使源目录保存较少文件<blockquote>
+<p>这是一个传统优化办法，因为rsync虽然是同步所有文件，但和同步最近更新的文件是一个道理，因此将源服务器上的目录删除，仅仅保持最近更新的文件，文件数量就变得不但很少，而且是稳定的，随着时间推移，这数量也不会涨得很快。但这样做有个缺点，就是rsync不能使用删除模式，如果有文件要删除，可以将其弄成空文件，假如有更严格要求，可以另一个程序来删除。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://man.linuxde.net/rsync" target="_blank" rel="external">关于rsync命令</a><br><a href="http://www.cnblogs.com/JohnABC/p/6203524.html" target="_blank" rel="external">John_ABC的博客</a><br><a href="http://blog.csdn.net/onlyForCloud/article/details/46971101" target="_blank" rel="external">传输优化相关</a><br><a href="http://kkkkkk.blog.51cto.com/468162/1194202" target="_blank" rel="external">常见错误处理</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[弱网终端替代工具Mosh]]></title>
       <url>http://arvon.top/2017/07/17/%E5%BC%B1%E7%BD%91%E7%BB%88%E7%AB%AF%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7Mosh/</url>
       <content type="html"><![CDATA[<p><strong>应用背景：</strong>当有海外服务器维护需求的时候，常常会遇到使用ssh终端延时高并经常性假死的情况，非常影响维护效率。然后一个能缓解延时假死的小工具就是十分有用的，Mosh正是这样一个工具。Mosh是一个用于从客户端跨互联网连接远程服务器的命令行工具，程序最初由Keith Winstein 编写，用于类Unix的操作系统中，发布于GNU GPL V3协议下，基于UDP方式进行数据传输。<br><a id="more"></a></p>

@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/07/24/Rsync%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-07-25T06:10:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Rsync服务安装配置记录</title>
+        <pubTime>2017-07-24T14:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>运维工具</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/07/16/Nginx%E6%B7%BB%E5%8A%A0%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2017-07-18T08:45:31.000Z</lastmod>
     <data>
@@ -294,23 +313,6 @@
         <pubTime>2015-07-29T02:45:32.000Z</pubTime>
         
         <tag>正则</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/03/13/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Linux下hexo配置</title>
-        <pubTime>2015-03-13T03:25:11.000Z</pubTime>
-        
-        <tag>Hexo</tag>
          
          
            
@@ -1389,6 +1391,23 @@
         <display>
         <title>Hexo简明</title>
         <pubTime>2015-07-20T08:42:47.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/03/13/Linux%E4%B8%8Bhexo%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux下hexo配置</title>
+        <pubTime>2015-03-13T03:25:11.000Z</pubTime>
         
         <tag>Hexo</tag>
          
