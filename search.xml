@@ -1031,6 +1031,26 @@
     </entry>
     
     <entry>
+      <title><![CDATA[小米Air系统重装Win7]]></title>
+      <url>http://arvon.top/2017/03/01/%E5%B0%8F%E7%B1%B3Air%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85Win7/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>为毛装个系统还要记一下<br>网络的解释说第六代酷睿使用了更新的主板芯片，win7缺少驱动。</p>
+<ul>
+<li>Skylake一代会支持DDR4，100系列芯片组升级也很诱人，但新平台有个大坑需要注意——Skylake平台上不能通过USB接口装Windows 7系统了。</li>
+<li>Skylake一代Intel会移除EHCI主控，改为支持XHCI主控，但Windows 7系统原生不支持XHCI主控。再进一步说就是，如果你打算在Skylake平台上继续使用Windows 7系统，那么安装系统时就会遇到一个难题——不能通过USB硬盘安装，也不能通过USB光驱安装。</li>
+<li>Skylake的这个改动只影响Windows 7系统，Windows 8及之后的系统都会原生支持XHCI主控，装系统时USB接口没问题。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h3 id="设置BIOG"><a href="#设置BIOG" class="headerlink" title="设置BIOG"></a>设置BIOG</h3><blockquote>
+<p>1、开机，按F2进BIOS。选择Security，再选择Set Supervisor Password，这是设置管理员和密码，只有设置了这个，我们下一步才能操作。设置好后，按F10，点Yes。<br>2、重启后，继续按F2，就会出现要你输入管理员密码的提示。输入密码进BIOS，选择Security，往下找，选择Secure Boot，选择Disabled，关闭微软安全认证，不然安装win7会蓝屏的。<br>3、再往上移，找到TPM Availability，改成Hiden。然后往下选择boot，选择硬盘启动模式UEFI改为Legacy。USB Boot改为Enabled，然后选择Boot Devices Order，找到你的U盘PE名称调到第一位，确认后按F10，点Yes重启。<br>4、BIOS设置好后，用注入了NVME驱动的PE进去用DiskGenius把GPT分区转换成MBR，然后和普通笔记本装系统一样了，但是系统也是有要求的，要注入NVME驱动的系统，重启后才不会蓝屏。</p>
+</blockquote>
+<h3 id="下载列表"><a href="#下载列表" class="headerlink" title="下载列表"></a>下载列表</h3><p>含NVME驱动的PE工具：<a href="http://xz.gqgtpc.com/pe/Gqgtupe3.0.1_Setup.exe" target="_blank" rel="external">http://xz.gqgtpc.com/pe/Gqgtupe3.0.1_Setup.exe</a><br>含NVME驱动的Win7系统：<a href="https://page61.ctfile.com/fs/1773061-211197383" target="_blank" rel="external">https://page61.ctfile.com/fs/1773061-211197383</a></p>
+<h3 id="经验贴"><a href="#经验贴" class="headerlink" title="经验贴"></a>经验贴</h3><p><a href="http://bbs.xiaomi.cn/t-13410315" target="_blank" rel="external">http://bbs.xiaomi.cn/t-13410315</a><br><a href="http://www.miui.com/thread-8800142-1-1.html" target="_blank" rel="external">http://www.miui.com/thread-8800142-1-1.html</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Nginx状态码总结]]></title>
       <url>http://arvon.top/2016/12/04/Nginx%E7%8A%B6%E6%80%81%E7%A0%81%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<p><img src="http://os1t5i0z4.bkt.clouddn.com/20010101-emoticon-26.jpeg" alt="我要学习"><br>工作中常见的状态码其实并不多，去小米面试的时候问到关于这个问题，回答的不太好，这里就总结记录一下。万一面试再遇到呢。是吧<br><a id="more"></a></p>
