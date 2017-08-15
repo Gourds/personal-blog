@@ -115,7 +115,7 @@
 <meta property="og:url" content="http://arvon.top/2017/08/02/Shell编程多线程并发实践/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="Tips：正常来说shell是不具备多线程能力的，也就是说shell本身是按顺序进行执行指令的，并不能并发执行。但是可以换个思路，通过遍历+后台执行的方式进行模拟多线程的方式。但是还有个问题就是如何去控制并发数量，比如你要批量往1w台机器上copy一个文件，如果不设置并发数，估计直接就带宽跑满game over了，不过也有对应的解决方案，往下看吧。">
-<meta property="og:updated_time" content="2017-08-02T14:17:55.000Z">
+<meta property="og:updated_time" content="2017-08-04T04:06:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell编程多线程并发实践">
 <meta name="twitter:description" content="Tips：正常来说shell是不具备多线程能力的，也就是说shell本身是按顺序进行执行指令的，并不能并发执行。但是可以换个思路，通过遍历+后台执行的方式进行模拟多线程的方式。但是还有个问题就是如何去控制并发数量，比如你要批量往1w台机器上copy一个文件，如果不设置并发数，估计直接就带宽跑满game over了，不过也有对应的解决方案，往下看吧。">
@@ -438,6 +438,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># cat server.csv | grep gid &gt; confd/</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `cat server.csv | egrep -v <span class="string">"gid"</span>`;<span class="keyword">do</span></div><div class="line">    sid=`<span class="built_in">echo</span> <span class="variable">$i</span> |awk -F<span class="string">','</span> <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line">    cat server.csv | grep gid &gt; confd/<span class="variable">$&#123;sid&#125;</span>_server.csv</div><div class="line">    <span class="built_in">echo</span> <span class="variable">$i</span> &gt;&gt; confd/<span class="variable">$&#123;sid&#125;</span>_server.csv</div><div class="line">    &#123;</div><div class="line">    <span class="built_in">echo</span> <span class="string">"./tool_refresh_gs -save -config confd/<span class="variable">$&#123;sid&#125;</span>_server.csv  -out <span class="variable">$&#123;sid&#125;</span>"</span></div><div class="line">    <span class="comment">#./tool_refresh_gs -save -config confd/$&#123;sid&#125;_server.csv  -out $&#123;sid&#125;</span></div><div class="line">    &#125;&amp;</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="built_in">wait</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="不错的"><a href="#不错的" class="headerlink" title="不错的"></a>不错的</h3><p><a href="http://blog.csdn.net/spch2008/article/details/51433353" target="_blank" rel="external">写的很不错</a></p>
 
       
     </div>
@@ -511,6 +512,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/08/13/vsftp安装配置记录/" rel="prev" title="vsftp安装配置记录">
+                vsftp安装配置记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -583,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -681,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发方案模型"><span class="nav-number">1.</span> <span class="nav-text">并发方案模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战小栗子"><span class="nav-number">2.</span> <span class="nav-text">实战小栗子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发方案模型"><span class="nav-number">1.</span> <span class="nav-text">并发方案模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战小栗子"><span class="nav-number">2.</span> <span class="nav-text">实战小栗子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不错的"><span class="nav-number">3.</span> <span class="nav-text">不错的</span></a></li></ol></div>
             
 
           </div>
