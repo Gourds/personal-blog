@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/06/25/Linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BC%98%E5%85%88%E7%BA%A7/</loc>
+    <lastmod>2017-09-06T01:41:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux后台执行执行程序及环境变量优先级</title>
+        <pubTime>2017-06-24T17:23:45.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>系统原理</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/08/13/vsftp%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-08-15T02:26:28.000Z</lastmod>
     <data>
@@ -253,25 +272,6 @@
         <tag>运维工具</tag>
          
         <tag>Nginx</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2017/06/25/Linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BC%98%E5%85%88%E7%BA%A7/</loc>
-    <lastmod>2017-06-26T09:44:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>Linux后台执行执行程序及环境变量优先级</title>
-        <pubTime>2017-06-24T17:23:45.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>系统原理</tag>
          
          
            
