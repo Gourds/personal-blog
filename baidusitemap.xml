@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/09/07/Ansible%E9%83%A8%E7%BD%B2NFS%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2017-09-07T12:30:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ansible部署NFS服务</title>
+        <pubTime>2017-09-07T12:30:00.000Z</pubTime>
+        
+        <tag>Ansible</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/06/25/Linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BC%98%E5%85%88%E7%BA%A7/</loc>
     <lastmod>2017-09-06T01:41:40.000Z</lastmod>
     <data>
@@ -375,33 +392,16 @@
     
     
   <url>
-    <loc>http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/</loc>
+    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Tmux 使用简记</title>
-        <pubTime>2015-07-22T01:49:22.000Z</pubTime>
+        <title>Python复习笔记</title>
+        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
         
-        <tag>Linux</tag>
+        <tag>Python</tag>
          
-        <tag>运维工具</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/07/28/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAvsftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Linux下搭建VSFTP服务器</title>
-        <pubTime>2015-07-28T07:04:06.000Z</pubTime>
-        
-        <tag>Linux</tag>
+        <tag>学习笔记</tag>
          
          
            
@@ -755,14 +755,16 @@
 
     
   <url>
-    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
+    <loc>http://arvon.top/2015/07/22/Tmux-%E4%BD%BF%E7%94%A8%E7%AE%80%E8%AE%B0/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
-        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
+        <title>Tmux 使用简记</title>
+        <pubTime>2015-07-22T01:49:22.000Z</pubTime>
         
-        <tag>Ansible</tag>
+        <tag>Linux</tag>
+         
+        <tag>运维工具</tag>
          
          
            
@@ -772,16 +774,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Python复习笔记</title>
-        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
+        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
+        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
         
-        <tag>Python</tag>
-         
-        <tag>学习笔记</tag>
+        <tag>Ansible</tag>
          
          
            
@@ -1478,6 +1478,23 @@
         <display>
         <title>Linux下关于文件属性的三个时间</title>
         <pubTime>2015-05-13T02:36:23.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/07/28/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAvsftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux下搭建VSFTP服务器</title>
+        <pubTime>2015-07-28T07:04:06.000Z</pubTime>
         
         <tag>Linux</tag>
          
