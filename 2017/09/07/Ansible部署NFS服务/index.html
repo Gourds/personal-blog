@@ -115,7 +115,7 @@
 <meta property="og:url" content="http://arvon.top/2017/09/07/Ansible部署NFS服务/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="虽然很简单，写的比较low，不过还是记下吧，下次就可以直接拿着用了。很久以前写过一篇如何配置，这个安装基本是把原来的给改成playbook了，附原来手动配置的链接。另附官方模块地址：  http://docs.ansible.com/ansible/latest/mount_module.html">
-<meta property="og:updated_time" content="2017-09-07T12:35:47.000Z">
+<meta property="og:updated_time" content="2017-09-07T12:36:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ansible部署NFS服务">
 <meta name="twitter:description" content="虽然很简单，写的比较low，不过还是记下吧，下次就可以直接拿着用了。很久以前写过一篇如何配置，这个安装基本是把原来的给改成playbook了，附原来手动配置的链接。另附官方模块地址：  http://docs.ansible.com/ansible/latest/mount_module.html">
@@ -406,7 +406,7 @@
 <p><a href="http://docs.ansible.com/ansible/latest/mount_module.html" target="_blank" rel="external">http://docs.ansible.com/ansible/latest/mount_module.html</a></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><ul>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><ul>
 <li><p>Role目录结构</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">nfs/</div><div class="line">├── nfs-client</div><div class="line">│   ├── defaults</div><div class="line">│   │   └── main.yml</div><div class="line">│   └── tasks</div><div class="line">│       └── main.yml</div><div class="line">└── nfs-server</div><div class="line">    ├── defaults</div><div class="line">    │   └── main.yml</div><div class="line">    ├── tasks</div><div class="line">    │   └── main.yml</div><div class="line">    └── templates</div><div class="line">        └── exports.j2</div></pre></td></tr></table></figure>
 </li>
@@ -670,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Server"><span class="nav-number">1.</span> <span class="nav-text">Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Client"><span class="nav-number">1.1.</span> <span class="nav-text">Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-number">1.2.</span> <span class="nav-text">Other</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">1.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client"><span class="nav-number">2.</span> <span class="nav-text">Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-number">3.</span> <span class="nav-text">Other</span></a></li></ol></div>
             
 
           </div>

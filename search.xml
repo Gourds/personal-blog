@@ -11,7 +11,7 @@
 <p><a href="http://docs.ansible.com/ansible/latest/mount_module.html" target="_blank" rel="external">http://docs.ansible.com/ansible/latest/mount_module.html</a></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><ul>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><ul>
 <li><p>Role目录结构</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">nfs/</div><div class="line">├── nfs-client</div><div class="line">│   ├── defaults</div><div class="line">│   │   └── main.yml</div><div class="line">│   └── tasks</div><div class="line">│       └── main.yml</div><div class="line">└── nfs-server</div><div class="line">    ├── defaults</div><div class="line">    │   └── main.yml</div><div class="line">    ├── tasks</div><div class="line">    │   └── main.yml</div><div class="line">    └── templates</div><div class="line">        └── exports.j2</div></pre></td></tr></table></figure>
 </li>
