@@ -404,7 +404,7 @@
 
       
         
-          <p><strong> 背景：</strong>直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。<br>
+          <p><strong>背景:</strong> 直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/05/关于Kafka分布式消息队列/#more" rel="contents">
