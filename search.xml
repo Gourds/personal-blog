@@ -74,13 +74,13 @@
 </ul>
 <h4 id="安装配置kafka监控程序"><a href="#安装配置kafka监控程序" class="headerlink" title="安装配置kafka监控程序"></a>安装配置kafka监控程序</h4><blockquote>
 <p><strong>目前常用有三种：</strong><br>Kafka Web Console：监控功能较为全面，可以预览消息，监控Offset、Lag等信息，但存在bug，不建议在生产环境中使用。<br>Kafka Manager：偏向Kafka集群管理，若操作不当，容易导致集群出现故障。对Kafka实时生产和消费消息是通过JMX实现的。没有记录Offset、Lag等信息。<br>KafkaOffsetMonitor：程序一个jar包的形式运行，部署较为方便。只有监控功能，使用起来也较为安全。<br>这里使用第三种KafkaOffsetMonitor</p>
-<ul>
-<li>install<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v0.2.1/KafkaOffsetMonitor-assembly-0.2.1.jar</div><div class="line"><span class="comment">#下载即可</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
 </blockquote>
 <ul>
-<li>start<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \</div><div class="line">     com.quantifind.kafka.offsetapp.OffsetGetterWeb \</div><div class="line">     --zk 10.17.0.112:2181,10.17.0.226:2181,10.17.0.221:2181 \</div><div class="line">     --port 8089 \</div><div class="line">     --refresh 10.seconds \</div><div class="line">     --retain 2.days &amp;</div></pre></td></tr></table></figure>
+<li><p>install</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v0.2.1/KafkaOffsetMonitor-assembly-0.2.1.jar</div><div class="line"><span class="comment">#下载即可</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>start</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \</div><div class="line">     com.quantifind.kafka.offsetapp.OffsetGetterWeb \</div><div class="line">     --zk 10.17.0.112:2181,10.17.0.226:2181,10.17.0.221:2181 \</div><div class="line">     --port 8089 \</div><div class="line">     --refresh 10.seconds \</div><div class="line">     --retain 2.days &amp;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="常用kafka命令"><a href="#常用kafka命令" class="headerlink" title="常用kafka命令"></a>常用kafka命令</h3><ul>
@@ -4434,7 +4434,7 @@ Mo birthday happy to
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a></p>
+<p>Email 邮件：<br><a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#111;&#109;">&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#111;&#109;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>

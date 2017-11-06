@@ -115,7 +115,7 @@
 <meta property="og:url" content="http://arvon.top/2017/11/05/关于Kafka分布式消息队列/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="背景: 直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。">
-<meta property="og:updated_time" content="2017-11-06T10:08:45.000Z">
+<meta property="og:updated_time" content="2017-11-06T10:12:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Kafka分布式消息队列">
 <meta name="twitter:description" content="背景: 直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。">
@@ -469,13 +469,13 @@
 </ul>
 <h4 id="安装配置kafka监控程序"><a href="#安装配置kafka监控程序" class="headerlink" title="安装配置kafka监控程序"></a>安装配置kafka监控程序</h4><blockquote>
 <p><strong>目前常用有三种：</strong><br>Kafka Web Console：监控功能较为全面，可以预览消息，监控Offset、Lag等信息，但存在bug，不建议在生产环境中使用。<br>Kafka Manager：偏向Kafka集群管理，若操作不当，容易导致集群出现故障。对Kafka实时生产和消费消息是通过JMX实现的。没有记录Offset、Lag等信息。<br>KafkaOffsetMonitor：程序一个jar包的形式运行，部署较为方便。只有监控功能，使用起来也较为安全。<br>这里使用第三种KafkaOffsetMonitor</p>
-<ul>
-<li>install<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v0.2.1/KafkaOffsetMonitor-assembly-0.2.1.jar</div><div class="line"><span class="comment">#下载即可</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
 </blockquote>
 <ul>
-<li>start<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \</div><div class="line">     com.quantifind.kafka.offsetapp.OffsetGetterWeb \</div><div class="line">     --zk 10.17.0.112:2181,10.17.0.226:2181,10.17.0.221:2181 \</div><div class="line">     --port 8089 \</div><div class="line">     --refresh 10.seconds \</div><div class="line">     --retain 2.days &amp;</div></pre></td></tr></table></figure>
+<li><p>install</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v0.2.1/KafkaOffsetMonitor-assembly-0.2.1.jar</div><div class="line"><span class="comment">#下载即可</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>start</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \</div><div class="line">     com.quantifind.kafka.offsetapp.OffsetGetterWeb \</div><div class="line">     --zk 10.17.0.112:2181,10.17.0.226:2181,10.17.0.221:2181 \</div><div class="line">     --port 8089 \</div><div class="line">     --refresh 10.seconds \</div><div class="line">     --retain 2.days &amp;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="常用kafka命令"><a href="#常用kafka命令" class="headerlink" title="常用kafka命令"></a>常用kafka命令</h3><ul>
@@ -655,7 +655,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
