@@ -7,7 +7,7 @@
       <title><![CDATA[关于Kafka分布式消息队列]]></title>
       <url>http://arvon.top/2017/11/05/%E5%85%B3%E4%BA%8EKafka%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</url>
       <content type="html"><![CDATA[<p><strong> 背景：</strong>直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。<br><a id="more"></a></p>
-<h3 id="关于Kafka的基本原理"><a href="#关于Kafka的基本原理" class="headerlink" title="关于Kafka的基本原理"></a>关于Kafka的基本原理</h3><h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>  Kafka是由LinkedIn使用Scala开发的一个分布式的消息系统。最初用作LinkedIn的活动流（Activity Stream）和运营数据处理管道（Pipeline），Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。kafka是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等。</p>
+<h3 id="关于Kafka的基本原理"><a href="#关于Kafka的基本原理" class="headerlink" title="关于Kafka的基本原理"></a>关于Kafka的基本原理</h3><h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>Kafka是由LinkedIn使用Scala开发的一个分布式的消息系统。最初用作LinkedIn的活动流（Activity Stream）和运营数据处理管道（Pipeline），Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。kafka是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统(也可以当做MQ系统)，常见可以用于web/nginx日志、访问日志，消息服务等等。</p>
 <h4 id="基本组成"><a href="#基本组成" class="headerlink" title="基本组成"></a>基本组成</h4><p><strong>Tips：</strong>主要由四部分组成，Topic（话题）、Producer（生产者）、Broker（服务节点）、Consumer（消费者）</p>
 <ul>
 <li>Broker<blockquote>
