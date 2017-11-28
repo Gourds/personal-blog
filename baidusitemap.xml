@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/11/28/collectd%E4%BD%BF%E7%94%A8exec%E6%A8%A1%E5%9D%97%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7/</loc>
+    <lastmod>2017-11-28T07:10:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>collectd使用exec模块进行自定义监控</title>
+        <pubTime>2017-11-28T07:00:00.000Z</pubTime>
+        
+        <tag>Grafana</tag>
+         
+        <tag>运维监控</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/11/24/Elasticsearch%E9%BB%98%E8%AE%A4fields1000%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/</loc>
     <lastmod>2017-11-24T08:19:12.000Z</lastmod>
     <data>
@@ -449,31 +468,16 @@
     
     
   <url>
-    <loc>http://arvon.top/2015/08/07/Linux%E6%8C%82%E8%BD%BDLVM%E5%88%86%E5%8C%BA/</loc>
+    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Linux挂载LVM分区</title>
-        <pubTime>2015-08-07T10:02:24.000Z</pubTime>
+        <title>Python复习笔记</title>
+        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
         
-        <tag>Linux</tag>
+        <tag>Python</tag>
          
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/04/13/Linux%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9C%BA%E4%BF%A1%E6%81%AF/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Linux查看主机信息</title>
-        <pubTime>2015-04-13T03:08:25.000Z</pubTime>
-        
-        <tag>Linux</tag>
+        <tag>学习笔记</tag>
          
          
            
@@ -795,14 +799,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
+    <loc>http://arvon.top/2015/09/09/CentOS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAzabbix%E7%9B%91%E6%8E%A7/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>8月读书计划</title>
-        <pubTime>2016-08-12T16:38:24.000Z</pubTime>
+        <title>CentOS环境搭建zabbix2.2监控</title>
+        <pubTime>2015-09-09T02:48:06.000Z</pubTime>
         
-        <tag>读书</tag>
+        <tag>Zabbix</tag>
          
          
            
@@ -812,16 +816,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/09/19/Python%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Python复习笔记</title>
-        <pubTime>2016-09-19T08:54:29.000Z</pubTime>
+        <title>8月读书计划</title>
+        <pubTime>2016-08-12T16:38:24.000Z</pubTime>
         
-        <tag>Python</tag>
-         
-        <tag>学习笔记</tag>
+        <tag>读书</tag>
          
          
            
@@ -1001,14 +1003,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2015/09/09/CentOS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAzabbix%E7%9B%91%E6%8E%A7/</loc>
+    <loc>http://arvon.top/2016/09/09/Centos%E4%B8%8B%E6%90%AD%E5%BB%BAsvn%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>CentOS环境搭建zabbix2.2监控</title>
-        <pubTime>2015-09-09T02:48:06.000Z</pubTime>
+        <title>Centos下搭建svn服务器</title>
+        <pubTime>2016-09-09T08:57:56.000Z</pubTime>
         
-        <tag>Zabbix</tag>
+        <tag>版本控制</tag>
          
          
            
@@ -1105,14 +1107,16 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/09/09/Centos%E4%B8%8B%E6%90%AD%E5%BB%BAsvn%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <loc>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Centos下搭建svn服务器</title>
-        <pubTime>2016-09-09T08:57:56.000Z</pubTime>
+        <title>Centos搭建nginx+php环境</title>
+        <pubTime>2015-02-13T04:58:28.000Z</pubTime>
         
-        <tag>版本控制</tag>
+        <tag>Linux</tag>
+         
+        <tag>Nginx</tag>
          
          
            
@@ -1213,16 +1217,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</loc>
+    <loc>http://arvon.top/2016/04/03/4%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Centos搭建nginx+php环境</title>
-        <pubTime>2015-02-13T04:58:28.000Z</pubTime>
+        <title>4月读书计划</title>
+        <pubTime>2016-04-03T02:05:16.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
-        <tag>Nginx</tag>
+        <tag>读书</tag>
          
          
            
@@ -1319,14 +1321,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2016/04/03/4%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</loc>
+    <loc>http://arvon.top/2016/08/16/DNS%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E8%A7%A3%E9%87%8A/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>4月读书计划</title>
-        <pubTime>2016-04-03T02:05:16.000Z</pubTime>
+        <title>DNS端口使用解释</title>
+        <pubTime>2016-08-16T04:59:31.000Z</pubTime>
         
-        <tag>读书</tag>
+        <tag>网络协议</tag>
          
          
            
@@ -1380,23 +1382,6 @@
         <tag>Linux</tag>
          
         <tag>运维工具</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2016/08/16/DNS%E7%AB%AF%E5%8F%A3%E4%BD%BF%E7%94%A8%E8%A7%A3%E9%87%8A/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>DNS端口使用解释</title>
-        <pubTime>2016-08-16T04:59:31.000Z</pubTime>
-        
-        <tag>网络协议</tag>
          
          
            
@@ -1461,14 +1446,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2015/07/30/%E7%AE%80%E6%98%8EPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://arvon.top/2015/07/20/Hexo%E7%AE%80%E6%98%8E/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>简明Python读书笔记</title>
-        <pubTime>2015-07-30T03:25:39.000Z</pubTime>
+        <title>Hexo简明</title>
+        <pubTime>2015-07-20T08:42:47.000Z</pubTime>
         
-        <tag>学习笔记</tag>
+        <tag>Hexo</tag>
          
          
            
@@ -1478,14 +1463,14 @@
 
     
   <url>
-    <loc>http://arvon.top/2015/07/20/Hexo%E7%AE%80%E6%98%8E/</loc>
+    <loc>http://arvon.top/2015/07/30/%E7%AE%80%E6%98%8EPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
     <data>
         <display>
-        <title>Hexo简明</title>
-        <pubTime>2015-07-20T08:42:47.000Z</pubTime>
+        <title>简明Python读书笔记</title>
+        <pubTime>2015-07-30T03:25:39.000Z</pubTime>
         
-        <tag>Hexo</tag>
+        <tag>学习笔记</tag>
          
          
            
@@ -1552,6 +1537,40 @@
         <display>
         <title>Linux主机时间不准问题</title>
         <pubTime>2015-12-13T03:20:56.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/08/07/Linux%E6%8C%82%E8%BD%BDLVM%E5%88%86%E5%8C%BA/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux挂载LVM分区</title>
+        <pubTime>2015-08-07T10:02:24.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/04/13/Linux%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9C%BA%E4%BF%A1%E6%81%AF/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux查看主机信息</title>
+        <pubTime>2015-04-13T03:08:25.000Z</pubTime>
         
         <tag>Linux</tag>
          

@@ -4,6 +4,28 @@
   
     
     <entry>
+      <title><![CDATA[collectd使用exec模块进行自定义监控]]></title>
+      <url>http://arvon.top/2017/11/28/collectd%E4%BD%BF%E7%94%A8exec%E6%A8%A1%E5%9D%97%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7/</url>
+      <content type="html"><![CDATA[<p>使用Grafana进行服务监控的明显优点就是监控出图漂亮，而且拥有丰富的插件，可以直接监控系统资源和负荷信息以及常见的服务进程状态，不过还是会有一些场景直接使用模块是不太容易进行监控的，这个时候更适合使用编写脚本进行数据收集和监控，而<strong>exec</strong>模块就可以满足这样的需求，下面就列举一个小栗子。<br><a id="more"></a></p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li><p>开启exec模块(/etc/collectd.conf)<br>开启exec模块并指定自定义脚本位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Plugin <span class="built_in">exec</span>&gt;</div><div class="line"><span class="comment">#   Exec "user:group" "/path/to/exec"</span></div><div class="line">    Exec <span class="string">"ec2-user:ec2-user"</span> <span class="string">"/opt/collectd/plugin/check_notice.sh"</span></div><div class="line"><span class="comment">#   NotificationExec "user:group" "/path/to/exec"</span></div><div class="line">&lt;/Plugin&gt;</div><div class="line">LoadPlugin <span class="built_in">exec</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">HOSTNAME=<span class="string">"<span class="variable">$&#123;COLLECTD_HOSTNAME:-vpc1-208-jenkins&#125;</span>"</span></div><div class="line">INTERVAL=<span class="string">"<span class="variable">$&#123;COLLECTD_INTERVAL:-10&#125;</span>"</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> sleep <span class="string">"<span class="variable">$INTERVAL</span>"</span>; <span class="keyword">do</span></div><div class="line">  RES=$(curl <span class="_">-s</span> http://1.2.3.4:8083/notice/v1/getnotice?gid=5\&amp;version=4.0.500 |grep Endpoint |wc <span class="_">-l</span>)</div><div class="line">  <span class="built_in">echo</span> <span class="string">"PUTVAL \"<span class="variable">$HOSTNAME</span>/health/gauge-notice\" interval=<span class="variable">$INTERVAL</span> N:<span class="variable">$RES</span>"</span></div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment">#$HOSTNAME/health/gauge-notice对应下面的</span></div><div class="line"><span class="comment">#&lt;instance-id&gt;/&lt;plugin&gt;-&lt;plugin_instance&gt;/&lt;type&gt;-&lt;type_instance&gt;</span></div><div class="line"><span class="comment">#gauge是表示type的一种，不能自己编着写哦</span></div><div class="line"><span class="comment">#脚本输出如：PUTVAL "vpc1-208-jenkins/health/gauge-notice" interval=10 N:1</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在Grafana上添加监控<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171128-colletcd-1.png" alt="20171128-colletcd-1"></p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://collectd.org/documentation/manpages/collectd-exec.5.shtml" target="_blank" rel="external">官方介绍</a></li>
+<li><a href="https://github.com/collectd/collectd" target="_blank" rel="external">Github地址</a></li>
+<li><a href="https://timo.piqiu.me/2013/07/04/graphite%E5%92%8Ccollectd%E4%BB%A5%E5%8F%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E8%84%9A%E6%9C%AC/" target="_blank" rel="external">timo的博客</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Elasticsearch默认fields1000报错解决]]></title>
       <url>http://arvon.top/2017/11/24/Elasticsearch%E9%BB%98%E8%AE%A4fields1000%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/</url>
       <content type="html"><![CDATA[<p><strong>背景：</strong>由于日志输出调整，ES出现了很多如下的报错，这个issue可以在<a href="https://github.com/elastic/elasticsearch/pull/17357" target="_blank" rel="external">这个github地址找到</a>,另外还有<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/indices-update-settings.html" target="_blank" rel="external">5.0版本关于这个问题的说明</a>。<br>我的ES版本为：5.0.0(直接curl yourip:9200就可以看到)</p>
