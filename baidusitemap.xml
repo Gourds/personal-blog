@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://arvon.top/2017/11/29/Jenkins%E4%BD%BF%E7%94%A8GitSubmodule%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E5%BA%93%E8%B0%83%E7%94%A8/</loc>
+    <lastmod>2017-11-29T03:58:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Jenkins使用GitSubmodule实现代码库调用</title>
+        <pubTime>2017-11-29T03:00:00.000Z</pubTime>
+        
+        <tag>Jenkins</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2017/07/17/%E5%BC%B1%E7%BD%91%E7%BB%88%E7%AB%AF%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7Mosh/</loc>
     <lastmod>2017-11-28T10:08:39.000Z</lastmod>
     <data>
@@ -478,23 +495,6 @@
         <tag>Python</tag>
          
         <tag>学习笔记</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
-        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
-        
-        <tag>Ansible</tag>
          
          
            
@@ -1573,6 +1573,23 @@
         <pubTime>2015-04-13T03:08:25.000Z</pubTime>
         
         <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2015/10/12/Ansible%E4%B9%8BHAVE-DECL-MPZ-POWM-SEC%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ansible之HAVE_DECL_MPZ_POWM_SEC报错记录</title>
+        <pubTime>2015-10-12T09:00:27.000Z</pubTime>
+        
+        <tag>Ansible</tag>
          
          
            

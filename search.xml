@@ -4,6 +4,42 @@
   
     
     <entry>
+      <title><![CDATA[Jenkins使用GitSubmodule实现代码库调用]]></title>
+      <url>http://arvon.top/2017/11/29/Jenkins%E4%BD%BF%E7%94%A8GitSubmodule%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E5%BA%93%E8%B0%83%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p><strong>背景：</strong>在实际项目构建中有时会用到调用qi’ta其他代码库的情况，例如调用公共代码库和基础代码库，此时就可以用git submodule这个模块实现这个需求，git submodule可以将一个git仓库以目录的方式作为另一个git仓库的子目录。Jenkins用来做项目的持续集成，如果使用了Git Submodule,每次Jenkins更新版本库的时候还需要更新submodule的内容。<br><a id="more"></a></p>
+<h3 id="Jenkis中的使用方法"><a href="#Jenkis中的使用方法" class="headerlink" title="Jenkis中的使用方法"></a>Jenkis中的使用方法</h3><ul>
+<li><p>版本需求<br><strong>注意：</strong>使用此功能，需要Jenkins的部分插件达到指定版本，我的版本如下：</p>
+<blockquote>
+<ul>
+<li>Git clent plugin == 2.6.0</li>
+<li>Git Plugin == 3.6.4</li>
+<li>Credentials Plugin == 2.1.16</li>
+<li>SSH Credentials Plugin  == 1.13</li>
+</ul>
+</blockquote>
+</li>
+<li><p>安装以上版本或更高版本插件<br>安装完成后需要重启Jenkins，此时就可以使用了</p>
+</li>
+<li><p>在Jenkins上设置<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171129-jenkins-1.jpeg" alt="20171129-jenkins-1"><br>其中User credentials from default remote of parent repository意思是Git Submodule的repository会使用和主repository一样的验证，就是主repository使用的身份，低版本不会有这个勾选项，还会报错。</p>
+</li>
+</ul>
+<h3 id="升级插件的方法"><a href="#升级插件的方法" class="headerlink" title="升级插件的方法"></a>升级插件的方法</h3><ul>
+<li><p>1.使用Jenins默认方法<br>进入Jenkins管理页面即 Jenkins–&gt;插件管理–&gt;高级  如下：<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171129-jenkins-2.jpeg" alt="20171129-jenkins-2"><br>Jenkins默认更新的URL为<code>http://updates.jenkins-ci.org/experimental/update-center.json</code> ，但是由于网络问题推荐使用<code>http://mirror.xmission.com/jenkins/updates/experimental/update-center.json</code>,另外有条件也可以使用这个页面上面的网络代理选项</p>
+</li>
+<li><p>2.直接下载插件通过web页面进行上传<br>依然在Jenkins的管理页面高级中，通过自己下载，然后上传即可，部分插件安装后需要重启Jenkins生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Plugin</div><div class="line"><span class="comment">#git 3.6.4</span></div><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Client+Plugin</div><div class="line"><span class="comment">#git-client 2.6.0</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="关于报错"><a href="#关于报错" class="headerlink" title="关于报错"></a>关于报错</h3><ul>
+<li><p>1.Permission报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">FATAL: Command &quot;git submodule update --init --recursive&quot; returned status code 128:</div><div class="line">stdout:</div><div class="line">stderr: Cloning into &apos;plxxm/pxxx&apos;...</div><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div><div class="line">fatal: clone of &apos;git@xxx.net:platform/planx.git&apos; into submodule path &apos;plxxm/pxxx&apos; failed</div><div class="line">hudson.plugins.git.GitException: Command &quot;git submodule update --init --recursive&quot; returned status code 128:</div><div class="line">stdout:</div><div class="line">stderr: Cloning into &apos;plxxm/pxxx&apos;...</div><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div></pre></td></tr></table></figure>
+<p><strong>原因：</strong>git submodule使用的是ssh方式管理repository,没有找到可以使用的ssh key做submodule的身份认证。按上面的方法升级Git插件版本后，就可以通过和主版本库一样的Credentials进行代码获取了</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[collectd使用exec模块进行自定义监控]]></title>
       <url>http://arvon.top/2017/11/28/collectd%E4%BD%BF%E7%94%A8exec%E6%A8%A1%E5%9D%97%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7/</url>
       <content type="html"><![CDATA[<p>使用Grafana进行服务监控的明显优点就是监控出图漂亮，而且拥有丰富的插件，可以直接监控系统资源和负荷信息以及常见的服务进程状态，不过还是会有一些场景直接使用模块是不太容易进行监控的，这个时候更适合使用编写脚本进行数据收集和监控，而<strong>exec</strong>模块就可以满足这样的需求，下面就列举一个小栗子。<br><a id="more"></a></p>
