@@ -92,7 +92,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ELK," />
 
 
 
@@ -108,15 +108,19 @@
 
 
 
-<meta name="description" content="不要为了看别人而走错了自己脚下的路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arvon&#39;s Blog">
-<meta property="og:url" content="http://arvon.top/archives/page/2/index.html">
+<meta name="description" content="背景介绍：对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用Sentinl这个kibana开源插件，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。">
+<meta name="keywords" content="ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kibana使用sentinl报警实践">
+<meta property="og:url" content="http://arvon.top/2018/03/15/Kibana使用sentinl报警实践/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="不要为了看别人而走错了自己脚下的路">
+<meta property="og:description" content="背景介绍：对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用Sentinl这个kibana开源插件，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。">
+<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20180315-sentinl-1.jpeg">
+<meta property="og:updated_time" content="2018-03-15T05:29:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arvon&#39;s Blog">
-<meta name="twitter:description" content="不要为了看别人而走错了自己脚下的路">
+<meta name="twitter:title" content="Kibana使用sentinl报警实践">
+<meta name="twitter:description" content="背景介绍：对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用Sentinl这个kibana开源插件，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。">
+<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20180315-sentinl-1.jpeg">
 
 
 
@@ -144,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="http://arvon.top/archives/page/2/"/>
+  <link rel="canonical" href="http://arvon.top/2018/03/15/Kibana使用sentinl报警实践/"/>
 
 
 
 
 
-  <title>归档 | Arvon's Blog</title>
+  <title>Kibana使用sentinl报警实践 | Arvon's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -186,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -314,291 +318,253 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      很好! 目前共计 96 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/03/15/Kibana使用sentinl报警实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kibana使用sentinl报警实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T13:13:45+08:00">
+                2018-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/15/Kibana使用sentinl报警实践/" class="leancloud_visitors" data-flag-title="Kibana使用sentinl报警实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p><strong>背景介绍：</strong><br>对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用<a href="https://github.com/sirensolutions/sentinl" target="_blank" rel="external">Sentinl这个kibana开源插件</a>，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。<br><a id="more"></a></p>
+<p>环境：</p>
+<blockquote>
+<p>td-agent 1.0.2<br>elasticsearch 6.2.2<br>kibana 6.2.2</p>
+</blockquote>
+<h3 id="安装及简要说明"><a href="#安装及简要说明" class="headerlink" title="安装及简要说明"></a>安装及简要说明</h3><ul>
+<li><p>安装<br>直接使用命令安装即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/share/kibana/bin/kibana-plugin install https://github.com/sirensolutions/sentinl/releases/download/tag-6.2.2/sentinl-v6.2.2.zip</div></pre></td></tr></table></figure>
+<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20180315-sentinl-1.jpeg" alt="1"></p>
+</li>
+<li><p>报警邮件配置<br>修改配置后重启kibana</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/kibana/kibana.yml</span></div><div class="line">sentinl:</div><div class="line">  settings:</div><div class="line">    email:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      user:  xxx.xxx.cn</div><div class="line">      password: xxx</div><div class="line">      host: smtp.xxx.org</div><div class="line">      ssl: <span class="literal">true</span></div><div class="line">      timeout: 10000</div><div class="line">    report:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      tmp_path: /tmp/</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置说明<br>说到配置结合kibana上自带的<code>Dev Tools</code>会对调试非常有帮助，另外推荐使用<a href="https://www.sojson.com/" target="_blank" rel="external">json验证</a>的网站对编写好的input进行重新编排检测，方便查看维护</p>
+</li>
+</ul>
+<p><strong>关于配置项简要说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General</td>
+<td>包含Title监控的名称及Schedule执行的时间间隔</td>
+</tr>
+<tr>
+<td>INPUT</td>
+<td>输入的数据源，可参照下面的例子</td>
+</tr>
+<tr>
+<td>Condition</td>
+<td>判断条件<a href="http://sentinl.readthedocs.io/en/latest/HOWTO-Anomaly-Detection/" target="_blank" rel="external">参考官网示例</a></td>
+</tr>
+<tr>
+<td>Transform</td>
+<td>How to Adapt or Post-Process data(暂时没有这个需求)</td>
+</tr>
+<tr>
+<td>ACTIONS</td>
+<td>条件满足后执行的动作</td>
+</tr>
+<tr>
+<td>Raw</td>
+<td>一般不需要配置，这个是对前面的配置生成的json文件，当然你也可以直接编辑这个文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>配置注意点</strong></p>
+<blockquote>
+<ul>
+<li><p><strong>Condition</strong><br>我这里基本使用<code>payload.hits.total</code>，由于不怎么熟悉ES的查询语句，刚开始这里有点迷糊，其实通过Kibana的Dev tools写个ES的查询DSL输出一下结果就明白了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;script&quot;: &#123;</div><div class="line">    &quot;script&quot;: &quot;payload.hits.total &gt; 1&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>我这里配置的意思是前面INPUT匹配到的log条数大于1就触发action</p>
+</li>
+<li><strong>ACTIONS</strong><br>我这里使用Email，注意Throttle这个参数如名字所示节流阀，当连续报警在这个范围内时，不会发送邮件，很人性化的一个设计</li>
+</ul>
+</blockquote>
+<h3 id="Input配置示例"><a href="#Input配置示例" class="headerlink" title="Input配置示例"></a>Input配置示例</h3><p><strong>提示：</strong>指定index时可以使用*进行通配匹配，默认不指定index会匹配所有index</p>
+<ul>
+<li><p>过滤指定index时间戳是最近两小时的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [</div><div class="line">        <span class="string">"bilogs-logics-105*"</span></div><div class="line">      ],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 100,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"filter"</span>: &#123;</div><div class="line">              <span class="string">"range"</span>: &#123;</div><div class="line">                <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                  <span class="string">"from"</span>: <span class="string">"now-2h"</span></div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>过滤指定index最近2小时内不包含gid:101字段的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [</div><div class="line">        <span class="string">"bilogs-logics-105*"</span></div><div class="line">      ],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 100,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"must_not"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="string">"match"</span>: &#123;</div><div class="line">                  <span class="string">"gid"</span>: 101</div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            ],</div><div class="line">            <span class="string">"filter"</span>: &#123;</div><div class="line">              <span class="string">"range"</span>: &#123;</div><div class="line">                <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                  <span class="string">"from"</span>: <span class="string">"now-2h"</span></div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>过滤指定时间范围内指定index中info.VIP为2-10且info.Type字段为VI_HC且info.Value字段小于1000的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 20,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"must"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"info.VIP"</span>: &#123;</div><div class="line">                    <span class="string">"gte"</span>: 2,</div><div class="line">                    <span class="string">"lte"</span>: 10</div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"match"</span>: &#123;</div><div class="line">                  <span class="string">"info.Type"</span>: <span class="string">"VI_HC"</span></div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"info.Value"</span>: &#123;</div><div class="line">                    <span class="string">"lt"</span>: 1000</div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                    <span class="string">"gte"</span>: <span class="string">"2018-03-14T02:42:26.704Z"</span>,</div><div class="line">                    <span class="string">"lte"</span>: <span class="string">"2018-03-14T20:42:26.704Z"</span></div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            ]</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://sentinl.readthedocs.io/en/latest/Config-Example/" target="_blank" rel="external">Sentinl 官方文档</a><br><a href="https://es.xiaoleilu.com/010_Intro/30_Tutorial_Search.html" target="_blank" rel="external">Elasticsearch 权威指南</a><br><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/combining-filters.html" target="_blank" rel="external">Elastic 官方文档</a></p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/11/24/Elasticsearch默认fields1000报错解决/" itemprop="url">
-              
-                <span itemprop="name">Elasticsearch默认fields1000报错解决</span>
-              
-            </a>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ELK/" rel="tag"># ELK</a>
+          
+        </div>
+      
+
+      
         
-      </h2>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-24T16:11:16+08:00"
-              content="2017-11-24" >
-          11-24
-        </time>
-      </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/06/Docker备份还原简介/" rel="next" title="Docker备份还原简介">
+                <i class="fa fa-chevron-left"></i> Docker备份还原简介
+              </a>
+            
+          </div>
 
-    </header>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/11/05/关于Kafka分布式消息队列/" itemprop="url">
-              
-                <span itemprop="name">关于Kafka分布式消息队列</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-05T21:00:00+08:00"
-              content="2017-11-05" >
-          11-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/13/etcd及相关组件安装配置说明/" itemprop="url">
-              
-                <span itemprop="name">Etcd及相关组件安装配置说明</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-13T21:00:00+08:00"
-              content="2017-10-13" >
-          10-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/09/07/Ansible部署NFS服务/" itemprop="url">
-              
-                <span itemprop="name">Ansible部署NFS服务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-07T20:30:00+08:00"
-              content="2017-09-07" >
-          09-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/13/vsftp安装配置记录/" itemprop="url">
-              
-                <span itemprop="name">vsftp安装配置记录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-13T21:00:00+08:00"
-              content="2017-08-13" >
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/Shell编程多线程并发实践/" itemprop="url">
-              
-                <span itemprop="name">Shell编程多线程并发实践</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T22:15:00+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/24/Rsync服务安装配置记录/" itemprop="url">
-              
-                <span itemprop="name">Rsync服务安装配置记录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-24T22:00:00+08:00"
-              content="2017-07-24" >
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/">14</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -606,6 +572,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
 
         </div>
         
@@ -625,8 +597,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/uploads/suolong.jpg"
@@ -729,6 +710,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装及简要说明"><span class="nav-number">1.</span> <span class="nav-text">安装及简要说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input配置示例"><span class="nav-number">2.</span> <span class="nav-text">Input配置示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -842,11 +839,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -879,6 +874,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2139885"></script>
+      <!-- UY END -->
     
   
 

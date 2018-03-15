@@ -4,6 +4,86 @@
   
     
     <entry>
+      <title><![CDATA[Kibana使用sentinl报警实践]]></title>
+      <url>http://arvon.top/2018/03/15/Kibana%E4%BD%BF%E7%94%A8sentinl%E6%8A%A5%E8%AD%A6%E5%AE%9E%E8%B7%B5/</url>
+      <content type="html"><![CDATA[<p><strong>背景介绍：</strong><br>对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用<a href="https://github.com/sirensolutions/sentinl" target="_blank" rel="external">Sentinl这个kibana开源插件</a>，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。<br><a id="more"></a></p>
+<p>环境：</p>
+<blockquote>
+<p>td-agent 1.0.2<br>elasticsearch 6.2.2<br>kibana 6.2.2</p>
+</blockquote>
+<h3 id="安装及简要说明"><a href="#安装及简要说明" class="headerlink" title="安装及简要说明"></a>安装及简要说明</h3><ul>
+<li><p>安装<br>直接使用命令安装即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/share/kibana/bin/kibana-plugin install https://github.com/sirensolutions/sentinl/releases/download/tag-6.2.2/sentinl-v6.2.2.zip</div></pre></td></tr></table></figure>
+<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20180315-sentinl-1.jpeg" alt="1"></p>
+</li>
+<li><p>报警邮件配置<br>修改配置后重启kibana</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/kibana/kibana.yml</span></div><div class="line">sentinl:</div><div class="line">  settings:</div><div class="line">    email:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      user:  xxx.xxx.cn</div><div class="line">      password: xxx</div><div class="line">      host: smtp.xxx.org</div><div class="line">      ssl: <span class="literal">true</span></div><div class="line">      timeout: 10000</div><div class="line">    report:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      tmp_path: /tmp/</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置说明<br>说到配置结合kibana上自带的<code>Dev Tools</code>会对调试非常有帮助，另外推荐使用<a href="https://www.sojson.com/" target="_blank" rel="external">json验证</a>的网站对编写好的input进行重新编排检测，方便查看维护</p>
+</li>
+</ul>
+<p><strong>关于配置项简要说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General</td>
+<td>包含Title监控的名称及Schedule执行的时间间隔</td>
+</tr>
+<tr>
+<td>INPUT</td>
+<td>输入的数据源，可参照下面的例子</td>
+</tr>
+<tr>
+<td>Condition</td>
+<td>判断条件<a href="http://sentinl.readthedocs.io/en/latest/HOWTO-Anomaly-Detection/" target="_blank" rel="external">参考官网示例</a></td>
+</tr>
+<tr>
+<td>Transform</td>
+<td>How to Adapt or Post-Process data(暂时没有这个需求)</td>
+</tr>
+<tr>
+<td>ACTIONS</td>
+<td>条件满足后执行的动作</td>
+</tr>
+<tr>
+<td>Raw</td>
+<td>一般不需要配置，这个是对前面的配置生成的json文件，当然你也可以直接编辑这个文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>配置注意点</strong></p>
+<blockquote>
+<ul>
+<li><p><strong>Condition</strong><br>我这里基本使用<code>payload.hits.total</code>，由于不怎么熟悉ES的查询语句，刚开始这里有点迷糊，其实通过Kibana的Dev tools写个ES的查询DSL输出一下结果就明白了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;script&quot;: &#123;</div><div class="line">    &quot;script&quot;: &quot;payload.hits.total &gt; 1&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>我这里配置的意思是前面INPUT匹配到的log条数大于1就触发action</p>
+</li>
+<li><strong>ACTIONS</strong><br>我这里使用Email，注意Throttle这个参数如名字所示节流阀，当连续报警在这个范围内时，不会发送邮件，很人性化的一个设计</li>
+</ul>
+</blockquote>
+<h3 id="Input配置示例"><a href="#Input配置示例" class="headerlink" title="Input配置示例"></a>Input配置示例</h3><p><strong>提示：</strong>指定index时可以使用*进行通配匹配，默认不指定index会匹配所有index</p>
+<ul>
+<li><p>过滤指定index时间戳是最近两小时的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [</div><div class="line">        <span class="string">"bilogs-logics-105*"</span></div><div class="line">      ],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 100,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"filter"</span>: &#123;</div><div class="line">              <span class="string">"range"</span>: &#123;</div><div class="line">                <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                  <span class="string">"from"</span>: <span class="string">"now-2h"</span></div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>过滤指定index最近2小时内不包含gid:101字段的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [</div><div class="line">        <span class="string">"bilogs-logics-105*"</span></div><div class="line">      ],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 100,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"must_not"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="string">"match"</span>: &#123;</div><div class="line">                  <span class="string">"gid"</span>: 101</div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            ],</div><div class="line">            <span class="string">"filter"</span>: &#123;</div><div class="line">              <span class="string">"range"</span>: &#123;</div><div class="line">                <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                  <span class="string">"from"</span>: <span class="string">"now-2h"</span></div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>过滤指定时间范围内指定index中info.VIP为2-10且info.Type字段为VI_HC且info.Value字段小于1000的log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"search"</span>: &#123;</div><div class="line">    <span class="string">"request"</span>: &#123;</div><div class="line">      <span class="string">"index"</span>: [],</div><div class="line">      <span class="string">"body"</span>: &#123;</div><div class="line">        <span class="string">"size"</span>: 20,</div><div class="line">        <span class="string">"query"</span>: &#123;</div><div class="line">          <span class="string">"bool"</span>: &#123;</div><div class="line">            <span class="string">"must"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"info.VIP"</span>: &#123;</div><div class="line">                    <span class="string">"gte"</span>: 2,</div><div class="line">                    <span class="string">"lte"</span>: 10</div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"match"</span>: &#123;</div><div class="line">                  <span class="string">"info.Type"</span>: <span class="string">"VI_HC"</span></div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"info.Value"</span>: &#123;</div><div class="line">                    <span class="string">"lt"</span>: 1000</div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;,</div><div class="line">              &#123;</div><div class="line">                <span class="string">"range"</span>: &#123;</div><div class="line">                  <span class="string">"@timestamp"</span>: &#123;</div><div class="line">                    <span class="string">"gte"</span>: <span class="string">"2018-03-14T02:42:26.704Z"</span>,</div><div class="line">                    <span class="string">"lte"</span>: <span class="string">"2018-03-14T20:42:26.704Z"</span></div><div class="line">                  &#125;</div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            ]</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://sentinl.readthedocs.io/en/latest/Config-Example/" target="_blank" rel="external">Sentinl 官方文档</a><br><a href="https://es.xiaoleilu.com/010_Intro/30_Tutorial_Search.html" target="_blank" rel="external">Elasticsearch 权威指南</a><br><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/combining-filters.html" target="_blank" rel="external">Elastic 官方文档</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Docker备份还原简介]]></title>
       <url>http://arvon.top/2018/03/06/Docker%E5%A4%87%E4%BB%BD%E8%BF%98%E5%8E%9F%E7%AE%80%E4%BB%8B/</url>
       <content type="html"><![CDATA[<p>一般而言，使用docker远端镜像仓库的话，基本不需要使用备份还原，但再某些情况下也是需要这些操作的，如对网络受限的主机进行部署或者基于安全考虑对本地仓库进行备份，就需要这些操作，总之Docker的备份还原还是十分简便的，这里也做一下记录。<br><a id="more"></a></p>
