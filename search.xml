@@ -4,6 +4,91 @@
   
     
     <entry>
+      <title><![CDATA[使用IPsec搭建vpn系统]]></title>
+      <url>http://arvon.top/2018/03/31/%E4%BD%BF%E7%94%A8IPsec%E6%90%AD%E5%BB%BAvpn%E7%B3%BB%E7%BB%9F/</url>
+      <content type="html"><![CDATA[<p>多机房情况下，有时候需要将跨机房内网打通，现在还是使用ipsec的多。而且相对也比较成熟。IPsec全称ip Security，由两类协议组成，分别为AH协议（Authentication Header）和ESP协议（Encapsulated Security Payload），由于AH协议无法提供数据加密，所有数据在传输时以明文传输，且AH由于提供数据来源确认，所以无法穿越NAT，所以这两种协议中ESP协议应用更广泛一些。VPN只是IPSec的一种应用方式。刚好有空余的机器就简单实验一下。<br><a id="more"></a></p>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>数据来源确认</th>
+<th>数据加密</th>
+<th>数据完整性确认</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AH</td>
+<td>是</td>
+<td>否</td>
+<td>是</td>
+<td>AH常用摘要算法（单向Hash函数）MD5和SHA1</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+<td>ESP通常使用DES、3DES、AES等加密算法实现数据加密，使用MD5或SHA1来实现数据完整性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Public IP</th>
+<th>Private IP</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CD-Host-A</td>
+<td>118.24.48.193</td>
+<td>172.27.0.12</td>
+<td>172.27.0.1</td>
+</tr>
+<tr>
+<td>CD-Host-B</td>
+<td>118.24.49.251</td>
+<td>172.27.0.4</td>
+<td>172.27.0.1</td>
+</tr>
+<tr>
+<td>GZ-Host-A</td>
+<td>193.112.154.165</td>
+<td>172.16.0.10</td>
+<td>172.16.0.1</td>
+</tr>
+<tr>
+<td>GZ-Host-B</td>
+<td>193.112.143.226</td>
+<td>172.16.0.16</td>
+<td>172.16.0.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>版本信息：</strong><br>规划：其中CD-A和GZ-A这两台机器作为vpn服务器。<br>版本：<code>Linux Libreswan 3.20 (netkey) on 3.10.0-514.26.2.el7.x86_64</code><br>OS:<code>CentOS Linux release 7.2.1511 (Core)</code></p>
+<h4 id="安装初始化（主机CD-A）"><a href="#安装初始化（主机CD-A）" class="headerlink" title="安装初始化（主机CD-A）"></a>安装初始化（主机CD-A）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y openswan</div></pre></td></tr></table></figure>
+<p><strong>系统参数调整</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysctl.conf <span class="comment">#修改参数如下</span></div><div class="line">net.ipv4.ip_forward = 1</div><div class="line">net.ipv4.conf.default.rp_filter = 0</div><div class="line">sysctl -p <span class="comment">#执行命令让参数生效</span></div><div class="line">setenforce 0 <span class="comment">#关闭selinux</span></div><div class="line">iptables -nvL <span class="comment">#确认端口开放UDP 500 4500</span></div><div class="line"><span class="comment">#关闭ipmp重定向（是否需要）</span></div><div class="line"><span class="comment">#sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '&#123;print$1"= 0"&#125;' &gt;&gt; /etc/sysctl.conf</span></div></pre></td></tr></table></figure></p>
+<p><strong>主配置如下</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#cat /etc/ipsec.conf</span></div><div class="line"><span class="comment">#version 2</span></div><div class="line">config setup</div><div class="line">	protostack=netkey</div><div class="line">	dumpdir=/var/run/pluto/</div><div class="line">	nat_traversal=yes</div><div class="line">	virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v4:100.64.0.0/10,%v6:fd00::/8,%v6:fe80::/10</div><div class="line">include /etc/ipsec.d/*.conf</div></pre></td></tr></table></figure></p>
+<p><strong>配置key认证</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> 0.0.0.0   0.0.0.0 : PSK <span class="string">"arvon.top"</span> &gt; /etc/ipsec.d/cn.secrets<span class="comment">#引号内为key字段</span></div></pre></td></tr></table></figure></p>
+<p><strong>关于配置:</strong>可以通过命令<code>man ipsec.conf</code>获得帮助<br><strong>填写连接的配置</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#cat /etc/ipsec.d/cn.conf</span></div><div class="line">conn cn-test</div><div class="line">	ike=3des-sha1</div><div class="line">	authby=secret</div><div class="line">	phase2=esp</div><div class="line">	phase2alg=3des-sha1</div><div class="line">	compress=no</div><div class="line">	pfs=yes</div><div class="line">	<span class="built_in">type</span>=tunnel</div><div class="line">	left=172.27.0.12</div><div class="line">	leftid=118.24.48.193</div><div class="line">	leftsubnet=172.27.0.0/24</div><div class="line">	leftnexthop=%defaultroute</div><div class="line">	right=193.112.154.165</div><div class="line">	rightid=193.112.154.165</div><div class="line">	rightsubnet=172.16.0.0/24</div><div class="line">	rightnexthop=%defaultroute</div><div class="line">	auto=add</div></pre></td></tr></table></figure></p>
+<p><strong>启动ipsec</strong><br><strong>Tips：</strong>修改连接配置auto=start，这样就不用每次重启ipsec后手动起连接了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start ipsec</div><div class="line">ipsec auto --up cn-test</div></pre></td></tr></table></figure></p>
+<h4 id="安装初始化（主机GZ-A）"><a href="#安装初始化（主机GZ-A）" class="headerlink" title="安装初始化（主机GZ-A）"></a>安装初始化（主机GZ-A）</h4><p><strong>注意：</strong>配置基本可以从CD-A照搬过来，不过由于我这里的环境是云端不同子网，所以连接的配置还需要做一些修改如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#cat /etc/ipsec.d/cn.conf</span></div><div class="line">conn cn-test</div><div class="line">	ike=3des-sha1</div><div class="line">	authby=secret</div><div class="line">	phase2=esp</div><div class="line">	phase2alg=3des-sha1</div><div class="line">	compress=no</div><div class="line">	pfs=yes</div><div class="line">	<span class="built_in">type</span>=tunnel</div><div class="line">	left=118.24.48.193</div><div class="line">	leftid=118.24.48.193</div><div class="line">	leftsubnet=172.27.0.0/24</div><div class="line">	leftnexthop=%defaultroute</div><div class="line">	right=172.16.0.10</div><div class="line">	rightid=193.112.154.165</div><div class="line">	rightsubnet=172.16.0.0/24</div><div class="line">	rightnexthop=%defaultroute</div><div class="line">	auto=add</div></pre></td></tr></table></figure></p>
+<p>此时，两台IPsec server已经联通了，不过是CD-B和GZ-B无法和对端网络联通，并没有达到实验目的，很明显现在主要问题是路由</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Step0: 方便排错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">route -n <span class="comment">#查看路由</span></div><div class="line">ip rule ls <span class="comment">#查看路由优先级</span></div><div class="line">ip route get 172.27.0.4 <span class="comment">#获取IP地址使用的路由</span></div><div class="line">route add -net 10.0.60.0 netmask 255.255.255.0 gw 10.0.50.1 <span class="comment">#添加路由</span></div><div class="line">route del -net 172.16.0.0 netmask 255.255.255.0 eth0 <span class="comment">#删除路由需要写完整</span></div><div class="line"><span class="comment">#systemctl start firewalld</span></div><div class="line">iptables -t nat -F <span class="comment">#清除防火墙nat规则</span></div><div class="line">iptables -t nat -nvL <span class="comment">#查看防火墙nat规则</span></div><div class="line">tcpdump -n -i eth0 dst 172.27.0.12 <span class="comment">#抓取eth0网卡上目标IP为12的包</span></div><div class="line">tcpdump -n -i eth0 src 172.27.0.12 <span class="comment">#抓取eth0网卡上源IP为12的包</span></div></pre></td></tr></table></figure></p>
+<p>Step1：以CD-A为例，当前路由如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@VM_0_12_centos ipsec.d]<span class="comment"># route -n</span></div><div class="line">Kernel IP routing table</div><div class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</div><div class="line">0.0.0.0         172.27.0.1      0.0.0.0         UG    0      0        0 eth0</div><div class="line">169.254.0.0     0.0.0.0         255.255.0.0     U     1002   0        0 eth0</div><div class="line">172.27.0.0      0.0.0.0         255.255.240.0   U     0      0        0 eth0</div></pre></td></tr></table></figure></p>
+<p>Step2: 在内网其他机器添加到VPN的路由<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#在CD-B添加到CD-A的路由</span></div><div class="line">route add -net 172.16.0.0 netmask 255.255.255.0 gw 172.27.0.12</div><div class="line"><span class="comment">#在GZ-B添加到GZ-A的路由</span></div><div class="line">route add -net 172.27.0.0 netmask 255.255.255.0 gw 172.16.0.10</div></pre></td></tr></table></figure></p>
+<p>Step3：在vpn网关机器上进行SNAT<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -t nat -A POSTROUTING <span class="_">-s</span> 172.27.0.0/24 <span class="_">-d</span> 172.16.0.0/24 -j SNAT --to 118.24.48.193</div><div class="line"><span class="comment">#iptables -t nat -A POSTROUTING -s 172.27.0.0/24 -d 172.16.0.0/24 -j RETURN</span></div><div class="line"><span class="comment">#iptables -t nat -A POSTROUTING -s 172.27.0.0/24 -o eth0 -j MASQUERADE</span></div></pre></td></tr></table></figure></p>
+<p><strong>最后说一下：</strong>比较容易踩坑的是使用公有云，由于外网网卡并不是直接与内网实例关联的，说以需要其他的途径才可以实现，一般对应服务商都有解决方案，而且关于ipsec连接配置也跟这个有关，具体还需要看一下实际情况。</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://github.com/xelerance/Openswan" target="_blank" rel="external">openswan github</a><br><a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md" target="_blank" rel="external">ipsec vpn</a><br><a href="https://segmentfault.com/a/1190000006125737" target="_blank" rel="external">唐霜的vpn教程</a><br><a href="https://docs.ucloud.cn/software/vpn/ipsec" target="_blank" rel="external">ucloud教程</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Kibana使用sentinl报警实践]]></title>
       <url>http://arvon.top/2018/03/15/Kibana%E4%BD%BF%E7%94%A8sentinl%E6%8A%A5%E8%AD%A6%E5%AE%9E%E8%B7%B5/</url>
       <content type="html"><![CDATA[<p><strong>背景介绍：</strong><br>对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用<a href="https://github.com/sirensolutions/sentinl" target="_blank" rel="external">Sentinl这个kibana开源插件</a>，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。<br><a id="more"></a></p>
