@@ -91,6 +91,8 @@
 
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
+<link href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css" rel="stylesheet" type="text/css" />
+
 
   <meta name="keywords" content="Hexo, NexT" />
 
@@ -316,6 +318,134 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/04/11/Fluentd使用中遇到的丢数据问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/11/Fluentd使用中遇到的丢数据问题/" itemprop="url">关于Fluentd使用中filter及ES插件的问题记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T17:52:00+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/11/Fluentd使用中遇到的丢数据问题/" class="leancloud_visitors" data-flag-title="关于Fluentd使用中filter及ES插件的问题记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Fluentd使用中遇到的丢数据问题"><a href="#Fluentd使用中遇到的丢数据问题" class="headerlink" title="Fluentd使用中遇到的丢数据问题"></a>Fluentd使用中遇到的丢数据问题</h3><p>目前遇到的问题主要有3个：两个关于buffer，一个关于connection。下面具体说描述下问题的详细信息及目前我采取的解决措施。先交代下我这里使用的Td-agent架构如下，PS（方便起见以下均将Td-agent简化为TD，关于TD和Fluentd的关系移步我的另一篇<a href="http://arvon.top/2018/02/23/Td-agent%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/">Blog</a>）</p>
+<p>需要注意： 这里的缓存Buffer设置对0.14.21版本测试生效，亲测0.12.20不生效，具体可到<a href="https://docs.fluentd.org/v1.0/articles/quickstart" target="_blank" rel="external">【Fluentd官网】</a>获取支持。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR;</div><div class="line">	A(Td-client)--&gt;F(Td-forward)</div><div class="line">    B(Td-client)--&gt;F(Td-forward)</div><div class="line">    F--&gt;E(Elasticsearch cluster)</div><div class="line">    E--&gt;K(Kibana)</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/11/Fluentd使用中遇到的丢数据问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1086,140 +1216,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/02/23/消息队列介绍及常用MQ对比/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Arvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/uploads/suolong.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Arvon's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/23/消息队列介绍及常用MQ对比/" itemprop="url">消息队列介绍及常用MQ对比</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T15:00:00+08:00">
-                2018-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/23/消息队列介绍及常用MQ对比/" class="leancloud_visitors" data-flag-title="消息队列介绍及常用MQ对比">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="什么是消息队列"><a href="#什么是消息队列" class="headerlink" title="什么是消息队列"></a>什么是消息队列</h3><p><strong>概述：</strong> 消息队列（Message Queue）一般大家习惯简称为MQ。主要特点为异步处理,也就是说消息的发送者和接收者不需要同时与消息队列交互。消息会保存在队列中，直到接收者取回它。消息队列和信号相比，能够传递更多的信息。与管道相比，消息队列提供了有格式的数据。</p>
-<blockquote>
-<p><strong>举一个直观的小例子</strong><br>姐姐小红希望弟弟小明多读书，经常拿好书给小明看。之前的方式是先问小明什么时候有空，然后把书给小明送过去，监督小明把书读完。后来两人都觉得太麻烦，就换了一个方式。<br>买了一个书架，小红一有好书就放到书架上，小明看到书架上有书就取着读。这里，书架其实就是一个消息队列，小红就是生产者，小明就是消费者。<br>这样的<strong>好处</strong>是：<br>1.小红想给小明书的时候不必问小明什么时候有时间，直接把书放在书架上就行了，小红和小明的时间都更自由<br>2.小红相信小明的读书自觉和读书能力，不必亲眼观察小明的读书过程，小红只要做一个放书的动作，很节省时间。<br>3.当明天有另一个爱读书的小伙伴小强加入，小红仍旧只需要把书放到书架上，小明和小强从书架上取书即可<br>4.书在书架上，小明读的慢就晚点看完，读的快就早点看完，小明的压力会小点。<br>对应可以总结为：<strong>解耦</strong>、<strong>提速</strong>、<strong>广播</strong>、<strong>削峰</strong><br>相应<strong>缺点</strong>就是：<br>1.引入复杂度<br>2.暂时的不一致性<br><strong>PS：</strong>以上内容引自知乎祁达方<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/23/消息队列介绍及常用MQ对比/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1264,7 +1265,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">99</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
