@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外说一下Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，另外说一句Altlassian公司的产品还都蛮好用的，譬如Sourcetree。">
+<meta name="description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator，Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，具体如何选择看公司爱好吧。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外多说一句Altlassian公司的产品还都蛮好用的，譬如So">
 <meta name="keywords" content="知识管理,Docker,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Docker搭建Jira和Confluence系统">
 <meta property="og:url" content="http://arvon.top/2018/04/14/使用Docker搭建Jira和Confluence系统/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外说一下Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，另外说一句Altlassian公司的产品还都蛮好用的，譬如Sourcetree。">
-<meta property="og:updated_time" content="2018-04-14T08:06:29.000Z">
+<meta property="og:description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator，Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，具体如何选择看公司爱好吧。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外多说一句Altlassian公司的产品还都蛮好用的，譬如So">
+<meta property="og:updated_time" content="2018-04-14T08:17:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Docker搭建Jira和Confluence系统">
-<meta name="twitter:description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外说一下Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，另外说一句Altlassian公司的产品还都蛮好用的，譬如Sourcetree。">
+<meta name="twitter:description" content="整理补个文档：这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator，Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，具体如何选择看公司爱好吧。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外多说一句Altlassian公司的产品还都蛮好用的，譬如So">
 
 
 
@@ -384,7 +384,7 @@
       
 
       
-        <p><strong>整理补个文档：</strong>这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外说一下Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，另外说一句Altlassian公司的产品还都蛮好用的，譬如Sourcetree。再简单介绍下这些工具</p>
+        <p><strong>整理补个文档：</strong>这周折腾了两天Jira和Confluence，准备用这个来代替现在使用的phabricator，Phabricator这个是开源的，Jira和Confluence时Atlassian公司的商业产品，具体如何选择看公司爱好吧。为简化测试和正式部署使用，采取Docker的方式进行安装部署。这里记录一下安装过程和一些避坑建议。另外多说一句Altlassian公司的产品还都蛮好用的，譬如Sourcetree。</p>
 <blockquote>
 <p><strong><a href="https://www.atlassian.com/software/jira" target="_blank" rel="external">JIRA</a></strong>是Atlassian公司出品的项目与事务跟踪工具，被广泛应用于缺陷跟踪、客户服务、需求收集、流程审批、任务跟踪、项目跟踪和敏捷管理等工作领域。<br><strong><a href="https://www.atlassian.com/software/confluence" target="_blank" rel="external">Confluence</a></strong>是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。<br><strong><a href="https://github.com/phacility/phabricator" target="_blank" rel="external">Phabricator</a></strong>是一套基于Web的软件开发协作工具，一个Web应用用于帮助软件公司构建更好的软件。原是facebook员工开发的可视化代码评审工具,主要功能有CodeReview、代码托管、Bug跟踪、Task管理、Wiki文档等功能。</p>
 </blockquote>
