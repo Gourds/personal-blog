@@ -5,13 +5,15 @@
     
   <url>
     <loc>http://arvon.top/2018/04/14/Gitlab%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2018-04-15T11:42:44.000Z</lastmod>
+    <lastmod>2018-04-15T11:46:59.000Z</lastmod>
     <data>
         <display>
         <title>Gitlab搭建使用记录</title>
         <pubTime>2018-04-14T12:54:00.000Z</pubTime>
         
         <tag>版本控制</tag>
+         
+        <tag>Docker</tag>
          
         <tag>Shell</tag>
          
