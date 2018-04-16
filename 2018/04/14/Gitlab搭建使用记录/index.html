@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方哈">
+<meta name="description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方,侵删">
 <meta name="keywords" content="版本控制,Docker,Shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gitlab搭建使用记录">
 <meta property="og:url" content="http://arvon.top/2018/04/14/Gitlab搭建使用记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方哈">
+<meta property="og:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方,侵删">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg">
-<meta property="og:updated_time" content="2018-04-15T11:46:59.000Z">
+<meta property="og:updated_time" content="2018-04-16T06:32:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitlab搭建使用记录">
-<meta name="twitter:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方哈">
+<meta name="twitter:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方,侵删">
 <meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg">
 
 
@@ -386,7 +386,7 @@
       
 
       
-        <p>Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。<br>操作之前看一把架构图,图片来自官方哈<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg" alt="1"></p>
+        <p>Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。<br>操作之前看一把架构图,图片来自官方,侵删<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg" alt="1"></p>
 <a id="more"></a>
 <h3 id="使用Omnibus安装（centos7）"><a href="#使用Omnibus安装（centos7）" class="headerlink" title="使用Omnibus安装（centos7）"></a>使用Omnibus安装（centos7）</h3><ul>
 <li><p>基础环境配置</p>
@@ -471,7 +471,7 @@
 <p>然后停止连接数据库的进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gitlab-ctl stop unicorn</div><div class="line">gitlab-ctl stop sidekiq</div><div class="line">gitlab-ctl status</div></pre></td></tr></table></figure></p>
 <p>然后执行还原命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># This command will overwrite the contents of your GitLab database!</span></div><div class="line">gitlab-rake gitlab:backup:restore BACKUP=1523625192_2018_04_13_10.6.4</div><div class="line"><span class="comment">#还原使用备份文件名除去"_gitlab_backup.tar"这个部分</span></div></pre></td></tr></table></figure></p>
 <p>如果有必要还原<code>/etc/gitlab/gitlab-secrets.json</code>最后重启Gitlab<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gitlab-ctl restart</div><div class="line">gitlab-rake gitlab:check SANITIZE=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<p>还原完成<br>另如因还原需要降级</p>
+<p>还原完成<br>另外如果还原需要降级，以下命令可能会需要</p>
 <blockquote>
 <p><code>Gitlab</code>历史版本地址<a href="https://packages.gitlab.com/gitlab/gitlab-ce" target="_blank" rel="external">【戳这里】</a><br><code>yum downgrade &quot;下载的旧版本的文件名&quot;</code></p>
 </blockquote>
