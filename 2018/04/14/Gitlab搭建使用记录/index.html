@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方,侵删">
 <meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg">
-<meta property="og:updated_time" content="2018-04-16T06:32:47.000Z">
+<meta property="og:updated_time" content="2018-04-16T07:08:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitlab搭建使用记录">
 <meta name="twitter:description" content="Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。操作之前看一把架构图,图片来自官方,侵删">
@@ -442,7 +442,7 @@
 </blockquote>
 <ul>
 <li><p>启动命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker run --detach \</div><div class="line">    --hostname 12.13.14.13 \</div><div class="line">    --publish 443:443 --publish 8080:80 --publish 222:22 \</div><div class="line">    --env <span class="string">'GITLAB_PORT=18080'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SHELL_SSH_PORT=222'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SSH_PORT=222'</span> \</div><div class="line">    --name gitlab \</div><div class="line">    --restart always \</div><div class="line">    --volume /srv/gitlab/config:/etc/gitlab \</div><div class="line">    --volume /srv/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</div><div class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</div><div class="line">    gitlab/gitlab-ce:latest</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker run --detach \</div><div class="line">    --hostname 12.13.14.13 \</div><div class="line">    --publish 443:443 --publish 18080:80 --publish 222:22 \</div><div class="line">    --env <span class="string">'GITLAB_PORT=18080'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SHELL_SSH_PORT=222'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SSH_PORT=222'</span> \</div><div class="line">    --name gitlab \</div><div class="line">    --restart always \</div><div class="line">    --volume /srv/gitlab/config:/etc/gitlab \</div><div class="line">    --volume /srv/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</div><div class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</div><div class="line">    gitlab/gitlab-ce:latest</div></pre></td></tr></table></figure>
 </li>
 <li><p>客户端连接命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> ssh://git@12.13.14.13:222/root/arvon-test.git</div><div class="line">touch demo.txt</div><div class="line">git add .</div><div class="line">git config --global user.email <span class="string">"arvon@gourds.com"</span></div><div class="line">git config --global user.name <span class="string">"arvon"</span></div><div class="line">git commit -m <span class="string">'add test'</span></div><div class="line">git push origin master <span class="comment">#推远端</span></div><div class="line">cat .git/config <span class="comment">#查看git配置</span></div><div class="line">git pull <span class="comment">#拉代码</span></div></pre></td></tr></table></figure>
@@ -553,6 +553,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/21/Gitlab迁移升级记录/" rel="prev" title="Gitlab迁移升级记录">
+                Gitlab迁移升级记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -637,7 +641,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title><![CDATA[Gitlab迁移升级记录]]></title>
+      <url>http://arvon.top/2018/04/21/Gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/</url>
+      <content type="html"><![CDATA[<p>之前写了gitlab的安装文档，目的是为了为迁移做准备，现在记录一下测试迁移的过程。现在需要将编译安装的<code>7.13.4</code>版本的gitlab升级至<code>10.6.0</code>并采用docker的方式运行。经查阅官方Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/tags/" target="_blank" rel="external">【版本】</a>是<code>9.5.1-10.7.0</code>。而在Github上<a href="https://github.com/sameersbn/docker-gitlab" target="_blank" rel="external">【sameersbn版本】</a>是<code>v6.1-v10.6.4</code>。另外<br>还有Gitlab的<a href="https://gitlab.com/gitlab-org/gitlab-ce/tree/master/doc/update" target="_blank" rel="external">【官方升级说明】</a>,这个说明里面都是临近的版本升级说明，但并没有介绍大跨度升级的详细内容。最后决定采用github上提供的升级建议。记录说明如下</p>
+<a id="more"></a>
+<h3 id="迁移升级步骤"><a href="#迁移升级步骤" class="headerlink" title="迁移升级步骤"></a>迁移升级步骤</h3><ul>
+<li><p>思路：</p>
+<blockquote>
+<p><strong>概览：</strong>从7.13.4–&gt;8.0.3–&gt;10.6.0</p>
+<p>A. 先迁移至同版本的Docker容器中<br>B. 利用Docker易于部署的特性将Gitlab升级至指定版本<br>C. 使用了<a href="https://github.com/sameersbn/docker-gitlab" target="_blank" rel="external">【sameersbn提供的方法】</a></p>
+</blockquote>
+</li>
+<li><p>拉取Docker版本的<code>7.13.4</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker pull sameersbn/gitlab:7.13.4</div><div class="line"><span class="comment">#docker pull sameersbn/gitlab:latest</span></div><div class="line"><span class="built_in">cd</span> docker-gitlab <span class="comment">#获取对应版本docker compose配置</span></div><div class="line">git <span class="built_in">clone</span> https://github.com/sameersbn/docker-gitlab.git</div><div class="line"><span class="comment">#docker build --tag=$USER/gitlab .</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用docker-compose启动gitlab</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pip install docker-compose</div><div class="line"><span class="comment">#进入docker compose同级目录执行up命令</span></div><div class="line">docker-compose up <span class="_">-d</span></div><div class="line"><span class="comment">#docker-compose down</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>还原gitlab到7.13.4</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="_">-a</span></div><div class="line">cp /gitlab_bak/1523732410_gitlab_backup.tar  /srv/docker/gitlab/gitlab/backups/ <span class="comment">#copy 备份数据到docker里backup目录</span></div><div class="line">docker <span class="built_in">exec</span> -it docker-gitlab_gitlab_1 /bin/bash <span class="comment">#进入容器</span></div><div class="line">bundle <span class="built_in">exec</span> rake gitlab:check SANITIZE=<span class="literal">true</span> <span class="comment">#需要检测状态，确认所有状态正常后，停止gitlab</span></div><div class="line">RAILS_ENV=production bin/background_jobs start <span class="comment">#根据检测状态情况执行，不然可能存在无法停止gitlab的情况</span></div><div class="line"><span class="string">"/usr/bin/git"</span> config --global core.autocrlf <span class="string">"input"</span> <span class="comment">#根据检测状态情况执行</span></div><div class="line">service gitlab stop <span class="comment">#停止gitlab 必须停</span></div><div class="line"><span class="comment">#bundle exec rake db:migrate RAILS_ENV=production</span></div><div class="line">RAILS_ENV=production bin/background_jobs start</div><div class="line">bundle <span class="built_in">exec</span> rake gitlab:check SANITIZE=<span class="literal">true</span> <span class="comment">#确认状态无误</span></div><div class="line">bundle <span class="built_in">exec</span> rake gitlab:backup:restore RAILS_ENV=production <span class="comment">#还原操作</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>至此还原已经完成了，开始升级操作</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#每次升级之后做一下备份</span></div><div class="line">RAILS_ENV=production bin/background_jobs start</div><div class="line">service gitlab stop</div><div class="line">sudo -u git -H bundle <span class="built_in">exec</span> rake gitlab:backup:create RAILS_ENV=production</div><div class="line"><span class="comment">#使用compose更新版本</span></div><div class="line">git branch</div><div class="line">git checkout .</div><div class="line">git  clean -df</div><div class="line">git checkout v8.0.3</div><div class="line">mv docker-compose.yml.dist docker-compose.yml</div><div class="line">docker-compose up <span class="_">-d</span></div><div class="line"><span class="comment">#backup again</span></div><div class="line">docker-compose down</div><div class="line">git checkout 10.6.0</div><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="官方建议"><a href="#官方建议" class="headerlink" title="官方建议"></a>官方建议</h3><p>官方提供了3种Gitlab的安装方法，根据安装方法的不同需要选取不同的迁移升级策略。三种安装方式分别如下<em>【除了源码安装其他的安装方法在我之前的一篇<a href="http://arvon.top/2018/04/14/Gitlab%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">博客</a>里已经记录了】</em></p>
+<ul>
+<li>Omnibus Packages</li>
+<li>Source installation</li>
+<li>Docker installation</li>
+</ul>
+<p><strong>关于如何还原备份</strong><a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html#restore" target="_blank" rel="external">【文档地址】</a><br>主要参照官方吧，我这里不再详细说了。简单记录一点我看到的<br>从9.1.0版本开始满足以下条件可以实现升级到新版本而不必停止Gitlab服务</p>
+<blockquote>
+<ul>
+<li>只能一次升级一个小版本，如：9.1到9.2，不能9.1到9.3</li>
+</ul>
+</blockquote>
+<p>从9.2.开始备份文件的时间戳发生了变化</p>
+<blockquote>
+<p>In GitLab 9.2 the timestamp format was changed from EPOCH_YYYY_MM_DD to EPOCH_YYYY_MM_DD_GitLab version, for example 1493107454_2017_04_25 would become 1493107454_2017_04_25_9.1.0</p>
+</blockquote>
+<p><strong>其他意见</strong></p>
+<ul>
+<li>采用Omnibus Packages时<a href="https://docs.gitlab.com/omnibus/update/README.html" target="_blank" rel="external">【文档】</a></li>
+<li>采用Source installation时<a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html#restore-for-installation-from-source" target="_blank" rel="external">【文档】</a></li>
+</ul>
+<h3 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h3><ul>
+<li>官方还原文档<a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html#restore" target="_blank" rel="external">【建议】</a></li>
+<li>参考官方<a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html#troubleshooting" target="_blank" rel="external">【Troubleshooting】</a></li>
+<li>合理运用命令<code>bundle exec rake gitlab:check SANITIZE=true</code></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Gitlab搭建使用记录]]></title>
       <url>http://arvon.top/2018/04/14/Gitlab%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。<br>操作之前看一把架构图,图片来自官方,侵删<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg" alt="1"></p>
@@ -62,7 +116,7 @@
 </blockquote>
 <ul>
 <li><p>启动命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker run --detach \</div><div class="line">    --hostname 12.13.14.13 \</div><div class="line">    --publish 443:443 --publish 8080:80 --publish 222:22 \</div><div class="line">    --env <span class="string">'GITLAB_PORT=18080'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SHELL_SSH_PORT=222'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SSH_PORT=222'</span> \</div><div class="line">    --name gitlab \</div><div class="line">    --restart always \</div><div class="line">    --volume /srv/gitlab/config:/etc/gitlab \</div><div class="line">    --volume /srv/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</div><div class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</div><div class="line">    gitlab/gitlab-ce:latest</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker run --detach \</div><div class="line">    --hostname 12.13.14.13 \</div><div class="line">    --publish 443:443 --publish 18080:80 --publish 222:22 \</div><div class="line">    --env <span class="string">'GITLAB_PORT=18080'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SHELL_SSH_PORT=222'</span> \</div><div class="line">    --env <span class="string">'GITLAB_SSH_PORT=222'</span> \</div><div class="line">    --name gitlab \</div><div class="line">    --restart always \</div><div class="line">    --volume /srv/gitlab/config:/etc/gitlab \</div><div class="line">    --volume /srv/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</div><div class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</div><div class="line">    gitlab/gitlab-ce:latest</div></pre></td></tr></table></figure>
 </li>
 <li><p>客户端连接命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> ssh://git@12.13.14.13:222/root/arvon-test.git</div><div class="line">touch demo.txt</div><div class="line">git add .</div><div class="line">git config --global user.email <span class="string">"arvon@gourds.com"</span></div><div class="line">git config --global user.name <span class="string">"arvon"</span></div><div class="line">git commit -m <span class="string">'add test'</span></div><div class="line">git push origin master <span class="comment">#推远端</span></div><div class="line">cat .git/config <span class="comment">#查看git配置</span></div><div class="line">git pull <span class="comment">#拉代码</span></div></pre></td></tr></table></figure>

@@ -4,8 +4,27 @@
 
     
   <url>
+    <loc>http://arvon.top/2018/04/21/Gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2018-04-21T11:34:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gitlab迁移升级记录</title>
+        <pubTime>2018-04-21T11:33:00.000Z</pubTime>
+        
+        <tag>版本控制</tag>
+         
+        <tag>Docker</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2018/04/14/Gitlab%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2018-04-16T06:32:47.000Z</lastmod>
+    <lastmod>2018-04-16T07:08:37.000Z</lastmod>
     <data>
         <display>
         <title>Gitlab搭建使用记录</title>
@@ -699,23 +718,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx搭建CDN源站记录</title>
-        <pubTime>2016-03-03T04:32:05.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://arvon.top/2015/02/13/Centos%E6%90%AD%E5%BB%BAnginx-php%E7%8E%AF%E5%A2%83/</loc>
@@ -1778,7 +1780,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://arvon.top/2015/10/20/NFS%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
@@ -1788,6 +1789,24 @@
         <pubTime>2015-10-19T17:00:10.000Z</pubTime>
         
         <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx搭建CDN源站记录</title>
+        <pubTime>2016-03-03T04:32:05.000Z</pubTime>
+        
+        <tag>Nginx</tag>
          
          
            
