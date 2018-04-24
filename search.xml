@@ -4,6 +4,48 @@
   
     
     <entry>
+      <title><![CDATA[Etcd的v3版本常用操作及可视化]]></title>
+      <url>http://arvon.top/2018/04/24/etcd%E7%9A%84v3%E7%89%88%E6%9C%AC%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
+      <content type="html"><![CDATA[<p>简单记录一下<code>Etcd API v3</code>版本的基本操作和可视化<code>WEB UI</code>使用，关于V2的使用可以看我之前的一篇介绍<a href="http://arvon.top/tags/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84/">【etcd v2】</a>。Etcd v2 和 v3 本质上是共享同一套 raft 协议代码的两个独立的应用，接口不一样，存储不一样，数据也是互相隔离的。</p>
+<blockquote>
+<p><strong>V3相对V2的一些主要变化：</strong></p>
+<ul>
+<li>接口通过grpc提供rpc接口，放弃了v2的http接口。优势是长连接效率提升明显，缺点是使用不如以前方便，尤其对不方便维护长连接的场景。</li>
+<li>废弃了原来的目录结构，变成了纯粹的kv，用户可以通过前缀匹配模式模拟目录</li>
+<li>内存中不再保存value，同样的内存可以支持存储更多的key</li>
+<li>watch机制更稳定，基本上可以通过watch机制实现数据的完全同步</li>
+<li>提供了批量操作以及事务机制，用户可以通过批量事务请求来实现Etcd v2的CAS机制（批量事务支持if条件判断）</li>
+</ul>
+<p><em>–以上摘自王渊命的文章[侵删]</em></p>
+</blockquote>
+<a id="more"></a>
+<h4 id="使用Etcdctl管理"><a href="#使用Etcdctl管理" class="headerlink" title="使用Etcdctl管理"></a>使用Etcdctl管理</h4><p>这里列下我常用的，其他选项可以查看help或者官网说明，链接在最后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ETCDCTL_API=3 etcdctl put mykey <span class="string">"this is awesome"</span> <span class="comment">#设置</span></div><div class="line">ETCDCTL_API=3 etcdctl get mykey <span class="comment">#获取</span></div><div class="line">ETCDCTL_API=3 etcdctl del mykey <span class="comment">#删除</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key  <span class="comment">#获取所有的键值</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key --keys-only <span class="comment">#只获取所有的key不含value</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key --keys-only --limit 3 <span class="comment">#获取key只显示3个</span></div><div class="line">ETCDCTL_API=3 etcdctl get --prefix my <span class="comment">#获取所有以my开头的key及对应value</span></div><div class="line">ETCDCTL_API=3 etcdctl del my --prefix <span class="comment">#删除所有以my开头的键值</span></div></pre></td></tr></table></figure></p>
+<h4 id="使用HTTP管理"><a href="#使用HTTP管理" class="headerlink" title="使用HTTP管理"></a>使用HTTP管理</h4><p>HTTP接口没有怎么用，请参考<a href="https://github.com/coreos/etcd/blob/master/Documentation/dev-guide/api_reference_v3.md" target="_blank" rel="external">【API】</a>及<a href="https://grpc.io/blog/coreos" target="_blank" rel="external">【grpc官方】</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">curl -L http://localhost:2379/v3alpha/maintenance/status -X POST <span class="_">-d</span> <span class="string">'&#123;&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/kv/put -X POST <span class="_">-d</span> <span class="string">'&#123;"key": "Zm9v", "value": "YmFy"&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/kv/range -X POST <span class="_">-d</span> <span class="string">'&#123;"key": "Zm9v"&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/watch -X POST <span class="_">-d</span> <span class="string">'&#123;"create_request": &#123;"key": "Zm9v"&#125;&#125;'</span></div></pre></td></tr></table></figure></p>
+<h4 id="注册脚本"><a href="#注册脚本" class="headerlink" title="注册脚本"></a>注册脚本</h4><p>我提供的这个脚本主要是将本地目录中的文件以递归的形式注册到etcd上（文件内容是key=value有多行）。不贴具体的脚本了，可以从<a href="https://github.com/Gourds/daily-scripts/blob/master/python-scripts/register-etcd-from-files.py" target="_blank" rel="external">【–&gt;这里&lt;–】</a>获取，脚本主要功能如下</p>
+<blockquote>
+<ol>
+<li>Support configuration annotation</li>
+<li>Support for registering null values. like “value=”</li>
+<li>Support for registration of recursive directories</li>
+<li>Add exception capture</li>
+<li>Add null file support</li>
+<li>Add null dircectory support</li>
+<li>Add etcd v3 api support</li>
+<li>Support e3w <a href="https://github.com/soyking/e3w" target="_blank" rel="external">https://github.com/soyking/e3w</a></li>
+</ol>
+</blockquote>
+<p>主要说两个问题：</p>
+<ul>
+<li>在V2中创建目录<br>这个主要使用ETCD的HTTP接口实现，可以直接创建目录，比用key-value的形式要好,V2的可视化，推荐<a href="https://github.com/nikfoundas/etcd-viewer" target="_blank" rel="external">【Etcd-view】</a></li>
+<li>在V3中创建目录<br>在V3中本并不存在目录的概念了，但是如果想要使用<a href="https://github.com/soyking/e3w" target="_blank" rel="external">【E3W】</a>实现可视化，需要使用特定的value给目录这个key。如下root_v3是个目录，它下面那个就是特定的value<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@ip ops_user]# ETCDCTL_API=3 etcdctl get root_v3</div><div class="line">root_v3</div><div class="line">etcdv3_dir_$2H#%gRe3*t</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="权限机制"><a href="#权限机制" class="headerlink" title="权限机制"></a>权限机制</h4><p>占位，之后根据需要补充<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> ETCDCTL_API=3</div><div class="line">etcdctl user add root</div><div class="line">etcdctl auth <span class="built_in">enable</span></div><div class="line">etcdctl user list</div><div class="line">ETCDCTL_API=3 etcdctl user add root --endpoints=<span class="string">"https://10.17.1.32:2379"</span></div></pre></td></tr></table></figure></p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p><a href="https://github.com/coreos/etcd/tree/master/etcdctl" target="_blank" rel="external">【Etcd项目地址】</a><br><a href="https://github.com/coreos/etcd/blob/master/Documentation/dev-guide/api_grpc_gateway.md" target="_blank" rel="external">【Etcd API】</a><br><a href="http://www.10tiao.com/html/689/201612/2651576771/2.html" target="_blank" rel="external">【Etcd对比介绍】</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Gitlab迁移升级记录]]></title>
       <url>http://arvon.top/2018/04/21/Gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>之前写了gitlab的安装文档，目的是为了为迁移做准备，现在记录一下测试迁移的过程。现在需要将编译安装的<code>7.13.4</code>版本的gitlab升级至<code>10.6.0</code>并采用docker的方式运行。经查阅官方Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/tags/" target="_blank" rel="external">【版本】</a>是<code>9.5.1-10.7.0</code>。而在Github上<a href="https://github.com/sameersbn/docker-gitlab" target="_blank" rel="external">【sameersbn版本】</a>是<code>v6.1-v10.6.4</code>。另外<br>还有Gitlab的<a href="https://gitlab.com/gitlab-org/gitlab-ce/tree/master/doc/update" target="_blank" rel="external">【官方升级说明】</a>,这个说明里面都是临近的版本升级说明，但并没有介绍大跨度升级的详细内容。最后决定采用github上提供的升级建议。记录说明如下</p>
