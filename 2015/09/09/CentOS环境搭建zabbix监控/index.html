@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Zabbix," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="##zabbix server更新：此版本为2.2版本，已更新3.0版本">
+<meta name="keywords" content="Zabbix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS环境搭建zabbix2.2监控">
+<meta property="og:url" content="http://arvon.top/2015/09/09/CentOS环境搭建zabbix监控/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="##zabbix server更新：此版本为2.2版本，已更新3.0版本">
+<meta property="og:image" content="http://i1.tietuku.com/29ff780785f8142b.png">
+<meta property="og:image" content="http://i1.tietuku.com/a5071fd29e260241.png">
+<meta property="og:image" content="http://i1.tietuku.com/50818e58957d382a.png">
+<meta property="og:image" content="http://i1.tietuku.com/5c8029d4a5750557.png">
+<meta property="og:image" content="http://i1.tietuku.com/6eab8e80bb3eb1f1.png">
+<meta property="og:image" content="http://i1.tietuku.com/0d83e480b0e348c7.png">
+<meta property="og:image" content="http://i1.tietuku.com/75f80ce9269b455a.png">
+<meta property="og:image" content="http://i1.tietuku.com/3f75b678db942213.png">
+<meta property="og:image" content="http://i1.tietuku.com/b585f7995c14ad19.png">
+<meta property="og:image" content="http://i1.tietuku.com/c53075f14306cd61.png">
+<meta property="og:image" content="http://i1.tietuku.com/281d34ca6408ac6e.png">
+<meta property="og:image" content="http://i1.tietuku.com/21ba7ab71d649b6d.png">
+<meta property="og:image" content="http://i1.tietuku.com/263e79625c329936.png">
+<meta property="og:updated_time" content="2017-05-26T13:17:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS环境搭建zabbix2.2监控">
+<meta name="twitter:description" content="##zabbix server更新：此版本为2.2版本，已更新3.0版本">
+<meta name="twitter:image" content="http://i1.tietuku.com/29ff780785f8142b.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2015/09/09/CentOS环境搭建zabbix监控/"/>
+
+
+
+
+
+  <title>CentOS环境搭建zabbix2.2监控 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2015/09/09/CentOS环境搭建zabbix监控/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CentOS环境搭建zabbix2.2监控</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-09T10:48:06+08:00">
+                2015-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/09/09/CentOS环境搭建zabbix监控/" class="leancloud_visitors" data-flag-title="CentOS环境搭建zabbix2.2监控">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##zabbix server<br>更新：此版本为2.2版本，已更新3.0版本</p>
+<a id="more"></a>
+<h3 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure>
+<h3 id="install-zabbix-server"><a href="#install-zabbix-server" class="headerlink" title="install zabbix server"></a>install zabbix server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y zabbix zabbix-get zabbix-server zabbix-web-mysql zabbix-web zabbix-agent	#这个装出来是1.8的版本。所以重来</div><div class="line"><span class="meta">#</span><span class="bash">* 下面是2.2版本的安装包</span></div><div class="line">yum install -y zabbix22 zabbix22-web-mysql zabbix22-server zabbix22-agent zabbix22-web zabbix22-dbfiles-mysql zabbix22-server-mysql</div></pre></td></tr></table></figure>
+<h3 id="mysql-config"><a href="#mysql-config" class="headerlink" title="mysql config"></a>mysql config</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server</div></pre></td></tr></table></figure>
+<h4 id="修改mysql配置文件"><a href="#修改mysql配置文件" class="headerlink" title="修改mysql配置文件"></a>修改mysql配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">cp /etc/my.cnf /tmp</div><div class="line">egrep -v "(^#|^$)" 	#cat /etc/my.cnf | grep -v ^# | grep -v ^$</div><div class="line"><span class="meta">#</span><span class="bash">vi /etc/my.cnf</span></div><div class="line"><span class="meta">#</span><span class="bash">参照P27[Zabbix企业级分布式监控系统](http://item.jd.com/11522142.html?cu=<span class="literal">true</span>&amp;utm_source=baidu-search&amp;utm_medium=cpc&amp;utm_campaign=t_262767352_baidusearch&amp;utm_term=12777330128_0_0757319b492245849616c53bac31a23e)</span></div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">user=mysql</div><div class="line"><span class="meta">#</span><span class="bash"> Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">symbolic-links=0</div><div class="line">character-set-server=utf8</div><div class="line">innodb_file_per_table=1</div><div class="line">[mysqld_safe]</div><div class="line">log-error=/var/log/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<h3 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div><div class="line">service mysqld start</div><div class="line">ps -ef | grep mysql</div><div class="line">netstat -nlput | grep 3306</div></pre></td></tr></table></figure>
+<h4 id="mysql设置"><a href="#mysql设置" class="headerlink" title="mysql设置"></a>mysql设置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysqladmin -uroot password admin</div><div class="line">mysql -uroot -padmin</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database zabbix character <span class="built_in">set</span> utf8;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all privileges on zabbix.* to zabbix@localhost identified by <span class="string">'zabbix'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></div></pre></td></tr></table></figure>
+<h3 id="创建zabbix的数据库"><a href="#创建zabbix的数据库" class="headerlink" title="创建zabbix的数据库"></a>创建zabbix的数据库</h3><ul>
+<li>zabbix连接数据：zabbix/zabbix<h3 id="导入zabbix的数据库"><a href="#导入zabbix的数据库" class="headerlink" title="导入zabbix的数据库"></a>导入zabbix的数据库</h3><h4 id="进入数据库导入"><a href="#进入数据库导入" class="headerlink" title="进入数据库导入"></a>进入数据库导入</h4>mysql&gt;use zabbix<br>###倒入sql一定按顺序<code>一定</code></li>
+<li><code>必须多说两句</code>，这个地方卡了我整整一天，报错贴图在最后<br>source /usr/share/zabbix-mysql/schema.sql<br>source /usr/share/zabbix-mysql/images.sql<br>source /usr/share/zabbix-mysql/data.sql<h4 id="在数据库外导入"><a href="#在数据库外导入" class="headerlink" title="在数据库外导入"></a>在数据库外导入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql -uzabbix -pzabbix zabbix &lt; /usr/share/zabbix-mysql/schema.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/images.sql</div><div class="line">mysql -uzabbix -p_zabbix_ zabbix &lt; /usr/share/zabbix-mysql/data.sql</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###配置zabbix_server.conf</p>
+<ul>
+<li><p>默认参数：<br>  egrep -v “(^#|^$)” /etc/zabbix/zabbix_server.conf</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LogFile=/var/log/zabbix/zabbix_server.log</div><div class="line">LogFileSize=0</div><div class="line">PidFile=/var/run/zabbix/zabbix.pid</div><div class="line">DBName=zabbix</div><div class="line">DBUser=zabbix</div><div class="line">DBSocket=/var/lib/mysql/mysql.sock</div><div class="line">AlertScriptsPath=/var/lib/zabbix/</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改后参数：<br>  主要添加字段为：DBpassword=zabbix</p>
+</li>
+</ul>
+<h4 id="iptables-amp-Selinux设置"><a href="#iptables-amp-Selinux设置" class="headerlink" title="iptables&amp;Selinux设置"></a>iptables&amp;Selinux设置</h4><ul>
+<li>iptables设置(注意顺序)<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --sport 10050 -j ACCEPT</div><div class="line"><span class="meta">#</span><span class="bash">* Selinux关闭</span></div><div class="line">[root@localhost ~]# setenforce 0</div><div class="line">[root@localhost ~]# getenforce</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="启动zabbix服务-amp-http服务"><a href="#启动zabbix服务-amp-http服务" class="headerlink" title="启动zabbix服务&amp;http服务"></a>启动zabbix服务&amp;http服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/zabbix-server start</div><div class="line">sudo /etc/init.d/httpd start</div></pre></td></tr></table></figure>
+<h2 id="zabbix-agent"><a href="#zabbix-agent" class="headerlink" title="zabbix agent"></a>zabbix agent</h2><h3 id="sofaware"><a href="#sofaware" class="headerlink" title="sofaware"></a>sofaware</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</div><div class="line">yum install zabbix zabbix-agent</div></pre></td></tr></table></figure>
+<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><h4 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 10050 -j ACCEPT</div><div class="line">-A OUTPUT -m state --state NEW -m tcp -p tcp --dport 10051 -j ACCEPT</div></pre></td></tr></table></figure>
+<h4 id="zabbix-agentd-conf"><a href="#zabbix-agentd-conf" class="headerlink" title="zabbix_agentd.conf"></a>zabbix_agentd.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# egrep -v "(^#|^$)" /etc/zabbix/zabbix_agentd.conf</div><div class="line">PidFile=/var/run/zabbix/zabbix_agentd.pid</div><div class="line">LogFile=/var/log/zabbix/zabbix_agentd.log</div><div class="line">LogFileSize=0</div><div class="line">Server=192.168.138.133	#server IP</div><div class="line">ServerActive=192.168.138.133	#server IP</div><div class="line">Hostname=Centos-01.hostname</div><div class="line">Include=/etc/zabbix/zabbix_agentd.d/</div></pre></td></tr></table></figure>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# /etc/init.d/zabbix-agent restart</div></pre></td></tr></table></figure>
+<h4 id="zabbix添加主机"><a href="#zabbix添加主机" class="headerlink" title="zabbix添加主机"></a>zabbix添加主机</h4><h5 id="手动添加"><a href="#手动添加" class="headerlink" title="手动添加"></a>手动添加</h5><p><img src="http://i1.tietuku.com/29ff780785f8142b.png" alt="看图"><br><img src="http://i1.tietuku.com/a5071fd29e260241.png" alt=""></p>
+<h5 id="自动添加"><a href="#自动添加" class="headerlink" title="自动添加"></a>自动添加</h5><p><img src="http://i1.tietuku.com/50818e58957d382a.png" alt=""><br><img src="http://i1.tietuku.com/5c8029d4a5750557.png" alt=""></p>
+<p>##报错解决</p>
+<h4 id="timezone问题"><a href="#timezone问题" class="headerlink" title="timezone问题"></a>timezone问题</h4><p><img src="http://i1.tietuku.com/6eab8e80bb3eb1f1.png" alt=""><br>php.ini配置文件设置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp /etc/php.ini /tmp/</div><div class="line">sudo vim /etc/php.ini</div><div class="line"><span class="meta">#</span><span class="bash">添加字段：date.timezone = Asia/Shanghai</span></div></pre></td></tr></table></figure></p>
+<h4 id="web参数不满足要求问题"><a href="#web参数不满足要求问题" class="headerlink" title="web参数不满足要求问题"></a>web参数不满足要求问题</h4><p><img src="http://i1.tietuku.com/0d83e480b0e348c7.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp /etc/httpd/conf.d/zabbix.conf /tmp/</div><div class="line">sudo vim /etc/httpd/conf.d/zabbix.conf</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改其中字段为以下</p>
+<p><directory "="" usr="" share="" zabbix"=""><br>    Options FollowSymLinks<br>    AllowOverride None<br>    Order allow,deny<br>    Allow from all<br>    php_value date:timezone Asia/Shanghai<br>    php_value max_execution_time 300<br>    php_value post_max_size 16M<br>    php_value max_input_time 300<br>    php_value memory_limit 128M<br>    php_value upload_max_filesize 2M<br></directory><br>然后重启httpd服务</p>
+</blockquote>
+<h4 id="默认登陆账号密码"><a href="#默认登陆账号密码" class="headerlink" title="默认登陆账号密码"></a>默认登陆账号密码</h4><p>账户：Admin<br>密码：zabbix</p>
+<h4 id="zabbix忘记密码，将旧密码修改为arvon"><a href="#zabbix忘记密码，将旧密码修改为arvon" class="headerlink" title="zabbix忘记密码，将旧密码修改为arvon"></a>zabbix忘记密码，将旧密码修改为arvon</h4><p>登陆部署机数据库，修改数据库中的密码，步骤如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo -n arvon | openssl md5</div><div class="line">(stdin)= 5c48aaaa95a1797ffb2dc32699b0c6c3</div><div class="line"><span class="meta">&gt;</span><span class="bash">mysql -uname -ppassword</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">use zabbix;</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">select * from users;</span></div><div class="line"><span class="meta">#</span><span class="bash">先在外面生成的md5码该用了</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">update users <span class="built_in">set</span>  passwd=<span class="string">'e2798af12a7a0f4f70b4d69efbc25f4d'</span> <span class="built_in">where</span> userid = <span class="string">'1'</span>;</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://i1.tietuku.com/75f80ce9269b455a.png" alt=""></p>
+<h4 id="报错贴图“table-not-exist”"><a href="#报错贴图“table-not-exist”" class="headerlink" title="报错贴图“table not exist”"></a>报错贴图“table not exist”</h4><p><img src="http://i1.tietuku.com/3f75b678db942213.png" alt=""><br><img src="http://i1.tietuku.com/b585f7995c14ad19.png" alt=""></p>
+<h4 id="epel源错误"><a href="#epel源错误" class="headerlink" title="epel源错误"></a>epel源错误</h4><p><img src="http://i1.tietuku.com/c53075f14306cd61.png" alt=""><br>修改文件“/etc/yum.repos.d/epel.repo”， 第一项epel，将baseurl的注释取消， mirrorlist注释掉。即可</p>
+<h4 id="zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”"><a href="#zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”" class="headerlink" title="zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”"></a>zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”</h4><p><img src="http://i1.tietuku.com/281d34ca6408ac6e.png" alt=""></p>
+<blockquote>
+<p><a href="Zabbix discoverer processes more than 75% busy">参考</a></p>
+</blockquote>
+<h4 id="zabbix-server-is-not-running报错"><a href="#zabbix-server-is-not-running报错" class="headerlink" title="zabbix server is not running报错"></a>zabbix server is not running报错</h4><p><img src="http://i1.tietuku.com/21ba7ab71d649b6d.png" alt="错误如图"><br><img src="http://i1.tietuku.com/263e79625c329936.png" alt=""><br>解决：仅限于我个人使用，打死都想不到密码写错了，zabbix_server.conf里面的密码加了两个单引号，真是作死呀，就是看不出来</p>
+<p>参考文档：<br><a href="http://zabbix.org/wiki/InstallOnCentOS_RHEL#Database" target="_blank" rel="external">zabbix wike</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Zabbix/" rel="tag"># Zabbix</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/07/mysql主从配置/" rel="next" title="mysql主从">
+                <i class="fa fa-chevron-left"></i> mysql主从
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/14/Zabbix使用Percona组件监控Mysql/" rel="prev" title="Zabbix使用Percona组件监控Mysql">
+                Zabbix使用Percona组件监控Mysql <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/arvon2014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置yum源"><span class="nav-number">1.</span> <span class="nav-text">配置yum源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-zabbix-server"><span class="nav-number">2.</span> <span class="nav-text">install zabbix server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-config"><span class="nav-number">3.</span> <span class="nav-text">mysql config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改mysql配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">修改mysql配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动mysql服务"><span class="nav-number">4.</span> <span class="nav-text">启动mysql服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql设置"><span class="nav-number">4.1.</span> <span class="nav-text">mysql设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建zabbix的数据库"><span class="nav-number">5.</span> <span class="nav-text">创建zabbix的数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入zabbix的数据库"><span class="nav-number">6.</span> <span class="nav-text">导入zabbix的数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进入数据库导入"><span class="nav-number">6.1.</span> <span class="nav-text">进入数据库导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在数据库外导入"><span class="nav-number">6.2.</span> <span class="nav-text">在数据库外导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iptables-amp-Selinux设置"><span class="nav-number">6.3.</span> <span class="nav-text">iptables&Selinux设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动zabbix服务-amp-http服务"><span class="nav-number">7.</span> <span class="nav-text">启动zabbix服务&http服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zabbix-agent"><span class="nav-number"></span> <span class="nav-text">zabbix agent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sofaware"><span class="nav-number">1.</span> <span class="nav-text">sofaware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#configure"><span class="nav-number">2.</span> <span class="nav-text">configure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#iptables"><span class="nav-number">2.1.</span> <span class="nav-text">iptables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbix-agentd-conf"><span class="nav-number">2.2.</span> <span class="nav-text">zabbix_agentd.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动"><span class="nav-number">2.3.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbix添加主机"><span class="nav-number">2.4.</span> <span class="nav-text">zabbix添加主机</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手动添加"><span class="nav-number">2.4.1.</span> <span class="nav-text">手动添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自动添加"><span class="nav-number">2.4.2.</span> <span class="nav-text">自动添加</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#timezone问题"><span class="nav-number">2.5.</span> <span class="nav-text">timezone问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web参数不满足要求问题"><span class="nav-number">2.6.</span> <span class="nav-text">web参数不满足要求问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认登陆账号密码"><span class="nav-number">2.7.</span> <span class="nav-text">默认登陆账号密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbix忘记密码，将旧密码修改为arvon"><span class="nav-number">2.8.</span> <span class="nav-text">zabbix忘记密码，将旧密码修改为arvon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报错贴图“table-not-exist”"><span class="nav-number">2.9.</span> <span class="nav-text">报错贴图“table not exist”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#epel源错误"><span class="nav-number">2.10.</span> <span class="nav-text">epel源错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbixserver-web-报错“Zabbix-discoverer-processes-more-than-75-busy”"><span class="nav-number">2.11.</span> <span class="nav-text">zabbixserver web 报错“Zabbix discoverer processes more than 75% busy”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zabbix-server-is-not-running报错"><span class="nav-number">2.12.</span> <span class="nav-text">zabbix server is not running报错</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxx"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xxxx", "xxxx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

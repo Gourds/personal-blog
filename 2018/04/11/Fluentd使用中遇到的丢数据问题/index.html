@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ELK,踩坑指南," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目前遇到的问题主要有3个：两个关于buffer，一个关于connection。下面具体说描述下问题的详细信息及目前我采取的解决措施。先交代下我这里使用的Td-agent架构如下，PS（方便起见以下均将Td-agent简化为TD，关于TD和Fluentd的关系移步我的另一篇Blog） 需要注意： 这里的缓存Buffer设置对0.14.21版本测试生效，亲测0.12.20不生效，具体可到【Fluent">
+<meta name="keywords" content="ELK,踩坑指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluentd使用中遇到的丢数据问题">
+<meta property="og:url" content="http://arvon.top/2018/04/11/Fluentd使用中遇到的丢数据问题/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="目前遇到的问题主要有3个：两个关于buffer，一个关于connection。下面具体说描述下问题的详细信息及目前我采取的解决措施。先交代下我这里使用的Td-agent架构如下，PS（方便起见以下均将Td-agent简化为TD，关于TD和Fluentd的关系移步我的另一篇Blog） 需要注意： 这里的缓存Buffer设置对0.14.21版本测试生效，亲测0.12.20不生效，具体可到【Fluent">
+<meta property="og:updated_time" content="2018-04-26T10:26:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluentd使用中遇到的丢数据问题">
+<meta name="twitter:description" content="目前遇到的问题主要有3个：两个关于buffer，一个关于connection。下面具体说描述下问题的详细信息及目前我采取的解决措施。先交代下我这里使用的Td-agent架构如下，PS（方便起见以下均将Td-agent简化为TD，关于TD和Fluentd的关系移步我的另一篇Blog） 需要注意： 这里的缓存Buffer设置对0.14.21版本测试生效，亲测0.12.20不生效，具体可到【Fluent">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2018/04/11/Fluentd使用中遇到的丢数据问题/"/>
+
+
+
+
+
+  <title>Fluentd使用中遇到的丢数据问题 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/04/11/Fluentd使用中遇到的丢数据问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Fluentd使用中遇到的丢数据问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T17:52:00+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/11/Fluentd使用中遇到的丢数据问题/" class="leancloud_visitors" data-flag-title="Fluentd使用中遇到的丢数据问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目前遇到的问题主要有3个：两个关于buffer，一个关于connection。下面具体说描述下问题的详细信息及目前我采取的解决措施。先交代下我这里使用的Td-agent架构如下，PS（方便起见以下均将Td-agent简化为TD，关于TD和Fluentd的关系移步我的另一篇<a href="http://arvon.top/2018/02/23/Td-agent%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/">Blog</a>）</p>
+<p>需要注意： 这里的缓存Buffer设置对0.14.21版本测试生效，亲测0.12.20不生效，具体可到<a href="https://docs.fluentd.org/v1.0/articles/quickstart" target="_blank" rel="external">【Fluentd官网】</a>获取支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">graph LR;</div><div class="line">	  A(Td-client)--&gt;F(Td-forward)</div><div class="line">    B(Td-client)--&gt;F(Td-forward)</div><div class="line">    F--&gt;E(Elasticsearch cluster)</div><div class="line">    E--&gt;K(Kibana)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>Version：</strong></p>
+<blockquote>
+<p><code>td-agent 0.14.21</code><br><code>ES Version: 5.0.0, Build: 253032b/2016-10-26T04:37:51.531Z, JVM: 1.8.0_121</code> And <code>lucene_version : &quot;6.2.0</code><br><em>Td-agent的es插件版本</em><br><code>elasticsearch (1.0.18)</code><br><code>elasticsearch-api (1.0.18)</code><br><code>elasticsearch-transport (1.0.18)</code><br><code>fluent-plugin-elasticsearch (1.8.0)</code></p>
+</blockquote>
+<h3 id="Q1：Td-client端的Buffer问题"><a href="#Q1：Td-client端的Buffer问题" class="headerlink" title="Q1：Td-client端的Buffer问题"></a>Q1：Td-client端的Buffer问题</h3><p>这个问题出现次数最多，而且log暴露的问题也是显而易见，主要解决是参数问题</p>
+<ul>
+<li><p>报错日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  2018-03-16 03:25:19 +0000 [warn]: #0 suppressed same stacktrace</div><div class="line">2018-03-16 03:25:19 +0000 [warn]: #0 failed to write data into buffer by buffer overflow action=:throw_exception</div><div class="line">2018-03-16 03:25:19 +0000 [warn]: #0 emit transaction failed: error_class=Fluent::Plugin::Buffer::BufferOverflowError error=&quot;buffer space has too many data&quot; tag=&quot;logics.5013.205&quot;</div><div class="line">  2018-03-16 03:25:19 +0000 [warn]: #0 suppressed same stacktrace</div><div class="line">2018-03-16 03:25:19 +0000 [warn]: #0 failed to write data into buffer by buffer overflow action=:throw_exception</div><div class="line">2018-03-16 03:25:19 +0000 [warn]: #0 emit transaction failed: error_class=Fluent::Plugin::Buffer::BufferOverflowError error=&quot;buffer space has too many data&quot; tag=&quot;logics.5073.205&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改后的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">match</span> <span class="attr">logics.</span>**&gt;</span></div><div class="line">   type forward</div><div class="line">   <span class="tag">&lt;<span class="name">buffer</span>&gt;</span></div><div class="line">     @type file</div><div class="line">     path /var/log/td-agent/buffer/td-gamex-buffer</div><div class="line">     chunk_limit_size 512MB #Default: 8MB (memory) / 256MB (file)</div><div class="line">     total_limit_size 32GB #Default: 512MB (memory) / 64GB (file)</div><div class="line">     chunk_full_threshold 0.9 #flush the chunk when actual size reaches chunk_limit_size * chunk_full_threshold</div><div class="line">     compress text #The option to specify compression of each chunks, during events are buffered</div><div class="line">     flush_mode default</div><div class="line">     flush_interval 15s #Default: 60s</div><div class="line">     flush_thread_count 1 #Default: 1 The number threads used to write chunks in parallel</div><div class="line">     delayed_commit_timeout 60 #The timeout seconds decides that async write operation fails</div><div class="line">     overflow_action throw_exception</div><div class="line">     retry_timeout 10m</div><div class="line">   <span class="tag">&lt;/<span class="name">buffer</span>&gt;</span></div><div class="line">   send_timeout 60s</div><div class="line">   recover_wait 10s</div><div class="line">   heartbeat_interval 1s</div><div class="line">   phi_threshold 16</div><div class="line">   hard_timeout 60s</div><div class="line">   heartbeat_type tcp</div><div class="line">   <span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">      name logics.shard</div><div class="line">      host tdagent.test.net</div><div class="line">      port 24224</div><div class="line">      weight 1</div><div class="line">   <span class="tag">&lt;/<span class="name">server</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">match</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Q2：Td-forward端的Buffer问题"><a href="#Q2：Td-forward端的Buffer问题" class="headerlink" title="Q2：Td-forward端的Buffer问题"></a>Q2：Td-forward端的Buffer问题</h3><p>正常来说对forward端配置buffer跟client端一样就行了，不过在实际使用中发现按client的配置会报错，如下，从报错来看是路径的问题，经查证是buffer的路径在<code>forest copy</code>的配置类型下，需要区分index来进行缓存，使用<code>${tag}</code>作为buffer存储路径的话就很好的解决了这个问题。类似issues可前往<a href="https://github.com/uken/fluent-plugin-elasticsearch/issues/103" target="_blank" rel="external">【Github】</a>查看</p>
+<ul>
+<li><p>报错日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">2018-04-11 02:24:29 +0000 [error]: #0 Cannot output messages with tag &apos;logics.5022.205&apos;</div><div class="line">2018-04-11 02:24:29 +0000 [error]: #0 failed to configure sub output copy: Other &apos;elasticsearch&apos; plugin already use same buffer path: type = elasticsearch, buffer path = /var/log/td-agent/buffer/td-gamex-buffer</div><div class="line">2018-04-11 02:24:29 +0000 [error]: #0 /opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/buf_file.rb:71:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/output.rb:305:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/inject.rb:104:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/event_emitter.rb:73:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/compat/output.rb:504:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-elasticsearch-1.9.2/lib/fluent/plugin/out_elasticsearch.rb:71:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin.rb:164:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/multi_output.rb:73:in `block in configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/multi_output.rb:62:in `each&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/multi_output.rb:62:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin.rb:164:in `configure&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-forest-0.3.3/lib/fluent/plugin/out_forest.rb:132:in `block in plant&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-forest-0.3.3/lib/fluent/plugin/out_forest.rb:128:in `synchronize&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-forest-0.3.3/lib/fluent/plugin/out_forest.rb:128:in `plant&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-forest-0.3.3/lib/fluent/plugin/out_forest.rb:169:in `emit&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/compat/output.rb:211:in `process&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/bare_output.rb:53:in `emit_sync&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/event_router.rb:96:in `emit_stream&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:300:in `on_message&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:211:in `block in handle_connection&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:248:in `call&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:248:in `block (3 levels) in read_messages&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:247:in `feed_each&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:247:in `block (2 levels) in read_messages&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:256:in `call&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin/in_forward.rb:256:in `block in read_messages&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/server.rb:576:in `call&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/server.rb:576:in `on_read_without_connection&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/cool.io-1.4.6/lib/cool.io/io.rb:123:in `on_readable&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/cool.io-1.4.6/lib/cool.io/io.rb:186:in `on_readable&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/cool.io-1.4.6/lib/cool.io/loop.rb:88:in `run_once&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/cool.io-1.4.6/lib/cool.io/loop.rb:88:in `run&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/event_loop.rb:84:in `block in start&apos;</div><div class="line">/opt/td-agent/embedded/lib/ruby/gems/2.1.0/gems/fluentd-0.14.13/lib/fluent/plugin_helper/thread.rb:78:in `block in thread_create&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>解决后的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">match</span> <span class="attr">logics.</span>**&gt;</span></div><div class="line">  type forest</div><div class="line">  subtype copy</div><div class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">store</span>&gt;</span></div><div class="line">      @type elasticsearch</div><div class="line">      <span class="tag">&lt;<span class="name">buffer</span>&gt;</span></div><div class="line">        @type file</div><div class="line">        path /var/log/td-agent/buffer/td-gamex-buffer/$&#123;tag&#125;</div><div class="line">        chunk_limit_size 512MB #Default: 8MB (memory) / 256MB (file)</div><div class="line">        total_limit_size 32GB #Default: 512MB (memory) / 64GB (file)</div><div class="line">        chunk_full_threshold 0.9 #flush the chunk when actual size reaches chunk_limit_size * chunk_full_threshold</div><div class="line">        compress text #The option to specify compression of each chunks, during events are buffered</div><div class="line">        flush_mode default</div><div class="line">        flush_interval 15s #Default: 60s</div><div class="line">        flush_thread_count 1 #Default: 1 The number threads  used to write chunks in parallel</div><div class="line">        delayed_commit_timeout 60 #The timeout seconds decides that async write operation fails</div><div class="line">        overflow_action throw_exception</div><div class="line">        retry_timeout 10m</div><div class="line">      <span class="tag">&lt;/<span class="name">buffer</span>&gt;</span></div><div class="line">      host elasticsearch.test.net</div><div class="line">      port 9200</div><div class="line">      logstash_format true</div><div class="line">      logstash_prefix bilogs</div><div class="line">      logstash_dateformat logics-$&#123;tag_parts[-1]&#125;.%Y.%m.%d</div><div class="line">      time_key time</div><div class="line">      request_timeout 60s</div><div class="line">      reload_connections false</div><div class="line">      reload_on_failure true</div><div class="line">      reconnect_on_error true</div><div class="line">    <span class="tag">&lt;/<span class="name">store</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">match</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Q3：Td-forward端的connection问题"><a href="#Q3：Td-forward端的connection问题" class="headerlink" title="Q3：Td-forward端的connection问题"></a>Q3：Td-forward端的connection问题</h3><p>这个问题主要发生在TD向ES发送数据阶段，起初考虑是ES集群处理能力达到上限，无法分配更对的连接给TD，但是进行Reload之后就正常了，所以这个问题的可能性不大，很可能是TD或者ES在处理连接的逻辑上存在问题，没有正确的关闭或者使用连接。经过查找资料，也找到了一些蛛丝马迹，可供参考的资料也一快带上</p>
+<ul>
+<li><p>参考资料</p>
+<blockquote>
+<p>A. <a href="https://github.com/atomita/fluent-plugin-aws-elasticsearch-service/issues/15" target="_blank" rel="external">【Github 关于这个问题的Issues】</a></p>
+</blockquote>
+</li>
+<li><p>报错信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2018-03-21 04:28:19 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2018-03-21 04:28:34 +0000 error_class=&quot;Elasticsearch::Transport::Transport::Error&quot; error=&quot;Cannot get new connection from pool.&quot; plugin_id=&quot;object:3fe6fced399c&quot;</div><div class="line">  2018-03-21 04:28:19 +0000 [warn]: suppressed same stacktrace</div><div class="line">2018-03-21 04:28:35 +0000 [warn]: temporarily failed to flush the buffer. next_retry=2018-03-21 04:29:08 +0000 error_class=&quot;Elasticsearch::Transport::Transport::Error&quot; error=&quot;Cannot get new connection from pool.&quot; plugin_id=&quot;object:3fe6fced399c&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>再说明<br><strong>解决方法：</strong>还是升级吧，升级至1.9.1版本之后该问题消失。<a href="https://github.com/uken/fluent-plugin-elasticsearch/pull/220" target="_blank" rel="external">【关于修复PR信息点这里】</a>在<a href="https://github.com/uken/fluent-plugin-elasticsearch/pull/220/commits/494a68d6b26575e212713b156ab6fe61a7b38733" target="_blank" rel="external">【版本1.9.1 该Release版本时间为2016.12.14】</a>中修复</p>
+<blockquote>
+<p>目前解决主要涉及以下几个方面</p>
+<ul>
+<li><code>reload_connections false # defaults to true</code><br>You can tune how the elasticsearch-transport host reloading feature works. By default it will reload the host list from the server every 10,000th request to spread the load. This can be an issue if your Elasticsearch cluster is behind a Reverse Proxy, as Fluentd process may not have direct network access to the Elasticsearch nodes.<br>对于这个参数，我这里ES集群并没有使用代理而是DSN域名</li>
+<li><code>reload_on_failure true # defaults to false</code><br>Indicates that the elasticsearch-transport will try to reload the nodes addresses if there is a failure while making the</li>
+<li><code>request, this can be useful to quickly remove a dead node from the list of addresses</code><br>这个主要是当请求发生故障时ES-transport将重新加载节点地址，删除死节点，我这里使用的也是true</li>
+<li><code>reconnect_on_error true</code><br>Github提到这个有帮助，实测并不好用，问题还是会出现，但频率貌似有减少。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>目前解决途径<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">match</span> <span class="attr">logics.</span>**&gt;</span></div><div class="line">  type forest</div><div class="line">  subtype copy</div><div class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">store</span>&gt;</span></div><div class="line">      type elasticsearch</div><div class="line">      <span class="tag">&lt;<span class="name">buffer</span>&gt;</span></div><div class="line">        @type file</div><div class="line">        path /var/log/td-agent/buffer/td-gamex-buffer/$&#123;tag&#125;</div><div class="line">        chunk_limit_size 512MB #Default: 8MB (memory) / 256MB (file)</div><div class="line">        total_limit_size 32GB #Default: 512MB (memory) / 64GB (file)</div><div class="line">        chunk_full_threshold 0.9 #flush chunk when size reaches chunk_limit_size * chunk_full_threshold</div><div class="line">        compress text #The option to specify compression of each chunks, during events are buffered</div><div class="line">        flush_mode default</div><div class="line">        flush_interval 15s #Default: 60s</div><div class="line">        flush_thread_count 1 #Default: 1 The number threads used to write chunks in parallel</div><div class="line">        delayed_commit_timeout 60 #The timeout seconds  async write operation fails</div><div class="line">        overflow_action throw_exception</div><div class="line">        retry_timeout 10m</div><div class="line">      <span class="tag">&lt;/<span class="name">buffer</span>&gt;</span></div><div class="line">      host elasticsearch.yingxiong.net</div><div class="line">      port 9200</div><div class="line">      logstash_format true</div><div class="line">      logstash_prefix bilogs</div><div class="line">      logstash_dateformat logics-$&#123;tag_parts[-1]&#125;.%Y.%W</div><div class="line">      time_key time</div><div class="line">      flush_interval 10s</div><div class="line">      request_timeout 15s</div><div class="line">      num_threads 2</div><div class="line">      reload_connections false</div><div class="line">      reload_on_failure true</div><div class="line">      reconnect_on_error true</div><div class="line">    <span class="tag">&lt;/<span class="name">store</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">match</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ELK/" rel="tag"># ELK</a>
+          
+            <a href="/tags/踩坑指南/" rel="tag"># 踩坑指南</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/09/即学即用Docker读书笔记/" rel="next" title="即学即用Docker读书笔记">
+                <i class="fa fa-chevron-left"></i> 即学即用Docker读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/14/使用Docker搭建Jira和Confluence系统/" rel="prev" title="使用Docker搭建Jira和Confluence系统">
+                使用Docker搭建Jira和Confluence系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/arvon2014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1：Td-client端的Buffer问题"><span class="nav-number">1.</span> <span class="nav-text">Q1：Td-client端的Buffer问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2：Td-forward端的Buffer问题"><span class="nav-number">2.</span> <span class="nav-text">Q2：Td-forward端的Buffer问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3：Td-forward端的connection问题"><span class="nav-number">3.</span> <span class="nav-text">Q3：Td-forward端的connection问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxx"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xxxx", "xxxx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

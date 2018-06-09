@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="配置管理,运维架构," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介：Etcd是CentOS公司发起的一个开源项目，灵感来自于 ZooKeeper 和 Doozer，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性（Raft是一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader。），主要用于共享配置和服务发现的分布式、一致性的KV存储系统">
+<meta name="keywords" content="配置管理,运维架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Etcd及相关组件安装配置说明">
+<meta property="og:url" content="http://arvon.top/2017/10/13/etcd及相关组件安装配置说明/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="简介：Etcd是CentOS公司发起的一个开源项目，灵感来自于 ZooKeeper 和 Doozer，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性（Raft是一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader。），主要用于共享配置和服务发现的分布式、一致性的KV存储系统">
+<meta property="og:updated_time" content="2017-10-13T08:58:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Etcd及相关组件安装配置说明">
+<meta name="twitter:description" content="简介：Etcd是CentOS公司发起的一个开源项目，灵感来自于 ZooKeeper 和 Doozer，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性（Raft是一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader。），主要用于共享配置和服务发现的分布式、一致性的KV存储系统">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2017/10/13/etcd及相关组件安装配置说明/"/>
+
+
+
+
+
+  <title>Etcd及相关组件安装配置说明 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2017/10/13/etcd及相关组件安装配置说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Etcd及相关组件安装配置说明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:00:00+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/13/etcd及相关组件安装配置说明/" class="leancloud_visitors" data-flag-title="Etcd及相关组件安装配置说明">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>简介：</strong><a href="https://coreos.com/etcd/" target="_blank" rel="external">Etcd</a>是CentOS公司发起的一个开源项目，灵感来自于 ZooKeeper 和 Doozer，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性（Raft是一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader。），主要用于<strong>共享配置和服务发现</strong>的分布式、一致性的KV存储系统。<br>除了常见的共享配置及服务发现，还可以使用Etcd结合SkyDNS提供<strong>内网域名解析服务</strong>。<br>这里主要涉及etcd安装配置说明、etcd-view安装配置、skydns安装配置</p>
+<a id="more"></a>
+<blockquote>
+<p><strong>优势分析：</strong></p>
+<ul>
+<li><strong>简单：</strong>基于HTTP+JSON的API，可以直接用curl命令和Pyhton的URL方法轻松测试使用，相比ZK方便运维</li>
+<li><strong>可靠：</strong>使用Raft算法保证强一致性，并可靠的实现了分布式，集群具备一定的容错能力。即使集群中出现部分节点故障、网络故障等问题，仍可保证其余大多数节点正确的步进。甚至当更多的节点（一般来说超过集群节点总数的一半）出现故障而导致集群不可用时，依然可以保证节点中的数据不会出现错误的结果。</li>
+<li><strong>安全：</strong></li>
+<li><strong>快速：</strong>按照官网给出的[Benchmark], 在2CPU，1.8G内存，SSD磁盘这样的配置下，单节点的写性能可以达到16K QPS, 而先写后读也能达到12K QPS。性能相当可观</li>
+<li><strong>项目活跃度：</strong>有大量资料，开发社区活跃，对比ZK好特别多。Google的容器集群管理系统Kubernetes、开源PaaS平台Cloud Foundry和CoreOS的Fleet都广泛使用了etcd。</li>
+</ul>
+<p><strong>原理分析：</strong></p>
+<ul>
+<li>a.)ETCD使用Raft协议来维护集群内各个节点状态的一致性。简单说，ETCD集群是一个分布式系统，由多个节点相互通信构成整体对外服务，每个节点都存储了完整的数据，并且通过Raft协议保证每个节点维护的数据是一致的。每个ETCD节点都维护了一个状态机，并且，任意时刻至多存在一个有效的主节点。主节点处理所有来自客户端写操作，通过Raft协议保证写操作对状态机的改动会可靠的同步到其他节点。</li>
+<li>b.)ETCD工作原理核心部分在于Raft协议,Raft协议主要分为三个部分：选主，日志复制，安全性。</li>
+<li><strong>选主：</strong>一组服务节点构成一个集群，并且有一个主节点来对外提供服务。当集群初始化，或者主节点挂掉后，面临一个选主问题。集群中每个节点，任意时刻处于Leader, Follower, Candidate这三个角色之一。当集群初始化时候，每个节点都是Follower角色，当Follower在一定时间内没有收到来自主节点的心跳，会将自己角色改变为Candidate，并发起一次选主投票；当收到包括自己在内超过半数节点赞成后，选举成功；当收到票数不足半数选举失败，或者选举超时。若本轮未选出主节点，将进行下一轮选举（出现这种情况，是由于多个节点同时选举，所有节点均为获得过半选票）。Candidate节点收到来自主节点的信息后，会立即终止选举过程，进入Follower角色。为了避免陷入选主失败循环，每个节点未收到心跳发起选举的时间是一定范围内的随机值，这样能够避免2个节点同时发起选主。</li>
+<li><strong>日志复制：</strong>所谓日志复制，是指主节点将每次操作形成日志条目，并持久化到本地磁盘，然后通过网络IO发送给其他节点。其他节点根据日志的逻辑时钟(TERM)和日志编号(INDEX)来判断是否将该日志记录持久化到本地。当主节点收到包括自己在内超过半数节点成功返回，那么认为该日志是可提交的(committed），并将日志输入到状态机，将结果返回给客户端。注意每次选主都会形成一个唯一的TERM编号，相当于逻辑时钟。每一条日志都有全局唯一的编号。</li>
+<li><strong>安全性：</strong>Raft在选主逻辑中，对能够成为主的节点加以限制，确保选出的节点已定包含了集群已经提交的所有日志。如果新选出的主节点已经包含了集群所有提交的日志，那就不需要从和其他节点比对数据了。简化了流程，缩短了集群恢复服务的时间。</li>
+</ul>
+<p><strong>应用场景：</strong></p>
+<ul>
+<li>配置管理</li>
+<li>服务注册发现</li>
+<li>选主</li>
+<li>应用调度</li>
+<li>分布式队列</li>
+<li>分布式锁</li>
+</ul>
+</blockquote>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>软件获取地址：<blockquote>
+<ul>
+<li>Etcd <a href="https://github.com/coreos/etcd/releases/" target="_blank" rel="external">Github地址</a></li>
+<li>Etcd-viewer <a href="https://nikfoundas.github.io/etcd-viewer/" target="_blank" rel="external">nikfoundas.github.io</a><br>Need:<ul>
+<li>java &gt;= 1.7<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">官网地址</a></li>
+<li>maven &gt;= 3.0.5 <a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">官网地址</a></li>
+</ul>
+</li>
+<li>skydns <a href="https://github.com/skynetservices/skydns" target="_blank" rel="external">Gitbub地址</a></li>
+</ul>
+</blockquote>
+</li>
+<li>我的安装版本<blockquote>
+<ul>
+<li><strong>Etcd:</strong><a href="https://github.com/coreos/etcd/releases/download/v3.2.7/etcd-v3.2.7-linux-amd64.tar.gz" target="_blank" rel="external">__V3.2.7</a></li>
+<li><strong>Etcd-viewer:</strong><a href="https://github.com/nikfoundas/etcd-viewer/archive/v1.1.zip" target="_blank" rel="external">__V1.1</a><ul>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm" target="_blank" rel="external">JDK1.8</a></li>
+<li><a href="http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz" target="_blank" rel="external">Maven3.5.0</a></li>
+</ul>
+</li>
+<li><strong>sykdns:</strong><a href="http://download.openpkg.org/components/cache/skydns/skydns-20170903.tar.gz" target="_blank" rel="external">__V2.5.3a</a>    </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="Etcd接口支持"><a href="#Etcd接口支持" class="headerlink" title="Etcd接口支持"></a>Etcd接口支持</h4><ul>
+<li>支持HTTP的PUT/GET/DELETE接口</li>
+<li>通过http long poll支持WATCH接口（服务注册与发现）</li>
+<li>支持key具有TTL属性</li>
+<li>CAS（compare and swap）操作</li>
+<li>支持多key的事务操作</li>
+<li>支持目录操作</li>
+</ul>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><ul>
+<li><p>启动参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> /usr/<span class="built_in">local</span>/bin/etcd \</div><div class="line">-name ip-10-222-0-218-2 \</div><div class="line">--data-dir /opt/etcd/etcd-data \</div><div class="line">-initial-advertise-peer-urls http://10.222.0.218:12380 \</div><div class="line">-listen-peer-urls http://10.222.0.218:12380 \</div><div class="line">-listen-client-urls http://10.222.0.218:2379,http://127.0.0.1:2379 \</div><div class="line">-advertise-client-urls http://10.222.0.218:2379 \</div><div class="line">-initial-cluster-token etcd-cluster-arvon \</div><div class="line">-initial-cluster ip-10-222-0-218=http://10.222.0.218:12380,ip-10-222-0-218=http://10.222.0.218:2380 \</div><div class="line">-initial-cluster-state new</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">etcdctl member list</div><div class="line"><span class="comment">#查看集群状况</span></div><div class="line">etcdctl rm hello</div><div class="line"><span class="comment">#检查集群监控状态</span></div><div class="line">etcdctl <span class="built_in">set</span> <span class="built_in">test</span>-key1 value1</div><div class="line"><span class="comment">#设置一个键值</span></div><div class="line">etcdctl get <span class="built_in">test</span>-key1</div><div class="line"><span class="comment">#获取指定key的value</span></div><div class="line">etcdctl mkdir /dir1/dir2/</div><div class="line">etcdctl mkdir /dir3/</div><div class="line"><span class="comment">#创建一个空目录,可递归创建</span></div><div class="line"><span class="built_in">set</span> /dir4/<span class="built_in">test</span>-key2 value2</div><div class="line"><span class="comment">#跨目录设置key，会自动创建目录</span></div><div class="line">etcdctl get /dir4/<span class="built_in">test</span>-key2</div><div class="line"><span class="comment">#获取目录下的key</span></div><div class="line">etcdctl ls</div><div class="line">etcdctl ls dir1/dir2</div><div class="line"><span class="comment">#查看注册在根目录下的文件（目录及key）</span></div><div class="line">etcdctl rm <span class="built_in">test</span>-key1</div><div class="line"><span class="comment">#删除指定key</span></div><div class="line">etcdctl rmdir dir3</div><div class="line"><span class="comment">#删除指定空目录（只能删除空目录）</span></div><div class="line">etcdctl rm -r  dir1</div><div class="line"><span class="comment">#递归删除指定目录，也能删除key</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>HTTP接口常用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">curl http://10.222.0.80:2379/version</div><div class="line"><span class="comment">#查看版本</span></div><div class="line">curl http://10.222.0.80:2379/v2/members</div><div class="line"><span class="comment">#查看集群节点</span></div><div class="line">curl http://10.222.0.80:2379/v2/stats/store</div><div class="line"><span class="comment">#查看集群运行状态</span></div><div class="line">curl http://10.222.0.80:2379/v2/stats/leader</div><div class="line"><span class="comment">#查看选举的leader</span></div><div class="line">curl http://10.222.0.80:2379/v2/stats/self</div><div class="line"><span class="comment">#查看节点自身信息</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys</div><div class="line"><span class="comment">#查看键</span></div><div class="line">curl -XPUT http://10.222.0.80:2379/v2/keys/<span class="built_in">test</span>-key11 <span class="_">-d</span> value=<span class="string">"value11"</span></div><div class="line">curl -XPUT http://10.222.0.80:2379/v2/keys/dir3/dir33/<span class="built_in">test</span>-key333 <span class="_">-d</span> value=<span class="string">"value333"</span></div><div class="line"><span class="comment">#创建一个键值</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/cdir1 -XPUT <span class="_">-d</span> dir=<span class="literal">true</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/cdir2/cdir3 -XPUT <span class="_">-d</span> dir=<span class="literal">true</span></div><div class="line"><span class="comment">#创建一个目录</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/tvalue1 -XPUT <span class="_">-d</span> value=<span class="string">"t1"</span> <span class="_">-d</span> ttl=10</div><div class="line"><span class="comment">#创建一个带ttl的键值，单位为秒，即10s后此键值自动消失</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/seqvar -XPOST <span class="_">-d</span> value=<span class="string">"s01"</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/seqvar -XPOST <span class="_">-d</span> value=<span class="string">"s02"</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/seqvar -XPOST <span class="_">-d</span> value=<span class="string">"s03"</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/seqvar</div><div class="line"><span class="comment">#创建有序键值（例如类似DNS轮训注册）</span></div><div class="line">curl http://10.222.0.80:2379/v2/keys/value111 -XDELETE</div><div class="line"><span class="comment">#删除一个键值</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="备份还原策略"><a href="#备份还原策略" class="headerlink" title="备份还原策略"></a>备份还原策略</h3><ul>
+<li><p>数据备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ps axu | grep etcd|sed <span class="string">"s/ -/\n/g"</span> |grep <span class="string">"data-dir"</span> |awk <span class="string">'&#123;print $2&#125;'</span></div><div class="line"><span class="comment">#获取data目录</span></div><div class="line">etcdctl backup --data-dir=/opt/etcd/etcd-data --backup-dir=/tmp/etcd-backup-`date +%y%m%d%H`</div><div class="line"><span class="comment">#备份数据目录到tmp下</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>备份还原（单机情况）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1. 关闭etcd</span></div><div class="line"><span class="comment">#2. 将备份数据拷贝至datadir</span></div><div class="line"><span class="comment">#3. 启动配置需加上--force-new-cluster参数</span></div><div class="line"><span class="comment">#4. 启动etcd</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>说明</p>
+<blockquote>
+<p>1.使用 –force-new-cluster 参数启动Etcd服务。这个参数会重置集群ID和集群的所有成员信息，其中节点的监听地址会被重置为localhost:2379, 表示集群中只有一个节点。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="附录1：结合SkyDNS实现内网域名解析"><a href="#附录1：结合SkyDNS实现内网域名解析" class="headerlink" title="附录1：结合SkyDNS实现内网域名解析"></a>附录1：结合SkyDNS实现内网域名解析</h3><p><strong>说明：</strong>使用skydns+etcd可以搭建一个内网的域名服务，对于业务的部署连接及扩展会非常有帮助。</p>
+<blockquote>
+<p>设置步骤如下：</p>
+<ul>
+<li>安装etcd服务</li>
+<li>安装skydns服务</li>
+<li>初始化skydns服务</li>
+<li>修改dhcp选项中的DNS解析地址，或手动修改/etc/resolve.conf</li>
+<li>配置完成（附录2中有完整的ansible脚本）</li>
+</ul>
+</blockquote>
+<h3 id="附录2：Ansible脚本"><a href="#附录2：Ansible脚本" class="headerlink" title="附录2：Ansible脚本"></a>附录2：Ansible脚本</h3><p><a href="https://github.com/Arvon2014/A-ops-scripts/tree/master/ansible-playbook/roles/etcd" target="_blank" rel="external">安装部署脚本地址：</a>包括以下</p>
+<ul>
+<li>安装etcd</li>
+<li>安装etcd-view</li>
+<li>安装skydns</li>
+<li>安装supervisor</li>
+</ul>
+<h3 id="附录3：参考链接"><a href="#附录3：参考链接" class="headerlink" title="附录3：参考链接"></a>附录3：参考链接</h3><p><a href="https://coreos.com/etcd/" target="_blank" rel="external">Etcd</a><br><a href="http://blog.csdn.net/shukebai/article/details/53464887" target="_blank" rel="external">Etcd不错的图文应用介绍</a><br><a href="http://blog.csdn.net/u010511236/article/details/52386229" target="_blank" rel="external">Etcd常用场景分析</a><br><a href="https://yq.aliyun.com/articles/11035" target="_blank" rel="external">Etcd原理及ZK对比</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/配置管理/" rel="tag"># 配置管理</a>
+          
+            <a href="/tags/运维架构/" rel="tag"># 运维架构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/07/Ansible部署NFS服务/" rel="next" title="Ansible部署NFS服务">
+                <i class="fa fa-chevron-left"></i> Ansible部署NFS服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/05/关于Kafka分布式消息队列/" rel="prev" title="关于Kafka分布式消息队列">
+                关于Kafka分布式消息队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/arvon2014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Etcd接口支持"><span class="nav-number">1.1.</span> <span class="nav-text">Etcd接口支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">1.2.</span> <span class="nav-text">常用命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备份还原策略"><span class="nav-number">2.</span> <span class="nav-text">备份还原策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录1：结合SkyDNS实现内网域名解析"><span class="nav-number">3.</span> <span class="nav-text">附录1：结合SkyDNS实现内网域名解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录2：Ansible脚本"><span class="nav-number">4.</span> <span class="nav-text">附录2：Ansible脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录3：参考链接"><span class="nav-number">5.</span> <span class="nav-text">附录3：参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxx"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xxxx", "xxxx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="连接登录数据库12345678mysql –u用户名 [–h主机名或者IP地址] –p密码eggs: mysql -uusername -hIPaddress -p(password)#1. 连接到本机上的MYSQL。#首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否">
+<meta name="keywords" content="Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql自用命令手册">
+<meta property="og:url" content="http://arvon.top/2015/07/22/mysql自用命令手册/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="连接登录数据库12345678mysql –u用户名 [–h主机名或者IP地址] –p密码eggs: mysql -uusername -hIPaddress -p(password)#1. 连接到本机上的MYSQL。#首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否">
+<meta property="og:updated_time" content="2017-05-26T13:17:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql自用命令手册">
+<meta name="twitter:description" content="连接登录数据库12345678mysql –u用户名 [–h主机名或者IP地址] –p密码eggs: mysql -uusername -hIPaddress -p(password)#1. 连接到本机上的MYSQL。#首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2015/07/22/mysql自用命令手册/"/>
+
+
+
+
+
+  <title>mysql自用命令手册 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2015/07/22/mysql自用命令手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql自用命令手册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-22T16:10:15+08:00">
+                2015-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/07/22/mysql自用命令手册/" class="leancloud_visitors" data-flag-title="mysql自用命令手册">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="连接登录数据库"><a href="#连接登录数据库" class="headerlink" title="连接登录数据库"></a>连接登录数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql –u用户名 [–h主机名或者IP地址] –p密码</div><div class="line">eggs: mysql -uusername -hIPaddress -p(password)</div><div class="line"><span class="meta">#</span><span class="bash">1. 连接到本机上的MYSQL。</span></div><div class="line"><span class="meta">#</span><span class="bash">首先打开DOS窗口，然后进入目录mysql\bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码.</span></div><div class="line"><span class="meta">#</span><span class="bash">如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</span></div><div class="line"><span class="meta">#</span><span class="bash">2. 连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：</span></div><div class="line"><span class="meta">#</span><span class="bash">mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）</span></div><div class="line"><span class="meta">#</span><span class="bash">3. 退出MYSQL命令： <span class="built_in">exit</span> （回车） 或者 \q</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">**格式：**mysqladmin -u用户名 -p旧密码 password 新密码(注：因为开始时root没有密码，所以-p旧密码一项就可以省略)</span></div><div class="line">mysqladmin -u root password ab12</div><div class="line">再将root的密码改为djg345</div><div class="line">mysqladmin -u root -p ab12 password djg345</div></pre></td></tr></table></figure>
+<h3 id="查看mysql数据库中所有用户及拥有的权限"><a href="#查看mysql数据库中所有用户及拥有的权限" class="headerlink" title="查看mysql数据库中所有用户及拥有的权限"></a>查看mysql数据库中所有用户及拥有的权限</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;</div></pre></td></tr></table></figure>
+<h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">**格式：**grant select on 数据库.* to 用户名@登录主机 identified by “密码”</span></div><div class="line"><span class="meta">#</span><span class="bash">1.增加一个用户<span class="built_in">test</span>1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：</span></div><div class="line">grant select,insert,update,delete on *.* to test1@”%” Identified by “abc”;</div><div class="line"><span class="meta">#</span><span class="bash">2.增加一个用户<span class="built_in">test</span>2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），</span></div><div class="line">这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。</div><div class="line"><span class="meta">#</span><span class="bash">grant select,insert,update,delete on mydb.* to <span class="built_in">test</span>2@localhost identified by “abc”;</span></div><div class="line"><span class="meta">#</span><span class="bash">如果你不想<span class="built_in">test</span>2有密码，可以再打一个命令将密码消掉:</span></div><div class="line">grant select,insert,update,delete on mydb.* to test2@localhost identified by “”;</div></pre></td></tr></table></figure>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">mysql&gt;</span><span class="bash">Delete FROM user Where User=<span class="string">'test'</span> and Host=<span class="string">'localhost'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">drop database <span class="built_in">test</span>DB; //删除用户的数据库</span></div></pre></td></tr></table></figure>
+<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW DATABASES;	<span class="comment">#显示当前数据库服务器中的数据库列表(注意：mysql库里面有MYSQL的系统信息，我们改密码和新增用户，实际上就是用这个库进行操作。)</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 库名；	<span class="comment">##显示数据库中的数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW TABLES;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DESCRIBE 表名;	<span class="comment">#显示数据表的结构</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE DATABASE 库名;	<span class="comment">#建立数据库</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 库名;	<span class="comment">#;建立数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1))</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DROP DATABASE 	<span class="comment">#库名;删除数据库</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DROP TABLE 表名；	<span class="comment">#删除数据表</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> DELETE FROM 表名;	<span class="comment">#将表中记录清空</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT * FROM 表名;	<span class="comment">#显示表中的记录</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> INSERT INTO 表名 VALUES (”hyq”,”M”);	<span class="comment">#往表中插入记录</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> UPDATE 表名 SET 字段名1=<span class="string">'a'</span>,字段名2=<span class="string">'b'</span> WHERE 字段名3=<span class="string">'c'</span>;	<span class="comment">#更新表中数据</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE 表名;	<span class="comment">#用文本方式将数据装入数据表中</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE 数据库名;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SOURCE d:/mysql.sql;	<span class="comment">#导入.sql文件命令：</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> UPDATE mysql.user SET password=PASSWORD(<span class="string">'新密码'</span>) WHERE User=<span class="string">'root'</span>;</span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;	<span class="comment">#命令行修改root密码</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT DATABASE();	<span class="comment">#显示use的数据库名</span></span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT USER();	<span class="comment">#显示当前的user</span></span></div></pre></td></tr></table></figure>
+<h4 id="命令实例"><a href="#命令实例" class="headerlink" title="命令实例"></a>命令实例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">drop database if exists school;	#如果存在SCHOOL则删除</div><div class="line">create database school;	#建立库SCHOOL</div><div class="line">use school;	#打开库SCHOOL</div><div class="line">create table teacher;	#(进入SCHOOL库后)简历表teacher</div><div class="line"> (</div><div class="line"> id int(3) auto_increment not null primary key,</div><div class="line"> name char(10) not null,</div><div class="line"> address varchar(50) default ‘深圳',</div><div class="line"> year date</div><div class="line"> );	#建表结束</div><div class="line">insert into teacher values(”,'allen','大连一中','1976-10-10′);	#插入字段</div><div class="line">insert into teacher values(”,'jack','大连二中','1975-12-23′);</div></pre></td></tr></table></figure>
+<h3 id="导出数据库"><a href="#导出数据库" class="headerlink" title="导出数据库"></a>导出数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">1. 导出整个数据库（导出文件默认是存在mysql\bin目录下；在linux下为/var/lib/mysql）</span></div><div class="line">mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash">2. 导出一个表</span></div><div class="line">mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名</div><div class="line">mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash">3. 导出一个数据库结构</span></div><div class="line">mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql</div><div class="line"><span class="meta">#</span><span class="bash"><span class="_">-d</span> 没有数据 –add-drop-table 在每个create语句之前增加一个drop table</span></div><div class="line"><span class="meta">#</span><span class="bash">4. 带语言参数导出</span></div><div class="line">mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name &gt; outfile_name.sql</div></pre></td></tr></table></figure>
+<h3 id="备份恢复数据库"><a href="#备份恢复数据库" class="headerlink" title="备份恢复数据库"></a>备份恢复数据库</h3><ol>
+<li><p>备份数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysqldump -uroot -p test_db &gt; test_db.sql</div><div class="line">mysqldump -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 \</div><div class="line">--comments=FALSE --tables --no-create-info=FALSE --add-drop-table=TRUE --no-data=FALSE \</div><div class="line"><span class="meta">$</span><span class="bash">&#123;area&#125; | sed <span class="string">'s/AUTO_INCREMENT=[0-9]*\s//g'</span> &gt;<span class="variable">$&#123;dest_dir&#125;</span>/<span class="variable">$&#123;area&#125;</span>.sql</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>恢复数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p test_db &lt; test_db.sql</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute="DROP DATABASE IF EXISTS    $&#123;area&#125;";</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --execute="CREATE DATABASE IF NOT   EXISTS  $&#123;area&#125; DEFAULT CHARACTER SET utf8";</div><div class="line">mysql -h$&#123;ipaddr&#125; -u$&#123;username&#125; -p$&#123;password&#125; --default-character-set=utf8 --database= $&#123;area&#125; &lt;$&#123;area&#125;.sql;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grant all privileges on test_db.* to test_db@'localhost' identified by '123456';</div><div class="line"><span class="meta">#</span><span class="bash">兼容4.1之前的版本：</span></div><div class="line">update mysql.user set password=old_password('123456') where user='test_db';</div><div class="line"><span class="meta">#</span><span class="bash">4. 忘记密码</span></div><div class="line">在“my.cnf”或“my.ini”文件的“mysqld”配置段添加“skip-grant-tables”，然后重新启动mysql即可登录修改root密码。</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://www.jb51.net/article/24345.htm" target="_blank" rel="external">mysql常用命令集锦</a><br><a href="http://www.jb51.net/article/25652.htm" target="_blank" rel="external">Mysql常用命令 详细整理版</a><br><a href="http://www.cnblogs.com/fly1988happy/archive/2011/12/15/2288554.html" target="_blank" rel="external">Mysql 用户权限</a><br><a href="http://www.cnblogs.com/fly1988happy/archive/2011/12/15/2288554.html" target="_blank" rel="external">Mysql 命令大全</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/22/Tmux-使用简记/" rel="next" title="Tmux 使用简记">
+                <i class="fa fa-chevron-left"></i> Tmux 使用简记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/27/Linux系统查看命令/" rel="prev" title="Linux查看系统信息命令">
+                Linux查看系统信息命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/arvon2014" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接登录数据库"><span class="nav-number">1.</span> <span class="nav-text">连接登录数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改密码"><span class="nav-number">2.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看mysql数据库中所有用户及拥有的权限"><span class="nav-number">3.</span> <span class="nav-text">查看mysql数据库中所有用户及拥有的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加新用户"><span class="nav-number">4.</span> <span class="nav-text">添加新用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">5.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看命令"><span class="nav-number">6.</span> <span class="nav-text">查看命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令实例"><span class="nav-number">6.1.</span> <span class="nav-text">命令实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出数据库"><span class="nav-number">7.</span> <span class="nav-text">导出数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备份恢复数据库"><span class="nav-number">8.</span> <span class="nav-text">备份恢复数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">9.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxx"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xxxx", "xxxx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
