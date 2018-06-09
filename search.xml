@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title><![CDATA[Bitbucket实践]]></title>
+      <url>http://arvon.top/2018/06/09/Bitbucket%E5%AE%9E%E8%B7%B5/</url>
+      <content type="html"><![CDATA[<p>前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。</p>
+<a id="more"></a>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用Docker的方式，由于Bitbucket基于性能的考虑不推荐使用mysql(<a href="https://confluence.atlassian.com/bitbucketserver/connecting-bitbucket-server-to-mysql-776640382.html" target="_blank" rel="external">参考</a>)，所以最后根据推荐决定使用PostgreSQL，以下是编写的docker-compose,可以在<a href="https://github.com/Gourds/docker-image/tree/master/Service/bitbucket" target="_blank" rel="external">【Github】</a>进行查看和建议。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">postgresql:</div><div class="line">  image: sameersbn/postgresql:9.4-3</div><div class="line">  environment:</div><div class="line">    - DB_USER=YourUserName</div><div class="line">    - DB_PASS=YourPassword</div><div class="line">    - DB_NAME=YourDatabaseName</div><div class="line">  volumes:</div><div class="line">    - /srv/docker/bitbucket/postgresql:/var/lib/postgresql</div><div class="line">bitbucket:</div><div class="line">  image: atlassian/bitbucket-server:5.0</div><div class="line">  links:</div><div class="line">    - postgresql:postgresql</div><div class="line">  ports:</div><div class="line">    - "80:7990"</div><div class="line">    - "7999:7999"</div><div class="line">  environment:</div><div class="line">    - 'BITBUCKET_PROXY_NAME='</div><div class="line">    - 'BITBUCKET_PROXY_PORT='</div><div class="line">    - 'BITBUCKET_PROXY_SCHEME='</div><div class="line">    - 'BITBUCKET_DELAYED_START='</div><div class="line">  volumes:</div><div class="line">    - /srv/docker/bitbucket/app-data:/var/atlassian/application-data/bitbucket</div></pre></td></tr></table></figure></p>
+<h3 id="备份及还原"><a href="#备份及还原" class="headerlink" title="备份及还原"></a>备份及还原</h3><p><code>Bitbucket</code>的备份主要包括两部分</p>
+<ul>
+<li>家目录：包括仓库数据、日志、插件等，具体参考<a href="https://confluence.atlassian.com/bitbucketserver/bitbucket-server-home-directory-776640890.html" target="_blank" rel="external">【官方说明】</a></li>
+<li>数据库：<code>which contains data about pull requests, comments, users, groups, permissions, and so on.</code></li>
+</ul>
+<p>关于备份官方提供了3种方式</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>不停机备份</th>
+<th>自定义备份</th>
+<th>客户端备份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概述</td>
+<td>使用内部一致性数据库快照和数据块级别文件系统快照进行不停机备份</td>
+<td>使用增量备份及云供应商的快照功能</td>
+<td>使用外部程序锁定bitbucker服务器实例，并以独立于供应商的格式备份其整个主目录和数据库。使用简单但不适用与高可用环境</td>
+</tr>
+<tr>
+<td>高可用</td>
+<td>不影响服务</td>
+<td>不可用时间短，只需要几秒钟短暂锁定存储桶就可以创建一致的快照</td>
+<td>不可用时间长。bitbucket在整个备份过程中被锁定，这可能需要几分钟或更长时间，特别是在大型组织中</td>
+</tr>
+<tr>
+<td>版本支持</td>
+<td>Bitbucket 4.8+</td>
+<td>Bitbucket 4.0+ &amp;&amp; Stash 2.12+</td>
+<td>Bitbucket 4.0+ &amp;&amp; Stash2.7+</td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a href="https://confluence.atlassian.com/bitbucketserver/using-bitbucket-zero-downtime-backup-829920023.html" target="_blank" rel="external">【DOC】</a></td>
+<td><a href="https://confluence.atlassian.com/bitbucketserver/using-bitbucket-server-diy-backup-776640056.html" target="_blank" rel="external">【DOC】</a></td>
+<td><a href="https://confluence.atlassian.com/bitbucketserver/using-the-bitbucket-server-backup-client-776640064.html" target="_blank" rel="external">【DOC】</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://bitbucket.org/atlassian/docker-atlassian-bitbucket-server" target="_blank" rel="external">【官方Docker参考】</a><br><a href="https://confluence.atlassian.com/bitbucketserver/data-recovery-and-backups-776640050.html" target="_blank" rel="external">【官方备份说明】</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Ansible自定义插件获取指定远端配置]]></title>
       <url>http://arvon.top/2018/05/11/Ansible%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E8%BF%9C%E7%AB%AF%E9%85%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<p><strong>概述:</strong>将ansible部署与变量控制拆分，解决应用与主机的规划问题。其中使用Ansible本地<code>fact</code>实现应用主机规划，使用自定义的Ansible<code>lookup</code>插件来实现从远端获取变量。通过这种方式可以提高ansible代码的利用率和普适性，降低运维的配置管理工作复杂度。可以关注下以下几点</p>
