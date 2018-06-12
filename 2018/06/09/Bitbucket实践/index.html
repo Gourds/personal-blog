@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。">
+<meta name="description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。  update:2018-06-12: 添加备份还原文档，文档在【这里】，就不单独在放Blog了">
 <meta name="keywords" content="版本控制,Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bitbucket实践">
 <meta property="og:url" content="http://arvon.top/2018/06/09/Bitbucket实践/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。">
-<meta property="og:updated_time" content="2018-06-09T08:27:43.000Z">
+<meta property="og:description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。  update:2018-06-12: 添加备份还原文档，文档在【这里】，就不单独在放Blog了">
+<meta property="og:updated_time" content="2018-06-12T07:42:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bitbucket实践">
-<meta name="twitter:description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。">
+<meta name="twitter:description" content="前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。  update:2018-06-12: 添加备份还原文档，文档在【这里】，就不单独在放Blog了">
 
 
 
@@ -385,6 +385,9 @@
 
       
         <p>前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。</p>
+<blockquote>
+<p><strong>update:</strong><br>2018-06-12: 添加备份还原文档，文档在<a href="https://github.com/Gourds/docker-image/tree/master/Service/bitbucket/backup-restore" target="_blank" rel="external">【这里】</a>，就不单独在放Blog了</p>
+</blockquote>
 <a id="more"></a>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用Docker的方式，由于Bitbucket基于性能的考虑不推荐使用mysql(<a href="https://confluence.atlassian.com/bitbucketserver/connecting-bitbucket-server-to-mysql-776640382.html" target="_blank" rel="external">参考</a>)，所以最后根据推荐决定使用PostgreSQL，以下是编写的docker-compose,可以在<a href="https://github.com/Gourds/docker-image/tree/master/Service/bitbucket" target="_blank" rel="external">【Github】</a>进行查看和建议。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">postgresql:</div><div class="line">  image: sameersbn/postgresql:9.4-3</div><div class="line">  environment:</div><div class="line">    - DB_USER=YourUserName</div><div class="line">    - DB_PASS=YourPassword</div><div class="line">    - DB_NAME=YourDatabaseName</div><div class="line">  volumes:</div><div class="line">    - /srv/docker/bitbucket/postgresql:/var/lib/postgresql</div><div class="line">bitbucket:</div><div class="line">  image: atlassian/bitbucket-server:5.0</div><div class="line">  links:</div><div class="line">    - postgresql:postgresql</div><div class="line">  ports:</div><div class="line">    - "80:7990"</div><div class="line">    - "7999:7999"</div><div class="line">  environment:</div><div class="line">    - 'BITBUCKET_PROXY_NAME='</div><div class="line">    - 'BITBUCKET_PROXY_PORT='</div><div class="line">    - 'BITBUCKET_PROXY_SCHEME='</div><div class="line">    - 'BITBUCKET_DELAYED_START='</div><div class="line">  volumes:</div><div class="line">    - /srv/docker/bitbucket/app-data:/var/atlassian/application-data/bitbucket</div></pre></td></tr></table></figure></p>
 <h3 id="备份及还原"><a href="#备份及还原" class="headerlink" title="备份及还原"></a>备份及还原</h3><p><code>Bitbucket</code>的备份主要包括两部分</p>
