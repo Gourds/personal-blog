@@ -4,6 +4,65 @@
   
     
     <entry>
+      <title><![CDATA[Elasticsearch使用curator管理index]]></title>
+      <url>http://arvon.top/2018/08/01/ES%E4%BD%BF%E7%94%A8curator%E7%AE%A1%E7%90%86index/</url>
+      <content type="html"><![CDATA[<p>有个管理ES index的需求，感觉使用curl调用HTTP接口很不方便也不是很科学。在Github上一查，果然有官方提供的工具<code>curator</code>，这个工具不仅仅满足了我简单管理的需要（索引的关闭、打开、段合并、删除等），也为以后的扩展提供了新的解决方案（支持磁盘占用触发）,非常不错。以下记录我的调研测试过程。另外补充一句<code>curator</code>的官方文档十分完备，如喜欢直接阅读官方文档可以直接跳到本文底部，那里有官方文档链接。</p>
+<a id="more"></a>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>官方提供了多种安装途径（pip、yum、SourceCode、Docker），支持Unix及Windows平台。由于安装需要python3.x环境且我使用的是AWS的ec2实例，感觉使用源码或yum的方式管理维护不太方便，所以决定使用Docker方式。</p>
+<ul>
+<li><p>本地环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># cat /etc/issue</span></div><div class="line">Amazon Linux AMI release 2017.03</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装Docker环境&amp;下载源代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">yum install docker</div><div class="line">/etc/init.d/docker start</div><div class="line"><span class="comment">#Install and start docker service</span></div><div class="line">mkdir -pv /data/ES-curator&amp;&amp;<span class="built_in">cd</span>  /data/ES-curator</div><div class="line">wget https://github.com/elastic/curator/archive/v5.5.4.zip &amp;&amp; unzip v5.5.4.zip</div><div class="line"><span class="comment">#Download curator source code</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>简单升级DockerFile</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">FROM python:3.6-alpine3.6 as builder</div><div class="line">RUN apk --no-cache add build-base tar musl-utils openssl-dev</div><div class="line">RUN pip3 install setuptools cx_Freeze==6.0b1 requests-aws4auth boto3</div><div class="line">COPY . .</div><div class="line">RUN ln <span class="_">-s</span> /lib/libc.musl-x86_64.so.1 ldd</div><div class="line">RUN ln <span class="_">-s</span> /lib /lib64</div><div class="line">RUN pip3 install -r requirements.txt</div><div class="line">RUN python3 setup.py build_exe</div><div class="line">FROM alpine:3.6</div><div class="line">ENV CURATOR_CONFIG_HOME /data/curator-config</div><div class="line">RUN apk --no-cache upgrade &amp;&amp; apk --no-cache add ca-certificates  &amp;&amp; \</div><div class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;CURATOR_CONFIG_HOME&#125;</span>"</span></div><div class="line">COPY --from=builder build/exe.linux-x86_64-3.6 /curator/</div><div class="line">VOLUME [<span class="string">"<span class="variable">$&#123;CURATOR_CONFIG_HOME&#125;</span>"</span>]</div><div class="line">USER root:root</div><div class="line">ENTRYPOINT [<span class="string">"/curator/curator"</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p>构建Docker镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> curator-5.5.4/ &amp;&amp; docker build -t curator:v5.5.4 .</div><div class="line"><span class="comment">#build docker image from source code</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>配置文件（默认会使用<code>~/.curator/curator.yml</code>，可以手动通过<code>--config</code>参数指定。配置如下，更具体的文档可以查阅<a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/configfile.html" target="_blank" rel="external">【官方】</a><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">---</span></div><div class="line"><span class="comment"># Remember, leave a key empty if there is no value.  None will be a string,</span></div><div class="line"><span class="comment"># not a Python "NoneType"</span></div><div class="line"><span class="attr">client:</span></div><div class="line"><span class="attr">  hosts:</span></div><div class="line">  <span class="comment">#填写ES的服务节点，可以只写一个节点，可以写成下面的形式，也可以写成['host1', 'host2]这种形式</span></div><div class="line"><span class="bullet">    -</span> <span class="string">x.x.x.x</span></div><div class="line"><span class="attr">  port:</span> <span class="number">9200</span> <span class="comment">#ES的端口</span></div><div class="line"><span class="attr">  url_prefix:</span> <span class="comment">#默认留空即可，使用域名的时候可以根据需求修改</span></div><div class="line"><span class="attr">  use_ssl:</span> <span class="literal">False</span></div><div class="line"><span class="attr">  certificate:</span></div><div class="line"><span class="attr">  client_cert:</span></div><div class="line"><span class="attr">  client_key:</span></div><div class="line"><span class="attr">  ssl_no_validate:</span> <span class="literal">False</span></div><div class="line"><span class="attr">  http_auth:</span></div><div class="line"><span class="attr">  timeout:</span> <span class="number">30</span></div><div class="line"><span class="attr">  master_only:</span> <span class="literal">False</span></div><div class="line"></div><div class="line"><span class="attr">logging:</span></div><div class="line"><span class="attr">  loglevel:</span> <span class="string">INFO</span> <span class="comment">#记录log的级别</span></div><div class="line"><span class="attr">  logfile:</span> <span class="string">/data/curator-config/log/curator_%Y%m%d.log</span> <span class="comment">#log的输出设置，默认留空</span></div><div class="line"><span class="attr">  logformat:</span> <span class="string">default</span></div><div class="line"><span class="attr">  blacklist:</span> <span class="string">['elasticsearch',</span> <span class="string">'urllib3'</span><span class="string">]</span> <span class="comment">#日志输出屏蔽的列表，按默认即可，这两个相关log输入太影响Debug</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="使用Docker对Index进行管理"><a href="#使用Docker对Index进行管理" class="headerlink" title="使用Docker对Index进行管理"></a>使用Docker对Index进行管理</h4><p>由于直接测试写的文档，也没有什么高深的技术，有兴趣可移步到我的<a href="https://github.com/Gourds/docker-image/tree/master/Service/elasticsearch_curator/cuator_config" target="_blank" rel="external">Github</a>。里面有测试使用的例子（包括打开索引、关闭索引、段合并以及删除索引）</p>
+<p><strong>使用命令</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/close_index_rule.yml</div><div class="line"><span class="comment">#关闭索引</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/delete_index_rule.yml</div><div class="line"><span class="comment">#删除索引</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/merge_index_rule.yml</div><div class="line"><span class="comment">#段合并</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/open_index_rule.yml</div><div class="line"><span class="comment">#打开索引</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="补充配置说明（随后补充）"><a href="#补充配置说明（随后补充）" class="headerlink" title="补充配置说明（随后补充）"></a>补充配置说明（随后补充）</h3><p>上面记录了我使用中需求的具体示例，还有一些配置选项没有进行说明，就简单介绍下curator可以对Index进行哪些操作，以及常见具体操作时的参数选项。</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/alias.html" target="_blank" rel="external">【Alias】</a> 这个操作可以通过别名添加或删除索引</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/allocation.html" target="_blank" rel="external">【Allocation】</a>更改选定索引的分片路由分配</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/close.html" target="_blank" rel="external">【Close】</a>关闭选定索引，可以节省内存</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/cluster_routing.html" target="_blank" rel="external">【Cluster Routing】</a>更改选定索引的分片路由分配</li>
+<li>Create Index：</li>
+<li>Delete Index：</li>
+<li>DeleteSnapshots：</li>
+<li>forceMerge：</li>
+<li>Index Settings:</li>
+<li>Open:</li>
+<li>Reindex:</li>
+<li>Replicas:</li>
+<li>Restore:</li>
+<li>Rollover:</li>
+<li>Shrink:</li>
+<li>Snapshot:</li>
+</ul>
+<h4 id="选取Index（Filters）"><a href="#选取Index（Filters）" class="headerlink" title="选取Index（Filters）"></a>选取Index（Filters）</h4><p>使用filters进行筛选需要操作的index。虽然过滤器可以链接，但是每个过滤器都通过隐含的逻辑AND操作链接。如果想从几个不同的模式中匹配，就像用逻辑或运算一样，可以用模式过滤器类型使用正则表达式来匹配。</p>
+<p>操作筛选操作分为两部分（索引以及镜像），这里只对Index的过滤选项进行介绍，更多可以参照<a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/filters.html" target="_blank" rel="external">【官方】</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#支持正则进行多个index的匹配</span></div><div class="line">  filters:</div><div class="line">  - filtertype: pattern</div><div class="line">    kind: regex</div><div class="line">    value: <span class="string">'^(alpha-|bravo-|charlie-).*$'</span></div><div class="line">  - filtertype: age <span class="comment">#按时间进行筛选index</span></div><div class="line">    <span class="built_in">source</span>: creation_date</div><div class="line">    direction: older</div><div class="line">    unit: days</div><div class="line">    unit_count: 3</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://github.com/elastic/curator" target="_blank" rel="external">【Github地址】</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html" target="_blank" rel="external">【官方文档】</a></li>
+</ul>
+<hr>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Bitbucket实践]]></title>
       <url>http://arvon.top/2018/06/09/Bitbucket%E5%AE%9E%E8%B7%B5/</url>
       <content type="html"><![CDATA[<p>前言：之前使用了Atlassian公司的Confluence和Jira，现在新项目考虑使用Bitbucket做代码仓库，这里记录一下调研实践过程。由于之前的服务是使用docker进行部署的，所以Bitbucket也决定使用docker的方式进行部署。</p>
@@ -5507,7 +5566,7 @@ Mo birthday happy to
 <p>Reference-style 引用方式：<br>[link text][id]<br>[id]: <a href="https://www.mozilla.org" target="_blank" rel="external">https://www.mozilla.org</a> “title text”</p>
 <p>Relative reference to a repository file 引用存储文件：<br>[link text](../path/file/readme.text “title text”)</p>
 <p>还能这样使用：<br>[link text][]<br>[link text]: <a href="http://www.reddit.com" target="_blank" rel="external">http://www.reddit.com</a></p>
-<p>Email 邮件：<br><a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#101;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#x6d;">&#101;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#x6d;</a></p>
+<p>Email 邮件：<br><a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a></p>
 </blockquote>
 <h3 id="images图片链接"><a href="#images图片链接" class="headerlink" title="images图片链接"></a>images图片链接</h3><p><code>图片外链</code>必须记着，很好用<a href="http://i2.tietuku.com/" target="_blank" rel="external">贴图</a></p>
 <blockquote>
