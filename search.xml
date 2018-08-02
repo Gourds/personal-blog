@@ -29,27 +29,30 @@
 </li>
 </ul>
 <h4 id="使用Docker对Index进行管理"><a href="#使用Docker对Index进行管理" class="headerlink" title="使用Docker对Index进行管理"></a>使用Docker对Index进行管理</h4><p>由于直接测试写的文档，也没有什么高深的技术，有兴趣可移步到我的<a href="https://github.com/Gourds/docker-image/tree/master/Service/elasticsearch_curator/cuator_config" target="_blank" rel="external">Github</a>。里面有测试使用的例子（包括打开索引、关闭索引、段合并以及删除索引）</p>
+<p>自己写了一个简单的启动脚本，由于比较长也没什么营养，感兴趣的可以看<a href="https://github.com/Gourds/docker-image/blob/master/Service/elasticsearch_curator/cuator_config/curator-manage-index" target="_blank" rel="external">【这里】</a><br>使用我这个脚本，然后再服务器上进行设置定时任务运行,当需要单独执行某个操作时候这种管理方式可能方便些。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#crontab -e</span></div><div class="line">0 3 * * * service curator-manage-index cron</div></pre></td></tr></table></figure></p>
 <p><strong>使用命令</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/close_index_rule.yml</div><div class="line"><span class="comment">#关闭索引</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/delete_index_rule.yml</div><div class="line"><span class="comment">#删除索引</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/merge_index_rule.yml</div><div class="line"><span class="comment">#段合并</span></div><div class="line">docker run <span class="_">-d</span> --rm -v /data/ES-curator/curator-config/:/data/curator-config curator:v5.5.4 --config /data/curator-config/curator.yml /data/curator-config/open_index_rule.yml</div><div class="line"><span class="comment">#打开索引</span></div></pre></td></tr></table></figure></p>
 <hr>
-<h3 id="补充配置说明（随后补充）"><a href="#补充配置说明（随后补充）" class="headerlink" title="补充配置说明（随后补充）"></a>补充配置说明（随后补充）</h3><p>上面记录了我使用中需求的具体示例，还有一些配置选项没有进行说明，就简单介绍下curator可以对Index进行哪些操作，以及常见具体操作时的参数选项。</p>
+<h3 id="补充配置说明"><a href="#补充配置说明" class="headerlink" title="补充配置说明"></a>补充配置说明</h3><p>上面记录了我使用中需求的具体示例，还有一些配置选项没有进行说明，就简单介绍下curator可以对Index进行哪些操作，以及常见具体操作时的参数选项。</p>
 <ul>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/alias.html" target="_blank" rel="external">【Alias】</a> 这个操作可以通过别名添加或删除索引</li>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/allocation.html" target="_blank" rel="external">【Allocation】</a>更改选定索引的分片路由分配</li>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/close.html" target="_blank" rel="external">【Close】</a>关闭选定索引，可以节省内存</li>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/cluster_routing.html" target="_blank" rel="external">【Cluster Routing】</a>更改选定索引的分片路由分配</li>
-<li>Create Index：</li>
-<li>Delete Index：</li>
-<li>DeleteSnapshots：</li>
-<li>forceMerge：</li>
-<li>Index Settings:</li>
-<li>Open:</li>
-<li>Reindex:</li>
-<li>Replicas:</li>
-<li>Restore:</li>
-<li>Rollover:</li>
-<li>Shrink:</li>
-<li>Snapshot:</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/create_index.html" target="_blank" rel="external">【Create Index】</a>创建索引</li>
+<li>[【Delete Index】][6]删除过滤筛选出的索引</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/delete_snapshots.html" target="_blank" rel="external">【DeleteSnapshots】</a>从选定的存储库中删除选定的快照</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/forcemerge.html" target="_blank" rel="external">【forceMerge】</a>将过滤选定的索引按照配置进行强制合并</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index_settings.html" target="_blank" rel="external">【Index Settings】</a>更新选中的index的设置</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/open.html" target="_blank" rel="external">【Open】</a>打开选定索引</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/reindex.html" target="_blank" rel="external">【Reindex】</a>对index进行重新索引，有很多选项，具体看官网</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/replicas.html" target="_blank" rel="external">【Replicas】</a>此操作将每个shard的副本数设置为count值</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/restore.html" target="_blank" rel="external">【Restore】</a>从快照中恢复index</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/rollover.html" target="_blank" rel="external">【Rollover】</a>对满足任何描述条件的索引使用弹性搜索滚动API创建新索引</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/shrink.html" target="_blank" rel="external">【Shrink】</a>缩小索引，不过需要满足多个条件，具体参照文档</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/snapshot.html" target="_blank" rel="external">【Snapshot】</a>对选定索引创建快照</li>
 </ul>
+<hr>
+<p>[6]:<br><a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/delete_indices.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elasticsearch/client/curator/current/delete_indices.html</a></p>
 <h4 id="选取Index（Filters）"><a href="#选取Index（Filters）" class="headerlink" title="选取Index（Filters）"></a>选取Index（Filters）</h4><p>使用filters进行筛选需要操作的index。虽然过滤器可以链接，但是每个过滤器都通过隐含的逻辑AND操作链接。如果想从几个不同的模式中匹配，就像用逻辑或运算一样，可以用模式过滤器类型使用正则表达式来匹配。</p>
 <p>操作筛选操作分为两部分（索引以及镜像），这里只对Index的过滤选项进行介绍，更多可以参照<a href="https://www.elastic.co/guide/en/elasticsearch/client/curator/current/filters.html" target="_blank" rel="external">【官方】</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#支持正则进行多个index的匹配</span></div><div class="line">  filters:</div><div class="line">  - filtertype: pattern</div><div class="line">    kind: regex</div><div class="line">    value: <span class="string">'^(alpha-|bravo-|charlie-).*$'</span></div><div class="line">  - filtertype: age <span class="comment">#按时间进行筛选index</span></div><div class="line">    <span class="built_in">source</span>: creation_date</div><div class="line">    direction: older</div><div class="line">    unit: days</div><div class="line">    unit_count: 3</div></pre></td></tr></table></figure>
