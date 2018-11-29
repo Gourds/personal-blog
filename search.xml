@@ -5,6 +5,86 @@
     
     <entry>
       <title><![CDATA[Docker方式安装Jumpserver]]></title>
+      <url>http://arvon.top/2018/11/29/Docker%E6%96%B9%E5%BC%8F%E4%B8%8BBitbucket%E5%8F%8AConfluence%E5%92%8CJira%E8%BF%81%E7%A7%BB%E6%96%87%E6%A1%A3/</url>
+      <content type="html"><![CDATA[<p>之前写过使用Docker部署Confluence、Jira、Bitbucket的文档，由于宿主服务器硬件有点跟不上了，所以前端时间进行了这些服务的迁移。这里先介绍Confluence及Jira的迁移过程。简单介绍下做的事情<br><strong>迁移思路：</strong></p>
+<blockquote>
+<ul>
+<li>按照原来搭建方法在新宿主机上新建相同的容器（注意控制版本，可以用指定的版本来替代image的latest标签）</li>
+<li>将备份的数据导入新的容器中</li>
+</ul>
+</blockquote>
+<p>这里面最容易出问题的就是备份数据是否是完全完整的，比如Jira的附件及插件、Bitbucket代码是可以导入等，当然许多官方会有相关的提示，不过并没有提供更详尽的解决过程，这里算一个补充吧。<br>PS：Atlassian的这几个服务都是有自动备份功能的，所以也不需要过多干涉，后面的还原数据操作，Jira和Confluence都是用的应用自己的备份，备份路径也是官方Docker的路径（这个就根据实际情况拿到备份就行了）。还有本来想贴几个图可能会更直观，不过七牛的图床域名被回收了，之后应该会用<a href="https://github.com/Chevereto/Chevereto-Free" target="_blank" rel="external">【chevreto】</a>，有时间了整一整。<br><a id="more"></a></p>
+<h3 id="创建Mysql容器"><a href="#创建Mysql容器" class="headerlink" title="创建Mysql容器"></a>创建Mysql容器</h3><ul>
+<li><p>启动容器<br>先说一下为什么用Mysql，因为刚开始只是有一个Jira的需求，然后选用DB的时候感觉Mysql相对Postsql更易于操作维护，就选了这个，这导致了后面Confluence的DB问题，不过都顺利解决了。Docker启动新容器的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">docker run --name mysql</div><div class="line">           -p 3306:3306 \</div><div class="line">           -v /data/mysql/data:/var/lib/mysql \</div><div class="line">           <span class="_">-e</span> MYSQL_ROOT_PASSWORD=root \</div><div class="line">           -idt docker.io/mysql:5.7.21 \</div><div class="line">           --character-set-server=utf8 \</div><div class="line">           --collation-server=utf8_bin \</div><div class="line">           --character-set-server=utf8 \</div><div class="line">           --collation-server=utf8_bin \</div><div class="line">           --max_allowed_packet=512M   \</div><div class="line">           --innodb_log_file_size=2GB</div></pre></td></tr></table></figure>
+<p>注意Mysql启动时候的参数，不注意这个后面会有好多个坑。<br>使用Mysql的要求 =&gt;<a href="https://confluence.atlassian.com/doc/database-setup-for-mysql-128747.html" target="_blank" rel="external">【Confluence的文档】</a><br>修改建议 =&gt;<a href="https://confluence.atlassian.com/confkb/mysqlsyntaxerrorexception-row-size-too-large-658735905.html" target="_blank" rel="external">【Confluence的建议】</a><br>关于参数的解释 =&gt; <a href="https://blog.csdn.net/kai404/article/details/80242262" target="_blank" rel="external">【CSDN上的一篇博客】</a></p>
+</li>
+<li><p>Mysql容器的配置<br>登入Mysql进行DB和用户的创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE DATABASE jira_db CHARACTER SET utf8 COLLATE utf8_bin;</div><div class="line">mysql&gt; grant ALL PRIVILEGES on jira_db.* to jira_user@<span class="string">"%"</span> Identified by <span class="string">"jira_pass"</span>;</div><div class="line">mysql&gt; CREATE DATABASE confluence CHARACTER SET utf8 COLLATE utf8_bin;</div><div class="line">mysql&gt; grant ALL PRIVILEGES on confluence.* to confluence_user@<span class="string">"%"</span> Identified by <span class="string">"confluence_pass"</span>;</div><div class="line"><span class="comment">#mysql&gt; grant SELECT on *.* to backup_user@"%" Identified by "backup_user";</span></div><div class="line"><span class="comment">#mysql&gt; grant ALL PRIVILEGES on *.* to sa_user@"%" Identified by "sa_user";</span></div><div class="line">mysql&gt; flush privileges;</div><div class="line"><span class="comment">#set global max_allowed_packet=1073741824;  当导入时有可能是这个值过小，可以临时进行调整。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Mysql容器的检查<br>登入Mysql对配置进行检查</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -it mysql /bin/bash <span class="comment">#进入mysql容器</span></div><div class="line">mysql&gt; show global variables; 展示所有配置</div><div class="line">mysql&gt; show engine innodb status\G;  查看innodb装填</div><div class="line">mysql&gt; show variables like <span class="string">'character%'</span>; 查看字符集设置</div><div class="line">mysql&gt; show variables like <span class="string">'innodb_log_file%'</span>;查看innodb_log_file设置</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="新建Jira容器并还原数据"><a href="#新建Jira容器并还原数据" class="headerlink" title="新建Jira容器并还原数据"></a>新建Jira容器并还原数据</h3><ul>
+<li><p>启动Jira容器<br>先启动容器，不做其他操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 18080:8080 -dit --name jira docker.io/cptactionhank/atlassian-jira:7.8.2</div></pre></td></tr></table></figure>
+</li>
+<li><p>原数据导出<br>注意权限，也可以在导入操作进行权限的修改。另外官方备份的数据并不包括附件及插件等，具体可参照<a href="https://confluence.atlassian.com/adminjiraserver078/backing-up-data-947189268.html" target="_blank" rel="external">【官方说明】</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#导出Jira应用数据</span></div><div class="line">docker cp jira_v1:/var/atlassian/jira/<span class="built_in">export</span>/2018-Nov-18--1058.zip ./</div><div class="line">chown -R daemon.daemon 2018-Nov-18--1058.zip</div><div class="line"><span class="comment">#导出Jira附件</span></div><div class="line">docker <span class="built_in">exec</span> -it jira_v1 /bin/bash</div><div class="line">&gt; <span class="built_in">cd</span> /var/atlassian/jira/</div><div class="line">&gt; tar czvf jira_data_20181118.tar.gz /data/</div><div class="line">docker cp /var/atlassian/jira/jira_data_20181118.tar.gz ./</div><div class="line"><span class="comment">#导出插件</span></div><div class="line">docker cp jira_v1:/var/atlassian/jira/jira_plugins_20181118.tar.gz ./</div></pre></td></tr></table></figure>
+</li>
+<li><p>将备份数据导入指定目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#导入Jira应用数据</span></div><div class="line">docker cp 2018-Nov-18--1058.zip jira:/var/atlassian/jira/import/</div><div class="line">chown -R daemon.daemon 2018-Nov-18--1058.zip</div><div class="line"><span class="comment">#导入附件</span></div><div class="line">scp old-host:/tmp/jira_data_20181118.tar.gz ./jira_data_20181118.tar.gz</div><div class="line">chown daemon.daemon jira_data_20181118.tar.gz</div><div class="line">docker cp jira_data_20181118.tar.gz  jira:/var/atlassian/jira/</div><div class="line"><span class="comment">#导入插件</span></div><div class="line">docker cp jira_v1:/var/atlassian/jira/jira_plugins_20181118.tar.gz ./</div><div class="line">scp old-host:/tmp/jira_plugins_20181118.tar.gz ./</div><div class="line">docker cp jira_plugins_20181118.tar.gz jira:var/atlassian/jira/</div></pre></td></tr></table></figure>
+</li>
+<li><p>Jira初始化<br>在完成数据导入后，就可以登录<a href="http://your_host:18080，按照提示进行授权码的购买或输入。然后在最后的步骤会让选择是作为新的服务器还是从备份恢复，选择从备份恢复即可。提示还是很到位的，注意权限，权限不对的话数据导入会报错，在Jira的log里会有体现。" target="_blank" rel="external">http://your_host:18080，按照提示进行授权码的购买或输入。然后在最后的步骤会让选择是作为新的服务器还是从备份恢复，选择从备份恢复即可。提示还是很到位的，注意权限，权限不对的话数据导入会报错，在Jira的log里会有体现。</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs <span class="_">-f</span> jira <span class="comment">#追踪jira的log输出</span></div></pre></td></tr></table></figure>
+<p>没有问题的话，Jira就恢复完成了，另外还有下一步的参数优化，因为官方设置的JVM默认值偏低，所以最好提前调整了。</p>
+</li>
+<li><p>Jira的参数优化<br>其实容器启动的时候也可以指定，不过这个后续可能还会变动，直接修改便于维护就这样了，这个根据实际使用情况修改吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -it -u root jira /bin/bash</div><div class="line"><span class="comment">#进入容器后执行以下命令</span></div><div class="line">sed -i <span class="string">'s@JVM_MINIMUM_MEMORY=.*@JVM_MINIMUM_MEMORY="1024m"@'</span> /opt/atlassian/jira/bin/setenv.sh</div><div class="line">sed -i <span class="string">'s@JVM_MAXIMUM_MEMORY=.*@JVM_MAXIMUM_MEMORY="2048m"@'</span> /opt/atlassian/jira/bin/setenv.sh</div><div class="line"><span class="comment">#修改完之后，退出容器然后重启Jira容器即可</span></div><div class="line">docker restart jira</div></pre></td></tr></table></figure>
+<p>OK，完成了Jira的迁移还原操作</p>
+</li>
+</ul>
+<h3 id="新建Confluence容器并还原数据"><a href="#新建Confluence容器并还原数据" class="headerlink" title="新建Confluence容器并还原数据"></a>新建Confluence容器并还原数据</h3><ul>
+<li><p>启动Confluence容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -v /data/confluence:/var/atlassian/application-data/confluence --name=<span class="string">"confluence"</span> <span class="_">-d</span> -p 8090:8090 -p 8091:8091 confluence-oracle-jdk:v6.8.1</div></pre></td></tr></table></figure>
+</li>
+<li><p>Confluence原数据导出<br>因为这个数据目录是直接挂在出来的，备份路径在<code>/data/confluence/backups/backup-2018_11_18.zip</code>（根据挂在路径的不同略有差异）</p>
+</li>
+</ul>
+<ul>
+<li><p>Confluence数据导入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scp old-host:/data/confluence/backups/backup-2018_11_18.zip ./</div><div class="line">mv backup-2018_11_18.zip /data/confluence/restore/</div><div class="line">chown daemon.daemon /data/confluence/restore/backup-2018_11_18.zip</div></pre></td></tr></table></figure>
+</li>
+<li><p>Confluence初始化<br>访问<a href="http://your_host:8090,根据提示进行设置，需要注意连接DB的设置需要指定连接Mysql的参数,选择JDBC的方式，如下" target="_blank" rel="external">http://your_host:8090,根据提示进行设置，需要注意连接DB的设置需要指定连接Mysql的参数,选择JDBC的方式，如下</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jdbc:mysql://your_host:3306/confluence?sessionVariables=tx_isolation=&apos;READ-COMMITTED&apos;&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8</div></pre></td></tr></table></figure>
+<p>然后就可以正常使用了，跟Jira一样，JVM的参数也可以调整，不然的话，一段时间后可能内存就不够用了</p>
+</li>
+<li><p>Confluence启动参数修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -it -u root confluence /bin/bash</div><div class="line"><span class="comment">#进入Confluence容器后，执行以下命令</span></div><div class="line">sed -i <span class="string">'s@CATALINA_OPTS="-Xms.*@CATALINA_OPTS="-Xms4096m -Xms4096m $&#123;JVM_SUPPORT_RECOMMENDED_ARGS&#125; -Dconfluence.home=$&#123;CONFLUENCE_HOME&#125; -XX:+UseG1GC $&#123;CATALINA_OPTS&#125;"@'</span>  /opt/atlassian/confluence/bin/setenv.sh</div><div class="line"><span class="comment">#修改完参数后重启即可</span></div><div class="line">docker restart  confluence</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="新建Bitbucket容器并还原数据"><a href="#新建Bitbucket容器并还原数据" class="headerlink" title="新建Bitbucket容器并还原数据"></a>新建Bitbucket容器并还原数据</h3><p>Bitbucket的迁移采用了相对暴力的方式，可以参照<a href="https://confluence.atlassian.com/bitbucketserver/migrating-bitbucket-server-to-another-server-776640406.html" target="_blank" rel="external">【官方迁移向导】</a></p>
+<ul>
+<li><p>Bitbucket使用的是Docker-compose的方式进行部署的，如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="attr">postgresql:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">sameersbn/postgresql:9.4-3</span></div><div class="line"><span class="attr">  environment:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">DB_USER=bitbucket</span></div><div class="line"><span class="bullet">    -</span> <span class="string">DB_PASS=bitbucket_pass</span></div><div class="line"><span class="bullet">    -</span> <span class="string">DB_NAME=bitbucket</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/srv/docker/bitbucket/postgresql:/var/lib/postgresql</span></div><div class="line"><span class="attr">bitbucket:</span></div><div class="line"><span class="attr">  image:</span> <span class="string">atlassian/bitbucket-server:5.0</span></div><div class="line"><span class="attr">  links:</span></div><div class="line"><span class="attr">    - postgresql:</span><span class="string">postgresql</span></div><div class="line"><span class="attr">  ports:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"80:7990"</span></div><div class="line"><span class="bullet">    -</span> <span class="string">"7999:7999"</span></div><div class="line"><span class="attr">  environment:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">'BITBUCKET_PROXY_NAME='</span></div><div class="line"><span class="bullet">    -</span> <span class="string">'BITBUCKET_PROXY_PORT='</span></div><div class="line"><span class="bullet">    -</span> <span class="string">'BITBUCKET_PROXY_SCHEME='</span></div><div class="line"><span class="bullet">    -</span> <span class="string">'BITBUCKET_DELAYED_START='</span></div><div class="line"><span class="attr">  volumes:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">/srv/docker/bitbucket/app-data:/var/atlassian/application-data/bitbucket</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>导出数据<br>先停止原服务，防止迁移过程中有数据的读写变化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#从上一步可以看出是直接原来的数据目录直接全部拿过来了</span></div><div class="line">tar czvf bitbucket_20181118.tar.gz  /srv/docker/bitbucket/</div><div class="line">bitbucket_20181118.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>将备份数据放入挂载目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xvf bitbucket_20181118.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动Bitbucket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="补充点"><a href="#补充点" class="headerlink" title="补充点"></a>补充点</h3><p>所有迁移完成后，由于机器IP域名等可能会变化，所以应用间的联通性需要重新建立，这就牵涉使用问题了，不赘述了。以后有其他操作及坑再同步。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Docker方式安装Jumpserver]]></title>
       <url>http://arvon.top/2018/11/27/Docker%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85Jumpserver/</url>
       <content type="html"><![CDATA[<p>之前有自己手动封装过Jumpserver的Docker镜像，既然官方发布的有Docker那就使用官方的。不过官方的是DockerAllinone模式，推荐使用外置DB及Reids。所以这里就再弄一个用。如官方所述需要注意Mysql的编码问题，另外还有一个关于Docker的volume小瑕疵，其他的就没有什么问题了。官方链接放在最后需要的自取，另外以下代码在我的<a href="https://github.com/Gourds/docker-image/tree/master/Service/jumpserver" target="_blank" rel="external">【github】</a>上都有。</p>
 <a id="more"></a>

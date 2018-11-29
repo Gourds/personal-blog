@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://arvon.top/2018/11/29/Docker%E6%96%B9%E5%BC%8F%E4%B8%8BBitbucket%E5%8F%8AConfluence%E5%92%8CJira%E8%BF%81%E7%A7%BB%E6%96%87%E6%A1%A3/</loc>
+    <lastmod>2018-11-29T07:54:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>Docker方式安装Jumpserver</title>
+        <pubTime>2018-11-29T05:57:00.000Z</pubTime>
+        
+        <tag>知识管理</tag>
+         
+        <tag>Docker</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://arvon.top/2018/11/27/Docker%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85Jumpserver/</loc>
     <lastmod>2018-11-27T07:53:53.000Z</lastmod>
     <data>
@@ -878,23 +897,6 @@
         <tag>Linux</tag>
          
         <tag>运维工具</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2015/08/17/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A82/</loc>
-    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Perl语言入门</title>
-        <pubTime>2015-08-17T09:45:52.000Z</pubTime>
-        
-        <tag>学习笔记</tag>
          
          
            
@@ -1928,7 +1930,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://arvon.top/2016/03/03/Nginx%E6%90%AD%E5%BB%BACDN%E6%BA%90%E7%AB%99/</loc>
     <lastmod>2017-05-26T13:17:57.000Z</lastmod>
@@ -1938,6 +1939,24 @@
         <pubTime>2016-03-03T04:32:05.000Z</pubTime>
         
         <tag>Nginx</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://arvon.top/2015/08/17/Perl%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A82/</loc>
+    <lastmod>2017-05-26T13:17:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Perl语言入门</title>
+        <pubTime>2015-08-17T09:45:52.000Z</pubTime>
+        
+        <tag>学习笔记</tag>
          
          
            
