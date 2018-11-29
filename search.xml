@@ -36,7 +36,7 @@
 <li><p>将备份数据导入指定目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#导入Jira应用数据</span></div><div class="line">docker cp 2018-Nov-18--1058.zip jira:/var/atlassian/jira/import/</div><div class="line">chown -R daemon.daemon 2018-Nov-18--1058.zip</div><div class="line"><span class="comment">#导入附件</span></div><div class="line">scp old-host:/tmp/jira_data_20181118.tar.gz ./jira_data_20181118.tar.gz</div><div class="line">chown daemon.daemon jira_data_20181118.tar.gz</div><div class="line">docker cp jira_data_20181118.tar.gz  jira:/var/atlassian/jira/</div><div class="line"><span class="comment">#导入插件</span></div><div class="line">docker cp jira_v1:/var/atlassian/jira/jira_plugins_20181118.tar.gz ./</div><div class="line">scp old-host:/tmp/jira_plugins_20181118.tar.gz ./</div><div class="line">docker cp jira_plugins_20181118.tar.gz jira:var/atlassian/jira/</div></pre></td></tr></table></figure>
 </li>
-<li><p>Jira初始化<br>在完成数据导入后，就可以登录<a href="http://your_host:18080，按照提示进行授权码的购买或输入。然后在最后的步骤会让选择是作为新的服务器还是从备份恢复，选择从备份恢复即可。提示还是很到位的，注意权限，权限不对的话数据导入会报错，在Jira的log里会有体现。" target="_blank" rel="external">http://your_host:18080，按照提示进行授权码的购买或输入。然后在最后的步骤会让选择是作为新的服务器还是从备份恢复，选择从备份恢复即可。提示还是很到位的，注意权限，权限不对的话数据导入会报错，在Jira的log里会有体现。</a></p>
+<li><p>Jira初始化<br>在完成数据导入后，就可以登录<code>http://your_host:18080</code>，按照提示进行授权码的购买或输入。然后在最后的步骤会让选择是作为新的服务器还是从备份恢复，选择从备份恢复即可。提示还是很到位的，注意权限，权限不对的话数据导入会报错，在Jira的log里会有体现。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs <span class="_">-f</span> jira <span class="comment">#追踪jira的log输出</span></div></pre></td></tr></table></figure>
 <p>没有问题的话，Jira就恢复完成了，另外还有下一步的参数优化，因为官方设置的JVM默认值偏低，所以最好提前调整了。</p>
 </li>
@@ -56,7 +56,7 @@
 <li><p>Confluence数据导入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scp old-host:/data/confluence/backups/backup-2018_11_18.zip ./</div><div class="line">mv backup-2018_11_18.zip /data/confluence/restore/</div><div class="line">chown daemon.daemon /data/confluence/restore/backup-2018_11_18.zip</div></pre></td></tr></table></figure>
 </li>
-<li><p>Confluence初始化<br>访问<a href="http://your_host:8090,根据提示进行设置，需要注意连接DB的设置需要指定连接Mysql的参数,选择JDBC的方式，如下" target="_blank" rel="external">http://your_host:8090,根据提示进行设置，需要注意连接DB的设置需要指定连接Mysql的参数,选择JDBC的方式，如下</a></p>
+<li><p>Confluence初始化<br>访问<code>http://your_host:8090</code>,根据提示进行设置，需要注意连接DB的设置需要指定连接Mysql的参数,选择JDBC的方式，如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jdbc:mysql://your_host:3306/confluence?sessionVariables=tx_isolation=&apos;READ-COMMITTED&apos;&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8</div></pre></td></tr></table></figure>
 <p>然后就可以正常使用了，跟Jira一样，JVM的参数也可以调整，不然的话，一段时间后可能内存就不够用了</p>
 </li>
