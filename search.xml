@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[阿里云AutoScaling实践]]></title>
+      <url>http://arvon.top/2018/12/19/Ali%E4%BA%91AutoScaling%E5%AE%9E%E8%B7%B5/</url>
+      <content type="html"><![CDATA[<h3 id="标题设置"><a href="#标题设置" class="headerlink" title="标题设置"></a>标题设置</h3><p>xxx</p>
+<p><img src="x" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Docker方式下Bitbucket及confluence和jira的迁移]]></title>
       <url>http://arvon.top/2018/11/29/Docker%E6%96%B9%E5%BC%8F%E4%B8%8BBitbucket%E5%8F%8AConfluence%E5%92%8CJira%E8%BF%81%E7%A7%BB%E6%96%87%E6%A1%A3/</url>
       <content type="html"><![CDATA[<p>之前写过使用Docker部署Confluence、Jira、Bitbucket的文档，由于宿主服务器硬件有点跟不上了，所以前端时间进行了这些服务的迁移。这里先介绍Confluence及Jira的迁移过程。简单介绍下做的事情<br><strong>迁移思路：</strong></p>
