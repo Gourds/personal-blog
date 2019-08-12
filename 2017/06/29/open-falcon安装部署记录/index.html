@@ -130,21 +130,21 @@
 <meta property="og:url" content="http://arvon.top/2017/06/29/open-falcon安装部署记录/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-1.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-2.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-3.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-5.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-6.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-7.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-8.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-9.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-10.jpeg">
-<meta property="og:updated_time" content="2018-04-16T02:59:44.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-4.png">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-1.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-2.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-3.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-5.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-6.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-7.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-8.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-9.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-10.jpeg">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="open-falcon安装部署记录">
 <meta name="twitter:description" content="监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-4.png">
 
 
 
@@ -407,7 +407,7 @@
 
       
         <p>监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有前景的，不妨尝试一下，现在只是基本搭建完成，TAG系统和表达式这些还没开始尝试，最近应该还会了解这个，以下是安装配置及简单调试使用过程。<br><a id="more"></a></p>
-<h3 id="架构图-来自小米官方-及组件说明"><a href="#架构图-来自小米官方-及组件说明" class="headerlink" title="架构图(来自小米官方)及组件说明"></a>架构图(来自小米官方)及组件说明</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png" alt="jiagou-4"></p>
+<h3 id="架构图-来自小米官方-及组件说明"><a href="#架构图-来自小米官方-及组件说明" class="headerlink" title="架构图(来自小米官方)及组件说明"></a>架构图(来自小米官方)及组件说明</h3><p><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-4.png" alt="jiagou-4"></p>
 <blockquote>
 <p><strong>Agent: </strong>部署在目标机器采集机器监控项<br><strong>Transfer： </strong>数据接收端，转发数据到后端Graph和Judge<br><strong>Graph：</strong> 操作rrd文件，存储监控数据<br><strong>Query：</strong>查询各个Graph数据，提供统一http查询接口<br><strong>Dashboard： </strong>查询监控历史趋势图的web端<br><strong>Alarm：</strong>主要负责告警<br><strong>Task： </strong>负责一些定时任务，索引全量更新，垃圾索引清理，自身组件监控</p>
 </blockquote>
@@ -454,7 +454,7 @@
 <li><p>配置修改</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim ./gunicorn.conf</div><div class="line">vim ./rrd/config.py</div><div class="line"><span class="comment">#主要也是修改数据库，也可以修改服务端口</span></div><div class="line">./control start</div></pre></td></tr></table></figure>
 </li>
-<li><p>访问dashboard测试<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-1.jpeg" alt="dashboard-1"><br>这个没有默认的用户密码，自己注册后即可登录，且注册不会验证邮箱，登录后如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-2.jpeg" alt="dashboard-2"></p>
+<li><p>访问dashboard测试<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-1.jpeg" alt="dashboard-1"><br>这个没有默认的用户密码，自己注册后即可登录，且注册不会验证邮箱，登录后如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-2.jpeg" alt="dashboard-2"></p>
 </li>
 </ul>
 <h4 id="Agent端配置"><a href="#Agent端配置" class="headerlink" title="Agent端配置"></a>Agent端配置</h4><ul>
@@ -464,7 +464,7 @@
 <li><p>配置启动agent</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir ~/falcon_aget;<span class="built_in">cd</span> ~/falcon_agent</div><div class="line">cp falcon-agent-5.1.2.tar.gz ./</div><div class="line">tar xvf falcon-agent-5.1.2.tar.gz</div><div class="line"><span class="comment">##然后修改配置</span></div><div class="line">cp cfg.example.json cfg.json</div><div class="line"><span class="comment">#vim cfg.jsoon</span></div><div class="line"><span class="comment">#修改heartbeat、transfer的配置地址端口等改为对应配置即可</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>可以通过浏览器查看上报的监控数据<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-3.jpeg" alt="agent-3"></p>
+<li><p>可以通过浏览器查看上报的监控数据<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-3.jpeg" alt="agent-3"></p>
 </li>
 </ul>
 <h4 id="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"><a href="#报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）" class="headerlink" title="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"></a>报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）</h4><ul>
@@ -480,16 +480,16 @@
 </ol>
 </blockquote>
 <h4 id="设置Hostgroup（主机组）"><a href="#设置Hostgroup（主机组）" class="headerlink" title="设置Hostgroup（主机组）"></a>设置Hostgroup（主机组）</h4><ul>
-<li>创建主机组<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-5.jpeg" alt="5"></li>
-<li>为主机组添加主机(主机填写hostname主机名即可)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-6.jpeg" alt="6"></li>
+<li>创建主机组<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-5.jpeg" alt="5"></li>
+<li>为主机组添加主机(主机填写hostname主机名即可)<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-6.jpeg" alt="6"></li>
 </ul>
 <h4 id="设置Templates（模板）"><a href="#设置Templates（模板）" class="headerlink" title="设置Templates（模板）"></a>设置Templates（模板）</h4><ul>
-<li>创建模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-7.jpeg" alt="7"></li>
-<li>设置报警策略<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-8.jpeg" alt="8"></li>
-<li>主机组关联模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-9.jpeg" alt="9"></li>
+<li>创建模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-7.jpeg" alt="7"></li>
+<li>设置报警策略<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-8.jpeg" alt="8"></li>
+<li>主机组关联模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-9.jpeg" alt="9"></li>
 </ul>
 <h4 id="查看报警"><a href="#查看报警" class="headerlink" title="查看报警"></a>查看报警</h4><ul>
-<li>报警<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-10.jpeg" alt="10"></li>
+<li>报警<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-10.jpeg" alt="10"></li>
 </ul>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://book.open-falcon.org/zh_0_2/index.html" target="_blank" rel="external">小米官方手册0.2.0</a></p>
 

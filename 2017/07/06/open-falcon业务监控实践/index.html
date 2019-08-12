@@ -130,19 +130,19 @@
 <meta property="og:url" content="http://arvon.top/2017/07/06/open-falcon业务监控实践/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="上一篇已经写了falcon的基础安装配置以及简单的使用说明，现在来记录下一些业务相关的监控如何做，截图居多。心疼流量三秒…其实实现方法都不难，设计一个良好的命名规范以及科学的分组，实际上对监控来说是十分必要的。还有就是要对监控指标的判断做个性化设置，最好就是看图的话一眼就概览全局（要让图清晰直观的反应状况），报警的话做到真实有效人性化。这篇里面只涉及如何对常见服务进行配置。   对于基础监控：cp">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-1.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-2.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-3.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-4.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-5.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-6.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-7.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-8.jpeg">
-<meta property="og:updated_time" content="2018-04-16T02:59:49.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-1.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-2.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-3.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-4.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-5.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-6.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-7.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-8.jpeg">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="open-falcon业务监控实践">
 <meta name="twitter:description" content="上一篇已经写了falcon的基础安装配置以及简单的使用说明，现在来记录下一些业务相关的监控如何做，截图居多。心疼流量三秒…其实实现方法都不难，设计一个良好的命名规范以及科学的分组，实际上对监控来说是十分必要的。还有就是要对监控指标的判断做个性化设置，最好就是看图的话一眼就概览全局（要让图清晰直观的反应状况），报警的话做到真实有效人性化。这篇里面只涉及如何对常见服务进行配置。   对于基础监控：cp">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-1.jpeg">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-1.jpeg">
 
 
 
@@ -416,18 +416,18 @@
 <h3 id="监控自定义服务进程或端口"><a href="#监控自定义服务进程或端口" class="headerlink" title="监控自定义服务进程或端口"></a>监控自定义服务进程或端口</h3><p><strong>Tips：</strong>一般而言，对于某一服务仅监听服务或端口取其一即可，因为一般而言进程挂了端口自然也就down了，这两者是有直接关联的。但也分业务，具体看需求吧</p>
 <h4 id="监控端口"><a href="#监控端口" class="headerlink" title="监控端口"></a>监控端口</h4><p><strong>Tips：</strong>端口监控，falcon现在的机制是配置完策略agent才会去采集这些信息。可参考<a href="https://book.open-falcon.org/zh_0_2/usage/proc-port-monitor.html" target="_blank" rel="external">官网说明</a></p>
 <ul>
-<li>设置端口监控模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-1.jpeg" alt="falconuse-1"></li>
+<li>设置端口监控模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-1.jpeg" alt="falconuse-1"></li>
 <li>模板关联至主机组</li>
-<li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
+<li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
 </ul>
 <h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p><strong>Tips：</strong>官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
 <ul>
 <li><p>获取两个字段</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  ps axu | grep mysql</div><div class="line">  <span class="comment">#root      5465  0.0  0.0 113176  1600 ?        S    May18   0:00 /bin/sh /usr/libexec/mysql55/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span></div><div class="line"><span class="comment">#mysql     5658  0.0  1.2 1336076 101032 ?      Sl   May18  27:08 /usr/libexec/mysql55/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock</span></div><div class="line"><span class="comment">#tai_ops  28522  0.0  0.0 110408   868 pts/0    S+   03:04   0:00 grep mysql</span></div><div class="line">  cat /proc/5465/status  | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld_safe</span></div><div class="line">  cat /proc/5465/cmdline</div><div class="line">  <span class="comment">#/bin/sh/usr/libexec/mysql55/mysqld_safe--datadir=/var/lib/mysql--socket=/var/lib/mysql/mysql.sock--pid-file=/var/run/mysqld/mysqld.pid--basedir=/usr--user=mysql</span></div><div class="line">  cat /proc/5658/status | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld</span></div><div class="line">  cat /proc/5658/cmdline</div><div class="line">  <span class="comment">#/usr/libexec/mysql55/mysqld--basedir=/usr--datadir=/var/lib/mysql--plugin-dir=/usr/lib64/mysql/plugin--user=mysql--log-error=/var/log/mysqld.log--pid-file=/var/run/mysqld/m</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>Dashboard上模板配置<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-3.jpeg" alt="falconuse-3"></p>
+<li><p>Dashboard上模板配置<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-3.jpeg" alt="falconuse-3"></p>
 </li>
-<li>报警如下<br><strong>注意：</strong>我测试的host组有3台机器，其中一台是没有mysql的，所以检测不到进程所以就报警了，从这也可以看出，falcon默认是不收集这些数据的，当你写上规则之后它会按这个规则进行抓取不管有没有这个服务，只要你配置了规则，就按这个规则去取数据，取不到或取到报警阈值都会报警<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-4.jpeg" alt="falconuse-4"></li>
+<li>报警如下<br><strong>注意：</strong>我测试的host组有3台机器，其中一台是没有mysql的，所以检测不到进程所以就报警了，从这也可以看出，falcon默认是不收集这些数据的，当你写上规则之后它会按这个规则进行抓取不管有没有这个服务，只要你配置了规则，就按这个规则去取数据，取不到或取到报警阈值都会报警<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-4.jpeg" alt="falconuse-4"></li>
 </ul>
 <h3 id="常用服务监控"><a href="#常用服务监控" class="headerlink" title="常用服务监控"></a>常用服务监控</h3><p>Tips：常用服务监控除了官方提供的一些方案也可以自己往transfer接口post自定义的监控数据，不过个人感觉使用crontab的方式收集数据还是挺僵硬的</p>
 <h4 id="Redis监控-Ardb监控"><a href="#Redis监控-Ardb监控" class="headerlink" title="Redis监控/Ardb监控"></a>Redis监控/Ardb监控</h4><p>官方提供了<a href="https://book.open-falcon.org/zh_0_2/usage/redis.html" target="_blank" rel="external">两种方案</a>，都在github开源,由于第二种方案目前还不支持redis3.2.0，所以我使用第一种。实际上就是连接到redis然后获取一些redis的info信息，然后用固定的数据格式post给falcon，ardb与redis监控基本相同。</p>
@@ -435,9 +435,9 @@
 <li><p>获取监控脚本<br>需要<strong>特别注意</strong>脚本中redis-cli的命令路径，我就折在这里了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/iambocai/falcon-monit-scripts.git</div><div class="line">ll /data/falcon_scripts/falcon-monit-scripts/redis/redis-monitor.py</div><div class="line"><span class="comment">#vim redis-monitor.py  修改脚本，主要该host、port、redis-cli的路径</span></div><div class="line"><span class="comment">#设置crontab -e</span></div><div class="line"><span class="comment">#* * * * * python /opt/falcon-agent/scripts/falcon-monit-scripts/redis/redis-monitor.py</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>web配置如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-5.jpeg" alt="5"></p>
+<li><p>web配置如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-5.jpeg" alt="5"></p>
 </li>
-<li>出图如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-6.jpeg" alt="6"></li>
+<li>出图如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-6.jpeg" alt="6"></li>
 </ul>
 <h4 id="Mysql监控"><a href="#Mysql监控" class="headerlink" title="Mysql监控"></a>Mysql监控</h4><p>由于小米官方给出的方案是需要go环境进行的编译的，所以就直接在falcon的server机器上进行编译，然后拿编译的包对mysql机器进行分发部署</p>
 <ul>
@@ -449,8 +449,8 @@
 <p>…<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_spin_waits Endpoint:ip-10-222-0-63 Value:302 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_spin_rounds Endpoint:ip-10-222-0-63 Value:1780 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_os_waits Endpoint:ip-10-222-0-63 Value:42 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Is_slave Endpoint:ip-10-222-0-63 Value:0 CounterType:GAUGE Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”info”,”msg”:”Send response 127.0.0.1:3306: success”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”Send to <a href="http://10.222.0.44:1988/v1/push" target="_blank" rel="external">http://10.222.0.44:1988/v1/push</a>, size: 1”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:mysql_alive_local Endpoint:ip-10-222-0-63 Value:1 CounterType:GAUGE Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”info”,”msg”:”Alive data response 127.0.0.1:3306: success”,”time”:”2017-07-07T00:58:01Z”}</p>
 </blockquote>
 </li>
-<li>Web配置举例<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-7.jpeg" alt="7"></li>
-<li>出图如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-8.jpeg" alt="8"></li>
+<li>Web配置举例<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-7.jpeg" alt="7"></li>
+<li>出图如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-8.jpeg" alt="8"></li>
 </ul>
 <h4 id="nginx监控"><a href="#nginx监控" class="headerlink" title="nginx监控"></a>nginx监控</h4><p>这个目前没什么需求，就直接先参考<a href="https://github.com/GuyCheung/falcon-ngx_metric" target="_blank" rel="external">小米给出的方案</a>吧,其实都大同小异，有需求的话之后可能会自己写一些业务方面的监控脚本。到时候再共享</p>
 <h3 id="关于排错"><a href="#关于排错" class="headerlink" title="关于排错"></a>关于排错</h3><ul>

@@ -130,12 +130,12 @@
 <meta property="og:url" content="http://arvon.top/2017/11/28/collectd使用exec模块进行自定义监控/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="使用Grafana进行服务监控的明显优点就是监控出图漂亮，而且拥有丰富的插件，可以直接监控系统资源和负荷信息以及常见的服务进程状态，不过还是会有一些场景直接使用模块是不太容易进行监控的，这个时候更适合使用编写脚本进行数据收集和监控，而exec模块就可以满足这样的需求，下面就列举一个小栗子。">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20171128-colletcd-1.png">
-<meta property="og:updated_time" content="2018-04-16T02:58:28.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20171128-colletcd-1.png">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="collectd使用exec模块进行自定义监控">
 <meta name="twitter:description" content="使用Grafana进行服务监控的明显优点就是监控出图漂亮，而且拥有丰富的插件，可以直接监控系统资源和负荷信息以及常见的服务进程状态，不过还是会有一些场景直接使用模块是不太容易进行监控的，这个时候更适合使用编写脚本进行数据收集和监控，而exec模块就可以满足这样的需求，下面就列举一个小栗子。">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20171128-colletcd-1.png">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20171128-colletcd-1.png">
 
 
 
@@ -405,7 +405,7 @@
 <li><p>自定义脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">HOSTNAME=<span class="string">"<span class="variable">$&#123;COLLECTD_HOSTNAME:-vpc1-208-jenkins&#125;</span>"</span></div><div class="line">INTERVAL=<span class="string">"<span class="variable">$&#123;COLLECTD_INTERVAL:-10&#125;</span>"</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> sleep <span class="string">"<span class="variable">$INTERVAL</span>"</span>; <span class="keyword">do</span></div><div class="line">  RES=$(curl <span class="_">-s</span> http://1.2.3.4:8083/notice/v1/getnotice?gid=5\&amp;version=4.0.500 |grep Endpoint |wc <span class="_">-l</span>)</div><div class="line">  <span class="built_in">echo</span> <span class="string">"PUTVAL \"<span class="variable">$HOSTNAME</span>/health/gauge-notice\" interval=<span class="variable">$INTERVAL</span> N:<span class="variable">$RES</span>"</span></div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment">#$HOSTNAME/health/gauge-notice对应下面的</span></div><div class="line"><span class="comment">#&lt;instance-id&gt;/&lt;plugin&gt;-&lt;plugin_instance&gt;/&lt;type&gt;-&lt;type_instance&gt;</span></div><div class="line"><span class="comment">#gauge是表示type的一种，不能自己编着写哦</span></div><div class="line"><span class="comment">#脚本输出如：PUTVAL "vpc1-208-jenkins/health/gauge-notice" interval=10 N:1</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>在Grafana上添加监控<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171128-colletcd-1.png" alt="20171128-colletcd-1"></p>
+<li><p>在Grafana上添加监控<br><img src="http://img.arvon.top:80/images/2019/08/12//20171128-colletcd-1.png" alt="20171128-colletcd-1"></p>
 </li>
 </ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>

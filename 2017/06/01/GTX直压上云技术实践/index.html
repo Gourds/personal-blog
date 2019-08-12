@@ -130,12 +130,12 @@
 <meta property="og:url" content="http://arvon.top/2017/06/01/GTX直压上云技术实践/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="update:测试时出现二进制文件大小恰好为256M整数倍时解压不退出的bug,提交至维护人员后已经解决，不得不说反馈速度真的是快，从我提出到解决总共用了不到1天时间。给点个赞，棒棒哒GTX Compressor(直压上云技术)调研,由于现业务存在大规模业务数据上传云存储，云厂商提供接口具有一些局限性，现在尝试gtz这个工具。该工具目前支持阿里云及AWS非常符合业务场景，具有高压缩比、高性能、高速">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170601-gtztools-1.jpeg">
-<meta property="og:updated_time" content="2017-06-02T10:41:40.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170601-gtztools-1.jpeg">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GTX直压上云技术实践">
 <meta name="twitter:description" content="update:测试时出现二进制文件大小恰好为256M整数倍时解压不退出的bug,提交至维护人员后已经解决，不得不说反馈速度真的是快，从我提出到解决总共用了不到1天时间。给点个赞，棒棒哒GTX Compressor(直压上云技术)调研,由于现业务存在大规模业务数据上传云存储，云厂商提供接口具有一些局限性，现在尝试gtz这个工具。该工具目前支持阿里云及AWS非常符合业务场景，具有高压缩比、高性能、高速">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170601-gtztools-1.jpeg">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20170601-gtztools-1.jpeg">
 
 
 
@@ -428,7 +428,7 @@
 <li><p>本地压缩解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####----压缩----</span></div><div class="line"><span class="comment">#直接压缩，1G的数据压到68k了，不过源数据不具备参考性，dd出来的数据</span></div><div class="line">./gtz -o test.gtz up_data_test/gtz-test3.log</div><div class="line"><span class="comment">#通过zcat和管道压缩，支持二进制文件</span></div><div class="line">zcat up_data_test/gtz-test3.log |./gtz -o <span class="built_in">test</span>2.gtz</div><div class="line"><span class="comment">####----解压----</span></div><div class="line"><span class="comment">#解压单个文件，解压路径为压缩时的路径</span></div><div class="line">./gtz <span class="_">-d</span> ./test.gtz</div></pre></td></tr></table></figure>
 </li>
-<li><p>压缩上传AWS例子<br>上传文件在S3上显示为目录gtz-test4.name，该目录里面下面为原文件同名目录及一个gtz.meta文件，如图<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170601-gtztools-1.jpeg" alt="1"></p>
+<li><p>压缩上传AWS例子<br>上传文件在S3上显示为目录gtz-test4.name，该目录里面下面为原文件同名目录及一个gtz.meta文件，如图<br><img src="http://img.arvon.top:80/images/2019/08/12//20170601-gtztools-1.jpeg" alt="1"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> AWS_ACCESS_KEY_ID=<span class="string">'your_key'</span></div><div class="line"><span class="built_in">export</span> AWS_SECRET_ACCESS_KEY=<span class="string">'Your_key'</span></div><div class="line"><span class="built_in">export</span> AWS_DEFAULT_REGION=<span class="string">'your_region'</span></div><div class="line"><span class="comment">#上传单个文件，上传1G的测试数据需要50s左右</span></div><div class="line">./gtz -o s3://arvon-gtz-test/gtz-test4.name up_data_test/gtz-test4.db</div><div class="line"><span class="comment">#追加文件到压缩包，如果不加-a参数会覆盖原来的文件</span></div><div class="line">./gtz -o s3://arvon-gtz-test/ up_data_test/gtz-test3.log</div></pre></td></tr></table></figure>
 </li>
 <li><p>解压缩AWS上S3到本地</p>

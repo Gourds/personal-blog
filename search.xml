@@ -147,7 +147,7 @@
     <entry>
       <title><![CDATA[CentOS7安装配置supervisor]]></title>
       <url>http://arvon.top/2018/08/30/CentOS7%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEsupervisor/</url>
-      <content type="html"><![CDATA[<p>之前一直用AWS的服务，使用的也是AWS官方提供的系统镜像，感觉挺好使的，所以centos7的版本用的不多。最近刚好需要使用腾讯云，记录一下supervisor的安装配置，不管简单与否，好久没写博客了还是记录一下吧。<br><img src="http://os1t5i0z4.bkt.clouddn.com/20010101-emoticon-27.jpeg" alt=""></p>
+      <content type="html"><![CDATA[<p>之前一直用AWS的服务，使用的也是AWS官方提供的系统镜像，感觉挺好使的，所以centos7的版本用的不多。最近刚好需要使用腾讯云，记录一下supervisor的安装配置，不管简单与否，好久没写博客了还是记录一下吧。<br><img src="http://img.arvon.top:80/images/2019/08/12//20010101-emoticon-27.jpeg" alt=""></p>
 <a id="more"></a>
 <hr>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
@@ -487,7 +487,7 @@
     <entry>
       <title><![CDATA[Gitlab搭建使用记录]]></title>
       <url>http://arvon.top/2018/04/14/Gitlab%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-      <content type="html"><![CDATA[<p>Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。<br>操作之前看一把架构图,图片来自官方,侵删<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180413-gitlab-1.jpeg" alt="1"></p>
+      <content type="html"><![CDATA[<p>Gitlab有迁移升级的打算，尝试下新版本（10.6.4)顺带记录一下过程。我这里尝试两种安装方法，一种是Omnibus包安装（官方推荐），另一种会尝试Docker。<br>操作之前看一把架构图,图片来自官方,侵删<br><img src="http://img.arvon.top:80/images/2019/08/12//20180413-gitlab-1.jpeg" alt="1"></p>
 <a id="more"></a>
 <h3 id="使用Omnibus安装（centos7）"><a href="#使用Omnibus安装（centos7）" class="headerlink" title="使用Omnibus安装（centos7）"></a>使用Omnibus安装（centos7）</h3><ul>
 <li><p>基础环境配置</p>
@@ -1012,7 +1012,7 @@
 <h3 id="安装及简要说明"><a href="#安装及简要说明" class="headerlink" title="安装及简要说明"></a>安装及简要说明</h3><ul>
 <li><p>安装<br>直接使用命令安装即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/share/kibana/bin/kibana-plugin install https://github.com/sirensolutions/sentinl/releases/download/tag-6.2.2/sentinl-v6.2.2.zip</div></pre></td></tr></table></figure>
-<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20180315-sentinl-1.jpeg" alt="1"></p>
+<p><img src="http://img.arvon.top:80/images/2019/08/12//20180315-sentinl-1.jpeg" alt="1"></p>
 </li>
 <li><p>报警邮件配置<br>修改配置后重启kibana</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vim /etc/kibana/kibana.yml</span></div><div class="line">sentinl:</div><div class="line">  settings:</div><div class="line">    email:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      user:  xxx.xxx.cn</div><div class="line">      password: xxx</div><div class="line">      host: smtp.xxx.org</div><div class="line">      ssl: <span class="literal">true</span></div><div class="line">      timeout: 10000</div><div class="line">    report:</div><div class="line">      active: <span class="literal">true</span></div><div class="line">      tmp_path: /tmp/</div></pre></td></tr></table></figure>
@@ -1085,8 +1085,8 @@
       <title><![CDATA[Docker备份还原简介]]></title>
       <url>http://arvon.top/2018/03/06/Docker%E5%A4%87%E4%BB%BD%E8%BF%98%E5%8E%9F%E7%AE%80%E4%BB%8B/</url>
       <content type="html"><![CDATA[<p>一般而言，使用docker远端镜像仓库的话，基本不需要使用备份还原，但再某些情况下也是需要这些操作的，如对网络受限的主机进行部署或者基于安全考虑对本地仓库进行备份，就需要这些操作，总之Docker的备份还原还是十分简便的，这里也做一下记录。<br><a id="more"></a></p>
-<h3 id="备份镜像"><a href="#备份镜像" class="headerlink" title="备份镜像"></a>备份镜像</h3><p>一般迁移时使用，有图可能更直观，如下,可以使用镜像名+TAG，也可以使用镜像ID<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180306-docker-1.jpeg" alt="docker-1"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker images <span class="comment">#list images</span></div><div class="line">docker <span class="built_in">history</span> d86649f09ddb <span class="comment">#查看这个镜像的历史，如果有需要可以导出之前版本的镜像</span></div><div class="line">docker save -o /data/image_bak.tar docker.taiyouxi.net/ticore/testlink:1.0.1</div><div class="line"><span class="comment">#save usage: docker save -o /down_dir/your_tar_file_name image:TAG</span></div><div class="line"><span class="comment">#OR：docker save image:TAG &gt; /down_dir/your_tar_file_name</span></div></pre></td></tr></table></figure></p>
-<h3 id="备份容器"><a href="#备份容器" class="headerlink" title="备份容器"></a>备份容器</h3><p>备份容器跟备份镜像有些细微的差别，首先需要容器commit成为image，如果必要可以对容器的启动配置也进行备份，然后就跟直接对镜像备份一样对新生成的镜像备份即可<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20180306-docker-2.png" alt="docker-2"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="comment">#list Running container</span></div><div class="line">docker commit <span class="variable">$&#123;CONTAINER ID&#125;</span> new_images_name:version <span class="comment">#将容器提交为镜像</span></div><div class="line">docker rmi image_name:version <span class="comment">#删除某个镜像</span></div></pre></td></tr></table></figure></p>
+<h3 id="备份镜像"><a href="#备份镜像" class="headerlink" title="备份镜像"></a>备份镜像</h3><p>一般迁移时使用，有图可能更直观，如下,可以使用镜像名+TAG，也可以使用镜像ID<br><img src="http://img.arvon.top:80/images/2019/08/12//20180306-docker-1.jpeg" alt="docker-1"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker images <span class="comment">#list images</span></div><div class="line">docker <span class="built_in">history</span> d86649f09ddb <span class="comment">#查看这个镜像的历史，如果有需要可以导出之前版本的镜像</span></div><div class="line">docker save -o /data/image_bak.tar docker.taiyouxi.net/ticore/testlink:1.0.1</div><div class="line"><span class="comment">#save usage: docker save -o /down_dir/your_tar_file_name image:TAG</span></div><div class="line"><span class="comment">#OR：docker save image:TAG &gt; /down_dir/your_tar_file_name</span></div></pre></td></tr></table></figure></p>
+<h3 id="备份容器"><a href="#备份容器" class="headerlink" title="备份容器"></a>备份容器</h3><p>备份容器跟备份镜像有些细微的差别，首先需要容器commit成为image，如果必要可以对容器的启动配置也进行备份，然后就跟直接对镜像备份一样对新生成的镜像备份即可<br><img src="http://img.arvon.top:80/images/2019/08/12//20180306-docker-2.png" alt="docker-2"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="comment">#list Running container</span></div><div class="line">docker commit <span class="variable">$&#123;CONTAINER ID&#125;</span> new_images_name:version <span class="comment">#将容器提交为镜像</span></div><div class="line">docker rmi image_name:version <span class="comment">#删除某个镜像</span></div></pre></td></tr></table></figure></p>
 <p>另外可以备份容器的运行配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker inspect d7796307dfb7 &gt; /data/bak_container_config.json <span class="comment">#备份配置</span></div><div class="line"><span class="comment">#PS：附送命令</span></div><div class="line">docker inspect --format=<span class="string">'&#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;end&#125;&#125;'</span> <span class="variable">$INSTANCE_ID</span>  <span class="comment">#获取IP地址</span></div><div class="line">docker inspect --format=<span class="string">'&#123;&#123;range $p, $conf := .NetworkSettings.Ports&#125;&#125; &#123;&#123;$p&#125;&#125; -&gt; &#123;&#123;(index $conf 0).HostPort&#125;&#125; &#123;&#123;end&#125;&#125;'</span> <span class="variable">$INSTANCE_ID</span> <span class="comment">#获取端口映射</span></div></pre></td></tr></table></figure></p>
 <h3 id="还原镜像"><a href="#还原镜像" class="headerlink" title="还原镜像"></a>还原镜像</h3><p>还原也十分简单，在具备docker环境并运行docker的主机上，执行导入镜像命令即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker load -i /data/image_bak.tar</div><div class="line"><span class="comment">#OR</span></div><div class="line">docker load &lt; /data/image_bak.tar</div><div class="line">docker images</div></pre></td></tr></table></figure></p>
 ]]></content>
@@ -1137,7 +1137,7 @@
 <blockquote>
 <p>update：2017-05-20 初次修改</p>
 </blockquote>
-<h3 id="一般架构"><a href="#一般架构" class="headerlink" title="一般架构"></a>一般架构</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170911-fluentd-1.jpeg" alt="fluentd-1"><br><a id="more"></a></p>
+<h3 id="一般架构"><a href="#一般架构" class="headerlink" title="一般架构"></a>一般架构</h3><p><img src="http://img.arvon.top:80/images/2019/08/12//20170911-fluentd-1.jpeg" alt="fluentd-1"><br><a id="more"></a></p>
 <h3 id="特性记录"><a href="#特性记录" class="headerlink" title="特性记录"></a>特性记录</h3><ul>
 <li>版本<br>2017 年 12 月的时候，fluentd 发布了 v1.0 版本，也就是 td-agent v3 版。</li>
 <li>性能<br><code>“a regular PC box can handle 18,000 messages/second with a single process.”</code>即一般来说，fluentd 单节点的吞吐量大概是 18w/sec 左右。<br>要想提高性能的话，可以在输出端（match）指定 num_threads 来提高并发，在输入端安装 fluent-plugin-multiprocess 插件来提高 CPU 的利用率（Ruby 也有 GIL 问题）。</li>
@@ -1273,11 +1273,11 @@
 </li>
 <li><p>安装以上版本或更高版本插件<br>安装完成后需要重启Jenkins，此时就可以使用了</p>
 </li>
-<li><p>在Jenkins上设置<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171129-jenkins-1.jpeg" alt="20171129-jenkins-1"><br>其中User credentials from default remote of parent repository意思是Git Submodule的repository会使用和主repository一样的验证，就是主repository使用的身份，低版本不会有这个勾选项，还会报错。</p>
+<li><p>在Jenkins上设置<br><img src="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-1.jpeg" alt="20171129-jenkins-1"><br>其中User credentials from default remote of parent repository意思是Git Submodule的repository会使用和主repository一样的验证，就是主repository使用的身份，低版本不会有这个勾选项，还会报错。</p>
 </li>
 </ul>
 <h3 id="升级插件的方法"><a href="#升级插件的方法" class="headerlink" title="升级插件的方法"></a>升级插件的方法</h3><ul>
-<li><p>1.使用Jenins默认方法<br>进入Jenkins管理页面即 Jenkins–&gt;插件管理–&gt;高级  如下：<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171129-jenkins-2.jpeg" alt="20171129-jenkins-2"><br>Jenkins默认更新的URL为<code>http://updates.jenkins-ci.org/experimental/update-center.json</code> ，但是由于网络问题推荐使用<code>http://mirror.xmission.com/jenkins/updates/experimental/update-center.json</code>,另外有条件也可以使用这个页面上面的网络代理选项</p>
+<li><p>1.使用Jenins默认方法<br>进入Jenkins管理页面即 Jenkins–&gt;插件管理–&gt;高级  如下：<br><img src="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-2.jpeg" alt="20171129-jenkins-2"><br>Jenkins默认更新的URL为<code>http://updates.jenkins-ci.org/experimental/update-center.json</code> ，但是由于网络问题推荐使用<code>http://mirror.xmission.com/jenkins/updates/experimental/update-center.json</code>,另外有条件也可以使用这个页面上面的网络代理选项</p>
 </li>
 <li><p>2.直接下载插件通过web页面进行上传<br>依然在Jenkins的管理页面高级中，通过自己下载，然后上传即可，部分插件安装后需要重启Jenkins生效</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Plugin</div><div class="line"><span class="comment">#git 3.6.4</span></div><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Client+Plugin</div><div class="line"><span class="comment">#git-client 2.6.0</span></div></pre></td></tr></table></figure>
@@ -1303,7 +1303,7 @@
 <li><p>自定义脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">HOSTNAME=<span class="string">"<span class="variable">$&#123;COLLECTD_HOSTNAME:-vpc1-208-jenkins&#125;</span>"</span></div><div class="line">INTERVAL=<span class="string">"<span class="variable">$&#123;COLLECTD_INTERVAL:-10&#125;</span>"</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> sleep <span class="string">"<span class="variable">$INTERVAL</span>"</span>; <span class="keyword">do</span></div><div class="line">  RES=$(curl <span class="_">-s</span> http://1.2.3.4:8083/notice/v1/getnotice?gid=5\&amp;version=4.0.500 |grep Endpoint |wc <span class="_">-l</span>)</div><div class="line">  <span class="built_in">echo</span> <span class="string">"PUTVAL \"<span class="variable">$HOSTNAME</span>/health/gauge-notice\" interval=<span class="variable">$INTERVAL</span> N:<span class="variable">$RES</span>"</span></div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment">#$HOSTNAME/health/gauge-notice对应下面的</span></div><div class="line"><span class="comment">#&lt;instance-id&gt;/&lt;plugin&gt;-&lt;plugin_instance&gt;/&lt;type&gt;-&lt;type_instance&gt;</span></div><div class="line"><span class="comment">#gauge是表示type的一种，不能自己编着写哦</span></div><div class="line"><span class="comment">#脚本输出如：PUTVAL "vpc1-208-jenkins/health/gauge-notice" interval=10 N:1</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>在Grafana上添加监控<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20171128-colletcd-1.png" alt="20171128-colletcd-1"></p>
+<li><p>在Grafana上添加监控<br><img src="http://img.arvon.top:80/images/2019/08/12//20171128-colletcd-1.png" alt="20171128-colletcd-1"></p>
 </li>
 </ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
@@ -1926,18 +1926,18 @@
 <h3 id="监控自定义服务进程或端口"><a href="#监控自定义服务进程或端口" class="headerlink" title="监控自定义服务进程或端口"></a>监控自定义服务进程或端口</h3><p><strong>Tips：</strong>一般而言，对于某一服务仅监听服务或端口取其一即可，因为一般而言进程挂了端口自然也就down了，这两者是有直接关联的。但也分业务，具体看需求吧</p>
 <h4 id="监控端口"><a href="#监控端口" class="headerlink" title="监控端口"></a>监控端口</h4><p><strong>Tips：</strong>端口监控，falcon现在的机制是配置完策略agent才会去采集这些信息。可参考<a href="https://book.open-falcon.org/zh_0_2/usage/proc-port-monitor.html" target="_blank" rel="external">官网说明</a></p>
 <ul>
-<li>设置端口监控模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-1.jpeg" alt="falconuse-1"></li>
+<li>设置端口监控模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-1.jpeg" alt="falconuse-1"></li>
 <li>模板关联至主机组</li>
-<li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
+<li>然后就可以收到报警信息了(这里为测试方便监控了Mysql的3306端口，有值就报警)<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-2.jpeg" alt="falconuse-2"></li>
 </ul>
 <h4 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h4><p><strong>Tips：</strong>官方给出两种方案，一种取/proc/$pid/status这里面的name字段，另一种取/proc/$pid/cmdline里的name字段，这里拿mysql举例，个人推荐cmdline，因为name字段很容易重复</p>
 <ul>
 <li><p>获取两个字段</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  ps axu | grep mysql</div><div class="line">  <span class="comment">#root      5465  0.0  0.0 113176  1600 ?        S    May18   0:00 /bin/sh /usr/libexec/mysql55/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span></div><div class="line"><span class="comment">#mysql     5658  0.0  1.2 1336076 101032 ?      Sl   May18  27:08 /usr/libexec/mysql55/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock</span></div><div class="line"><span class="comment">#tai_ops  28522  0.0  0.0 110408   868 pts/0    S+   03:04   0:00 grep mysql</span></div><div class="line">  cat /proc/5465/status  | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld_safe</span></div><div class="line">  cat /proc/5465/cmdline</div><div class="line">  <span class="comment">#/bin/sh/usr/libexec/mysql55/mysqld_safe--datadir=/var/lib/mysql--socket=/var/lib/mysql/mysql.sock--pid-file=/var/run/mysqld/mysqld.pid--basedir=/usr--user=mysql</span></div><div class="line">  cat /proc/5658/status | grep -i name</div><div class="line">  <span class="comment">#Name:	mysqld</span></div><div class="line">  cat /proc/5658/cmdline</div><div class="line">  <span class="comment">#/usr/libexec/mysql55/mysqld--basedir=/usr--datadir=/var/lib/mysql--plugin-dir=/usr/lib64/mysql/plugin--user=mysql--log-error=/var/log/mysqld.log--pid-file=/var/run/mysqld/m</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>Dashboard上模板配置<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-3.jpeg" alt="falconuse-3"></p>
+<li><p>Dashboard上模板配置<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-3.jpeg" alt="falconuse-3"></p>
 </li>
-<li>报警如下<br><strong>注意：</strong>我测试的host组有3台机器，其中一台是没有mysql的，所以检测不到进程所以就报警了，从这也可以看出，falcon默认是不收集这些数据的，当你写上规则之后它会按这个规则进行抓取不管有没有这个服务，只要你配置了规则，就按这个规则去取数据，取不到或取到报警阈值都会报警<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-4.jpeg" alt="falconuse-4"></li>
+<li>报警如下<br><strong>注意：</strong>我测试的host组有3台机器，其中一台是没有mysql的，所以检测不到进程所以就报警了，从这也可以看出，falcon默认是不收集这些数据的，当你写上规则之后它会按这个规则进行抓取不管有没有这个服务，只要你配置了规则，就按这个规则去取数据，取不到或取到报警阈值都会报警<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-4.jpeg" alt="falconuse-4"></li>
 </ul>
 <h3 id="常用服务监控"><a href="#常用服务监控" class="headerlink" title="常用服务监控"></a>常用服务监控</h3><p>Tips：常用服务监控除了官方提供的一些方案也可以自己往transfer接口post自定义的监控数据，不过个人感觉使用crontab的方式收集数据还是挺僵硬的</p>
 <h4 id="Redis监控-Ardb监控"><a href="#Redis监控-Ardb监控" class="headerlink" title="Redis监控/Ardb监控"></a>Redis监控/Ardb监控</h4><p>官方提供了<a href="https://book.open-falcon.org/zh_0_2/usage/redis.html" target="_blank" rel="external">两种方案</a>，都在github开源,由于第二种方案目前还不支持redis3.2.0，所以我使用第一种。实际上就是连接到redis然后获取一些redis的info信息，然后用固定的数据格式post给falcon，ardb与redis监控基本相同。</p>
@@ -1945,9 +1945,9 @@
 <li><p>获取监控脚本<br>需要<strong>特别注意</strong>脚本中redis-cli的命令路径，我就折在这里了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/iambocai/falcon-monit-scripts.git</div><div class="line">ll /data/falcon_scripts/falcon-monit-scripts/redis/redis-monitor.py</div><div class="line"><span class="comment">#vim redis-monitor.py  修改脚本，主要该host、port、redis-cli的路径</span></div><div class="line"><span class="comment">#设置crontab -e</span></div><div class="line"><span class="comment">#* * * * * python /opt/falcon-agent/scripts/falcon-monit-scripts/redis/redis-monitor.py</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>web配置如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-5.jpeg" alt="5"></p>
+<li><p>web配置如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-5.jpeg" alt="5"></p>
 </li>
-<li>出图如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-6.jpeg" alt="6"></li>
+<li>出图如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-6.jpeg" alt="6"></li>
 </ul>
 <h4 id="Mysql监控"><a href="#Mysql监控" class="headerlink" title="Mysql监控"></a>Mysql监控</h4><p>由于小米官方给出的方案是需要go环境进行的编译的，所以就直接在falcon的server机器上进行编译，然后拿编译的包对mysql机器进行分发部署</p>
 <ul>
@@ -1959,8 +1959,8 @@
 <p>…<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_spin_waits Endpoint:ip-10-222-0-63 Value:302 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_spin_rounds Endpoint:ip-10-222-0-63 Value:1780 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Innodb_mutex_os_waits Endpoint:ip-10-222-0-63 Value:42 CounterType:COUNTER Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:Is_slave Endpoint:ip-10-222-0-63 Value:0 CounterType:GAUGE Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”info”,”msg”:”Send response 127.0.0.1:3306: success”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”Send to <a href="http://10.222.0.44:1988/v1/push" target="_blank" rel="external">http://10.222.0.44:1988/v1/push</a>, size: 1”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”debug”,”msg”:”MetaData Metric:mysql_alive_local Endpoint:ip-10-222-0-63 Value:1 CounterType:GAUGE Tags:port=3306 Timestamp:1499389081 Step:60”,”time”:”2017-07-07T00:58:01Z”}<br>{“level”:”info”,”msg”:”Alive data response 127.0.0.1:3306: success”,”time”:”2017-07-07T00:58:01Z”}</p>
 </blockquote>
 </li>
-<li>Web配置举例<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-7.jpeg" alt="7"></li>
-<li>出图如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170704-falconuse-8.jpeg" alt="8"></li>
+<li>Web配置举例<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-7.jpeg" alt="7"></li>
+<li>出图如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170704-falconuse-8.jpeg" alt="8"></li>
 </ul>
 <h4 id="nginx监控"><a href="#nginx监控" class="headerlink" title="nginx监控"></a>nginx监控</h4><p>这个目前没什么需求，就直接先参考<a href="https://github.com/GuyCheung/falcon-ngx_metric" target="_blank" rel="external">小米给出的方案</a>吧,其实都大同小异，有需求的话之后可能会自己写一些业务方面的监控脚本。到时候再共享</p>
 <h3 id="关于排错"><a href="#关于排错" class="headerlink" title="关于排错"></a>关于排错</h3><ul>
@@ -1976,7 +1976,7 @@
       <title><![CDATA[open-falcon安装部署记录]]></title>
       <url>http://arvon.top/2017/06/29/open-falcon%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</url>
       <content type="html"><![CDATA[<p>监控对运维来说是相当重要的，现在来说falcon确实相对zabbix有一定优势，不过也存在明显短板，优势是架构设计以及一些设计思路很好，就单说模板继承，这个相对zabbix就很有优势，毕竟是已经有了前人的经验，小米之前也是用的zabbix，所以大众常见的zabbix痛点在falcon上基本得到了改善，但falcon的UI真是很难受啊，不过毕竟火起来还不久，又是一个互联网领头企业开源的项目，还是很有前景的，不妨尝试一下，现在只是基本搭建完成，TAG系统和表达式这些还没开始尝试，最近应该还会了解这个，以下是安装配置及简单调试使用过程。<br><a id="more"></a></p>
-<h3 id="架构图-来自小米官方-及组件说明"><a href="#架构图-来自小米官方-及组件说明" class="headerlink" title="架构图(来自小米官方)及组件说明"></a>架构图(来自小米官方)及组件说明</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-4.png" alt="jiagou-4"></p>
+<h3 id="架构图-来自小米官方-及组件说明"><a href="#架构图-来自小米官方-及组件说明" class="headerlink" title="架构图(来自小米官方)及组件说明"></a>架构图(来自小米官方)及组件说明</h3><p><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-4.png" alt="jiagou-4"></p>
 <blockquote>
 <p><strong>Agent: </strong>部署在目标机器采集机器监控项<br><strong>Transfer： </strong>数据接收端，转发数据到后端Graph和Judge<br><strong>Graph：</strong> 操作rrd文件，存储监控数据<br><strong>Query：</strong>查询各个Graph数据，提供统一http查询接口<br><strong>Dashboard： </strong>查询监控历史趋势图的web端<br><strong>Alarm：</strong>主要负责告警<br><strong>Task： </strong>负责一些定时任务，索引全量更新，垃圾索引清理，自身组件监控</p>
 </blockquote>
@@ -2023,7 +2023,7 @@
 <li><p>配置修改</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim ./gunicorn.conf</div><div class="line">vim ./rrd/config.py</div><div class="line"><span class="comment">#主要也是修改数据库，也可以修改服务端口</span></div><div class="line">./control start</div></pre></td></tr></table></figure>
 </li>
-<li><p>访问dashboard测试<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-1.jpeg" alt="dashboard-1"><br>这个没有默认的用户密码，自己注册后即可登录，且注册不会验证邮箱，登录后如下<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-2.jpeg" alt="dashboard-2"></p>
+<li><p>访问dashboard测试<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-1.jpeg" alt="dashboard-1"><br>这个没有默认的用户密码，自己注册后即可登录，且注册不会验证邮箱，登录后如下<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-2.jpeg" alt="dashboard-2"></p>
 </li>
 </ul>
 <h4 id="Agent端配置"><a href="#Agent端配置" class="headerlink" title="Agent端配置"></a>Agent端配置</h4><ul>
@@ -2033,7 +2033,7 @@
 <li><p>配置启动agent</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mkdir ~/falcon_aget;<span class="built_in">cd</span> ~/falcon_agent</div><div class="line">cp falcon-agent-5.1.2.tar.gz ./</div><div class="line">tar xvf falcon-agent-5.1.2.tar.gz</div><div class="line"><span class="comment">##然后修改配置</span></div><div class="line">cp cfg.example.json cfg.json</div><div class="line"><span class="comment">#vim cfg.jsoon</span></div><div class="line"><span class="comment">#修改heartbeat、transfer的配置地址端口等改为对应配置即可</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>可以通过浏览器查看上报的监控数据<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-3.jpeg" alt="agent-3"></p>
+<li><p>可以通过浏览器查看上报的监控数据<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-3.jpeg" alt="agent-3"></p>
 </li>
 </ul>
 <h4 id="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"><a href="#报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）" class="headerlink" title="报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）"></a>报警邮件设置（小米规范使用http接口，不过小米也有相应的封装工具，如果二次开发可以自己定制实现方法）</h4><ul>
@@ -2049,16 +2049,16 @@
 </ol>
 </blockquote>
 <h4 id="设置Hostgroup（主机组）"><a href="#设置Hostgroup（主机组）" class="headerlink" title="设置Hostgroup（主机组）"></a>设置Hostgroup（主机组）</h4><ul>
-<li>创建主机组<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-5.jpeg" alt="5"></li>
-<li>为主机组添加主机(主机填写hostname主机名即可)<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-6.jpeg" alt="6"></li>
+<li>创建主机组<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-5.jpeg" alt="5"></li>
+<li>为主机组添加主机(主机填写hostname主机名即可)<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-6.jpeg" alt="6"></li>
 </ul>
 <h4 id="设置Templates（模板）"><a href="#设置Templates（模板）" class="headerlink" title="设置Templates（模板）"></a>设置Templates（模板）</h4><ul>
-<li>创建模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-7.jpeg" alt="7"></li>
-<li>设置报警策略<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-8.jpeg" alt="8"></li>
-<li>主机组关联模板<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-9.jpeg" alt="9"></li>
+<li>创建模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-7.jpeg" alt="7"></li>
+<li>设置报警策略<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-8.jpeg" alt="8"></li>
+<li>主机组关联模板<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-9.jpeg" alt="9"></li>
 </ul>
 <h4 id="查看报警"><a href="#查看报警" class="headerlink" title="查看报警"></a>查看报警</h4><ul>
-<li>报警<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170628-openfalcon-10.jpeg" alt="10"></li>
+<li>报警<br><img src="http://img.arvon.top:80/images/2019/08/12//20170628-openfalcon-10.jpeg" alt="10"></li>
 </ul>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://book.open-falcon.org/zh_0_2/index.html" target="_blank" rel="external">小米官方手册0.2.0</a></p>
 ]]></content>
@@ -2067,9 +2067,9 @@
     <entry>
       <title><![CDATA[Linux启动流程]]></title>
       <url>http://arvon.top/2017/06/25/Linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-1.jpeg" alt="1"><br><strong>背景故事：</strong>为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有<strong>BUT</strong>，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。。。不过总结一下还是对系统层认识不够生动，所以就补一篇日志，万一我最棒的媳妇看到了呢，那就点点点~<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-1.jpeg" alt="1"><br><strong>背景故事：</strong>为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有<strong>BUT</strong>，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。。。不过总结一下还是对系统层认识不够生动，所以就补一篇日志，万一我最棒的媳妇看到了呢，那就点点点~<br><a id="more"></a></p>
 <h3 id="计算机如何启动的"><a href="#计算机如何启动的" class="headerlink" title="计算机如何启动的"></a>计算机如何启动的</h3><p>又看了一遍阮一峰关于这个的文章，觉得自己就先不写了，后续自己再理解着写吧。。时间有限啊，参考<a href="http://www.ruanyifeng.com/blog/2013/02/booting.html" target="_blank" rel="external">计算机是如何启动的</a></p>
-<h3 id="系统如何启动的"><a href="#系统如何启动的" class="headerlink" title="系统如何启动的"></a>系统如何启动的</h3><p><strong>说明一下</strong>这些图都是通过搜索引擎抓过来的，并不是我画的。更详细的说明看参考地址里的文章里面写的很好。<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-3.png" alt="3"><br><strong>来看看上图</strong>，这个就是Linux系统启动的流程不过比较简略，但要点都在，下张图会更详尽一点，接着看吧<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-2.png" alt="2"><br>这张图就更详细点了，不过还有更详尽的，Look下面<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-4.jpeg" alt="4"><br>嗯，这样就很尴尬了，感觉看图就够了，我也就不啰嗦了，蛮好~~</p>
+<h3 id="系统如何启动的"><a href="#系统如何启动的" class="headerlink" title="系统如何启动的"></a>系统如何启动的</h3><p><strong>说明一下</strong>这些图都是通过搜索引擎抓过来的，并不是我画的。更详细的说明看参考地址里的文章里面写的很好。<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-3.png" alt="3"><br><strong>来看看上图</strong>，这个就是Linux系统启动的流程不过比较简略，但要点都在，下张图会更详尽一点，接着看吧<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-2.png" alt="2"><br>这张图就更详细点了，不过还有更详尽的，Look下面<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-4.jpeg" alt="4"><br>嗯，这样就很尴尬了，感觉看图就够了，我也就不啰嗦了，蛮好~~</p>
 <h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html" target="_blank" rel="external">阮一峰大牛的网络日志</a><br><a href="http://www.itnpc.com/news/web/1473647313114728.html" target="_blank" rel="external">来自家住海边喜欢浪的文章</a></p>
 ]]></content>
     </entry>
@@ -2117,7 +2117,7 @@
     <entry>
       <title><![CDATA[Linux管理员的瑞士军刀-AWK]]></title>
       <url>http://arvon.top/2017/06/24/Linux%E7%AE%A1%E7%90%86%E5%91%98%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80-AWK/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-awkcommand-1.jpeg" alt="1"><br>作为Linux系统管理员的瑞士小军刀，awk的作用是显而易见的，但是一般情况下使用的都是很简单的分割打印，但有时候需要稍微复杂一些的用法，这里进行一下我的总结。其实之前有写过一篇awk的博客，不过写的比较基础，这次作为补充并尽可能覆盖常用用法，之前的地址<a href="http://arvon.top/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/">戳这里</a><br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20170624-awkcommand-1.jpeg" alt="1"><br>作为Linux系统管理员的瑞士小军刀，awk的作用是显而易见的，但是一般情况下使用的都是很简单的分割打印，但有时候需要稍微复杂一些的用法，这里进行一下我的总结。其实之前有写过一篇awk的博客，不过写的比较基础，这次作为补充并尽可能覆盖常用用法，之前的地址<a href="http://arvon.top/2015/07/29/awk%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B/">戳这里</a><br><a id="more"></a></p>
 <h4 id="感受一下"><a href="#感受一下" class="headerlink" title="感受一下"></a>感受一下</h4><p>通过一个简单的实例来进行说明，实例数据如下,其他介绍放在后面，毕竟实例比理论来的直观嘛：</p>
 <table>
 <thead>
@@ -2337,7 +2337,7 @@
 <li><p>本地压缩解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####----压缩----</span></div><div class="line"><span class="comment">#直接压缩，1G的数据压到68k了，不过源数据不具备参考性，dd出来的数据</span></div><div class="line">./gtz -o test.gtz up_data_test/gtz-test3.log</div><div class="line"><span class="comment">#通过zcat和管道压缩，支持二进制文件</span></div><div class="line">zcat up_data_test/gtz-test3.log |./gtz -o <span class="built_in">test</span>2.gtz</div><div class="line"><span class="comment">####----解压----</span></div><div class="line"><span class="comment">#解压单个文件，解压路径为压缩时的路径</span></div><div class="line">./gtz <span class="_">-d</span> ./test.gtz</div></pre></td></tr></table></figure>
 </li>
-<li><p>压缩上传AWS例子<br>上传文件在S3上显示为目录gtz-test4.name，该目录里面下面为原文件同名目录及一个gtz.meta文件，如图<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170601-gtztools-1.jpeg" alt="1"></p>
+<li><p>压缩上传AWS例子<br>上传文件在S3上显示为目录gtz-test4.name，该目录里面下面为原文件同名目录及一个gtz.meta文件，如图<br><img src="http://img.arvon.top:80/images/2019/08/12//20170601-gtztools-1.jpeg" alt="1"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> AWS_ACCESS_KEY_ID=<span class="string">'your_key'</span></div><div class="line"><span class="built_in">export</span> AWS_SECRET_ACCESS_KEY=<span class="string">'Your_key'</span></div><div class="line"><span class="built_in">export</span> AWS_DEFAULT_REGION=<span class="string">'your_region'</span></div><div class="line"><span class="comment">#上传单个文件，上传1G的测试数据需要50s左右</span></div><div class="line">./gtz -o s3://arvon-gtz-test/gtz-test4.name up_data_test/gtz-test4.db</div><div class="line"><span class="comment">#追加文件到压缩包，如果不加-a参数会覆盖原来的文件</span></div><div class="line">./gtz -o s3://arvon-gtz-test/ up_data_test/gtz-test3.log</div></pre></td></tr></table></figure>
 </li>
 <li><p>解压缩AWS上S3到本地</p>
@@ -2443,7 +2443,7 @@
     <entry>
       <title><![CDATA[Nginx重定向及域名CNAME问题]]></title>
       <url>http://arvon.top/2017/05/29/Nginx%E9%87%8D%E5%AE%9A%E5%90%91%E5%8F%8A%E5%9F%9F%E5%90%8DCNAME%E8%AE%B0%E5%BD%95/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170529-nginxcname-1.jpeg" alt="20170529-nginxcname-1"><br><strong>关于域名解析</strong>的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。</p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20170529-nginxcname-1.jpeg" alt="20170529-nginxcname-1"><br><strong>关于域名解析</strong>的几个问题整理，最近换了博客评论系统，原因是多说马上就停止支持了，所以现在转用网易云跟帖，个人感觉还可以。期间有个域名解析的问题我觉得可以记录下。主要就是DNS的CNAME记录以及Nginx的301、302重定向。</p>
 <h3 id="关于DNS的CNAME解析"><a href="#关于DNS的CNAME解析" class="headerlink" title="关于DNS的CNAME解析"></a>关于DNS的CNAME解析</h3><blockquote>
 <p>其实这个也蛮好理解，不涉及数据报内容的改变，就是将要解析的域名指向另一个域名解析。对比A记录就更清晰了，A记录是域名到IP的解析，而CNAME记录是域名解析到域名。所以通过域名的CNAME记录对web访问时没有任何影响的，它只是改变了域名解析的过程而已。</p>
 </blockquote>
@@ -2480,7 +2480,7 @@
     <entry>
       <title><![CDATA[Jumpserver实践记录]]></title>
       <url>http://arvon.top/2017/05/24/Jumpserver%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-1.jpeg" alt="20170524-jumpserver-1"><br><strong>Jumpserver</strong>是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-1.jpeg" alt="20170524-jumpserver-1"><br><strong>Jumpserver</strong>是一个由一群有理想有抱负的大牛们开发的开源跳板机及资产管理系统，最近在整理搭建，发现还是蛮好用的，过程记录如下，感谢<a href="https://github.com/jumpserver/jumpserver/tree/0.3.2" target="_blank" rel="external">作者</a>开源！！</p>
 <a id="more"></a>
 <h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><ul>
 <li>aws ec2</li>
@@ -2512,13 +2512,13 @@
 </li>
 </ul>
 <h3 id="设置教程"><a href="#设置教程" class="headerlink" title="设置教程"></a>设置教程</h3><ul>
-<li>使用jumpserver账户密码登录，如果未设置就是admin及默认密码（如果没有改端口默认为8000）<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-2.png" alt="2"></li>
-<li>进入设置页面，<strong>注意</strong>这里填写的用户只能一次，新添加一个会覆盖原来的设置<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-3.jpeg" alt="3"></li>
-<li>建立用户组，然后建立用户时关联用户组，这里的用户和组都是相对jumpserver其实在服务器上并不需要存在这些<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-4.jpeg" alt="4"></li>
-<li>添加资产，可以使用上面的python脚本进行批量添加<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-5.jpeg" alt="5"></li>
-<li>创建sudo权限控制组，方便对权限进行精细控制<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-6.jpeg" alt="6"></li>
-<li>创建用户，这时并没有真正创建，需要保存后进行推送，推送需要选择资产或资产组，选择完成点击推送后会在对应资产上创建该用户<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-7.jpeg" alt="7"></li>
-<li>确定jumpserver用户以哪个系统用户访问对应资产<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170524-jumpserver-8.jpeg" alt="8"></li>
+<li>使用jumpserver账户密码登录，如果未设置就是admin及默认密码（如果没有改端口默认为8000）<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-2.png" alt="2"></li>
+<li>进入设置页面，<strong>注意</strong>这里填写的用户只能一次，新添加一个会覆盖原来的设置<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-3.jpeg" alt="3"></li>
+<li>建立用户组，然后建立用户时关联用户组，这里的用户和组都是相对jumpserver其实在服务器上并不需要存在这些<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-4.jpeg" alt="4"></li>
+<li>添加资产，可以使用上面的python脚本进行批量添加<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-5.jpeg" alt="5"></li>
+<li>创建sudo权限控制组，方便对权限进行精细控制<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-6.jpeg" alt="6"></li>
+<li>创建用户，这时并没有真正创建，需要保存后进行推送，推送需要选择资产或资产组，选择完成点击推送后会在对应资产上创建该用户<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-7.jpeg" alt="7"></li>
+<li>确定jumpserver用户以哪个系统用户访问对应资产<br><img src="http://img.arvon.top:80/images/2019/08/12//20170524-jumpserver-8.jpeg" alt="8"></li>
 <li>设置完成，此时jumpserver新建用户可以通过接收到的邮件信息进行访问了<ul>
 <li>上传下载这个比较好理解直接操作一遍就清楚了</li>
 <li>另外有审计功能也是很不错，方便问题定位，也是点着看看就清楚了</li>
@@ -2537,7 +2537,7 @@
     <entry>
       <title><![CDATA[MacOS下pip安装报permitted错误解决]]></title>
       <url>http://arvon.top/2017/05/24/MacOS%E4%B8%8Bpip%E5%AE%89%E8%A3%85%E6%8A%A5permitted%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170627-macerror-1.jpeg" alt="1"><br>安装个python的etcd模块报错，那红红的一串很是好看。。。<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20170627-macerror-1.jpeg" alt="1"><br>安装个python的etcd模块报错，那红红的一串很是好看。。。<br><a id="more"></a></p>
 <p><strong>故障描述：</strong><br>就是这种权限报错OSError: [Errno 1] Operation not permitted ，原因如下</p>
 <blockquote>
 <p>Mac现在系统有个称为SIP的机制(System Integrity Protection)，默认下系统启用SIP系统完整性保护机制，无论是对于硬盘还是运行时的进程限制对系统目录的写操作，macosx 10.11 EI Capitan使用了Rootlees，可以理解为一个更高等级的内核保护，系统会默认锁定/system , /sbin , /usr这三个目录，所以安装的时候会报这个错误</p>
@@ -2557,7 +2557,7 @@
     <entry>
       <title><![CDATA[计算机度量单位总结]]></title>
       <url>http://arvon.top/2017/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%A6%E9%87%8F%E5%8D%95%E4%BD%8D%E6%80%BB%E7%BB%93/</url>
-      <content type="html"><![CDATA[<p>第一次可以分不清大B小b，但二次就不应该。。。<br><img src="http://os1t5i0z4.bkt.clouddn.com/20010101-emoticon-1.jpg" alt="1"><br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p>第一次可以分不清大B小b，但二次就不应该。。。<br><img src="http://img.arvon.top:80/images/2019/08/12//20010101-emoticon-1.jpg" alt="1"><br><a id="more"></a></p>
 <p><strong>来看一看</strong>：</p>
 <table>
 <thead>
@@ -2769,7 +2769,7 @@
     <entry>
       <title><![CDATA[Nginx状态码总结]]></title>
       <url>http://arvon.top/2016/12/04/Nginx%E7%8A%B6%E6%80%81%E7%A0%81%E6%80%BB%E7%BB%93/</url>
-      <content type="html"><![CDATA[<p><img src="http://os1t5i0z4.bkt.clouddn.com/20010101-emoticon-26.jpeg" alt="我要学习"><br>工作中常见的状态码其实并不多，去小米面试的时候问到关于这个问题，回答的不太好，这里就总结记录一下。万一面试再遇到呢。是吧<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20010101-emoticon-26.jpeg" alt="我要学习"><br>工作中常见的状态码其实并不多，去小米面试的时候问到关于这个问题，回答的不太好，这里就总结记录一下。万一面试再遇到呢。是吧<br><a id="more"></a></p>
 <table>
 <thead>
 <tr>
@@ -2938,7 +2938,7 @@
     <entry>
       <title><![CDATA[Iptables整理笔记]]></title>
       <url>http://arvon.top/2016/11/17/Iptables%E6%95%B4%E7%90%86%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20161117-iptables-1.png" alt="20161117-iptables-1"><br>iptabels还是很实用的，分享下我的整理笔记<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20161117-iptables-1.png" alt="20161117-iptables-1"><br>iptabels还是很实用的，分享下我的整理笔记<br><a id="more"></a></p>
 <h2 id="场景规则"><a href="#场景规则" class="headerlink" title="场景规则"></a>场景规则</h2> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#对本机lo回环地址放开</span></div><div class="line">iptables -I INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#对本机访问外部网络放开(ESTABLISHED表示tcp的一种状态，RELETED为ftp的一种状态)</span></div><div class="line">iptabels -I INPUT -m state --state ESTABLISHED,RELETED -j ACCEPT</div><div class="line"><span class="comment">#对所有地址开放本机tcp（80，22，10-21）端口</span></div><div class="line">iptabels -I INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">iptabels -I INPUT -p tcp --dports 10:21 -j ACCEPT -m comment --comment <span class="string">" 2015-09-24 by arvon"</span></div><div class="line"><span class="comment">#允许所有的地址开放本机的基于ICMP协议的数据包访问</span></div><div class="line">iptables -I INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#ftp主动模式下规则</span></div><div class="line">iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line"><span class="comment">#ftp被动模式下规则</span></div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line">  <span class="comment">##vim /etc/vsftpd/vsftpd.conf</span></div><div class="line">  <span class="comment">#pasv_min_port=50000</span></div><div class="line">  <span class="comment">#pasv_max_port=60000</span></div><div class="line">iptables -I INPUT -p tcp --dports 50000:60000 -j ACCEPT</div><div class="line"><span class="comment">#ftp被动模式下规则二</span></div><div class="line">iptables —I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</div><div class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</div><div class="line">  <span class="comment">#modprobe nf_conntrack_ftp #临时开启内核连接追踪模块ftp</span></div><div class="line">  <span class="comment">#vim /etc/sysconfig/iptables-config    #开机自动加载</span></div><div class="line">  <span class="comment">##IPTABLES_MODULES="nf_conntrack_ftp"</span></div><div class="line"><span class="comment">#防CC攻击</span></div><div class="line"><span class="comment">#对源地址为12并且并发大于10的数据包进行拒绝并返回错误信息</span></div><div class="line">iptables -I INPUT -p tcp --dport 80 <span class="_">-s</span> 192.168.1.12 -m connlimit --connlimit-above 10 -j REJECT</div><div class="line"><span class="comment">#当icmp不超过10个时放行，当超过10个每分钟放行1个</span></div><div class="line">iptables -A INPUT -p icmp -m <span class="built_in">limit</span> --limit 1/m --limit-burst 10 -j ACCEPT</div><div class="line">iptables -A INPUT -p icmp DROP</div><div class="line"><span class="comment">#防SYN攻击</span></div><div class="line">iptables -N syn-flood</div><div class="line">iptables -A INPUT -p tcp --syn -j syn-flood</div><div class="line">iptables -I syn-flood -p tcp -m <span class="built_in">limit</span> --limit 3/s --limit-burst 6 -j RETURN</div><div class="line">iptables -A syn-flood -j REJECT</div><div class="line"><span class="comment">#转发</span></div><div class="line">iptables -A FORWARD -p tcp <span class="_">-s</span> 10.10.0.0/24 -m multiport --dports 80,110,21 -j ACCEPT</div><div class="line"><span class="comment">#工作日工作时间禁止访问tencent的域名</span></div><div class="line">iptables -I FORWARD -p udp --dport 53 -m string --string <span class="string">"tencent"</span> -m time --timestart 8:00 --timestop 12:00 --days Mon,Tue,Wed,Thu,Fri,Sat -j DROP</div><div class="line"><span class="comment">#内核参数调整</span></div><div class="line">sysctl -w net.ipv4.ip_forward=1 <span class="comment">#开启内核数据包转发功能</span></div><div class="line">sysctl -w net.ipv4.tcp_syncookies=1 <span class="comment">#开启cookies验证，一定程度防止syn攻击</span></div></pre></td></tr></table></figure>
 <h2 id="Iptables命令"><a href="#Iptables命令" class="headerlink" title="Iptables命令"></a>Iptables命令</h2> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#列出所有规则</span></div><div class="line">iptables -nVL</div><div class="line"><span class="comment">#添加规则</span></div><div class="line">iptables -I INPUT <span class="_">-s</span> 192.168.1.0/24 -p tcp -m multiport --dport 22,80 -j ACCEPT</div><div class="line"><span class="comment">#删除一条规则</span></div><div class="line">iptables -D INPUT -p icmp -j ACCEPT</div><div class="line">iptables -D INPUT 2</div><div class="line"><span class="comment">#清除所有规则</span></div><div class="line">iptables -F</div><div class="line"><span class="comment">#SNAT</span></div><div class="line">iptables -t nat -A POSTROUTING <span class="_">-s</span> 10.10.10.177.0/24 -j SNAT --to 10.10.188.111</div><div class="line"><span class="comment">#DNAT</span></div><div class="line">iptables -t nat -A PREROUTING <span class="_">-d</span> 10.10.188.111 -p tcp --dport 80 -j DNAT --to 10.10.177.222:80</div><div class="line"><span class="comment">#在最后添加默认拒绝的规则</span></div><div class="line">iptables -P INPUT DROP</div></pre></td></tr></table></figure>
 <h2 id="iptables规则组成"><a href="#iptables规则组成" class="headerlink" title="iptables规则组成"></a>iptables规则组成</h2><ul>
@@ -2990,7 +2990,7 @@
     <entry>
       <title><![CDATA[Notes：第一本Docker书]]></title>
       <url>http://arvon.top/2016/10/11/Notes%EF%BC%9A%E7%AC%AC%E4%B8%80%E6%9C%ACDocker%E4%B9%A6/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20161011-notedocker-1.jpeg" alt=""><br>图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。</p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20161011-notedocker-1.jpeg" alt=""><br>图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。</p>
 <a id="more"></a>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
 <li>Docker组件<blockquote>
@@ -3744,7 +3744,7 @@
     <entry>
       <title><![CDATA[8月读书计划]]></title>
       <url>http://arvon.top/2016/08/13/8%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20160813-augustread-1.jpg" alt="20160813-augustread-1"><br>前天入了三本图灵的图解系列丛书，要计划读一下，这里做个记录。</p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20160813-augustread-1.jpg" alt="20160813-augustread-1"><br>前天入了三本图灵的图解系列丛书，要计划读一下，这里做个记录。</p>
 <h3 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h3><ul>
 <li><a href="https://www.amazon.cn/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%A1%AC%E4%BB%B6-%E4%B8%89%E8%BD%AE%E8%B4%A4%E4%B8%80/dp/B00LZZADJC/ref=pd_bxgy_14_img_3?ie=UTF8&amp;psc=1&amp;refRID=F6ZZB1SS4HR0R286HEJA" target="_blank" rel="external">图解网络硬件</a></li>
 <li><a href="https://www.amazon.cn/%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6-%E5%9B%BE%E8%A7%A3TCP-IP-%E7%AB%B9%E4%B8%8B%E9%9A%86%E5%8F%B2/dp/B00DMS9990/ref=sr_1_1?ie=UTF8&amp;qid=1471020135&amp;sr=8-1&amp;keywords=%E5%9B%BE%E8%A7%A3tcp+ip" target="_blank" rel="external">图解tcp/ip</a></li>
@@ -4101,7 +4101,7 @@
     <entry>
       <title><![CDATA[4月读书计划]]></title>
       <url>http://arvon.top/2016/04/03/4%E6%9C%88%E8%AF%BB%E4%B9%A6%E8%AE%A1%E5%88%92/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20160403-aprilread-1.jpg" alt="20160403-aprilread-1"><br>PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。</p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20160403-aprilread-1.jpg" alt="20160403-aprilread-1"><br>PS：学习其实是一件蛮幸福的事情，学的越多感觉不会的越多，不过心里很踏实，最近学习ansibel和git。</p>
 <h3 id="关于最近的学习方向"><a href="#关于最近的学习方向" class="headerlink" title="关于最近的学习方向"></a>关于最近的学习方向</h3><ul>
 <li>ansibel<ul>
 <li>最近购买了4本图书，买了就不能白买不是，而且也是机遇不错，现阶段也在使用ansibel，配置管理和版本控制对于运维确实是挺重要的，【奔跑吧ansible】预计花费4周左右时间来学习。</li>
@@ -5282,7 +5282,7 @@ Mo birthday happy to
     <entry>
       <title><![CDATA[简明Python读书笔记]]></title>
       <url>http://arvon.top/2015/07/30/%E7%AE%80%E6%98%8EPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<p><img src="http://oqfz9mxmq.bkt.clouddn.com/20150730-pythonnote-1.jpeg" alt="20150730-pythonnote-1"></p>
+      <content type="html"><![CDATA[<p><img src="http://img.arvon.top:80/images/2019/08/12//20150730-pythonnote-1.jpeg" alt="20150730-pythonnote-1"></p>
 <h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><ul>
 <li>20150730 总结介绍</li>
 <li>20150731 控制流</li>
@@ -5877,7 +5877,7 @@ Mo birthday happy to
       <url>http://arvon.top/2015/07/17/%E4%BD%BF%E7%94%A8Hexo%E5%92%8CGithub%E6%90%AD%E5%BB%BABlog/</url>
       <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=25706279&auto=1&height=66"></iframe>
 
-<p><strong>Update</strong>:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-1.jpeg" alt="20150717-hexoblog-1"><br><img src="http://oqfz9mxmq.bkt.clouddn.com/20150717-hexoblog-2.jpeg" alt="20150717-hexoblog-2"><br>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。</p>
+<p><strong>Update</strong>:添加了云音乐外链，方法非常简单粗暴，直接在网易云音乐上生成外链然后放进文章里就行了，如图<br><img src="http://img.arvon.top:80/images/2019/08/12//20150717-hexoblog-1.jpeg" alt="20150717-hexoblog-1"><br><img src="http://img.arvon.top:80/images/2019/08/12//20150717-hexoblog-2.jpeg" alt="20150717-hexoblog-2"><br>Tips：最近几天都在折腾这个东西，网上有很多的教程，但终究还是有点费劲，在这里总结一下。我是在win7上做的，我尽可能把我出问题的地方着重描述，希望让有兴趣玩这个伙伴们可以顺利点，嘻嘻。特别鸣谢陈素封的博客，帮助很大，话不多说，开始整理。win上多有不便，还会在linux上进行搭建。</p>
 <a id="more"></a>
 <h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p> 2015/07/17第一次记录，因对markdown语法不熟练，Blog功能尚不完善，所以待补充修改</p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>

@@ -130,12 +130,12 @@
 <meta property="og:url" content="http://arvon.top/2018/02/23/Td-agent配置说明/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="简介：生产环境并没有使用传统ELK,而是使用tdagent来代替Logstash作日志收集。关于td-agent和Fluentd的关系可以引用官网的描述：&amp;quot;In one word, td-agent is a stable distribution package of Fluentd.&amp;quot;  update：2017-05-20 初次修改  一般架构">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170911-fluentd-1.jpeg">
-<meta property="og:updated_time" content="2018-02-23T08:14:41.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170911-fluentd-1.jpeg">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Td-agent配置说明">
 <meta name="twitter:description" content="简介：生产环境并没有使用传统ELK,而是使用tdagent来代替Logstash作日志收集。关于td-agent和Fluentd的关系可以引用官网的描述：&amp;quot;In one word, td-agent is a stable distribution package of Fluentd.&amp;quot;  update：2017-05-20 初次修改  一般架构">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170911-fluentd-1.jpeg">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20170911-fluentd-1.jpeg">
 
 
 
@@ -401,7 +401,7 @@
 <blockquote>
 <p>update：2017-05-20 初次修改</p>
 </blockquote>
-<h3 id="一般架构"><a href="#一般架构" class="headerlink" title="一般架构"></a>一般架构</h3><p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170911-fluentd-1.jpeg" alt="fluentd-1"><br><a id="more"></a></p>
+<h3 id="一般架构"><a href="#一般架构" class="headerlink" title="一般架构"></a>一般架构</h3><p><img src="http://img.arvon.top:80/images/2019/08/12//20170911-fluentd-1.jpeg" alt="fluentd-1"><br><a id="more"></a></p>
 <h3 id="特性记录"><a href="#特性记录" class="headerlink" title="特性记录"></a>特性记录</h3><ul>
 <li>版本<br>2017 年 12 月的时候，fluentd 发布了 v1.0 版本，也就是 td-agent v3 版。</li>
 <li>性能<br><code>“a regular PC box can handle 18,000 messages/second with a single process.”</code>即一般来说，fluentd 单节点的吞吐量大概是 18w/sec 左右。<br>要想提高性能的话，可以在输出端（match）指定 num_threads 来提高并发，在输入端安装 fluent-plugin-multiprocess 插件来提高 CPU 的利用率（Ruby 也有 GIL 问题）。</li>

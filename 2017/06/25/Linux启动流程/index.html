@@ -130,15 +130,15 @@
 <meta property="og:url" content="http://arvon.top/2017/06/25/Linux启动流程/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="背景故事：为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有BUT，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-1.jpeg">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-3.png">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-2.png">
-<meta property="og:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-4.jpeg">
-<meta property="og:updated_time" content="2017-06-26T06:50:03.000Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-1.jpeg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-3.png">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-2.png">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-4.jpeg">
+<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux启动流程">
 <meta name="twitter:description" content="背景故事：为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有BUT，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。">
-<meta name="twitter:image" content="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-1.jpeg">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-1.jpeg">
 
 
 
@@ -400,9 +400,9 @@
       
 
       
-        <p><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-1.jpeg" alt="1"><br><strong>背景故事：</strong>为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有<strong>BUT</strong>，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。。。不过总结一下还是对系统层认识不够生动，所以就补一篇日志，万一我最棒的媳妇看到了呢，那就点点点~<br><a id="more"></a></p>
+        <p><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-1.jpeg" alt="1"><br><strong>背景故事：</strong>为啥想起来写Linux启动流程了呢，这个呢要从一个月以前说起，蜜汁尴尬~~~。我媳妇用的Ubuntu，然后她需要装很多环境，不知道为何内核老是更新，结果就是后面装东西的时候提示/boot分区空间不足无法安装，但我天真可爱的媳妇不会清呀，然后我就来了，一看简单啊，删呗，凡事总有<strong>BUT</strong>，我觉得这个事情嘛要清就要清彻底，就不rm-rf了，直接卸安装包多清爽，于是乎系统挂了，剁手啊打什么通配符。。。不过总结一下还是对系统层认识不够生动，所以就补一篇日志，万一我最棒的媳妇看到了呢，那就点点点~<br><a id="more"></a></p>
 <h3 id="计算机如何启动的"><a href="#计算机如何启动的" class="headerlink" title="计算机如何启动的"></a>计算机如何启动的</h3><p>又看了一遍阮一峰关于这个的文章，觉得自己就先不写了，后续自己再理解着写吧。。时间有限啊，参考<a href="http://www.ruanyifeng.com/blog/2013/02/booting.html" target="_blank" rel="external">计算机是如何启动的</a></p>
-<h3 id="系统如何启动的"><a href="#系统如何启动的" class="headerlink" title="系统如何启动的"></a>系统如何启动的</h3><p><strong>说明一下</strong>这些图都是通过搜索引擎抓过来的，并不是我画的。更详细的说明看参考地址里的文章里面写的很好。<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-3.png" alt="3"><br><strong>来看看上图</strong>，这个就是Linux系统启动的流程不过比较简略，但要点都在，下张图会更详尽一点，接着看吧<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-2.png" alt="2"><br>这张图就更详细点了，不过还有更详尽的，Look下面<br><img src="http://oqfz9mxmq.bkt.clouddn.com/20170624-Linuxboot-4.jpeg" alt="4"><br>嗯，这样就很尴尬了，感觉看图就够了，我也就不啰嗦了，蛮好~~</p>
+<h3 id="系统如何启动的"><a href="#系统如何启动的" class="headerlink" title="系统如何启动的"></a>系统如何启动的</h3><p><strong>说明一下</strong>这些图都是通过搜索引擎抓过来的，并不是我画的。更详细的说明看参考地址里的文章里面写的很好。<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-3.png" alt="3"><br><strong>来看看上图</strong>，这个就是Linux系统启动的流程不过比较简略，但要点都在，下张图会更详尽一点，接着看吧<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-2.png" alt="2"><br>这张图就更详细点了，不过还有更详尽的，Look下面<br><img src="http://img.arvon.top:80/images/2019/08/12//20170624-Linuxboot-4.jpeg" alt="4"><br>嗯，这样就很尴尬了，感觉看图就够了，我也就不啰嗦了，蛮好~~</p>
 <h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html" target="_blank" rel="external">阮一峰大牛的网络日志</a><br><a href="http://www.itnpc.com/news/web/1473647313114728.html" target="_blank" rel="external">来自家住海边喜欢浪的文章</a></p>
 
       
