@@ -400,7 +400,7 @@
           <p><a href="https://book.douban.com/subject/26700648/" target="_blank" rel="external">《即学即用Docker》</a>这本书在手里也有很长时间了，现在补上读书笔记。感觉这书非常适合入门，对没有docker基础的推荐阅读。目前手里还有《Docker经典实例》和《Kubernetes权威指南》等待我的临幸，有时间就争取先来一遍。<br><strong>容器是什么</strong><br>容器不同于VMware或者Xen这种虚拟化系统，是一种完全不同的虚拟化方式，所有容器共用一个内核，而且容器之间的隔离完全在这个内核中实现，这叫做操作系统虚拟化。<br>容器是自成一体的执行环境，所有容器共用宿主机的内核，而且系统中的容器之间是相互隔离的（不强制一定要隔离）。<br>容器的最大优势是高效使用资源，因为不用为了使用各个独立的功能而运行整个操作系统。因为容器共用一个内核，所以隔离执行的任务和底层硬件之间少了一层交互。运行在容器里面的进程只需要使用很少一部分内核，进程在特权模式下进出处理器时不会再调出一个完整的内核。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/09/即学即用Docker读书笔记/#more" rel="contents">
+            <a class="btn" href="/2018/04/09/即学即用Docker读书笔记/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -546,7 +546,7 @@
           <p>多机房情况下，有时候需要将跨机房内网打通，现在还是使用ipsec的多。而且相对也比较成熟。IPsec全称ip Security，由两类协议组成，分别为AH协议（Authentication Header）和ESP协议（Encapsulated Security Payload），由于AH协议无法提供数据加密，所有数据在传输时以明文传输，且AH由于提供数据来源确认，所以无法穿越NAT，所以这两种协议中ESP协议应用更广泛一些。VPN只是IPSec的一种应用方式。刚好有空余的机器就简单实验一下。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/31/使用IPsec搭建vpn系统/#more" rel="contents">
+            <a class="btn" href="/2018/03/31/使用IPsec搭建vpn系统/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -692,7 +692,7 @@
           <p><strong>背景介绍：</strong><br>对于Kibana的一些数据我们有时候是想要对某些字段进行持续关注的，这时候通过报警的手段就可以大幅提升对这些信息状态了解的及时性及可靠性。使用<a href="https://github.com/sirensolutions/sentinl" target="_blank" rel="external">Sentinl这个kibana开源插件</a>，就可以帮助我们实现这个功能。这里记录一下我的实践过程，主要是对一些业务数据某些字段进行监控报警。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/15/Kibana使用sentinl报警实践/#more" rel="contents">
+            <a class="btn" href="/2018/03/15/Kibana使用sentinl报警实践/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -838,7 +838,7 @@
           <p>一般而言，使用docker远端镜像仓库的话，基本不需要使用备份还原，但再某些情况下也是需要这些操作的，如对网络受限的主机进行部署或者基于安全考虑对本地仓库进行备份，就需要这些操作，总之Docker的备份还原还是十分简便的，这里也做一下记录。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/06/Docker备份还原简介/#more" rel="contents">
+            <a class="btn" href="/2018/03/06/Docker备份还原简介/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -987,7 +987,7 @@
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/01/关于Fluentd使用中filter及ES插件的问题记录/#more" rel="contents">
+            <a class="btn" href="/2018/03/01/关于Fluentd使用中filter及ES插件的问题记录/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1137,7 +1137,7 @@
 <h3 id="一般架构"><a href="#一般架构" class="headerlink" title="一般架构"></a>一般架构</h3><p><img src="http://img.arvon.top:80/images/2019/08/12/20170911-fluentd-1.jpg" alt="fluentd-1"><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/23/Td-agent配置说明/#more" rel="contents">
+            <a class="btn" href="/2018/02/23/Td-agent配置说明/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1285,7 +1285,7 @@
 <p><strong>举一个直观的小例子</strong><br>姐姐小红希望弟弟小明多读书，经常拿好书给小明看。之前的方式是先问小明什么时候有空，然后把书给小明送过去，监督小明把书读完。后来两人都觉得太麻烦，就换了一个方式。<br>买了一个书架，小红一有好书就放到书架上，小明看到书架上有书就取着读。这里，书架其实就是一个消息队列，小红就是生产者，小明就是消费者。<br>这样的<strong>好处</strong>是：<br>1.小红想给小明书的时候不必问小明什么时候有时间，直接把书放在书架上就行了，小红和小明的时间都更自由<br>2.小红相信小明的读书自觉和读书能力，不必亲眼观察小明的读书过程，小红只要做一个放书的动作，很节省时间。<br>3.当明天有另一个爱读书的小伙伴小强加入，小红仍旧只需要把书放到书架上，小明和小强从书架上取书即可<br>4.书在书架上，小明读的慢就晚点看完，读的快就早点看完，小明的压力会小点。<br>对应可以总结为：<strong>解耦</strong>、<strong>提速</strong>、<strong>广播</strong>、<strong>削峰</strong><br>相应<strong>缺点</strong>就是：<br>1.引入复杂度<br>2.暂时的不一致性<br><strong>PS：</strong>以上内容引自知乎祁达方<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/23/消息队列介绍及常用MQ对比/#more" rel="contents">
+            <a class="btn" href="/2018/02/23/消息队列介绍及常用MQ对比/#espandi" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
