@@ -130,13 +130,13 @@
 <meta property="og:url" content="http://arvon.top/2017/11/29/Jenkins使用GitSubmodule实现代码库调用/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
 <meta property="og:description" content="背景：在实际项目构建中有时会用到调用其他代码库的情况，例如调用公共代码库和基础代码库，此时就可以用git submodule这个模块实现这个需求，git submodule可以将一个git仓库以目录的方式作为另一个git仓库的子目录。Jenkins用来做项目的持续集成，如果使用了Git Submodule,每次Jenkins更新版本库的时候还需要更新submodule的内容。">
-<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-1.jpeg">
-<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-2.jpeg">
-<meta property="og:updated_time" content="2019-08-12T11:29:06.033Z">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12/20171129-jenkins-1.jpg">
+<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12/20171129-jenkins-2.jpg">
+<meta property="og:updated_time" content="2019-08-13T02:03:36.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins使用GitSubmodule实现代码库调用">
 <meta name="twitter:description" content="背景：在实际项目构建中有时会用到调用其他代码库的情况，例如调用公共代码库和基础代码库，此时就可以用git submodule这个模块实现这个需求，git submodule可以将一个git仓库以目录的方式作为另一个git仓库的子目录。Jenkins用来做项目的持续集成，如果使用了Git Submodule,每次Jenkins更新版本库的时候还需要更新submodule的内容。">
-<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-1.jpeg">
+<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12/20171129-jenkins-1.jpg">
 
 
 
@@ -412,11 +412,11 @@
 </li>
 <li><p>安装以上版本或更高版本插件<br>安装完成后需要重启Jenkins，此时就可以使用了</p>
 </li>
-<li><p>在Jenkins上设置<br><img src="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-1.jpeg" alt="20171129-jenkins-1"><br>其中User credentials from default remote of parent repository意思是Git Submodule的repository会使用和主repository一样的验证，就是主repository使用的身份，低版本不会有这个勾选项，还会报错。</p>
+<li><p>在Jenkins上设置<br><img src="http://img.arvon.top:80/images/2019/08/12/20171129-jenkins-1.jpg" alt="20171129-jenkins-1"><br>其中User credentials from default remote of parent repository意思是Git Submodule的repository会使用和主repository一样的验证，就是主repository使用的身份，低版本不会有这个勾选项，还会报错。</p>
 </li>
 </ul>
 <h3 id="升级插件的方法"><a href="#升级插件的方法" class="headerlink" title="升级插件的方法"></a>升级插件的方法</h3><ul>
-<li><p>1.使用Jenins默认方法<br>进入Jenkins管理页面即 Jenkins–&gt;插件管理–&gt;高级  如下：<br><img src="http://img.arvon.top:80/images/2019/08/12//20171129-jenkins-2.jpeg" alt="20171129-jenkins-2"><br>Jenkins默认更新的URL为<code>http://updates.jenkins-ci.org/experimental/update-center.json</code> ，但是由于网络问题推荐使用<code>http://mirror.xmission.com/jenkins/updates/experimental/update-center.json</code>,另外有条件也可以使用这个页面上面的网络代理选项</p>
+<li><p>1.使用Jenins默认方法<br>进入Jenkins管理页面即 Jenkins–&gt;插件管理–&gt;高级  如下：<br><img src="http://img.arvon.top:80/images/2019/08/12/20171129-jenkins-2.jpg" alt="20171129-jenkins-2"><br>Jenkins默认更新的URL为<code>http://updates.jenkins-ci.org/experimental/update-center.json</code> ，但是由于网络问题推荐使用<code>http://mirror.xmission.com/jenkins/updates/experimental/update-center.json</code>,另外有条件也可以使用这个页面上面的网络代理选项</p>
 </li>
 <li><p>2.直接下载插件通过web页面进行上传<br>依然在Jenkins的管理页面高级中，通过自己下载，然后上传即可，部分插件安装后需要重启Jenkins生效</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Plugin</div><div class="line"><span class="comment">#git 3.6.4</span></div><div class="line">https://wiki.jenkins.io/display/JENKINS/Git+Client+Plugin</div><div class="line"><span class="comment">#git-client 2.6.0</span></div></pre></td></tr></table></figure>
