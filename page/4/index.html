@@ -400,7 +400,7 @@
           <p><strong>背景：</strong>在实际项目构建中有时会用到调用其他代码库的情况，例如调用公共代码库和基础代码库，此时就可以用git submodule这个模块实现这个需求，git submodule可以将一个git仓库以目录的方式作为另一个git仓库的子目录。Jenkins用来做项目的持续集成，如果使用了Git Submodule,每次Jenkins更新版本库的时候还需要更新submodule的内容。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/29/Jenkins使用GitSubmodule实现代码库调用/#espandi" rel="contents">
+            <a class="btn" href="/2017/11/29/Jenkins使用GitSubmodule实现代码库调用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -546,7 +546,7 @@
           <p>使用Grafana进行服务监控的明显优点就是监控出图漂亮，而且拥有丰富的插件，可以直接监控系统资源和负荷信息以及常见的服务进程状态，不过还是会有一些场景直接使用模块是不太容易进行监控的，这个时候更适合使用编写脚本进行数据收集和监控，而<strong>exec</strong>模块就可以满足这样的需求，下面就列举一个小栗子。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/28/collectd使用exec模块进行自定义监控/#espandi" rel="contents">
+            <a class="btn" href="/2017/11/28/collectd使用exec模块进行自定义监控/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -694,7 +694,7 @@
 <p>This is to prevent mapping explosion when dynamic keys such as UUID are used as field names. index.mapping.total_fields.limit specifies the total number of fields an index can have. An exception will be thrown when the limit is reached. The default limit is 1000. Value 0 means no limit. This setting is runtime adjustable<br><strong>– – – 以上摘自</strong>yanjunh对于该issue的答复<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/24/Elasticsearch默认fields1000报错解决/#espandi" rel="contents">
+            <a class="btn" href="/2017/11/24/Elasticsearch默认fields1000报错解决/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -840,7 +840,7 @@
           <p><strong>背景:</strong> 直接使用EFK进行日志收集，在大规模高压力的情况下Elasticsearch会存在丢数据的情况，现在考虑使用MQ（Message Queue）进行缓冲，达到不丢数据的目的。由于对于日志收集响应速度并不是十分高，并且对日志的可靠性要求较高，最终选择Kafka来充当消息队列而非官方推荐的redis。这里着重进行kafka介绍，之后会整合EFK+kafka的应用落地记录。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/05/关于Kafka分布式消息队列/#espandi" rel="contents">
+            <a class="btn" href="/2017/11/05/关于Kafka分布式消息队列/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -986,7 +986,7 @@
           <p><strong>简介：</strong><a href="https://coreos.com/etcd/" target="_blank" rel="external">Etcd</a>是CentOS公司发起的一个开源项目，灵感来自于 ZooKeeper 和 Doozer，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性（Raft是一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader。），主要用于<strong>共享配置和服务发现</strong>的分布式、一致性的KV存储系统。<br>除了常见的共享配置及服务发现，还可以使用Etcd结合SkyDNS提供<strong>内网域名解析服务</strong>。<br>这里主要涉及etcd安装配置说明、etcd-view安装配置、skydns安装配置</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/13/etcd及相关组件安装配置说明/#espandi" rel="contents">
+            <a class="btn" href="/2017/10/13/etcd及相关组件安装配置说明/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1135,7 +1135,7 @@
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/07/Ansible部署NFS服务/#espandi" rel="contents">
+            <a class="btn" href="/2017/09/07/Ansible部署NFS服务/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1281,7 +1281,7 @@
           <p>ftp服务在运维工作中还是十分常用的。下面记录下安装配置过程。关于主动被动原理可以看一下<a href="http://wiki.arvon.top/doku.php?id=ftp" target="_blank" rel="external">我的wiki</a><br>vsftp是一个主打安全的ftp服务，所以配置文件会复杂一些。下面是适用于一般场景的配置，使用虚拟用户进行登录操作，更多定制需要需要自行进行修改。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/13/vsftp安装配置记录/#espandi" rel="contents">
+            <a class="btn" href="/2017/08/13/vsftp安装配置记录/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
