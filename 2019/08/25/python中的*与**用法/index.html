@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -123,19 +123,17 @@
 
 
 
-<meta name="description" content="图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="在Python中经常会见到以下一些用法，如在函数调用中fun1(*vars)|fun2(**vars),以及在函数定义中如def fun1(*param) or def fun2(**param)这些形式。下面就针对这些情况使用具体例子进行一下说明。">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Notes：第一本Docker书">
-<meta property="og:url" content="http://arvon.top/2016/10/11/Notes：第一本Docker书/index.html">
+<meta property="og:title" content="python中的*与**用法">
+<meta property="og:url" content="http://arvon.top/2019/08/25/python中的*与**用法/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。">
-<meta property="og:image" content="http://img.arvon.top:80/images/2019/08/12/20161011-notedocker-1.jpg">
-<meta property="og:updated_time" content="2019-08-21T08:18:02.481Z">
+<meta property="og:description" content="在Python中经常会见到以下一些用法，如在函数调用中fun1(*vars)|fun2(**vars),以及在函数定义中如def fun1(*param) or def fun2(**param)这些形式。下面就针对这些情况使用具体例子进行一下说明。">
+<meta property="og:updated_time" content="2019-08-26T03:20:44.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Notes：第一本Docker书">
-<meta name="twitter:description" content="图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。">
-<meta name="twitter:image" content="http://img.arvon.top:80/images/2019/08/12/20161011-notedocker-1.jpg">
+<meta name="twitter:title" content="python中的*与**用法">
+<meta name="twitter:description" content="在Python中经常会见到以下一些用法，如在函数调用中fun1(*vars)|fun2(**vars),以及在函数定义中如def fun1(*param) or def fun2(**param)这些形式。下面就针对这些情况使用具体例子进行一下说明。">
 
 
 
@@ -165,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://arvon.top/2016/10/11/Notes：第一本Docker书/"/>
+  <link rel="canonical" href="http://arvon.top/2019/08/25/python中的*与**用法/"/>
 
 
 
 
 
-  <title>Notes：第一本Docker书 | Arvon's Blog</title>
+  <title>python中的*与**用法 | Arvon's Blog</title>
   
 
 
@@ -308,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2016/10/11/Notes：第一本Docker书/">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/25/python中的*与**用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Arvon">
@@ -325,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Notes：第一本Docker书</h1>
+          <h1 class="post-title" itemprop="name headline">python中的*与**用法</h1>
         
 
         <div class="post-meta">
@@ -337,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T15:49:18+08:00">
-                2016-10-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T21:00:00+08:00">
+                2019-08-25
               </time>
             
 
@@ -357,8 +355,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2016/10/11/Notes：第一本Docker书/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/10/11/Notes：第一本Docker书/" itemprop="commentsCount"></span>
+                <a href="/2019/08/25/python中的*与**用法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/25/python中的*与**用法/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -366,7 +364,7 @@
 
           
           
-             <span id="/2016/10/11/Notes：第一本Docker书/" class="leancloud_visitors" data-flag-title="Notes：第一本Docker书">
+             <span id="/2019/08/25/python中的*与**用法/" class="leancloud_visitors" data-flag-title="python中的*与**用法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,29 +395,12 @@
       
 
       
-        <p><img src="http://img.arvon.top:80/images/2019/08/12/20161011-notedocker-1.jpg" alt=""><br>图解http已经阅读完毕，现在开始转向docker的学习，先读《第一本Docker书》，就这样，简要记录读书笔记。</p>
+        <p>在Python中经常会见到以下一些用法，如在函数调用中<code>fun1(*vars)</code>|<code>fun2(**vars)</code>,以及在函数定义中如<code>def fun1(*param)</code> or <code>def fun2(**param)</code>这些形式。下面就针对这些情况使用具体例子进行一下说明。</p>
 <a id="more"></a>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
-<li>Docker组件<blockquote>
-<ul>
-<li>Docker客户端和服务器</li>
-<li>Docker镜像</li>
-<li>Registry: 用来保存用户构建的镜像，分为公共和私有两种</li>
-<li>Docker容器</li>
-</ul>
-</blockquote>
-</li>
-<li>常用命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">yum install docker</div><div class="line">systemctl enable docker</div><div class="line">systemctl start docker</div><div class="line">docker info</div><div class="line"><span class="meta">#</span><span class="bash">查看docker信息</span></div><div class="line">docker run -i -t ubuntu /bin/bash</div><div class="line"><span class="meta">#</span><span class="bash">以ubuntu为基础镜像创建容易完成后并运行/bin/bash启动一个shell，-i保证STDIN开启-t创建一个可以与之交互的伪终端这两个是创建可交互容器的最基本参数</span></div><div class="line">docker run --name arvon_web -i -t ubuntu /bin/bash</div><div class="line"><span class="meta">#</span><span class="bash">创建arvon_web为容器名的容器，可以使用容器名代替容器ID操作容器</span></div><div class="line">docker ps</div><div class="line"><span class="meta">#</span><span class="bash">查看正在运行的容器</span></div><div class="line">docker ps -a</div><div class="line"><span class="meta">#</span><span class="bash">查看所有容器，包括运行的和停止的</span></div><div class="line">docker start arvon_web</div><div class="line"><span class="meta">#</span><span class="bash">启动一个容器，可以使用容器名也可以使用容器ID，启动时会沿用docker run启动时指定的参数，因此会运行交互式会话的shell，使用docker attach可以附着到启动的容器</span></div><div class="line">docker attach arvon_web</div><div class="line"><span class="meta">#</span><span class="bash">附着到arvon_web这个容器，如果退出容器的shell，容器也会随之停止运行</span></div><div class="line">docker run --name demo_arvon -d ubuntu /bin/sh -c "while true;do echo hello world; sleep 1; done"</div><div class="line"><span class="meta">#</span><span class="bash">创建一个守护式进程，并一直输出helloworld，运行后不进入容器，容器在后台运行，可以通过docker ps查看到</span></div><div class="line">docker logs demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">可以查看demo_arvon这个容器的日志，是即时输出</span></div><div class="line">docker logs -f demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">相当于tailf，是实时输出的日志</span></div><div class="line">docker logs -ft demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">带时间戳的实时输出</span></div><div class="line">docker top demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">查看容器内的进程</span></div><div class="line">docker exec -d demo_arvon touch /etc/new_config_file</div><div class="line"><span class="meta">#</span><span class="bash">在demo_arvon这个容器中创建一个new_config_file的空文件</span></div><div class="line">docker stop demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">停止容器运行</span></div><div class="line">docker ps -n x</div><div class="line"><span class="meta">#</span><span class="bash">显示最后的x的容器，不管这些容器是否在运行都会列出来</span></div><div class="line">docker inspect demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">检查容器然后返回容器的配置信息，包括名称、网络配置等</span></div><div class="line">docker inspect --format='&#123;&#123; .State.Running &#125;&#125;' demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">查看容器的运行状态，<span class="literal">true</span>为运行，<span class="literal">false</span>为停止</span></div><div class="line">docker inspect --format '&#123;&#123; .NetworkSettings.IPAddress &#125;&#125;' demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">查看容器的IP地址,对运行中的容器有效，为运行的容器返回为空</span></div><div class="line">docker inspect --format='&#123;&#123; .State.Running &#125;&#125;' arvon_web demo_arvon</div><div class="line"><span class="meta">#</span><span class="bash">可以一次指定多个容器，会显示每个容器的输出结果</span></div><div class="line">docker rm arvon_web</div><div class="line"><span class="meta">#</span><span class="bash">删除容器</span></div><div class="line">docker rm `docker ps -a -q`</div><div class="line"><span class="meta">#</span><span class="bash">删除所有容器</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="镜像使用及构建"><a href="#镜像使用及构建" class="headerlink" title="镜像使用及构建"></a>镜像使用及构建</h3><ul>
-<li>使用镜像<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker images</div><div class="line"><span class="comment">#列出镜像列表</span></div><div class="line">docker pull fedora</div><div class="line"><span class="comment">#将fedora镜像拉取到本地</span></div><div class="line">docker search puppet</div><div class="line"><span class="comment">#查找Docker Hub上公共可用的镜像</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="使用dockercommit构建镜像"><a href="#使用dockercommit构建镜像" class="headerlink" title="使用dockercommit构建镜像"></a>使用dockercommit构建镜像</h3><ul>
-<li>Command<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#使用docker commit创建镜像，不推荐</span></div><div class="line">docker login</div><div class="line">Username: arvon2014</div><div class="line">Password:</div><div class="line">Email: mail@126.com</div><div class="line">Login Succeeded</div><div class="line"><span class="comment">#</span></div><div class="line">docker run --name t_img -i -t ubuntu /bin/bash</div><div class="line">docker commit -m=<span class="string">"A new custom image"</span> --author=<span class="string">"arvon"</span> t_img arvon2014/web_test：webserver</div><div class="line"><span class="comment">#其中t_img为容器名可以为容器ID， arvon2014为镜像的用户名web_rest为仓库名；webserver为标签-m为描述-author为作者信息，这些都可以省略</span></div><div class="line">docker inspect arvon2014/web_test:webserver</div><div class="line"><span class="comment">#查看新创建镜像的信息</span></div><div class="line">docker run -t -i arvon2014/web_test:webserver /bin/bash</div><div class="line"><span class="comment">#使用新创建的镜像运行一个容器</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
+<h3 id="对于函数调用中的-和"><a href="#对于函数调用中的-和" class="headerlink" title="对于函数调用中的*和**"></a>对于函数调用中的<code>*</code>和<code>**</code></h3><p>主要功能是一个函数解压传入的过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#demo1  * list</span></div><div class="line">demo_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo1</span><span class="params">(a,b,c)</span>:</span></div><div class="line">    print(<span class="string">'a+b+c='</span> + str(a+b+c))</div><div class="line"><span class="comment">#列表前面加星号作用是将列表解开成两个独立的参数，传入函数</span></div><div class="line">demo1(*demo_list)</div><div class="line"><span class="comment">#a+b+c=6</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#demo2 ** dict</span></div><div class="line">demo_dict = &#123;</div><div class="line">            <span class="string">'k1'</span>:&#123;<span class="string">'v1'</span>:<span class="number">1</span>&#125;,</div><div class="line">            <span class="string">'k2'</span>:&#123;<span class="string">'v2'</span>:<span class="number">2</span>&#125;,</div><div class="line">            <span class="string">'k3'</span>:&#123;<span class="string">'v3'</span>:<span class="number">3</span>&#125;</div><div class="line">             &#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo2</span><span class="params">(k1,k2,k3)</span>:</span></div><div class="line">    print(k1,k2,k3)</div><div class="line"><span class="comment">#字典前面加两个星号，是将字典解开成独立的元素作为形参</span></div><div class="line"><span class="comment">#补充：当将字典传入形参时，形参的名称要与字典的键名称相同</span></div><div class="line">demo2(**demo_dict)</div><div class="line"><span class="comment">#&#123;'v1': 1&#125; &#123;'v2': 2&#125; &#123;'v3': 3&#125;</span></div></pre></td></tr></table></figure>
+<h3 id="对于函数定义中的-和"><a href="#对于函数定义中的-和" class="headerlink" title="对于函数定义中的*和**"></a>对于函数定义中的<code>*</code>和<code>**</code></h3><p>主要功能是将任意个数的参数导入到python函数中<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(param1, *param2)</span>:</span></div><div class="line">    <span class="comment">#将所以参数以元组(tuple)的形式导入</span></div><div class="line">    print(param1)</div><div class="line">    print(param2)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(param1, **param2)</span>:</span></div><div class="line">    <span class="comment">#将参数以字典的形式导入</span></div><div class="line">    print(param1)</div><div class="line">    print(param2)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo_bar</span><span class="params">(param1,*param2,**param3)</span>:</span></div><div class="line">    <span class="comment">#上面两个可以混合使用</span></div><div class="line">    print(param1)</div><div class="line">    print(param2)</div><div class="line">    print(param3)</div><div class="line"></div><div class="line">foo(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">#1</span></div><div class="line"><span class="comment">#(2, 3)</span></div><div class="line">bar(<span class="number">1</span>,a=<span class="number">2</span>,b=<span class="number">3</span>)</div><div class="line"><span class="comment">#1</span></div><div class="line"><span class="comment">#&#123;'a': 2, 'b': 3&#125;</span></div><div class="line">foo_bar(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,a=<span class="number">4</span>,b=<span class="number">5</span>)</div><div class="line"><span class="comment">#1</span></div><div class="line"><span class="comment">#(2, 3)</span></div><div class="line"><span class="comment">#&#123;'a': 4, 'b': 5&#125;</span></div></pre></td></tr></table></figure></p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><a href="https://zhuanlan.zhihu.com/p/33896402" target="_blank" rel="external">知乎的一篇文章</a></p>
 
       
     </div>
@@ -466,7 +447,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -479,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/30/yum-报错：rpmdb-open-failed/" rel="next" title="yum 报错：rpmdb open failed">
-                <i class="fa fa-chevron-left"></i> yum 报错：rpmdb open failed
+              <a href="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" rel="next" title="Aws使用EMR对Dynamodb进行备份还原">
+                <i class="fa fa-chevron-left"></i> Aws使用EMR对Dynamodb进行备份还原
               </a>
             
           </div>
@@ -488,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/25/yum安装ffmpeg记录/" rel="prev" title="yum安装ffmpeg记录">
-                yum安装ffmpeg记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -668,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像使用及构建"><span class="nav-number">2.</span> <span class="nav-text">镜像使用及构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用dockercommit构建镜像"><span class="nav-number">3.</span> <span class="nav-text">使用dockercommit构建镜像</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于函数调用中的-和"><span class="nav-number">1.</span> <span class="nav-text">对于函数调用中的*和**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于函数定义中的-和"><span class="nav-number">2.</span> <span class="nav-text">对于函数定义中的*和**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展"><span class="nav-number">3.</span> <span class="nav-text">扩展</span></a></li></ol></div>
             
 
           </div>
