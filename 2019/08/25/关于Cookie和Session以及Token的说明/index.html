@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="安全认证," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="现在做web的话就绕不开安全认证这一步，那就先介绍下目前常见的认证方式然后再说关于cookie、session、token的东西。常用的认证方式简单概述如下：  cookie-session认证方式  出现较早的认证方式，主要形式是浏览器客户端将用户名密码发送给服务器，服务器验证后创建session并发放用于识别用户的sessionID（与用户状态绑定后记录在服务器端），这个sessionID以及">
+<meta name="keywords" content="安全认证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Cookie和Session以及Token的说明">
+<meta property="og:url" content="http://arvon.top/2019/08/25/关于Cookie和Session以及Token的说明/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="现在做web的话就绕不开安全认证这一步，那就先介绍下目前常见的认证方式然后再说关于cookie、session、token的东西。常用的认证方式简单概述如下：  cookie-session认证方式  出现较早的认证方式，主要形式是浏览器客户端将用户名密码发送给服务器，服务器验证后创建session并发放用于识别用户的sessionID（与用户状态绑定后记录在服务器端），这个sessionID以及">
+<meta property="og:updated_time" content="2019-08-27T11:25:15.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Cookie和Session以及Token的说明">
+<meta name="twitter:description" content="现在做web的话就绕不开安全认证这一步，那就先介绍下目前常见的认证方式然后再说关于cookie、session、token的东西。常用的认证方式简单概述如下：  cookie-session认证方式  出现较早的认证方式，主要形式是浏览器客户端将用户名密码发送给服务器，服务器验证后创建session并发放用于识别用户的sessionID（与用户状态绑定后记录在服务器端），这个sessionID以及">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2019/08/25/关于Cookie和Session以及Token的说明/"/>
+
+
+
+
+
+  <title>关于Cookie和Session以及Token的说明 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/25/关于Cookie和Session以及Token的说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于Cookie和Session以及Token的说明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T12:00:00+08:00">
+                2019-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/25/关于Cookie和Session以及Token的说明/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/25/关于Cookie和Session以及Token的说明/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2019/08/25/关于Cookie和Session以及Token的说明/" class="leancloud_visitors" data-flag-title="关于Cookie和Session以及Token的说明">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>现在做web的话就绕不开安全认证这一步，那就先介绍下目前常见的认证方式然后再说关于cookie、session、token的东西。常用的认证方式简单概述如下：</p>
+<ul>
+<li><p>cookie-session认证方式</p>
+<blockquote>
+<p>出现较早的认证方式，主要形式是浏览器客户端将用户名密码发送给服务器，服务器验证后创建session并发放用于识别用户的sessionID（与用户状态绑定后记录在服务器端），这个sessionID以及一些相关的其他信息就是cookie，cookie随着响应(Set-Cookie)返回给客户端由客户端存储于浏览器，之后客户端的请求都会带上这个cookie，服务端通过cookie来获取Session信息从而进行认证校验。</p>
+</blockquote>
+</li>
+<li><p>Oauth认证方式</p>
+<blockquote>
+<p>Oauth是一种授权机制，主要为第三方应用颁发授权令牌（token）,目前有Oauth2.0和Oauth1.0版本，其中Oauth2.0版本的标准是<a href="https://www.rfc-editor.org/rfc/rfc6749.html" target="_blank" rel="external">RFC6749</a>，Oauth1.0版本的标准是<a href="https://www.rfc-editor.org/rfc/rfc5849" target="_blank" rel="external">RFC5849</a>。Oauth2.0的具体介绍可以参考<a href="http://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html" target="_blank" rel="external">阮一峰|Oauth2.0</a></p>
+</blockquote>
+</li>
+<li><p>JWT认证方式</p>
+<blockquote>
+<p>JWT的标准是<a href="https://www.rfc-editor.org/rfc/rfc7519.html" target="_blank" rel="external">RFC7519</a>。大概原理是客户端经过服务器认证后服务器给客户端返回一个json对象（包含用户信息且加密处理的数据），之后客户端与服务器通信都会带上这个json对象，服务器只通过这个对象来认证用户，也就是说服务器端是无状态的不会保存状态数据了（比如session）。具体可参考<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">阮一峰|JSON Web Token 入门教程</a></p>
+</blockquote>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="概念梳理"><a href="#概念梳理" class="headerlink" title="概念梳理"></a>概念梳理</h3><ul>
+<li><p>Cookie</p>
+<blockquote>
+<p>Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型文本文件”[1]，指某些网站为了辨别用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。由网景公司的前雇员卢·蒙特利在1993年3月发明[2]。最初定义于RFC 2109。当前使用最广泛的 Cookie标准却不是RFC中定义的任何一个，而是在网景公司制定的标准上进行扩展后的产物。</p>
+<p>Cookie总是保存在客户端中，按在客户端中的存储位置，可分为内存Cookie和硬盘Cookie。内存Cookie由浏览器维护，保存在内存中，浏览器关闭后就消失了，其存在时间是短暂的。硬盘Cookie保存在硬盘里，有一个过期时间，除非用户手工清理或到了过期时间，硬盘Cookie不会被删除，其存在时间是长期的。所以，按存在时间，可分为非持久Cookie和持久Cookie。</p>
+<p>Cookie就是用来绕开HTTP的无状态性的“额外手段”之一。服务器可以设置或读取Cookies中包含信息，借此维护用户跟服务器会话中的状态</p>
+<p>使用Cookie的缺陷：</p>
+<ul>
+<li>Cookie会被附加在每个HTTP请求中，所以无形中增加了流量</li>
+<li>由于在HTTP请求中的Cookie是明文传递的，所以安全性成问题，除非用HTTPS</li>
+<li>Cookie的大小限制在4KB左右，对于复杂的存储需求来说是不够用的</li>
+</ul>
+<p>–选自<a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" rel="external">Wikipedia</a></p>
+</blockquote>
+</li>
+<li><p>Session</p>
+<blockquote>
+<p>跟上面cookie不同，cookie是实际存在的，而session是一个抽象概念，我们更多说的是session的实现。session其实就是服务器用来保存用户会话状态（因为HTTP是一个无状态的协议）的一种机制。</p>
+<p>服务器session存放在服务器（默认存在文件也可以存在内存、数据库中），运行需要依赖于session id，不过一般session id会存在客户端cookie中（当然如果浏览器禁用cookie的话，也可以通过其他方式实现，比如通过url来传递）</p>
+</blockquote>
+</li>
+<li><p>Token</p>
+<blockquote>
+<p>这里说的token是access token，仅仅是指访问资源凭证，是跟上面说的Oauth认证相关的。主要针对的是从第三方应用获得授权登录，客户端从第三方应用获取的授权登录令牌，我们就称为token。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="代码示例（Flask）"><a href="#代码示例（Flask）" class="headerlink" title="代码示例（Flask）"></a>代码示例（Flask）</h3><p>下面就FLask来做一些代码演示</p>
+<h4 id="Demo-1（逻辑演示）"><a href="#Demo-1（逻辑演示）" class="headerlink" title="Demo-1（逻辑演示）"></a>Demo-1（逻辑演示）</h4><p>如果不使用session-cookie机制，我们也可以实现用户的登录控制,下面这个非常简陋只是为了演示下登录验证的思路，不必纠结细节，极其不pythonic，代码臃肿且不科学。说一下下面的问题</p>
+<ul>
+<li>缺失判断来源的逻辑（应该增加判断条件更准确的鉴别请求来源）</li>
+<li>每次都需要重新登录验证</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">app = Flask(__name__)</div><div class="line">allow_login = <span class="keyword">False</span></div><div class="line"><span class="meta">@app.route('/login',methods=['GET','POST'],endpoint='login')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> allow_login</div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line">    <span class="keyword">if</span> request.form[<span class="string">'name'</span>] == <span class="string">'gourds'</span> <span class="keyword">and</span> request.form[<span class="string">'password'</span>] == <span class="string">'arvon'</span>:</div><div class="line">        allow_login = <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'success login'</span></div><div class="line">    allow_login = <span class="keyword">False</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line"><span class="meta">@app.route('/page1',methods=['GET'],endpoint='p1')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> allow_login</div><div class="line">    <span class="keyword">if</span> allow_login == <span class="keyword">True</span>:</div><div class="line">        allow_login = <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'play page1'</span></div><div class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</div><div class="line"><span class="meta">@app.route('/page2',methods=['GET'],endpoint='p2')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page2</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> allow_login</div><div class="line">    <span class="keyword">if</span> allow_login == <span class="keyword">True</span>:</div><div class="line">        allow_login = <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'play page2'</span></div><div class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</div></pre></td></tr></table></figure>
+<h4 id="demo-2（使用session-cookie）"><a href="#demo-2（使用session-cookie）" class="headerlink" title="demo-2（使用session-cookie）"></a>demo-2（使用session-cookie）</h4><p>使用session-cookie的话，如下<br>在下面的例子中当键入用户密码发出POST请求后，服务器的response是<code>Set-cookie:session=eyJnb3VyZHMiOiJnb3VyZHMtc2Vzc2lvbiJ9.EEaMcA.eV2X1jpYYTAZePmRTT5cdYhUfXw; HttpOnly; Path=/</code>,从浏览器开发者模式可以看到这个值存放在浏览器<code>cookies</code>下，然后访问其他页面时请求头（Request headers:<code>session=eyJnb3VyZHMiOiJnb3VyZHMtc2Vzc2lvbiJ9.EEaMcA.eV2X1jpYYTAZePmRTT5cdYhUfXw</code>）会带上这个cookie<code>session=eyJnb3VyZHMiOiJnb3VyZHMtc2Vzc2lvbiJ9.EEaMcA.eV2X1jpYYTAZePmRTT5cdYhUfXw</code>，就避免了每次输入账号密码的尴尬了。如果在浏览器在这个cookie删除或者禁用，就不能正常访问了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">app = Flask(__name__)</div><div class="line">allow_login = <span class="keyword">False</span></div><div class="line"><span class="meta">@app.route('/login',methods=['GET','POST'],endpoint='login')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line">    <span class="keyword">if</span> request.form[<span class="string">'name'</span>] == <span class="string">'gourds'</span> <span class="keyword">and</span> request.form[<span class="string">'password'</span>] == <span class="string">'arvon'</span>:</div><div class="line">        session[<span class="string">'gourds'</span>] = <span class="string">'gourds-session'</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'success login'</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line"></div><div class="line"><span class="meta">@app.route('/page1',methods=['GET'],endpoint='p1')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> session.get(<span class="string">'gourds'</span>):</div><div class="line">        <span class="keyword">return</span> <span class="string">'play page1'</span></div><div class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</div><div class="line"></div><div class="line"><span class="meta">@app.route('/page2',methods=['GET'],endpoint='p2')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page2</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> session.get(<span class="string">'gourds'</span>):</div><div class="line">        <span class="keyword">return</span> <span class="string">'play page2'</span></div><div class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</div></pre></td></tr></table></figure>
+<h4 id="Demo-3-使用Flask的特殊装饰符"><a href="#Demo-3-使用Flask的特殊装饰符" class="headerlink" title="Demo-3(使用Flask的特殊装饰符)"></a>Demo-3(使用Flask的特殊装饰符)</h4><p>使用Flask的特殊装饰符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">app = Flask(__name__)</div><div class="line">allow_login = <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="meta">@app.before_request</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_status</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.path == <span class="string">'/login'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> session.get(<span class="string">'gourds'</span>):</div><div class="line">        <span class="keyword">return</span> redirect(<span class="string">'/login'</span>)</div><div class="line"></div><div class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'], endpoint='login')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</div><div class="line">        <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line">    <span class="keyword">if</span> request.form[<span class="string">'name'</span>] == <span class="string">'gourds'</span> <span class="keyword">and</span> request.form[<span class="string">'password'</span>] == <span class="string">'arvon'</span>:</div><div class="line">        session[<span class="string">'gourds'</span>] = <span class="string">'gourds-session'</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'success login'</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>)</div><div class="line"></div><div class="line"><span class="meta">@app.route('/page1', methods=['GET'], endpoint='p1')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'play page1'</span></div><div class="line"></div><div class="line"><span class="meta">@app.route('/page2', methods=['GET'], endpoint='p2')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page2</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'play page2'</span></div></pre></td></tr></table></figure>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc2109.html" target="_blank" rel="external">RFC2109 | HTTP State Management Mechanism</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Session_(computer_science" target="_blank" rel="external">wikipedia|Session</a>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Access_token" target="_blank" rel="external">wikipedia|Access_token</a></li>
+<li><a href="https://www.cnblogs.com/moyand/p/9047978.html" target="_blank" rel="external">墨颜丶 | 彻底理解cookie，session，token</a></li>
+<li><a href="https://www.jianshu.com/p/bd1be47a16c1" target="_blank" rel="external">骑小猪看流星 | Cookie、Session、Token那点事儿</a></li>
+<li><a href="https://segmentfault.com/a/1190000017831088" target="_blank" rel="external">心难收 | 彻底弄懂session，cookie，token</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/安全认证/" rel="tag"># 安全认证</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" rel="next" title="Aws使用EMR对Dynamodb进行备份还原">
+                <i class="fa fa-chevron-left"></i> Aws使用EMR对Dynamodb进行备份还原
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/25/python中的*与**用法/" rel="prev" title="python中的*与**用法">
+                python中的*与**用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Gourds" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念梳理"><span class="nav-number">1.</span> <span class="nav-text">概念梳理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码示例（Flask）"><span class="nav-number">2.</span> <span class="nav-text">代码示例（Flask）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo-1（逻辑演示）"><span class="nav-number">2.1.</span> <span class="nav-text">Demo-1（逻辑演示）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#demo-2（使用session-cookie）"><span class="nav-number">2.2.</span> <span class="nav-text">demo-2（使用session-cookie）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo-3-使用Flask的特殊装饰符"><span class="nav-number">2.3.</span> <span class="nav-text">Demo-3(使用Flask的特殊装饰符)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytVqphGW';
+      var conf = '4962de519a26e5ebd7edae10d9cc340d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("IJfruTXafB06hcxVwGxHLVnv-gzGzoHsz", "DENy7NKv9HNWYsFFfeMtKjeu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

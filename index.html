@@ -451,6 +451,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/25/关于Cookie和Session以及Token的说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/25/关于Cookie和Session以及Token的说明/" itemprop="url">关于Cookie和Session以及Token的说明</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T12:00:00+08:00">
+                2019-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/25/关于Cookie和Session以及Token的说明/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://arvon.top/2019/08/25/关于Cookie和Session以及Token的说明/" class="cy_cmt_count" data-xid="2019/08/25/关于Cookie和Session以及Token的说明/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2019/08/25/关于Cookie和Session以及Token的说明/" class="leancloud_visitors" data-flag-title="关于Cookie和Session以及Token的说明">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>现在做web的话就绕不开安全认证这一步，那就先介绍下目前常见的认证方式然后再说关于cookie、session、token的东西。常用的认证方式简单概述如下：</p>
+<ul>
+<li><p>cookie-session认证方式</p>
+<blockquote>
+<p>出现较早的认证方式，主要形式是浏览器客户端将用户名密码发送给服务器，服务器验证后创建session并发放用于识别用户的sessionID（与用户状态绑定后记录在服务器端），这个sessionID以及一些相关的其他信息就是cookie，cookie随着响应(Set-Cookie)返回给客户端由客户端存储于浏览器，之后客户端的请求都会带上这个cookie，服务端通过cookie来获取Session信息从而进行认证校验。</p>
+</blockquote>
+</li>
+<li><p>Oauth认证方式</p>
+<blockquote>
+<p>Oauth是一种授权机制，主要为第三方应用颁发授权令牌（token）,目前有Oauth2.0和Oauth1.0版本，其中Oauth2.0版本的标准是<a href="https://www.rfc-editor.org/rfc/rfc6749.html" target="_blank" rel="external">RFC6749</a>，Oauth1.0版本的标准是<a href="https://www.rfc-editor.org/rfc/rfc5849" target="_blank" rel="external">RFC5849</a>。Oauth2.0的具体介绍可以参考<a href="http://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html" target="_blank" rel="external">阮一峰|Oauth2.0</a></p>
+</blockquote>
+</li>
+<li><p>JWT认证方式</p>
+<blockquote>
+<p>JWT的标准是<a href="https://www.rfc-editor.org/rfc/rfc7519.html" target="_blank" rel="external">RFC7519</a>。大概原理是客户端经过服务器认证后服务器给客户端返回一个json对象（包含用户信息且加密处理的数据），之后客户端与服务器通信都会带上这个json对象，服务器只通过这个对象来认证用户，也就是说服务器端是无状态的不会保存状态数据了（比如session）。具体可参考<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">阮一峰|JSON Web Token 入门教程</a></p>
+</blockquote>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/25/关于Cookie和Session以及Token的说明/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1175,157 +1338,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/08/01/ES使用curator管理index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Arvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/uploads/suolong.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Arvon's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/01/ES使用curator管理index/" itemprop="url">Elasticsearch使用curator管理index</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T12:11:16+08:00">
-                2018-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/01/ES使用curator管理index/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://arvon.top/2018/08/01/ES使用curator管理index/" class="cy_cmt_count" data-xid="2018/08/01/ES使用curator管理index/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/08/01/ES使用curator管理index/" class="leancloud_visitors" data-flag-title="Elasticsearch使用curator管理index">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>有个管理ES index的需求，感觉使用curl调用HTTP接口很不方便也不是很科学。在Github上一查，果然有官方提供的工具<code>curator</code>，这个工具不仅仅满足了我简单管理的需要（索引的关闭、打开、段合并、删除等），也为以后的扩展提供了新的解决方案（支持磁盘占用触发）,非常不错。以下记录我的调研测试过程。另外补充一句<code>curator</code>的官方文档十分完备，如喜欢直接阅读官方文档可以直接跳到本文底部，那里有官方文档链接。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/01/ES使用curator管理index/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1375,7 +1392,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1388,7 +1405,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
