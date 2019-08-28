@@ -5,13 +5,15 @@
     
   <url>
     <loc>http://arvon.top/2019/08/25/%E5%85%B3%E4%BA%8ECookie%E5%92%8CSession%E4%BB%A5%E5%8F%8AToken%E7%9A%84%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2019-08-27T11:25:15.929Z</lastmod>
+    <lastmod>2019-08-28T01:37:26.211Z</lastmod>
     <data>
         <display>
         <title>关于Cookie和Session以及Token的说明</title>
         <pubTime>2019-08-25T04:00:00.000Z</pubTime>
         
-        <tag>安全认证</tag>
+        <tag>Flask</tag>
+         
+        <tag>Web</tag>
          
          
            
