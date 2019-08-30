@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Jinja2," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍大概介绍一下，主要介绍模板（模板仅仅是文本文件。它可以生成任何基于文本的格式（HTML、XML、CSV、LaTex 等等）。它并没有特定的扩展名，.html或.xml都是可以的。）模板包含变量或表达式 ，这两者在模板求值的时候会被替换为值。模板中 还有标签，控制模板的逻辑。模板语法的大量灵感来自于 Django和Python。  Jinja2是一个现代的，设计者友好的，仿照Django模板的P">
+<meta name="keywords" content="Jinja2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jinja2语法">
+<meta property="og:url" content="http://arvon.top/2019/08/28/Jinja2语法/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="介绍大概介绍一下，主要介绍模板（模板仅仅是文本文件。它可以生成任何基于文本的格式（HTML、XML、CSV、LaTex 等等）。它并没有特定的扩展名，.html或.xml都是可以的。）模板包含变量或表达式 ，这两者在模板求值的时候会被替换为值。模板中 还有标签，控制模板的逻辑。模板语法的大量灵感来自于 Django和Python。  Jinja2是一个现代的，设计者友好的，仿照Django模板的P">
+<meta property="og:updated_time" content="2019-08-30T13:01:46.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jinja2语法">
+<meta name="twitter:description" content="介绍大概介绍一下，主要介绍模板（模板仅仅是文本文件。它可以生成任何基于文本的格式（HTML、XML、CSV、LaTex 等等）。它并没有特定的扩展名，.html或.xml都是可以的。）模板包含变量或表达式 ，这两者在模板求值的时候会被替换为值。模板中 还有标签，控制模板的逻辑。模板语法的大量灵感来自于 Django和Python。  Jinja2是一个现代的，设计者友好的，仿照Django模板的P">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2019/08/28/Jinja2语法/"/>
+
+
+
+
+
+  <title>Jinja2语法 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/28/Jinja2语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Jinja2语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-28T21:00:00+08:00">
+                2019-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/28/Jinja2语法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/08/28/Jinja2语法/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2019/08/28/Jinja2语法/" class="leancloud_visitors" data-flag-title="Jinja2语法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>大概介绍一下，主要介绍模板（模板仅仅是文本文件。它可以生成任何基于文本的格式（HTML、XML、CSV、LaTex 等等）。它并没有特定的扩展名，<code>.html</code>或<code>.xml</code>都是可以的。）模板包含变量或表达式 ，这两者在模板求值的时候会被替换为值。模板中 还有标签，控制模板的逻辑。模板语法的大量灵感来自于 Django和Python。</p>
+<blockquote>
+<p>Jinja2是一个现代的，设计者友好的，仿照Django模板的Python模板语言。它速度快，被广泛使用，并且提供了可选的沙箱模板执行环境保证安全.特征如下：</p>
+<ul>
+<li>沙箱中执行</li>
+<li>强大的HTML自动转义系统保护系统免受XSS</li>
+<li>模板继承</li>
+<li>及时编译最优的python代码</li>
+<li>易于调试。异常的行数直接指向模板中的对应行</li>
+<li>可配置的语法</li>
+</ul>
+<p>—-选自 <a href="http://docs.jinkan.org/docs/jinja2/index.html" target="_blank" rel="external">http://docs.jinkan.org</a></p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>Jinja2需要至少Python2.4版本来运行</li>
+<li>使用的时候推荐<code># -*- coding: utf-8 -*-</code>。<br>Jinja2内部使用Unicode ，这意味着你需要向渲染函数传递 Unicode 对象或只包含 ASCII 字符的字符串。此外，换行符按照默认 UNIX 风格规定行序列结束（ \n ）</li>
+<li>从Jinja2 2.4版本开始支持自动转义(autoescape参数)。<a href="http://docs.jinkan.org/docs/jinja2/extensions.html#autoescape-extension" target="_blank" rel="external">自动转义</a>扩展允许你在模板内开关自动转义特性。如果环境的 autoescape 设定为 False ，它可以被激活。如果是 True 可以被关闭。这个设定的覆盖是有作用域的。</li>
+</ul>
+<p>—-选自 <a href="https://www.w3cschool.cn/yshfid/" target="_blank" rel="external">W3Cschool Jinja2文档</a></p>
+</blockquote>
+<h3 id="模板（变量-及-过滤器）"><a href="#模板（变量-及-过滤器）" class="headerlink" title="模板（变量 及 过滤器）"></a>模板（变量 及 过滤器）</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>变量可以有两种形式，但实际不太一样，另外注意<code>&amp;#123;&amp;#123; &amp;#125;&amp;#125;</code>不是变量的一部分，而是打印语句的一部分</p>
+<ul>
+<li><p><code>&amp;#123;&amp;#123; foo.bar &amp;#125;&amp;#125;</code></p>
+<blockquote>
+<p>使用foo.bar实际在python层面做了以下事情</p>
+<ul>
+<li>检查foo上是否有一个名为bar的属性</li>
+<li>若没有，检查foo中是否有一个bar的项</li>
+<li>若没有，返回一个未定义的对象</li>
+</ul>
+</blockquote>
+</li>
+<li><p><code>&amp;#123;&amp;#123; foo[&#39;bar&#39;] &amp;#125;&amp;#125;</code></p>
+<blockquote>
+<p>-使用foo[‘bar’]如下<br>-检查foo中是否有一个名为bar的项<br>-若没有，检查foo中是否有一个名为bar的属性<br>-若没有，返回一个未定义的对象</p>
+</blockquote>
+</li>
+</ul>
+<p>变量赋值<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% set navigation = [('index.html', 'Index'), ('about.html', 'About')] %&amp;#125;</div><div class="line">&amp;#123;% set key, value = call_something() %&amp;#125;</div></pre></td></tr></table></figure></p>
+<h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><p>变量可以通过过滤器修改。过滤器与变量用管道符<code>|</code>分割，并且也可以用圆括号传递可选参数。多个过滤器可以链式调用<br>常见的内置过滤器如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">abs(number)  <span class="comment">#取绝对值</span></div><div class="line">attr(obj, name) <span class="comment">#获得对象属性</span></div><div class="line">batch(value, linecount, fill_with=<span class="keyword">None</span>) <span class="comment">#批处理项目的过滤器，类似切片</span></div><div class="line">capitalize(s) <span class="comment">#将第一个字母大写其余小写</span></div><div class="line">center(value, width=<span class="number">80</span>) <span class="comment">#将值的宽度增加到指定值</span></div><div class="line">default(value, default_value=<span class="string">u''</span>, boolean=<span class="keyword">False</span>) <span class="comment">#如果值未定义就设置为默认值，如果要对布尔值使用boolean参数需要为True</span></div><div class="line">dictsort(value, case_sensitive=<span class="keyword">False</span>, by=<span class="string">'key'</span>) <span class="comment">#对字典进行排序</span></div><div class="line">escape(s) <span class="comment">#将字符串中的字符&amp;、'、和'转换为安全的序列。如果您需要在HTML中显示可能包含此类字符的文本，请使用此选项。将返回值标记为标记字符串。</span></div><div class="line">filesizeformat(value, binary=<span class="keyword">False</span>) <span class="comment">#将文件大小格式转化为便于阅读的格式,如MB，G</span></div><div class="line">first(seq) <span class="comment">#返回序列中的第一个，字符串列表都可以，字符串如果包括,会以,分割，列表直接拿第一项</span></div><div class="line">float(value, default=<span class="number">0.0</span>) <span class="comment">#将输入转换成浮点数，转换失败就返回默认值</span></div><div class="line">forceescape(value) <span class="comment">#强制HTML转义。这可能会使转义变量翻倍</span></div><div class="line">format(value, args, kwargs*) <span class="comment">#给对象应用python字符串格式，如value="%s - %s"</span></div><div class="line">groupby(value, attribute) <span class="comment">#使用公共属性将对象序列分组</span></div><div class="line">indent(s, width=<span class="number">4</span>, indentfirst=<span class="keyword">False</span>) <span class="comment">#返回传递字符串的副本，每行缩进4个空格。第一行没有缩进。如果您想更改空格数或缩进第一行，可以向筛选器传递其他参数</span></div><div class="line">int(value, default=<span class="number">0</span>) <span class="comment">#将输入转换成整数，转换失败就返回默认值</span></div><div class="line">join(value, d=<span class="string">u''</span>, attribute=<span class="keyword">None</span>) <span class="comment">#将列表拼接，也可以连接对象的某些属性</span></div><div class="line">last(seq) <span class="comment">#返回序列中的最后一个</span></div><div class="line">length(object) <span class="comment">#返回序列或映射的项数，最简单可以看str的长度，已经列表的元素数</span></div><div class="line">list(value) <span class="comment">#将值转化为列表</span></div><div class="line">lower(s) <span class="comment">#将值转化为小写</span></div><div class="line">map() <span class="comment">#映射属性，对对象序列应用过滤器或查找属性，如&amp;#123;&amp;#123; titles|map('lower')|join(', ') &amp;#125;&amp;#125;</span></div><div class="line">pprint(value, verbose=<span class="keyword">False</span>) <span class="comment">#方便调试，美观的打印</span></div><div class="line">random(seq) <span class="comment">#从序列中返回随机项目</span></div><div class="line">reject() <span class="comment">#通过将测试应用于对象或属性，并在测试成功后拒绝这些对象来过滤对象序列。</span></div><div class="line">rejectattr() <span class="comment">#通过将测试应用于对象或属性，并在测试成功后拒绝这些对象来过滤对象序列。</span></div><div class="line">replace(s, old, new, count=<span class="keyword">None</span>) <span class="comment">#查找替换</span></div><div class="line">reverse(value) <span class="comment">#反转对象</span></div><div class="line">round(value, precision=<span class="number">0</span>, method=<span class="string">'common'</span>) <span class="comment">#将数字舍入到给定的精度。第一个参数指定精度(默认值为0)，第二个参数指定舍入方法</span></div><div class="line">safe(value) <span class="comment">#将该值标记为安全，这意味着在启用自动转义的环境中，该变量不会被转义。</span></div><div class="line">select() <span class="comment">#通过将测试应用于对象或属性，并仅选择测试成功的对象，过滤对象序列。</span></div><div class="line">selectattr() <span class="comment">#通过将测试应用于对象或属性，并仅选择测试成功的对象，过滤对象序列。</span></div><div class="line">slice(value, slices, fill_with=<span class="keyword">None</span>) <span class="comment">#分割迭代器并返回包含这些项目的列表。当创建包含三个表示列的ul标记的div时很有用</span></div><div class="line">sort(value, reverse=<span class="keyword">False</span>, case_sensitive=<span class="keyword">False</span>, attribute=<span class="keyword">None</span>) <span class="comment">#排序</span></div><div class="line">string(object) <span class="comment">#创建字符串unicode</span></div><div class="line">striptags(value) <span class="comment">#去掉SGML/XML标签，用一个空格替换相邻的空格。</span></div><div class="line">sum(iterable, attribute=<span class="keyword">None</span>, start=<span class="number">0</span>) <span class="comment">#返回数字的和，如&amp;#123;&amp;#123; items|sum(attribute='price') &amp;#125;&amp;#125;</span></div><div class="line">title(s) <span class="comment">#返回该值的标题大小写版本。即单词将以大写字母开头，所有剩余字符都是小写的</span></div><div class="line">trim(value) <span class="comment">#去掉开头和结尾的空格</span></div><div class="line">truncate(s, length=<span class="number">255</span>, killwords=<span class="keyword">False</span>, end=<span class="string">'...'</span>) <span class="comment">#截断字符串指定长度</span></div><div class="line">upper(s) <span class="comment">#将值转为大写</span></div><div class="line">urlencode(value) <span class="comment">#用于网址的转义字符串(使用UTF-8编码)。既接受字典和常规字符串也接受成对的iterables。</span></div><div class="line">urlize(value, trim_url_limit=<span class="keyword">None</span>, nofollow=<span class="keyword">False</span>) <span class="comment">#将纯文本网址转换为可点击</span></div><div class="line">wordcount(s) <span class="comment">#返回字符串中的单词数</span></div><div class="line">wordwrap(s, width=<span class="number">79</span>, break_long_words=<span class="keyword">True</span>, wrapstring=<span class="keyword">None</span>) <span class="comment">#返回传递给筛选器的字符串的副本，该字符串在指定个字符后换行</span></div><div class="line">xmlattr(d, autospace=<span class="keyword">True</span>) <span class="comment">#基于字典中的项目创建一个SGML/XML属性字符串。所有既不是无也不是未定义的值都会自动转义</span></div></pre></td></tr></table></figure></p>
+<p>过滤器小栗子<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% filter upper %&amp;#125;</div><div class="line">    This text becomes uppercase</div><div class="line">&amp;#123;% endfilter %&amp;#125;</div></pre></td></tr></table></figure></p>
+<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>测试可以对普通表达式进行测试变量,测试也可以接受参数。如果测试只接受一个参数，你可以省去括号来分组它们<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;<span class="comment">#123;% if loop.index is divisibleby(3) %&amp;#125;</span></div></pre></td></tr></table></figure></p>
+<p>内置测试清单<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">callable(object) <span class="comment">#对象是否可调用</span></div><div class="line">defined(value) <span class="comment">#是否定义</span></div><div class="line">divisibleby(value, num) <span class="comment">#能否被整除</span></div><div class="line">escaped(value) <span class="comment">#是否转义</span></div><div class="line">even(value) <span class="comment">#如果是偶数为true</span></div><div class="line">iterable(value) <span class="comment">#是否有可迭代对象</span></div><div class="line">lower(value) <span class="comment">#小写返回true</span></div><div class="line">mapping(value) <span class="comment">#字典返回true</span></div><div class="line">none(value) <span class="comment">#空返回true</span></div><div class="line">number(value) <span class="comment">#数字返回true</span></div><div class="line">odd(value) <span class="comment">#变量为奇数返回true</span></div><div class="line">sameas(value, other) <span class="comment">#是否指向相同的内存地址</span></div><div class="line">sequence(value) <span class="comment">#列表返回true</span></div><div class="line">string(value) <span class="comment">#字符串返回true</span></div><div class="line">undefined(value) <span class="comment">#是否未定义</span></div><div class="line">upper(value) <span class="comment">#大写返回true</span></div></pre></td></tr></table></figure></p>
+<h4 id="注释-amp-空白控制-amp-转义"><a href="#注释-amp-空白控制-amp-转义" class="headerlink" title="注释&amp;空白控制&amp;转义"></a>注释&amp;空白控制&amp;转义</h4><p><strong>注释：</strong> 在模板内进行注释使用<code>&amp;#123;# 要注释的内容 #&amp;#125;</code>,如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&amp;<span class="comment">#123;# note: disabled template example</span></div><div class="line">    &amp;<span class="comment">#123;% for user in users %&amp;#125;</span></div><div class="line">        ...</div><div class="line">    &amp;<span class="comment">#123;% endfor %&amp;#125;</span></div><div class="line"><span class="comment">#&amp;#125;</span></div></pre></td></tr></table></figure>
+<p><strong>空白控制</strong> :默认情况下，模板引擎不会对空白进行修改，如果配置了Jinja的<code>trim_blocks</code>则模板标签后的第一个换行符会被移除，另外，可以通过在块的开始或结束放置一个减号<code>-</code><br><strong>注意</strong>:标签和减号之间不能有空格,可以移除块前或块后的空白.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#demo1: 生成不换行的所有元素</span></div><div class="line">&amp;<span class="comment">#123;% for item in seq -%&amp;#125;</span></div><div class="line">    &amp;<span class="comment">#123;&amp;#123; item &amp;#125;&amp;#125;</span></div><div class="line">&amp;<span class="comment">#123;%- endfor %&amp;#125;</span></div><div class="line"><span class="comment">#demo2</span></div><div class="line">&amp;<span class="comment">#123;%- if foo -%&amp;#125;...&amp;#123;% endif %&amp;#125;</span></div></pre></td></tr></table></figure>
+<p><strong>转义：</strong>较短的转义可以使用变量表达式，较长的内容或段落可以通过<code>raw</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#demo1</span></div><div class="line">&amp;<span class="comment">#123;&amp;#123; '&amp;#123;' &amp;#125;&amp;#125;</span></div><div class="line"><span class="comment">#demo2</span></div><div class="line">&amp;<span class="comment">#123;% raw %&amp;#125;</span></div><div class="line">  &amp;<span class="comment">#123;% for i in [1,2,3] %&amp;#125;</span></div><div class="line">    &lt;li&gt;&amp;<span class="comment">#123;&amp;#123; i &amp;#125;&amp;#125;&lt;/li&gt;</span></div><div class="line">  &amp;<span class="comment">#123;% endfor %&amp;#125;</span></div><div class="line">&amp;<span class="comment">#123;% endraw %&amp;#125;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>扩展：<br>当从模板生成 HTML 时，始终有这样的风险:变量包含影响已生成 HTML 的字符。有两种 解决方法:手动转义每个字符或默认自动转义所有的东西。</p>
+<ul>
+<li>使用手动转义: 转义通过用管道传递到过滤器 |e 来实现: &#123;&#123; user.username|e &#125;&#125; 。</li>
+<li>使用自动转义: 当启用了自动转移，默认会转移一切，除非值被显式地标记为安全的</li>
+</ul>
+</blockquote>
+<h4 id="行语句"><a href="#行语句" class="headerlink" title="行语句"></a>行语句</h4><p>如果配置启用行语句，就可以把一个行标记为一个句子。例如如果行语句前缀配置为’#’，那么<code>#for item in [1,2,3]</code>和<code>&amp;#123;% for item in [1,2,3] %&amp;#125;</code>就是等效的。</p>
+<ul>
+<li>行语句可以出现在一行的任意位置，只要它的前面没有文本，提升可读性</li>
+<li>如果有未闭合的圆括号、花括号或方括号，那么行语句可以跨越多行</li>
+<li>从Jinja2.2版本开始，行注释可以使用了，例如如果配置<code>##</code>为行注释前缀，行中所有<code>##</code>后面的内容都会被忽略（不包括换行符）</li>
+</ul>
+<h3 id="模板继承-amp-包含"><a href="#模板继承-amp-包含" class="headerlink" title="模板继承&amp;包含"></a>模板继承&amp;包含</h3><p>模板继承可以说是Jinja最强大的部分了，模板继承允许定义一个基础模板，然后定义子模板可以覆盖的块。如下例子</p>
+<p><strong>基础模板</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    &amp;#123;% block head %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>&amp;#123;% block title %&amp;#125;&amp;#123;% endblock %&amp;#125; - My Webpage<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    &amp;#123;% endblock %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span>&amp;#123;% block content %&amp;#125;&amp;#123;% endblock %&amp;#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"footer"</span>&gt;</span></div><div class="line">        &amp;#123;% block footer %&amp;#125;</div><div class="line">        &amp;copy; Copyright 2008 by <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://gourds.site/"</span>&gt;</span>Gourds<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.</div><div class="line">        &amp;#123;% endblock %&amp;#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong>子模板s1</strong><br><code>&amp;#123;% extends%&amp;#125;</code>标签确定继承的模板，也可以访问多级目录下的模板<code>&amp;#123;% extends &quot;path_to/my_template.html&quot; %&amp;#125;</code>。使用<code>super()</code>可以调用super来渲染父级块的内容，会返回父级块的结果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% extends "base.html" %&amp;#125;</div><div class="line">&amp;#123;% block title %&amp;#125;Index&amp;#123;% endblock %&amp;#125;</div><div class="line">&amp;#123;% block head %&amp;#125;</div><div class="line">    &amp;#123;&amp;#123; super() &amp;#125;&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        .important &amp;#123; color: #336699; &amp;#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">&amp;#123;% endblock %&amp;#125;</div><div class="line">&amp;#123;% block content %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Index Test <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"important"</span>&gt;</span></div><div class="line">      Gourds test page s1.</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">&amp;#123;% endblock %&amp;#125;</div></pre></td></tr></table></figure>
+<p>推荐使用命名块结束标签提升可读性(<code>endblock</code>后面写的要与<code>block</code>后面的对应),如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% block my_data %&amp;#125;</div><div class="line">  &amp;#123;% block you_data %&amp;#125;</div><div class="line">    ...</div><div class="line">  &amp;#123;% endblock you_data %&amp;#125;</div><div class="line">&amp;#123;% endblock my_data%&amp;#125;</div></pre></td></tr></table></figure></p>
+<p><strong>嵌套块和作用域</strong><br>默认的块不允许访问块外作用域中的变量，嵌套块可以.从Jinja2.2开始，只需在块声明中添加<code>scoped</code>装饰，就可以显示的指定在块中可用的变量，当覆盖一个块时不需要<code>scoped</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% for item in seq %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&amp;#123;% block loop_item scoped %&amp;#125;&amp;#123;&amp;#123; item &amp;#125;&amp;#125;&amp;#123;% endblock %&amp;#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&amp;#123;% endfor %&amp;#125;</div></pre></td></tr></table></figure>
+<p><strong>包含</strong><br>Include语句用于包含一个模板，并在当前命名空间返回文件的渲染结果，包含的模板默认可以访问活动的上下文中的变量</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% include 'header.html' %&amp;#125;</div><div class="line">    Body</div><div class="line">&amp;#123;% include 'footer.html' %&amp;#125;</div></pre></td></tr></table></figure>
+<h3 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h3><h4 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h4><p>遍历列表中的每一元素，支持大部分python语法。注意不能在循环中使用<code>break</code>或<code>continue</code>.但可以通过过滤来跳过项目，如<code>&amp;#123;% for user in users if not user.hidden %&amp;#125;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% for k,v in local_data.items() %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&amp;#123;&amp;#123; v['Name'] &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&amp;#123;&amp;#123; v.Age &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&amp;#123;&amp;#123; v.Site &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">&amp;#123;% endfor %&amp;#125;</div></pre></td></tr></table></figure>
+<p>如果因序列是空或者过滤移除了序列中的所有项目而没有执行循环，你可以使用 else 渲染一个用于替换的块</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">&amp;#123;% for user in users %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&amp;#123;&amp;#123; user.username|e &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&amp;#123;% else %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">em</span>&gt;</span>no users found<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&amp;#123;% endfor %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>递归的使用循环</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"sitemap"</span>&gt;</span></div><div class="line">&amp;#123;%- for item in sitemap recursive %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&amp;#123;&amp;#123; item.href|e &amp;#125;&amp;#125;"</span>&gt;</span>&amp;#123;&amp;#123; item.title &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    &amp;#123;%- if item.children -%&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"submenu"</span>&gt;</span>&amp;#123;&amp;#123; loop(item.children) &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    &amp;#123;%- endif %&amp;#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&amp;#123;%- endfor %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在for循环中可用的特殊变量</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>loop.index</td>
+<td>当前迭代次数从1开始</td>
+</tr>
+<tr>
+<td>loop.index0</td>
+<td>当前迭代次数从0开始</td>
+</tr>
+<tr>
+<td>loop.revindex</td>
+<td>到循环结束需要迭代的次数从1开始</td>
+</tr>
+<tr>
+<td>loop.revindex0</td>
+<td>到循环结束需要迭代的次数从0开始</td>
+</tr>
+<tr>
+<td>loop.first</td>
+<td>如果是第一次迭代为True</td>
+</tr>
+<tr>
+<td>loop.last</td>
+<td>如果是最后一次迭代为True</td>
+</tr>
+<tr>
+<td>loop.length</td>
+<td>列表中的项目数</td>
+</tr>
+<tr>
+<td>loop.cycle</td>
+<td>在表表间期取值的辅助函数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h4><p>跟python中的if差不多，可以使用<code>if、elif、else</code>，可以测试变量或其他表达式，在jinja中也可以叫做内联表达式或者循环过滤</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% if users %&amp;#125;</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">&amp;#123;% for user in users %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&amp;#123;&amp;#123; user.username|e &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&amp;#123;% endfor %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">&amp;#123;% endif %&amp;#125;</div><div class="line"></div><div class="line">&amp;#123;% if kenny.sick %&amp;#125;</div><div class="line">    Kenny is sick.</div><div class="line">&amp;#123;% elif kenny.dead %&amp;#125;</div><div class="line">    You killed Kenny!  You bastard!!!</div><div class="line">&amp;#123;% else %&amp;#125;</div><div class="line">    Kenny looks okay --- so far</div><div class="line">&amp;#123;% endif %&amp;#125;</div></pre></td></tr></table></figure>
+<h4 id="关于宏"><a href="#关于宏" class="headerlink" title="关于宏"></a>关于宏</h4><p>类似其他语言，宏用来将重复行为分装成可重用的函数.如果宏在不同模板定义需要先<code>import</code>，如果一个宏的名称以下划线开始，则它不能导出且不能被导入<br>宏内部，可以访问的特殊的变量</p>
+<ul>
+<li><code>varargs</code>：多于宏接受的参数个数的位置参数被传入，它们会作为列表的值保存在 varargs变量上</li>
+<li><code>kwargs</code>：同varargs，但只针对关键字参数。所有未使用的关键字参数会存储在这个特殊变量中</li>
+<li><code>caller</code>：如果宏通过call标签调用，调用者会作为可调用的宏被存储在这个变量中</li>
+<li><code>name</code>：宏的名称</li>
+<li><code>arguments</code>：一个宏接受的参数名的元组</li>
+<li><code>defaults</code>：默认值的元组</li>
+<li><code>catch_kwargs</code>：如果宏接受额外的关键字参数，为true</li>
+<li><code>catch_varargs</code>：如果宏接受额外的位置参数，为true</li>
+<li><code>caller</code>：如果宏访问特殊的caller变量且由call标签调用，为true</li>
+</ul>
+<p>如下例子，定义宏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% macro input(name, value='', type='text', size=20) -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"&amp;#123;&amp;#123; type &amp;#125;&amp;#125;"</span> <span class="attr">name</span>=<span class="string">"&amp;#123;&amp;#123; name &amp;#125;&amp;#125;"</span> <span class="attr">value</span>=<span class="string">"&amp;#123;&amp;#123;</span></span></div><div class="line">        value|e &amp;#125;&amp;#125;" <span class="attr">size</span>=<span class="string">"&amp;#123;&amp;#123; size &amp;#125;&amp;#125;"</span>&gt;</div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div></pre></td></tr></table></figure>
+<p>使用宏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>带参数调用块的例子<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% macro dump_users(users) -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    &amp;#123;%- for user in users %&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; user.username|e &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; caller(user) &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    &amp;#123;%- endfor %&amp;#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div><div class="line"></div><div class="line">&amp;#123;% call(user) dump_users(list_of_user) %&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dl</span>&gt;</span>Realname<span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; user.realname|e &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dl</span>&gt;</span>Description<span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; user.description &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line">&amp;#123;% endcall %&amp;#125;</div></pre></td></tr></table></figure></p>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><p><strong>比较</strong>：</p>
+<ul>
+<li><code>==</code>/<code>!=</code></li>
+<li>and/or/not</li>
+<li><code>is</code>/<code>in</code>/<code>|</code>(应用过滤器)/<code>()</code>调用一个可调用对象/<br><strong>算数运算</strong>：</li>
+</ul>
+<h3 id="典型示例"><a href="#典型示例" class="headerlink" title="典型示例"></a>典型示例</h3><p>导入模板并使用模板中的宏，如下是被导入的forms.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% macro input(name, value='', type='text') -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"&amp;#123;&amp;#123; type &amp;#125;&amp;#125;"</span> <span class="attr">value</span>=<span class="string">"&amp;#123;&amp;#123; value|e &amp;#125;&amp;#125;"</span> <span class="attr">name</span>=<span class="string">"&amp;#123;&amp;#123; name &amp;#125;&amp;#125;"</span>&gt;</span></div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div><div class="line"></div><div class="line">&amp;#123;%- macro textarea(name, value='', rows=10, cols=40) -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"&amp;#123;&amp;#123; name &amp;#125;&amp;#125;"</span> <span class="attr">rows</span>=<span class="string">"&amp;#123;&amp;#123; rows &amp;#125;&amp;#125;"</span> <span class="attr">cols</span>=<span class="string">"&amp;#123;&amp;#123; cols</span></span></div><div class="line">        &amp;#125;&amp;#125;"&gt;&amp;#123;&amp;#123; value|e &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div></pre></td></tr></table></figure></p>
+<p>可以这样使用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% import 'forms.html' as forms %&amp;#125;</div><div class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; forms.input('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; forms.input('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; forms.textarea('comment') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>还可以导入到命名空间中<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% from 'forms.html' import input as input_field, textarea %&amp;#125;</div><div class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; input_field('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; input_field('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; textarea('comment') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<p>基本是<code>W3Cschool</code>的学习笔记，大部分是复制粘贴的，相当于读写一遍，侵删，以上</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jinja2/" rel="tag"># Jinja2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/28/Flask中Jinja2模板使用总结/" rel="next" title="Flask中Jinja2模板使用总结">
+                <i class="fa fa-chevron-left"></i> Flask中Jinja2模板使用总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/30/Jenkins的ActiveChoices插件使用/" rel="prev" title="Jenkins使用GitSubmodule实现代码库调用">
+                Jenkins使用GitSubmodule实现代码库调用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Gourds" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板（变量-及-过滤器）"><span class="nav-number"></span> <span class="nav-text">模板（变量 及 过滤器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤器"><span class="nav-number">2.</span> <span class="nav-text">过滤器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础语法"><span class="nav-number"></span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释-amp-空白控制-amp-转义"><span class="nav-number">2.</span> <span class="nav-text">注释&空白控制&转义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行语句"><span class="nav-number">3.</span> <span class="nav-text">行语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板继承-amp-包含"><span class="nav-number"></span> <span class="nav-text">模板继承&包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制结构"><span class="nav-number"></span> <span class="nav-text">控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#for语句"><span class="nav-number">1.</span> <span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句"><span class="nav-number">2.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于宏"><span class="nav-number">3.</span> <span class="nav-text">关于宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式"><span class="nav-number">4.</span> <span class="nav-text">表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型示例"><span class="nav-number"></span> <span class="nav-text">典型示例</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytVqphGW';
+      var conf = '4962de519a26e5ebd7edae10d9cc340d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("IJfruTXafB06hcxVwGxHLVnv-gzGzoHsz", "DENy7NKv9HNWYsFFfeMtKjeu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

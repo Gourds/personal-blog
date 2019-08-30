@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
+<meta name="description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。—&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
 <meta name="keywords" content="Date">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS搭建NTP服务器">
 <meta property="og:url" content="http://arvon.top/2016/01/20/centos搭建NTP服务器/index.html">
 <meta property="og:site_name" content="Arvon&#39;s Blog">
-<meta property="og:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
+<meta property="og:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。—&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
 <meta property="og:updated_time" content="2019-08-21T08:06:13.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建NTP服务器">
-<meta name="twitter:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。–&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
+<meta name="twitter:description" content="简介：NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。—&amp;gt;另一篇关于时间的 NTP基于UDP报文进行传输，使用的UDP端口号为123。使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以">
 
 
 
@@ -395,7 +395,7 @@
       
 
       
-        <p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">–&gt;另一篇关于时间的</a></p>
+        <p><strong>简介：</strong><br>NTP（NetworkTime Protocol，网络时间协议）是用来在分布式时间服务器和客户端之间进行时间同步。<a href="http://blog.arvon.top/2015/12/13/Linux%E4%B8%BB%E6%9C%BA%E6%97%B6%E9%97%B4%E4%B8%8D%E5%87%86%E9%97%AE%E9%A2%98/" target="_blank" rel="external">—&gt;另一篇关于时间的</a></p>
 <p>NTP基于UDP报文进行传输，使用的UDP端口号为123。<br>使用NTP的目的是对网络内所有具有时钟的设备进行时钟同步，使网络内所有设备的时钟保持一致，从而使设备能够提供基于统一时间的多种应用。<br>对于时间错误会导致服务器宕机，所以运行NTP的本地系统，既可以接受来自其他时钟源的同步，又可以作为时钟源同步其他的时钟，并且可以和其他设备互相同步。</p>
 <a id="more"></a>
 <h3 id="NTP服务器搭建"><a href="#NTP服务器搭建" class="headerlink" title="NTP服务器搭建"></a>NTP服务器搭建</h3><p><code>Tips: hadoop对局域网时间同步要求非常高，所以适合搭建使用ntp服务器</code></p>
@@ -602,7 +602,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -615,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -396,10 +396,10 @@
 
       
         <p><strong>摘要：</strong>早该记录了，最开始我的blog是使用hexo+github搭建的使用jacman主题，也是因为对git不够了解，当时绑定域名是使用直接在github上写CNAME文件。感觉太麻烦了，就买了空间换了WordPress，wp也是用了要有快一年，然后感觉markdown支持的真是不好，而且迁移很不爽，然后就换了现在的。关于现在这套blog架构，依然使用hexo作为blog框架，我自己的电脑用作服务器，然后VPS作为web服务器提供发布，使用git hook进行更新blog。</p>
-<h3 id="git钩子简介-–摘自git-scm"><a href="#git钩子简介-–摘自git-scm" class="headerlink" title="git钩子简介 –摘自git-scm"></a>git钩子简介 –摘自<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">git-scm</a></h3><p>Git 能在特定的重要动作发生时触发自定义脚本。 有两组这样的钩子：客户端的和服务器端的。 客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 你可以随心所欲地运用这些钩子。</p>
+<h3 id="git钩子简介-—摘自git-scm"><a href="#git钩子简介-—摘自git-scm" class="headerlink" title="git钩子简介 —摘自git-scm"></a>git钩子简介 —摘自<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">git-scm</a></h3><p>Git 能在特定的重要动作发生时触发自定义脚本。 有两组这样的钩子：客户端的和服务器端的。 客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 你可以随心所欲地运用这些钩子。</p>
 <a id="more"></a>
 <h4 id="git-hook概述"><a href="#git-hook概述" class="headerlink" title="git hook概述"></a>git hook概述</h4><p>钩子都被存储在 Git 目录下的 hooks 子目录中。 也即绝大部分项目中的 .git/hooks 。 当你用 git init 初始化一个新版本库时，Git 默认会在这个目录中放置一些示例脚本。这些脚本除了本身可以被调用外，它们还透露了被触发时所传入的参数。 所有的示例都是 shell 脚本，其中一些还混杂了 Perl 代码，不过，任何正确命名的可执行脚本都可以正常使用 —— 你可以用 Ruby 或 Python，或其它语言编写它们。 这些示例的名字都是以 .sample 结尾，如果你想启用它们，得先移除这个后缀。把一个正确命名且可执行的文件放入 Git 目录下的 hooks 子目录中，即可激活该钩子脚本。 这样一来，它就能被 Git 调用。Git Hooks 就是一些触发特定事件的脚本。比如 commit、push、merge 等等，也区分本地 Hooks 和服务端 Hooks。</p>
-<h4 id="使用post-reveive"><a href="#使用post-reveive" class="headerlink" title="使用post-reveive"></a>使用post-reveive</h4><p>当用户在本地仓库执行git-push命令时，服务器上远程仓库就会对应执行git-receive-pack命令，而git-receive-pack命令会调用pre-receive钩子。使用git部署时的流程：本地git-push –&gt; VPS上Git服务器更新并Hook –&gt;VPS上执行pre-receive脚本，同步到服务器本地仓库目录</p>
+<h4 id="使用post-reveive"><a href="#使用post-reveive" class="headerlink" title="使用post-reveive"></a>使用post-reveive</h4><p>当用户在本地仓库执行git-push命令时，服务器上远程仓库就会对应执行git-receive-pack命令，而git-receive-pack命令会调用pre-receive钩子。使用git部署时的流程：本地git-push —&gt; VPS上Git服务器更新并Hook —&gt;VPS上执行pre-receive脚本，同步到服务器本地仓库目录</p>
 <h3 id="git部署blog过程记录"><a href="#git部署blog过程记录" class="headerlink" title="git部署blog过程记录"></a>git部署blog过程记录</h3><h4 id="VPS安装git"><a href="#VPS安装git" class="headerlink" title="VPS安装git"></a>VPS安装git</h4><ul>
 <li>安装初始化<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum install git-core -y</div><div class="line">adduser git-blog</div><div class="line"><span class="built_in">cd</span> /home/git-blog</div><div class="line">git init --bare blog.git</div><div class="line"><span class="comment">#使用--bare参数是创建一个裸仓库，没有工作区，这里不再裸仓库进行操作，只为共享而存在</span></div></pre></td></tr></table></figure>
 </li>
@@ -584,7 +584,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +597,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -676,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git钩子简介-–摘自git-scm"><span class="nav-number">1.</span> <span class="nav-text">git钩子简介 –摘自git-scm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-hook概述"><span class="nav-number">1.1.</span> <span class="nav-text">git hook概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用post-reveive"><span class="nav-number">1.2.</span> <span class="nav-text">使用post-reveive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git部署blog过程记录"><span class="nav-number">2.</span> <span class="nav-text">git部署blog过程记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VPS安装git"><span class="nav-number">2.1.</span> <span class="nav-text">VPS安装git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建信任"><span class="nav-number">2.2.</span> <span class="nav-text">创建信任</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地配置git发布"><span class="nav-number">2.3.</span> <span class="nav-text">本地配置git发布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器配置git-hook"><span class="nav-number">2.4.</span> <span class="nav-text">服务器配置git hook</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布"><span class="nav-number">2.5.</span> <span class="nav-text">发布</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git钩子简介-—摘自git-scm"><span class="nav-number">1.</span> <span class="nav-text">git钩子简介 —摘自git-scm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-hook概述"><span class="nav-number">1.1.</span> <span class="nav-text">git hook概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用post-reveive"><span class="nav-number">1.2.</span> <span class="nav-text">使用post-reveive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git部署blog过程记录"><span class="nav-number">2.</span> <span class="nav-text">git部署blog过程记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VPS安装git"><span class="nav-number">2.1.</span> <span class="nav-text">VPS安装git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建信任"><span class="nav-number">2.2.</span> <span class="nav-text">创建信任</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地配置git发布"><span class="nav-number">2.3.</span> <span class="nav-text">本地配置git发布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器配置git-hook"><span class="nav-number">2.4.</span> <span class="nav-text">服务器配置git hook</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布"><span class="nav-number">2.5.</span> <span class="nav-text">发布</span></a></li></ol></li></ol></div>
             
 
           </div>

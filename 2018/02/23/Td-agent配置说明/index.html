@@ -406,7 +406,8 @@
 <li>版本<br>2017 年 12 月的时候，fluentd 发布了 v1.0 版本，也就是 td-agent v3 版。</li>
 <li>性能<br><code>“a regular PC box can handle 18,000 messages/second with a single process.”</code>即一般来说，fluentd 单节点的吞吐量大概是 18w/sec 左右。<br>要想提高性能的话，可以在输出端（match）指定 num_threads 来提高并发，在输入端安装 fluent-plugin-multiprocess 插件来提高 CPU 的利用率（Ruby 也有 GIL 问题）。</li>
 </ul>
-<h3 id="指令说明"><a href="#指令说明" class="headerlink" title="指令说明"></a>指令说明</h3><table>
+<h3 id="指令说明"><a href="#指令说明" class="headerlink" title="指令说明"></a>指令说明</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>指令</th>
@@ -440,6 +441,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="source指令"><a href="#source指令" class="headerlink" title="source指令"></a>source指令</h4><ul>
 <li><p>source<br><strong>Tips:</strong>每个 source 指令必须包括 “type” 参数，指定使用那种插件</p>
 <blockquote>
@@ -658,7 +660,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +673,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

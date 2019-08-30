@@ -397,9 +397,7 @@
       
         <p><strong>更新记录</strong><br>2015/08/17    拆开来记，start with foreach<br>2015/09/01 更新到子程序，最近有点懒惰了</p>
 <a id="more"></a>
-<p>##结构</p>
-<p>###foreach控制结构</p>
-<ul>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><h3 id="foreach控制结构"><a href="#foreach控制结构" class="headerlink" title="foreach控制结构"></a>foreach控制结构</h3><ul>
 <li>Example one<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">foreach</span> $rock (<span class="keyword">qw</span>/ <span class="keyword">my</span> girlfriend is Mo /)&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"One word is named $rock\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -413,38 +411,34 @@
 <blockquote>
 <p>arvon@Mo:~/arvon_perl&gt; perl foreach_two.pl<br>$rock now is     hello<br>$rock now is     world<br>$rock now is     Mo</p>
 </blockquote>
-<p>###Perl的默认变量$</p>
-<ul>
+<h3 id="Perl的默认变量"><a href="#Perl的默认变量" class="headerlink" title="Perl的默认变量$"></a>Perl的默认变量$</h3><ul>
 <li>Example one<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line"><span class="keyword">foreach</span> (<span class="number">1</span>..<span class="number">10</span>)&#123;    <span class="comment">#使用了默认变量$_</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"I can count to $_!\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>arvon@Mo:~/arvon_perl&gt; perl variable_one.pl<br>I can count to 1!<br>I can count to 2!<br>I can count to 3!<br>I can count to 4!<br>I can count to 5!<br>I can count to 6!<br>I can count to 7!<br>I can count to 8!<br>I can count to 9!<br>I can count to 10!</p>
 </blockquote>
-<p>###reverse操作符</p>
-<ul>
+<h3 id="reverse操作符"><a href="#reverse操作符" class="headerlink" title="reverse操作符"></a>reverse操作符</h3><ul>
 <li>reverse操作符会读取列表的值，并按相反的次序返回该列表。<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@fred = <span class="number">6</span>..<span class="number">10</span>;</div><div class="line">@barney = <span class="keyword">reverse</span>(@fred);</div><div class="line">@wilma = <span class="keyword">reverse</span> <span class="number">6</span>..<span class="number">10</span>;</div><div class="line">@fred = <span class="keyword">reverse</span> @fred;</div><div class="line"><span class="keyword">print</span> <span class="string">"@fred, @barney, @wilma, \n"</span>;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>arvon@Mo:~/arvon_perl&gt; perl reverse_array.pl<br>10 9 8 7 6, 10 9 8 7 6, 10 9 8 7 6,</p>
 </blockquote>
-<p>###sort操作符</p>
-<ul>
+<h3 id="sort操作符"><a href="#sort操作符" class="headerlink" title="sort操作符"></a>sort操作符</h3><ul>
 <li>其实啊，就是排序<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">@rocks = <span class="keyword">qw</span>/ happy birthday to Mo /;</div><div class="line">@sorted = <span class="keyword">sort</span>(@rocks);</div><div class="line">@back = <span class="keyword">reverse</span> <span class="keyword">sort</span> @rocks;</div><div class="line">@rocks = <span class="keyword">sort</span> @rocks;</div><div class="line">@numbers = <span class="keyword">sort</span> <span class="number">97</span>..<span class="number">102</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"</span></div><div class="line">       @rocks \</div><div class="line">       @sorted\</div><div class="line">       @back\</div><div class="line">       @rocks\</div><div class="line">       @numbers";</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>arvon@Mo:~/arvon_perl&gt; perl sort_string.pl</p>
 </blockquote>
-<pre><code>Mo birthday happy to
-Mo birthday happy to
-to happy birthday Mo
-Mo birthday happy to
-100 101 102 97 98 99
-</code></pre><p>###each操作符</p>
-<ul>
-<li>每次对数组调用each，会返回数组中下一个元素所对应的两个值–该元素的索引以及该元素的值<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.012</span>;</div><div class="line"><span class="keyword">my</span> @rocks = <span class="keyword">qw</span>/ bedrock slate rubble granite /;</div><div class="line"><span class="keyword">while</span>( <span class="keyword">my</span>( $index, $value ) = <span class="keyword">each</span> @rocks)&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$index: $value"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> $index(<span class="number">0</span> .. $#rocks )&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$index: $rocks[$index]\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>   Mo birthday happy to
+   Mo birthday happy to
+   to happy birthday Mo
+   Mo birthday happy to
+   100 101 102 97 98 99
+</code></pre><h3 id="each操作符"><a href="#each操作符" class="headerlink" title="each操作符"></a>each操作符</h3><ul>
+<li>每次对数组调用each，会返回数组中下一个元素所对应的两个值—该元素的索引以及该元素的值<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.012</span>;</div><div class="line"><span class="keyword">my</span> @rocks = <span class="keyword">qw</span>/ bedrock slate rubble granite /;</div><div class="line"><span class="keyword">while</span>( <span class="keyword">my</span>( $index, $value ) = <span class="keyword">each</span> @rocks)&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$index: $value"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">foreach</span> $index(<span class="number">0</span> .. $#rocks )&#123;</div><div class="line">    <span class="keyword">print</span> <span class="string">"$index: $rocks[$index]\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="子程序"><a href="#子程序" class="headerlink" title="子程序"></a>子程序</h2><ul>
@@ -656,7 +650,7 @@ Mo birthday happy to
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +663,7 @@ Mo birthday happy to
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -748,7 +742,7 @@ Mo birthday happy to
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#子程序"><span class="nav-number">1.</span> <span class="nav-text">子程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义子程序"><span class="nav-number">1.1.</span> <span class="nav-text">定义子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用子程序"><span class="nav-number">1.2.</span> <span class="nav-text">调用子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">1.3.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">1.4.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子程序中的私有变量"><span class="nav-number">1.4.1.</span> <span class="nav-text">子程序中的私有变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变长的参数列表"><span class="nav-number">1.4.2.</span> <span class="nav-text">变长的参数列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空参数列表"><span class="nav-number">1.4.3.</span> <span class="nav-text">空参数列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于词法（my）变量"><span class="nav-number">1.4.4.</span> <span class="nav-text">关于词法（my）变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use-strict编译指令（pragma）"><span class="nav-number">1.5.</span> <span class="nav-text">use strict编译指令（pragma）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return操作符"><span class="nav-number">1.6.</span> <span class="nav-text">return操作符</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach控制结构"><span class="nav-number">1.1.</span> <span class="nav-text">foreach控制结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl的默认变量"><span class="nav-number">1.2.</span> <span class="nav-text">Perl的默认变量$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse操作符"><span class="nav-number">1.3.</span> <span class="nav-text">reverse操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort操作符"><span class="nav-number">1.4.</span> <span class="nav-text">sort操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#each操作符"><span class="nav-number">1.5.</span> <span class="nav-text">each操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子程序"><span class="nav-number">2.</span> <span class="nav-text">子程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义子程序"><span class="nav-number">2.1.</span> <span class="nav-text">定义子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用子程序"><span class="nav-number">2.2.</span> <span class="nav-text">调用子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">2.3.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">2.4.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子程序中的私有变量"><span class="nav-number">2.4.1.</span> <span class="nav-text">子程序中的私有变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变长的参数列表"><span class="nav-number">2.4.2.</span> <span class="nav-text">变长的参数列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空参数列表"><span class="nav-number">2.4.3.</span> <span class="nav-text">空参数列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于词法（my）变量"><span class="nav-number">2.4.4.</span> <span class="nav-text">关于词法（my）变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use-strict编译指令（pragma）"><span class="nav-number">2.5.</span> <span class="nav-text">use strict编译指令（pragma）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return操作符"><span class="nav-number">2.6.</span> <span class="nav-text">return操作符</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -396,6 +396,7 @@
 
       
         <p>多机房情况下，有时候需要将跨机房内网打通，现在还是使用ipsec的多。而且相对也比较成熟。IPsec全称ip Security，由两类协议组成，分别为AH协议（Authentication Header）和ESP协议（Encapsulated Security Payload），由于AH协议无法提供数据加密，所有数据在传输时以明文传输，且AH由于提供数据来源确认，所以无法穿越NAT，所以这两种协议中ESP协议应用更广泛一些。VPN只是IPSec的一种应用方式。刚好有空余的机器就简单实验一下。<br><a id="more"></a></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -423,7 +424,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><table>
+</div>
+<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Region</th>
@@ -459,6 +462,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>版本信息：</strong><br>规划：其中CD-A和GZ-A这两台机器作为vpn服务器。<br>版本：<code>Linux Libreswan 3.20 (netkey) on 3.10.0-514.26.2.el7.x86_64</code><br>OS:<code>CentOS Linux release 7.2.1511 (Core)</code></p>
 <h4 id="安装初始化（主机CD-A）"><a href="#安装初始化（主机CD-A）" class="headerlink" title="安装初始化（主机CD-A）"></a>安装初始化（主机CD-A）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y openswan</div></pre></td></tr></table></figure>
 <p><strong>系统参数调整</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/sysctl.conf <span class="comment">#修改参数如下</span></div><div class="line">net.ipv4.ip_forward = 1</div><div class="line">net.ipv4.conf.default.rp_filter = 0</div><div class="line">sysctl -p <span class="comment">#执行命令让参数生效</span></div><div class="line">setenforce 0 <span class="comment">#关闭selinux</span></div><div class="line">iptables -nvL <span class="comment">#确认端口开放UDP 500 4500</span></div><div class="line"><span class="comment">#关闭ipmp重定向（是否需要）</span></div><div class="line"><span class="comment">#sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '&#123;print$1"= 0"&#125;' &gt;&gt; /etc/sysctl.conf</span></div></pre></td></tr></table></figure></p>
@@ -630,7 +634,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -643,7 +647,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

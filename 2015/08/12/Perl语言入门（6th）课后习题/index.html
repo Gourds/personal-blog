@@ -397,13 +397,11 @@
       
         <p>个人感觉课后习题单独分出来比较方便，这里有可能的话会多放些例子，ok，go</p>
 <a id="more"></a>
-<p>###Chapter one</p>
-<ol>
+<h3 id="Chapter-one"><a href="#Chapter-one" class="headerlink" title="Chapter one"></a>Chapter one</h3><ol>
 <li>计算半径为12.5的园的周长，可自行输入，小于0输出为0<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">print</span> <span class="string">"Please input a number: "</span>;</div><div class="line">$inputNumber = &lt;STDIN&gt;;</div><div class="line">$perimeter = $inputNumber * <span class="number">2</span> * <span class="number">3.14</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"The perimeter is $perimeter\n"</span>;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>###Chapter two</p>
-<ol>
+<h3 id="Chapter-two"><a href="#Chapter-two" class="headerlink" title="Chapter two"></a>Chapter two</h3><ol>
 <li><p>半径12.5圆，求周长</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="keyword">use</span> <span class="number">5.010</span>;</div><div class="line">$pi = <span class="number">3.141592654</span>;</div><div class="line">$circ = <span class="number">2</span> * $pi * <span class="number">12.5</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"The circumference of a circle of radius 12.5 is $circ.\n"</span>;</div></pre></td></tr></table></figure>
 </li>
@@ -431,8 +429,7 @@
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"><span class="comment">#chomp(@lines = &lt;STDIN&gt;);</span></div><div class="line"><span class="comment">#@sorted = sort @lines;</span></div><div class="line"><span class="comment">#print "@sorted\n";</span></div><div class="line"><span class="keyword">print</span> <span class="keyword">sort</span> &lt;STDIN&gt;;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>###小代码块</p>
-<ul>
+<h3 id="小代码块"><a href="#小代码块" class="headerlink" title="小代码块"></a>小代码块</h3><ul>
 <li>检查参数个数是否正确<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">max</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (@_ != <span class="number">2</span>)&#123;</div><div class="line">        <span class="keyword">print</span> <span class="string">"WAENING! &amp;max should get exactly two argumnets!\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment"># follow</span></div><div class="line">    <span class="comment">#...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -592,7 +589,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -605,7 +602,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-three"><span class="nav-number">1.</span> <span class="nav-text">Chapter three</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-one"><span class="nav-number">1.</span> <span class="nav-text">Chapter one</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-two"><span class="nav-number">2.</span> <span class="nav-text">Chapter two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-three"><span class="nav-number">3.</span> <span class="nav-text">Chapter three</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小代码块"><span class="nav-number">4.</span> <span class="nav-text">小代码块</span></a></li></ol></div>
             
 
           </div>

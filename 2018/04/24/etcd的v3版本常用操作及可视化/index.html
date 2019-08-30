@@ -405,12 +405,12 @@
 <li>watch机制更稳定，基本上可以通过watch机制实现数据的完全同步</li>
 <li>提供了批量操作以及事务机制，用户可以通过批量事务请求来实现Etcd v2的CAS机制（批量事务支持if条件判断）</li>
 </ul>
-<p><em>–以上摘自王渊命的文章[侵删]</em></p>
+<p><em>—以上摘自王渊命的文章[侵删]</em></p>
 </blockquote>
 <a id="more"></a>
 <h4 id="使用Etcdctl管理"><a href="#使用Etcdctl管理" class="headerlink" title="使用Etcdctl管理"></a>使用Etcdctl管理</h4><p>这里列下我常用的，其他选项可以查看help或者官网说明，链接在最后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ETCDCTL_API=3 etcdctl put mykey <span class="string">"this is awesome"</span> <span class="comment">#设置</span></div><div class="line">ETCDCTL_API=3 etcdctl get mykey <span class="comment">#获取</span></div><div class="line">ETCDCTL_API=3 etcdctl del mykey <span class="comment">#删除</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key  <span class="comment">#获取所有的键值</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key --keys-only <span class="comment">#只获取所有的key不含value</span></div><div class="line">ETCDCTL_API=3 etcdctl get <span class="string">""</span> --from-key --keys-only --limit 3 <span class="comment">#获取key只显示3个</span></div><div class="line">ETCDCTL_API=3 etcdctl get --prefix my <span class="comment">#获取所有以my开头的key及对应value</span></div><div class="line">ETCDCTL_API=3 etcdctl del my --prefix <span class="comment">#删除所有以my开头的键值</span></div></pre></td></tr></table></figure></p>
 <h4 id="使用HTTP管理"><a href="#使用HTTP管理" class="headerlink" title="使用HTTP管理"></a>使用HTTP管理</h4><p>HTTP接口没有怎么用，请参考<a href="https://github.com/coreos/etcd/blob/master/Documentation/dev-guide/api_reference_v3.md" target="_blank" rel="external">【API】</a>及<a href="https://grpc.io/blog/coreos" target="_blank" rel="external">【grpc官方】</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">curl -L http://localhost:2379/v3alpha/maintenance/status -X POST <span class="_">-d</span> <span class="string">'&#123;&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/kv/put -X POST <span class="_">-d</span> <span class="string">'&#123;"key": "Zm9v", "value": "YmFy"&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/kv/range -X POST <span class="_">-d</span> <span class="string">'&#123;"key": "Zm9v"&#125;'</span></div><div class="line">curl -L http://localhost:2379/v3alpha/watch -X POST <span class="_">-d</span> <span class="string">'&#123;"create_request": &#123;"key": "Zm9v"&#125;&#125;'</span></div></pre></td></tr></table></figure></p>
-<h4 id="注册脚本"><a href="#注册脚本" class="headerlink" title="注册脚本"></a>注册脚本</h4><p>我提供的这个脚本主要是将本地目录中的文件以递归的形式注册到etcd上（文件内容是key=value有多行）。不贴具体的脚本了，可以从<a href="https://github.com/Gourds/daily-scripts/blob/master/python-scripts/register-etcd-from-files.py" target="_blank" rel="external">【–&gt;这里&lt;–】</a>获取，脚本主要功能如下</p>
+<h4 id="注册脚本"><a href="#注册脚本" class="headerlink" title="注册脚本"></a>注册脚本</h4><p>我提供的这个脚本主要是将本地目录中的文件以递归的形式注册到etcd上（文件内容是key=value有多行）。不贴具体的脚本了，可以从<a href="https://github.com/Gourds/daily-scripts/blob/master/python-scripts/register-etcd-from-files.py" target="_blank" rel="external">【—&gt;这里&lt;—】</a>获取，脚本主要功能如下</p>
 <blockquote>
 <ol>
 <li>Support configuration annotation</li>
@@ -587,7 +587,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -600,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
