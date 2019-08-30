@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[Jenkins使用GitSubmodule实现代码库调用]]></title>
+      <title><![CDATA[JenkinsActiveChoices插件使用]]></title>
       <url>http://arvon.top/2019/08/30/Jenkins%E7%9A%84ActiveChoices%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>之前使用过Jenkins的<a href="https://wiki.jenkins.io/display/JENKINS/Active+Choices+Plugin" target="_blank" rel="external">Active Choices Plugin</a>插件，概述下当时我想实现的效果</p>
 <ul>
@@ -27,8 +27,58 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Flask中Jinja2模板使用总结]]></title>
+      <url>http://arvon.top/2019/08/28/Flask%E4%B8%ADJinja2%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<p>之前<a href="">已经总结过Jinja2</a>了,这里主要总结在Falsk中的一些东西。包括以下方面</p>
+<ul>
+<li>模板的目录结构设计</li>
+<li>常用的模块</li>
+<li>HTML转义</li>
+<li>特殊装饰器</li>
+</ul>
+<a id="more"></a>
+<h4 id="模板的目录设计"><a href="#模板的目录设计" class="headerlink" title="模板的目录设计"></a>模板的目录设计</h4><h4 id="常用的模块"><a href="#常用的模块" class="headerlink" title="常用的模块"></a>常用的模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</div><div class="line"><span class="meta">@app.route('/about')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">about</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'about.html'</span>,user=<span class="string">'Gourds'</span>)</div><div class="line">  <span class="string">"""</span></div><div class="line">  render_template参数说明：</div><div class="line">  第一个参数是模板名称，默认会在当前路径下的templates中查找</div><div class="line">  user='Gourds',其中左边data1表示模板中的占位符，右边表示在当前视图中的变量</div><div class="line">  """</div></pre></td></tr></table></figure>
+<p>如下就是HTML的例子(定义user返回hello不然返回gun)。变量表达式使用<code>&amp;#123;&amp;#123; &amp;#125;&amp;#125;</code>，控制语句使用<code>&amp;#123;% %&amp;#125;</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Gourds<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    &amp;#123;% if user is defined() %&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span> Hello &amp;#123;&amp;#123; user &amp;#125;&amp;#125; !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    &amp;#123;% else %&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span> Gun !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    &amp;#123;% endif %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="HTML自动转义"><a href="#HTML自动转义" class="headerlink" title="HTML自动转义"></a>HTML自动转义</h4><p>jinja2默认情况下实惠自动转义的。如下,会被自动转义<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.route('/index')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt; Welcome %s &lt;/h1&gt;'</span> % <span class="string">'&lt;em&gt;Gourds&lt;em&gt;'</span></div></pre></td></tr></table></figure></p>
+<p>不过有时候你可能就是想让输出这个，在Flask中可以使用<code>Marup</code>实现<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Markup</div><div class="line"><span class="meta">@app.route('/index')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> Markup(<span class="string">'&lt;h1&gt; Welcome %s &lt;/h1&gt;'</span>) % <span class="string">'&lt;em&gt;Gourds&lt;em&gt;'</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>自动转义的原因</strong><br>原因：被渲染到页面的对象中没有实现<code>__html__</code>方法的对象。换句话说,就是假设一个对象实现了<code>__html__</code>方法那么这个对象就是安全的,jinja2模板就不会将它转义,即使他就是个恶意的脚本，那么为了防止被恶意脚本攻击,jinja2模板默认开启了自动转义,频繁的自动转义是会大量的消耗资源的,所以在确定该数据是安全的情况下可以用过滤器<code>|safe</code>或者<code>&amp;#123;% autoescape false %&amp;#125;&amp;#123;% endautoescape %&amp;#125;</code>关闭转义环境</p>
+<ul>
+<li>safe过滤器：<br>过滤器safe在源码中是将对象转换成一个<code>Mark_up</code>类的对象并实现了<code>__html__</code>方法，所以数据对象就被标记为安全然后渲染到前端</li>
+<li>autoescape：<br>将对象处于一个没有转义的环境下直接渲染到前端，跟<code>__html__</code>没有关系</li>
+</ul>
+</blockquote>
+<h4 id="模板继承-amp-include-amp-宏"><a href="#模板继承-amp-include-amp-宏" class="headerlink" title="模板继承&amp;include&amp;宏"></a>模板继承&amp;include&amp;宏</h4><p>之前在jinja语法中写过了，在这就简单记下</p>
+<p><strong>模板继承</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&amp;#123;&amp;#123; extends "layout.html" &amp;#125;&amp;#125;</div><div class="line">&amp;#123;&amp;#123; block content &amp;#125;&amp;#125;</div><div class="line">    &amp;#123;&amp;#123; var1 &amp;#125;&amp;#125;</div><div class="line">    &amp;#123;&amp;#123; fun(a,b)&amp;#125;&amp;#125;</div><div class="line">&amp;#123;&amp;#123; endblock &amp;#125;&amp;#125;</div></pre></td></tr></table></figure>
+<p><strong>include模板</strong></p>
+<blockquote>
+<p>包含的模板会被传递到当前的上下文，使用<code>import</code>的话就不会。导入不会像包含被缓存，因为导入经常只作为容纳宏的模块</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% include 'header.html' without context %&amp;#125;</div></pre></td></tr></table></figure>
+<p><strong>宏</strong></p>
+<blockquote>
+<p>宏其实就类似程序中的function，用来替代重复性操作</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 定义 --&gt;</span></div><div class="line">&amp;#123;% macro input(name, value='', type='text', size=20) -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"&amp;#123;&amp;#123; type &amp;#125;&amp;#125;"</span> <span class="attr">name</span>=<span class="string">"&amp;#123;&amp;#123; name &amp;#125;&amp;#125;"</span> <span class="attr">value</span>=<span class="string">"&amp;#123;&amp;#123;</span></span></div><div class="line">        value|e &amp;#125;&amp;#125;" <span class="attr">size</span>=<span class="string">"&amp;#123;&amp;#123; size &amp;#125;&amp;#125;"</span>&gt;</div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div><div class="line"><span class="comment">&lt;!-- 使用 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="两个特殊装饰器"><a href="#两个特殊装饰器" class="headerlink" title="两个特殊装饰器"></a>两个特殊装饰器</h4><p><strong><code>@app.template_globle</code></strong></p>
+<blockquote>
+<p>这个装饰器可以使所有的模板都可以直接调用被装饰的函数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.template_global()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hi</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> str(x) + str(y)</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&amp;#123;&amp;#123; hi('hello', 'world')&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong><code>@app.template_filter</code></strong></p>
+<blockquote>
+<p>这个装饰器下的函数可以方便测试表达式,比如IF判断<code>&amp;#123;&amp;#123; if a|fun(b,c) &amp;#125;&amp;#125;</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.template_filter()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(a, b, c)</span>:</span></div><div class="line">    <span class="keyword">return</span> a - b - c</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&amp;#123;&amp;#123; 1|hello(2, 3) &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Jinja2语法]]></title>
-      <url>http://arvon.top/2019/08/28/Jinja2%E8%AF%AD%E6%B3%95/</url>
+      <url>http://arvon.top/2019/08/27/Jinja2%E8%AF%AD%E6%B3%95/</url>
       <content type="html"><![CDATA[<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>大概介绍一下，主要介绍模板（模板仅仅是文本文件。它可以生成任何基于文本的格式（HTML、XML、CSV、LaTex 等等）。它并没有特定的扩展名，<code>.html</code>或<code>.xml</code>都是可以的。）模板包含变量或表达式 ，这两者在模板求值的时候会被替换为值。模板中 还有标签，控制模板的逻辑。模板语法的大量灵感来自于 Django和Python。</p>
 <blockquote>
 <p>Jinja2是一个现代的，设计者友好的，仿照Django模板的Python模板语言。它速度快，被广泛使用，并且提供了可选的沙箱模板执行环境保证安全.特征如下：</p>
@@ -184,56 +234,6 @@
 <p>还可以导入到命名空间中<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% from 'forms.html' import input as input_field, textarea %&amp;#125;</div><div class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; input_field('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&amp;#123;&amp;#123; input_field('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; textarea('comment') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <hr>
 <p>基本是<code>W3Cschool</code>的学习笔记，大部分是复制粘贴的，相当于读写一遍，侵删，以上</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Flask中Jinja2模板使用总结]]></title>
-      <url>http://arvon.top/2019/08/28/Flask%E4%B8%ADJinja2%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
-      <content type="html"><![CDATA[<p>之前<a href="">已经总结过Jinja2</a>了,这里主要总结在Falsk中的一些东西。包括以下方面</p>
-<ul>
-<li>模板的目录结构设计</li>
-<li>常用的模块</li>
-<li>HTML转义</li>
-<li>特殊装饰器</li>
-</ul>
-<a id="more"></a>
-<h4 id="模板的目录设计"><a href="#模板的目录设计" class="headerlink" title="模板的目录设计"></a>模板的目录设计</h4><h4 id="常用的模块"><a href="#常用的模块" class="headerlink" title="常用的模块"></a>常用的模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</div><div class="line"><span class="meta">@app.route('/about')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">about</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'about.html'</span>,user=<span class="string">'Gourds'</span>)</div><div class="line">  <span class="string">"""</span></div><div class="line">  render_template参数说明：</div><div class="line">  第一个参数是模板名称，默认会在当前路径下的templates中查找</div><div class="line">  user='Gourds',其中左边data1表示模板中的占位符，右边表示在当前视图中的变量</div><div class="line">  """</div></pre></td></tr></table></figure>
-<p>如下就是HTML的例子(定义user返回hello不然返回gun)。变量表达式使用<code>&amp;#123;&amp;#123; &amp;#125;&amp;#125;</code>，控制语句使用<code>&amp;#123;% %&amp;#125;</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Gourds<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    &amp;#123;% if user is defined() %&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span> Hello &amp;#123;&amp;#123; user &amp;#125;&amp;#125; !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    &amp;#123;% else %&amp;#125;</div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span> Gun !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    &amp;#123;% endif %&amp;#125;</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h4 id="HTML自动转义"><a href="#HTML自动转义" class="headerlink" title="HTML自动转义"></a>HTML自动转义</h4><p>jinja2默认情况下实惠自动转义的。如下,会被自动转义<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.route('/index')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;h1&gt; Welcome %s &lt;/h1&gt;'</span> % <span class="string">'&lt;em&gt;Gourds&lt;em&gt;'</span></div></pre></td></tr></table></figure></p>
-<p>不过有时候你可能就是想让输出这个，在Flask中可以使用<code>Marup</code>实现<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Markup</div><div class="line"><span class="meta">@app.route('/index')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> Markup(<span class="string">'&lt;h1&gt; Welcome %s &lt;/h1&gt;'</span>) % <span class="string">'&lt;em&gt;Gourds&lt;em&gt;'</span></div></pre></td></tr></table></figure></p>
-<blockquote>
-<p><strong>自动转义的原因</strong><br>原因：被渲染到页面的对象中没有实现<code>__html__</code>方法的对象。换句话说,就是假设一个对象实现了<code>__html__</code>方法那么这个对象就是安全的,jinja2模板就不会将它转义,即使他就是个恶意的脚本，那么为了防止被恶意脚本攻击,jinja2模板默认开启了自动转义,频繁的自动转义是会大量的消耗资源的,所以在确定该数据是安全的情况下可以用过滤器<code>|safe</code>或者<code>&amp;#123;% autoescape false %&amp;#125;&amp;#123;% endautoescape %&amp;#125;</code>关闭转义环境</p>
-<ul>
-<li>safe过滤器：<br>过滤器safe在源码中是将对象转换成一个<code>Mark_up</code>类的对象并实现了<code>__html__</code>方法，所以数据对象就被标记为安全然后渲染到前端</li>
-<li>autoescape：<br>将对象处于一个没有转义的环境下直接渲染到前端，跟<code>__html__</code>没有关系</li>
-</ul>
-</blockquote>
-<h4 id="模板继承-amp-include-amp-宏"><a href="#模板继承-amp-include-amp-宏" class="headerlink" title="模板继承&amp;include&amp;宏"></a>模板继承&amp;include&amp;宏</h4><p>之前在jinja语法中写过了，在这就简单记下</p>
-<p><strong>模板继承</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&amp;#123;&amp;#123; extends "layout.html" &amp;#125;&amp;#125;</div><div class="line">&amp;#123;&amp;#123; block content &amp;#125;&amp;#125;</div><div class="line">    &amp;#123;&amp;#123; var1 &amp;#125;&amp;#125;</div><div class="line">    &amp;#123;&amp;#123; fun(a,b)&amp;#125;&amp;#125;</div><div class="line">&amp;#123;&amp;#123; endblock &amp;#125;&amp;#125;</div></pre></td></tr></table></figure>
-<p><strong>include模板</strong></p>
-<blockquote>
-<p>包含的模板会被传递到当前的上下文，使用<code>import</code>的话就不会。导入不会像包含被缓存，因为导入经常只作为容纳宏的模块</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;#123;% include 'header.html' without context %&amp;#125;</div></pre></td></tr></table></figure>
-<p><strong>宏</strong></p>
-<blockquote>
-<p>宏其实就类似程序中的function，用来替代重复性操作</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 定义 --&gt;</span></div><div class="line">&amp;#123;% macro input(name, value='', type='text', size=20) -%&amp;#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"&amp;#123;&amp;#123; type &amp;#125;&amp;#125;"</span> <span class="attr">name</span>=<span class="string">"&amp;#123;&amp;#123; name &amp;#125;&amp;#125;"</span> <span class="attr">value</span>=<span class="string">"&amp;#123;&amp;#123;</span></span></div><div class="line">        value|e &amp;#125;&amp;#125;" <span class="attr">size</span>=<span class="string">"&amp;#123;&amp;#123; size &amp;#125;&amp;#125;"</span>&gt;</div><div class="line">&amp;#123;%- endmacro %&amp;#125;</div><div class="line"><span class="comment">&lt;!-- 使用 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('username') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&amp;#123;&amp;#123; input('password', type='password') &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="两个特殊装饰器"><a href="#两个特殊装饰器" class="headerlink" title="两个特殊装饰器"></a>两个特殊装饰器</h4><p><strong><code>@app.template_globle</code></strong></p>
-<blockquote>
-<p>这个装饰器可以使所有的模板都可以直接调用被装饰的函数</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.template_global()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hi</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> str(x) + str(y)</div></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&amp;#123;&amp;#123; hi('hello', 'world')&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><strong><code>@app.template_filter</code></strong></p>
-<blockquote>
-<p>这个装饰器下的函数可以方便测试表达式,比如IF判断<code>&amp;#123;&amp;#123; if a|fun(b,c) &amp;#125;&amp;#125;</code></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.template_filter()</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(a, b, c)</span>:</span></div><div class="line">    <span class="keyword">return</span> a - b - c</div></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&amp;#123;&amp;#123; 1|hello(2, 3) &amp;#125;&amp;#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div></pre></td></tr></table></figure>
 ]]></content>
     </entry>
     
