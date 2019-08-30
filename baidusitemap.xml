@@ -4,12 +4,31 @@
 
     
   <url>
-    <loc>http://arvon.top/2019/08/27/Jinja2%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2019-08-30T13:06:08.049Z</lastmod>
+    <loc>http://arvon.top/2019/08/28/Flask%E4%B8%ADJinja2%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2019-08-30T13:15:38.956Z</lastmod>
+    <data>
+        <display>
+        <title>Flask中Jinja2模板使用总结</title>
+        <pubTime>2019-08-28T13:00:00.000Z</pubTime>
+        
+        <tag>Flask</tag>
+         
+        <tag>Jinja2</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://arvon.top/2019/08/25/Jinja2%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2019-08-30T13:08:01.292Z</lastmod>
     <data>
         <display>
         <title>Jinja2语法</title>
-        <pubTime>2019-08-27T13:00:00.000Z</pubTime>
+        <pubTime>2019-08-25T13:00:00.000Z</pubTime>
         
         <tag>Jinja2</tag>
          
@@ -29,25 +48,6 @@
         <pubTime>2019-08-30T00:30:00.000Z</pubTime>
         
         <tag>Jenkins</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://arvon.top/2019/08/28/Flask%E4%B8%ADJinja2%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-08-30T13:02:06.939Z</lastmod>
-    <data>
-        <display>
-        <title>Flask中Jinja2模板使用总结</title>
-        <pubTime>2019-08-28T13:00:00.000Z</pubTime>
-        
-        <tag>Flask</tag>
-         
-        <tag>Jinja2</tag>
          
          
            
