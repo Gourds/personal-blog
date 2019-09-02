@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/uploads/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在研究一些python项目的源码时经常会看到一些特殊的方法和变量，比如两边双下划线__init__定义的方法，还有一些类中会有以双下划线__开头定义的变量，以及以单下划线_开头的定义的变量。这里对目前经常遇到的做一个记录  __method__:在class中有一些以双下划线开头和结尾的函数被称为特殊方法(Magic Method)，更具体可以参考 官方文档  顺便说一下访问限制。如下（限制其实并">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中特殊方法和特殊变量总结">
+<meta property="og:url" content="http://arvon.top/2019/09/01/python中特殊方法和特殊变量总结/index.html">
+<meta property="og:site_name" content="Arvon&#39;s Blog">
+<meta property="og:description" content="在研究一些python项目的源码时经常会看到一些特殊的方法和变量，比如两边双下划线__init__定义的方法，还有一些类中会有以双下划线__开头定义的变量，以及以单下划线_开头的定义的变量。这里对目前经常遇到的做一个记录  __method__:在class中有一些以双下划线开头和结尾的函数被称为特殊方法(Magic Method)，更具体可以参考 官方文档  顺便说一下访问限制。如下（限制其实并">
+<meta property="og:updated_time" content="2019-09-02T12:46:22.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中特殊方法和特殊变量总结">
+<meta name="twitter:description" content="在研究一些python项目的源码时经常会看到一些特殊的方法和变量，比如两边双下划线__init__定义的方法，还有一些类中会有以双下划线__开头定义的变量，以及以单下划线_开头的定义的变量。这里对目前经常遇到的做一个记录  __method__:在class中有一些以双下划线开头和结尾的函数被称为特殊方法(Magic Method)，更具体可以参考 官方文档  顺便说一下访问限制。如下（限制其实并">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://arvon.top/2019/09/01/python中特殊方法和特殊变量总结/"/>
+
+
+
+
+
+  <title>python中特殊方法和特殊变量总结 | Arvon's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b85c147bc46947747a0ad3c56c079ce0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Arvon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/09/01/python中特殊方法和特殊变量总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python中特殊方法和特殊变量总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-01T10:59:29+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/09/01/python中特殊方法和特殊变量总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/09/01/python中特殊方法和特殊变量总结/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2019/09/01/python中特殊方法和特殊变量总结/" class="leancloud_visitors" data-flag-title="python中特殊方法和特殊变量总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在研究一些python项目的源码时经常会看到一些特殊的方法和变量，比如两边双下划线<code>__init__</code>定义的方法，还有一些类中会有以双下划线<code>__</code>开头定义的变量，以及以单下划线<code>_</code>开头的定义的变量。这里对目前经常遇到的做一个记录</p>
+<blockquote>
+<p><code>__method__</code>:在class中有一些以双下划线开头和结尾的函数被称为特殊方法(Magic Method)，更具体可以参考<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names" target="_blank" rel="external"> 官方文档</a></p>
+</blockquote>
+<p>顺便说一下访问限制。如下（限制其实并不严格，主要靠自觉）</p>
+<blockquote>
+<p><code>__</code>:在类内部如果使用双下划线开头定义变量，那么这个变量就变成了私有变量（private），即这个变量只有在内部访问（并不是绝对控制，可以通过其他方法访问）</p>
+<p><code>_</code>:在类内部如果使用_开头定义变量，其实表示建议（表示可以从外部访问但最好不要访问）当成私有变量</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="特殊方法-Magic-Method"><a href="#特殊方法-Magic-Method" class="headerlink" title="特殊方法(Magic Method)"></a>特殊方法(Magic Method)</h3><p>常用的内置方法简述如下</p>
+<h4 id="object-new-cls"><a href="#object-new-cls" class="headerlink" title="object.__new__(cls[, ...])"></a><code>object.__new__(cls[, ...])</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__new__" target="_blank" rel="external">Python3官方文档</a></p>
+<p><code>__new__</code>是一个静态方法用于创建对象并返回对象，当返回对象时会自动调用<code>__init__</code>进行初始化。第一个参数是cls表示对象本身，其实self就是<code>__new__</code>方法的返回值</p>
+</blockquote>
+<h4 id="object-init-self"><a href="#object-init-self" class="headerlink" title="object.__init__(self[, ...])"></a><code>object.__init__(self[, ...])</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__init__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>创建实例后由<code>__new__()</code>调用，但在返回给调用方之前调用。用于初始化实例，其中self表示实例本身</p>
+</blockquote>
+<h4 id="object-str-self"><a href="#object-str-self" class="headerlink" title="object.__str__(self)"></a><code>object.__str__(self)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__str__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>当使用内置函数print()或format()时被调用，返回值只能是str.<code>__str__</code> 方法默认调用了 <code>__repr__</code>方法</p>
+</blockquote>
+<h4 id="object-dir-self"><a href="#object-dir-self" class="headerlink" title="object.__dir__(self)"></a><code>object.__dir__(self)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__dir__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>用于列出该对象内部的所有属性（包括方法）名，该方法将会返回包含所有属性（方法）名的序列。被dir(object)调用，调用会将序列返回为一个经过排序的列表</p>
+</blockquote>
+<h4 id="object-call-self-args"><a href="#object-call-self-args" class="headerlink" title="object.__call__(self[, args...])"></a><code>object.__call__(self[, args...])</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#emulating-callable-objects" target="_blank" rel="external">Python3官方文档</a></p>
+<p>将一个类实例要变成一个可调用对象，当实例被调用时触发。x() = <code>x.__call__()</code><br>例子：flask源码请求入口、django源码请求入口</p>
+</blockquote>
+<h4 id="object-repr-self"><a href="#object-repr-self" class="headerlink" title="object.__repr__(self)"></a><code>object.__repr__(self)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__repr__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>跟<code>__str__</code>方法类似<code>__repr__</code>它们都是一个“自我描述”的方法，不过repr偏向于程序员调试(应该更多的表示出一个对象来源的类以及继承关系)。</p>
+</blockquote>
+<h4 id="object-setattr-self-name-value"><a href="#object-setattr-self-name-value" class="headerlink" title="object.__setattr__(self, name, value)"></a><code>object.__setattr__(self, name, value)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__setattr__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>试图分配属性时调用。这被调用而不是正常机制(即，将值存储在实例字典中)。name是属性名，value是要分配给它的值。app.abc = ‘mvalue’</p>
+</blockquote>
+<h4 id="object-getattr-self-name"><a href="#object-getattr-self-name" class="headerlink" title="object.__getattr__(self, name)"></a><code>object.__getattr__(self, name)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__getattr__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>如果name被访问，同时它不存在的时候，此方法被调用。app.abc</p>
+</blockquote>
+<h4 id="object-delattr-self-name"><a href="#object-delattr-self-name" class="headerlink" title="object.__delattr__(self, name)"></a><code>object.__delattr__(self, name)</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__delattr__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>如果要删除name，这个方法就被调用</p>
+</blockquote>
+<h4 id="setitem"><a href="#setitem" class="headerlink" title="__setitem__"></a><code>__setitem__</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>设置给定键的值。app[‘abc’]</p>
+</blockquote>
+<h4 id="getitem"><a href="#getitem" class="headerlink" title="__getitem__"></a><code>__getitem__</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>返回键对应的值。app[‘abc’] = ‘mvalue’</p>
+</blockquote>
+<h4 id="delitem"><a href="#delitem" class="headerlink" title="__delitem__"></a><code>__delitem__</code></h4><blockquote>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__" target="_blank" rel="external">Python3官方文档</a></p>
+<p>删除给定键对应的元素</p>
+</blockquote>
+<h3 id="特殊属性"><a href="#特殊属性" class="headerlink" title="特殊属性"></a>特殊属性</h3><h4 id="name"><a href="#name" class="headerlink" title="__name__"></a><code>__name__</code></h4><p>如果当前程序运行在当前模块中，那么<code>__name__</code>就是<code>__main__</code>,如果是被调用，这个模块中的<code>__name__</code>就是模块名<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gourds</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">'Py name is %s'</span> % __name__)</div><div class="line">gourds()</div><div class="line"><span class="comment">#文件file1一内直接执行 结果是Py name is __main__</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> file1</div><div class="line">file1.gourds()</div><div class="line"><span class="comment">#调用执行，结果是Py name is file1</span></div></pre></td></tr></table></figure>
+<h4 id="all"><a href="#all" class="headerlink" title="__all__"></a><code>__all__</code></h4><p>如果一个模块定义了<code>__all__</code>属性,则当被导入时，只有<code>__all__</code>内指定的属性、方法、类可被导入<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">__all__ = (<span class="string">'cls_test_1'</span>, <span class="string">'fun_test_2'</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">cls_test_1</span><span class="params">()</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'cls_test_1'</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">cls_test_2</span><span class="params">()</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'cls_test_2'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_test_1</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">'fun_test_1'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_test_2</span><span class="params">()</span>:</span></div><div class="line">    print(<span class="string">'fun_test_2'</span>)</div></pre></td></tr></table></figure></p>
+<p>如上，如果通过from调用上面的模块，则只有<code>__all__</code>里面定义的方法和类可以使用。如果使用其他未允许的，就会触发<code>NameError: name &#39;xxx&#39; is not defined</code></p>
+<h4 id="slots"><a href="#slots" class="headerlink" title="__slots__"></a><code>__slots__</code></h4><p>跟<code>__all__</code>不同，<code>__slots__</code>可以用来限制类中实例的属性（这个限制只能限制当前类的实例，对子类没有影响）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">test_slots</span><span class="params">()</span>:</span></div><div class="line">    __slots__ = (<span class="string">'ta'</span>, <span class="string">'tb'</span>)</div><div class="line"></div><div class="line">x = test_slots()</div><div class="line">x.ta = <span class="string">'mta'</span></div><div class="line">x.tb = <span class="string">'mtb'</span></div><div class="line">print(x.ta)</div><div class="line">print(x.tb)</div></pre></td></tr></table></figure></p>
+<p>如果视图设置不被允许的属性如<code>x.tc</code>,就会抛出<code>AttributeError: &#39;test_slots&#39; object has no attribute &#39;tc&#39;</code>,这个在Flask源码中的local对象有使用</p>
+<h4 id="mro"><a href="#mro" class="headerlink" title="__mro__"></a><code>__mro__</code></h4><p>Python中每一个有父类的类都有这个属性，值是一个tuble。表示方法解析时的对象查找顺序: 越靠前的优先级越高<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">gourds</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></div><div class="line">print(gourds.__mro__) <span class="comment">#(&lt;class '__main__.gourds'&gt;, &lt;class 'object'&gt;)</span></div></pre></td></tr></table></figure></p>
+<h3 id="扩展问题"><a href="#扩展问题" class="headerlink" title="扩展问题"></a>扩展问题</h3><h4 id="1-什么是方法什么是函数"><a href="#1-什么是方法什么是函数" class="headerlink" title="1. 什么是方法什么是函数"></a>1. 什么是方法什么是函数</h4><blockquote>
+<p>先扔下概念</p>
+<p><strong>function</strong> —— A series of statements which returns some value toa caller. It can also be passed zero or more arguments which may beused in the execution of the body</p>
+<p><strong>method</strong> —— A function which is defined inside a class body. Ifcalled as an attribute of an instance of that class, the methodwill get the instance object as its first argument (which isusually called self)</p>
+</blockquote>
+<ul>
+<li>函数是Python中的可调用对象，即可以使用call运算符调用</li>
+<li>方法是类中的函数。</li>
+</ul>
+<h4 id="2-函数调用时加括号和不加括号的区别"><a href="#2-函数调用时加括号和不加括号的区别" class="headerlink" title="2. 函数调用时加括号和不加括号的区别"></a>2. 函数调用时加括号和不加括号的区别</h4><p>不加括号表示调用函数本身，加括号就表示调用函数执行结果<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'hello'</span></div><div class="line"></div><div class="line">print(foo) <span class="comment">#&lt;function foo at 0x101fcee18&gt;</span></div><div class="line">print(foo()) <span class="comment">#hello</span></div></pre></td></tr></table></figure></p>
+<h4 id="3-super函数和mro方法的区别"><a href="#3-super函数和mro方法的区别" class="headerlink" title="3. super函数和mro方法的区别"></a>3. super函数和mro方法的区别</h4><p>super原理：通过mro()方法获取到实例的方法解析顺序，在mro顺序中返回当前类的下一个类</p>
+<blockquote>
+<p>具体可以参考<a href="http://py.defcoding.com/chapter-3/mro.html" target="_blank" rel="external">MRO 和 super</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/uploads/weipay.jpg" alt="Arvon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/uploads/zhipay.jpg" alt="Arvon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/30/Jenkins的ActiveChoices插件使用/" rel="next" title="JenkinsActiveChoices插件使用">
+                <i class="fa fa-chevron-left"></i> JenkinsActiveChoices插件使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/uploads/suolong.jpg"
+                alt="Arvon" />
+            
+              <p class="site-author-name" itemprop="name">Arvon</p>
+              <p class="site-description motion-element" itemprop="description">不要为了看别人而走错了自己脚下的路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Gourds" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/Marvon" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://johnny.mobi/" title="Johnny" target="_blank">Johnny</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://timo.piqiu.me/" title="Timo" target="_blank">Timo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://litten.me/" title="Litten" target="_blank">Litten</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.liaoxuefeng.com/" title="Liao" target="_blank">Liao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/blog/computer/" title="Frank" target="_blank">Frank</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊方法-Magic-Method"><span class="nav-number">1.</span> <span class="nav-text">特殊方法(Magic Method)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#object-new-cls"><span class="nav-number">1.1.</span> <span class="nav-text">object.__new__(cls[, ...])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-init-self"><span class="nav-number">1.2.</span> <span class="nav-text">object.__init__(self[, ...])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-str-self"><span class="nav-number">1.3.</span> <span class="nav-text">object.__str__(self)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-dir-self"><span class="nav-number">1.4.</span> <span class="nav-text">object.__dir__(self)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-call-self-args"><span class="nav-number">1.5.</span> <span class="nav-text">object.__call__(self[, args...])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-repr-self"><span class="nav-number">1.6.</span> <span class="nav-text">object.__repr__(self)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-setattr-self-name-value"><span class="nav-number">1.7.</span> <span class="nav-text">object.__setattr__(self, name, value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-getattr-self-name"><span class="nav-number">1.8.</span> <span class="nav-text">object.__getattr__(self, name)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object-delattr-self-name"><span class="nav-number">1.9.</span> <span class="nav-text">object.__delattr__(self, name)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setitem"><span class="nav-number">1.10.</span> <span class="nav-text">__setitem__</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getitem"><span class="nav-number">1.11.</span> <span class="nav-text">__getitem__</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delitem"><span class="nav-number">1.12.</span> <span class="nav-text">__delitem__</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊属性"><span class="nav-number">2.</span> <span class="nav-text">特殊属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#name"><span class="nav-number">2.1.</span> <span class="nav-text">__name__</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#all"><span class="nav-number">2.2.</span> <span class="nav-text">__all__</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#slots"><span class="nav-number">2.3.</span> <span class="nav-text">__slots__</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mro"><span class="nav-number">2.4.</span> <span class="nav-text">__mro__</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展问题"><span class="nav-number">3.</span> <span class="nav-text">扩展问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是方法什么是函数"><span class="nav-number">3.1.</span> <span class="nav-text">1. 什么是方法什么是函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-函数调用时加括号和不加括号的区别"><span class="nav-number">3.2.</span> <span class="nav-text">2. 函数调用时加括号和不加括号的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-super函数和mro方法的区别"><span class="nav-number">3.3.</span> <span class="nav-text">3. super函数和mro方法的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Arvon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytVqphGW';
+      var conf = '4962de519a26e5ebd7edae10d9cc340d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("IJfruTXafB06hcxVwGxHLVnv-gzGzoHsz", "DENy7NKv9HNWYsFFfeMtKjeu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
