@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title><![CDATA[关于对Python面向对象的理解]]></title>
+      <url>http://arvon.top/2019/09/10/%E5%85%B3%E4%BA%8E%E5%AF%B9Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<p>说起面向对象(Object Oriented Programming)首先想到的就是三个词：封装、继承和多态。</p>
+<p><strong>封装：</strong>目的是为了简化编程和提升安全性(标识出允许外部使用的所有成员函数和数据项)。</p>
+<ul>
+<li>属性封装</li>
+<li>方法封装</li>
+</ul>
+<p><strong>继承和多态：</strong>顾名思义，继承就是子类可以获取父类的特性，实际上就是为了更好的进行代码复用，而多态是指基于不同的父类调用同一方法也可能有不同的执行逻辑，与这个相关的还有一个有趣的名词”<a href="https://zh.wikipedia.org/wiki/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B" target="_blank" rel="external">鸭子模型</a>“。</p>
+<p>另外与面向对象对应的还有个面向过程(Process Oriented)。其中的区别下面有一个通俗的解释，可以做一个参考</p>
+<blockquote>
+<p>面向对象是相对于面向过程的，比如你要充话费，你会想，可以下个支付宝，然后绑定银行卡，然后在淘宝上买卡，自己冲，这种种过程。但是对于你女朋友就不一样了，她是面向“对象”的，她会想，谁会充话费呢？当然是你了，她就给你电话，然后你把之前的做了一遍，然后她收到到帐的短信，说了句，亲爱的。这就是面向对象！女的思维大部分是面向“对象”的！她不关心处理的细节，只关心谁可以，和结果！</p>
+<p>来源：知乎 <a href="https://www.zhihu.com/question/31021366/answer/50581592" target="_blank" rel="external">链接</a></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Python中的面向对象"><a href="#Python中的面向对象" class="headerlink" title="Python中的面向对象"></a>Python中的面向对象</h3><p>在python中类的创建有两种方式</p>
+<ul>
+<li><p>使用class创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'Gourds class'</span>)</div><div class="line">a1 = Foo()</div><div class="line">print(a1.test())</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用type创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a1 = type(<span class="string">'Foo'</span>,(object,),&#123;<span class="string">'test'</span>:fun1&#125;)</div><div class="line">print(a1.test())</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面两种其实并没有什么不同，为的是说一下跟type相关的有一个叫metaclass的东西<br>创建class后<br>当将class对象实例化的时候，默认会先执行对象的<strong>new</strong>方法，然后执行对象的<strong>init</strong>方法</p>
+<h3 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h3><ul>
+<li><a href="http://yangcongchufang.com/%E9%AB%98%E7%BA%A7python%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/python-object-class.html" target="_blank" rel="external">Python中的面向对象</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html" target="_blank" rel="external">函数是编程</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[python中特殊方法和特殊变量总结]]></title>
       <url>http://arvon.top/2019/09/01/python%E4%B8%AD%E7%89%B9%E6%AE%8A%E6%96%B9%E6%B3%95%E5%92%8C%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<p>在研究一些python项目的源码时经常会看到一些特殊的方法和变量，比如两边双下划线<code>__init__</code>定义的方法，还有一些类中会有以双下划线<code>__</code>开头定义的变量，以及以单下划线<code>_</code>开头的定义的变量。这里对目前经常遇到的做一个记录</p>

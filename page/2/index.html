@@ -305,6 +305,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://arvon.top/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Arvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/uploads/suolong.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arvon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" itemprop="url">Aws使用EMR对Dynamodb进行备份还原</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T13:38:00+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://arvon.top/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" class="cy_cmt_count" data-xid="2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/" class="leancloud_visitors" data-flag-title="Aws使用EMR对Dynamodb进行备份还原">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近需要对DynamoDB的数据进行迁移，由于现阶段将Dynamo的容量模式由<code>AutoScaling</code>修改成了<code>按需</code>，当使用之前的HIVE脚本时出现了<code>Read throughput should not be less than 1</code>的报错，报错跟DynamoDB的容量有关，继而准备用Ansible在执行脚本前将Dynamo的容量和模式进行调整，又发现了Ansible的Dynamo模块现阶段还没有支持<code>On-Demand billing</code>这个功能，接着又准备使用<code>awscli</code>命令行进行调整，经调研这个应该是可以对Dynamo进行调整的，文章后面有一些资料可以参考，现在由于AWS官方给出了回复，所以就不用搞这个了，直接升级版本就好了，更省事。关于版本问题可以看下面说的<code>版本问题说明</code>。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/21/Aws使用EMR对Dynamodb进行备份还原/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/11/29/Docker方式下Bitbucket及Confluence和Jira迁移文档/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1178,160 +1324,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://arvon.top/2018/05/11/Ansible自定义插件获取指定远端配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Arvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/uploads/suolong.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Arvon's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/11/Ansible自定义插件获取指定远端配置/" itemprop="url">Ansible自定义插件获取指定远端配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:00:00+08:00">
-                2018-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/05/11/Ansible自定义插件获取指定远端配置/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://arvon.top/2018/05/11/Ansible自定义插件获取指定远端配置/" class="cy_cmt_count" data-xid="2018/05/11/Ansible自定义插件获取指定远端配置/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/05/11/Ansible自定义插件获取指定远端配置/" class="leancloud_visitors" data-flag-title="Ansible自定义插件获取指定远端配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>概述:</strong>将ansible部署与变量控制拆分，解决应用与主机的规划问题。其中使用Ansible本地<code>fact</code>实现应用主机规划，使用自定义的Ansible<code>lookup</code>插件来实现从远端获取变量。通过这种方式可以提高ansible代码的利用率和普适性，降低运维的配置管理工作复杂度。可以关注下以下几点</p>
-<blockquote>
-<ul>
-<li>本地git注册文件的目录结构</li>
-<li>ansible的local fact与git中注册目录的对应关系</li>
-<li>ansible的playbook配置模板与获取fact的配置关系</li>
-</ul>
-</blockquote>
-<p>设计好以上几点可以大幅降低不必要的麻烦，设计的时候最好充分考虑后期扩展问题。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/11/Ansible自定义插件获取指定远端配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1386,7 +1378,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
